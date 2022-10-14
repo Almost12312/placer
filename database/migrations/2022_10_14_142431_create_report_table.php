@@ -16,7 +16,7 @@ class CreateReportTable extends Migration
         Schema::create('report', function (Blueprint $table) {
             $table->id();
             $table->string('text');
-            $table->string('id_advertisements');
+            $table->unsignedBigInteger('id_advertisements');
             $table->dateTime('created_at');
 
             $table->foreign('id_advertisements')->references('id')->on('advertisements');

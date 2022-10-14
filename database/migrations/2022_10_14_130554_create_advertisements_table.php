@@ -15,7 +15,7 @@ class CreateAdvertisementsTable extends Migration
     {
         Schema::create('advertisements', function (Blueprint $table) {
             $table->id();
-            $table->integer('author_id');
+            $table->unsignedBigInteger('author_id');
             $table->string('title');
             $table->string('content');
             $table->string('location');
@@ -23,7 +23,7 @@ class CreateAdvertisementsTable extends Migration
             $table->dateTime('delete_at');
             $table->dateTime('update_at');
             $table->string('price');
-            $table->integer('id_category');
+            $table->unsignedBigInteger('id_category');
             $table->integer('status');
 
             $table->foreign('author_id')->references('id')->on('users');

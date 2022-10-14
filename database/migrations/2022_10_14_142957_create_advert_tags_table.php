@@ -14,11 +14,11 @@ class CreateAdvertTagsTable extends Migration
     public function up()
     {
         Schema::create('advert_tags', function (Blueprint $table) {
-            $table->string('id_advertisements');
-            $table->string('id_tags');
+            $table->unsignedBigInteger('id_advertisements');
+            $table->unsignedBigInteger('id_tags');
 
             $table->foreign('id_advertisements')->references('id')->on('advertisements');
-            $table->foreign('is_tags')->references('id')->on('tags');
+            $table->foreign('id_tags')->references('id')->on('tags');
         });
     }
 

@@ -14,8 +14,8 @@ class CreateAdsFilesTable extends Migration
     public function up()
     {
         Schema::create('ads_files', function (Blueprint $table) {
-            $table->string('id_advertisements');
-            $table->string('id_files');
+            $table->unsignedBigInteger('id_advertisements');
+            $table->unsignedBigInteger('id_files');
             $table->foreign('id_advertisements')->references('id')->on('advertisements');
             $table->foreign('id_files')->references('id')->on('files');
         });
