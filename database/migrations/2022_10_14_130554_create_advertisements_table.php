@@ -17,14 +17,14 @@ class CreateAdvertisementsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('author_id');
             $table->string('title');
-            $table->string('content');
+            $table->text('content');
             $table->string('location');
-            $table->dateTime('create_at');
-            $table->dateTime('delete_at');
-            $table->dateTime('update_at');
-            $table->string('price');
+            $table->dateTime('delete_at')->nullable();
+            $table->integer('price');
             $table->unsignedBigInteger('category_id');
             $table->integer('status');
+            $table->timestamps();
+
 
             $table->foreign('author_id')->references('id')->on('users');
             $table->foreign('category_id')->references('id')->on('categories');

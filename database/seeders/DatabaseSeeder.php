@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Advertisement;
 use App\Models\Category;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -41,8 +43,23 @@ class DatabaseSeeder extends Seeder
         Category::create([
             'name' => 'phones'
         ]);
+
         Category::create([
             'name' => 'moto'
         ]);
+
+//        Advertisement::create([
+//            'author_id' => 1,
+//            'title' => 'Great cars',
+//            'content' => 'Lorem ipsum',
+//            'location' => 'Moscow',
+//            'delete_at' => null,
+//            'price' => 10241,
+//            'category_id' => 1,
+//            'status' => 1
+//        ]);
+
+        Advertisement::factory(10)->create();
+        Tag::factory(20)->create();
     }
 }
