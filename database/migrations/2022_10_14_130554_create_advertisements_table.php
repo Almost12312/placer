@@ -23,11 +23,11 @@ class CreateAdvertisementsTable extends Migration
             $table->dateTime('delete_at');
             $table->dateTime('update_at');
             $table->string('price');
-            $table->unsignedBigInteger('id_category');
+            $table->unsignedBigInteger('category_id');
             $table->integer('status');
 
             $table->foreign('author_id')->references('id')->on('users');
-            $table->foreign('id_category')->references('id')->on('category');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

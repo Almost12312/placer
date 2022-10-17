@@ -11,6 +11,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
+    public function advertisements()
+    {
+        return $this->hasMany(Advertisement::class);
+    }
+
+    public function file()
+    {
+        return $this->belongsToMany(File::class);
+    }
+
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -22,6 +32,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+    ];
+
+    protected $casts = [
+        'user_preferences' => 'array',
+        'email_verified_at' => 'datetime',
     ];
 
     /**
@@ -39,8 +54,5 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 }
 
