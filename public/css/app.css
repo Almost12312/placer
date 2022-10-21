@@ -1,1 +1,243 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+.container {
+  width: 90%;
+  max-width: 1920px;
+  margin: 100px auto 0 auto;
+  position: relative;
+}
+
+/* Шапка сайта */
+.header {
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  background: #ffffff;
+}
+
+.header__container {
+  width: 90%;
+  max-width: 1920px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  width: 60px;
+  height: 40px;
+}
+
+.user_menu {
+  position: relative;
+  border: none;
+}
+
+.user_menu_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 3px 4px 21px 0px rgba(34, 60, 80, 0.2) inset;
+  background: #6cf36c;
+}
+
+.user_img {
+  width: 35px;
+  height: 35px;
+}
+
+.burger_img {
+  width: 25px;
+  height: 25px;
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  border-radius: 10px;
+  border: none;
+  overflow: hidden;
+  box-shadow: 3px 4px 33px 5px rgba(34, 60, 80, 0.2);
+  transition: 0.3s;
+  z-index: 23;
+}
+.menu p {
+  font-size: 16px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  background: #ffffff;
+  padding: 10px 40px 10px 40px;
+}
+.menu p a {
+  text-decoration: none;
+  color: #000;
+}
+
+.user_menu:hover .menu {
+  display: block;
+}
+
+/* Подвальный сайта */
+.footer {
+  width: 100%;
+  height: 50px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  background: #ffffff;
+}
+
+.footer__container {
+  width: 90%;
+  max-width: 1920px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer__container ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.footer__container ul a {
+  text-decoration: none;
+}
+
+.companyInformation {
+  display: flex;
+}
+
+.company__cop {
+  margin-right: 40px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.interface {
+  display: flex;
+  align-items: center;
+}
+.interface ul li {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.interface img {
+  width: 30px;
+  height: 30px;
+}
+
+.ads_or_slider {
+  height: 350px;
+  background: pink;
+}
+
+.advertisements__body h2 {
+  margin-top: 30px;
+}
+
+.advertisements {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.advertisement {
+  width: 450px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.advertisement img {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px -45px 23px -3px rgba(34, 60, 80, 0.2) inset;
+}
+
+.advertisement__description {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.advertisement__description h3, .advertisement__description h6 {
+  font-weight: 700;
+}
+.advertisement__description h3, .advertisement__description h4, .advertisement__description h5, .advertisement__description h6 {
+  font-size: 20px;
+}
+.advertisement__description h4 {
+  font-weight: 500;
+}
+.advertisement__description h5 {
+  font-weight: 900;
+}
+
+.location_price {
+  position: relative;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.ad__title, .ad__price {
+  font-family: "Poppins", sans-serif;
+}
+
+.ad__title {
+  margin: 12px 0 5px 0;
+}
+
+.ad__price {
+  position: relative;
+  bottom: -2px;
+}
+
+.ad__content, .ad__location {
+  font-family: "Manrope", sans-serif;
+  color: #4a5568;
+  vertical-align: bottom;
+}
+
+.favorite {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 80%;
+  top: -30px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 1px 7px 70px 9px rgba(34, 60, 80, 0.32);
+}
+.favorite svg {
+  width: 40px;
+  height: 40px;
+}

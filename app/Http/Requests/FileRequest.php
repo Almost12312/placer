@@ -2,13 +2,17 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\ValidationException;
+
 
 class FileRequest extends FormRequest
 {
 
-    protected $redirectRoute = 'authorization';
-    protected $stopOnFirstFailure = true;
+    //protected $stopOnFirstFailure = true;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -20,28 +24,27 @@ class FileRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            'original_name' => 'required|unique:posts|max:255',
-            'size_bytes' => 'required',
-            'location' => 'required',
-            'new_hash_name' => 'required',
-            'extension' => 'required',
-            'loaded_by' => 'loaded_by'
+            'file' => 'mimes:jpg,pdf,png|required|max:2048'
         ];
     }
 
     public function messages()
     {
         return [
-            'original_name.required' => 'A original_name is required',
-            'size_bytes.required' => 'A size_bytes is required',
+            'file.required' => 'Файл не был передан',
+            'file.mimes' => 'Недопустимый формат файла',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            response()->json([
+                'errors' => $validator->errors()->messages()
+            ])
+        );
     }
 }

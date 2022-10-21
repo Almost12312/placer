@@ -10,11 +10,13 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MainController extends Controller
 {
-    public function file(Request $request)
+    public function file(FileRequest $request)
     {
         /** @var UploadedFile $file */
-
         $uploadedFile = $request->files->get('file');
+//        dd(
+//            $uploadedFile = $request->safe()->except(['name', 'email']);
+//        );
         $uploadedFileName = md5($uploadedFile->getClientOriginalName().time())
             . "."
             . $uploadedFile->getClientOriginalExtension();

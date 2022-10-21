@@ -15,7 +15,7 @@ use \App\Http\Controllers\MainController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::post('/file', [MainController::class, 'file']);
