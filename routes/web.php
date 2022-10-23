@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\MainController;
+use \App\Http\Controllers\FileController;
+use \App\Http\Controllers\AuthorizationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::post('/file', [MainController::class, 'file']);
+Route::post('/file', [FileController::class, 'file']);
 
+Route::view('/authorization', 'authorization')
+        ->name('authorization');
 

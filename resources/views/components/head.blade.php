@@ -14,8 +14,8 @@
                 <img class="user_img" src="images/user.svg" alt="Profile">
             </div>
             <div class="menu">
-                <p><a href="">Авторизация</a></p>
-                <p><a href="">Регистрация</a></p>
+                <p><a href="{{ route('authorization') }}">Авторизация</a></p>
+                <p><a href="{{ route('authorization') }}">Регистрация</a></p>
             </div>
         </button>
     </div>

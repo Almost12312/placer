@@ -1,32 +1,75 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+import axios from 'axios'
 
-require('./bootstrap');
 
-window.Vue = require('vue').default;
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+let loginBtn = document.getElementById('auth__submit');
+if (loginBtn) {
+    loginBtn.addEventListener('click', ()=> {
+        let login = document.getElementById("login").value;
+        let password = document.getElementById("password").value;
+        let credentials = {
+            login: login,
+            password: password
+        }
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+        axios.post('/login', credentials)
+            .then((response) => {
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+                if (response.data.success) {
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+                    location.href = response.data.redirect;
+                }
+                else {
 
-const app = new Vue({
-    el: '#app',
-});
+                    alert('Неверный логин и/или пароль');
+                }
+
+            });
+
+        console.log(credentials.login)
+    })
+}
+
+// let logoutBtn = document.getElementById('logout_btn');
+// if (logoutBtn) {
+//     logoutBtn.addEventListener('click', (event) => {
+//
+//         event.preventDefault();
+//
+//         axios.post('/logout').then(() => {
+//             location.reload();
+//         });
+//     })
+// }
+//
+// let registerBtn = document.getElementById('register_btn');
+// if (registerBtn) {
+//     registerBtn.addEventListener('click', ()=> {
+//         let login = document.getElementById("login").value;
+//         let password = document.getElementById("password").value;
+//         let age = document.getElementById("age").value;
+//         let name = document.getElementById("name").value;
+//         let credentials = {
+//             login: login,
+//             password: password,
+//             age: age,
+//             name: name
+//         }
+//
+//         axios.post('/register', credentials)
+//             .then((response) => {
+//
+//                 if (response.data.success) {
+//
+//                     location.href = response.data.redirect;
+//                 }
+//                 else {
+//
+//                     alert('Неверный логин и/или пароль');
+//                 }
+//
+//             });
+//
+//         console.log(credentials.login)
+//     })
+// }

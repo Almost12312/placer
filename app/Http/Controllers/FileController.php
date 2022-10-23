@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class MainController extends Controller
+class FileController extends Controller
 {
     public function file(FileRequest $request)
     {

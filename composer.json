@@ -15,7 +15,8 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "league/flysystem-cached-adapter": "~1.0",
         "league/flysystem-sftp": "~1.0",
-      "ext-http": "*"
+      "ext-http": "*",
+      "ext-pdo": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
