@@ -7,6 +7,7 @@
 
 body {
   height: 100vh;
+  background: #edeef0;
 }
 
 .container {
@@ -319,4 +320,108 @@ body {
   height: 200px;
   margin-top: 50px;
   background: #ffffff;
+}
+
+.cabinet {
+  display: flex;
+  padding: 40px 0;
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+.cabinet__menu {
+  width: 250px;
+  min-width: 250px;
+}
+
+.cabinet__options {
+  margin-top: 50px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  list-style: none;
+}
+
+.cabinet__options_a {
+  text-decoration: none;
+  color: #000000;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.a_active {
+  font-weight: 800;
+}
+
+.profile {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+.profile p {
+  margin-top: 10px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.avatar img {
+  width: 110px;
+  height: 110px;
+}
+
+.cabinet__advert {
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+.tovar__ads {
+  width: 1100px;
+  height: 250px;
+  margin: 0 auto;
+  background: pink;
+}
+
+.advert__status {
+  width: 550px;
+  display: flex;
+  justify-content: space-between;
+  margin: 80px 0 30px 0;
+}
+.advert__status a {
+  text-decoration: none;
+  color: #000000;
+}
+.advert__status h3 {
+  font-family: "Manrope", sans-serif;
+  font-weight: 100;
+  font-size: 24px;
+}
+.advert__status .h3__active {
+  font-weight: 600;
+  margin: auto;
+}
+
+.advertisement__container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.add {
+  width: 400px;
+  height: 200px;
+  background: yellow;
 }

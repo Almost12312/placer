@@ -14,6 +14,14 @@ use \App\Http\Controllers\AuthorizationController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::view('/authorization', 'authorization')
+    ->name('authorization');
+
+Route::view('/dashboard', 'authorization')
+    ->name('dashboard');
+
+Route::view('/cabinet', 'cabinet')
+    ->name('cabinet');
 
 Route::get('/', function () {
     return view('home');
@@ -21,6 +29,4 @@ Route::get('/', function () {
 
 Route::post('/file', [FileController::class, 'file']);
 
-Route::view('/authorization', 'authorization')
-        ->name('authorization');
-
+Route::post('/login', [AuthorizationController::class, 'login']);
