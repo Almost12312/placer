@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdvertisementController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\FileController;
 use \App\Http\Controllers\AuthorizationController;
@@ -23,10 +25,10 @@ Route::view('/dashboard', 'authorization')
 Route::view('/cabinet', 'cabinet')
     ->name('cabinet');
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'home']);
 
 Route::post('/file', [FileController::class, 'file']);
+
+Route::post('/createadv', [AdvertisementController::class, 'advertisement']);
 
 Route::post('/login', [AuthorizationController::class, 'login']);

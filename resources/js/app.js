@@ -30,6 +30,68 @@ if (loginBtn) {
     })
 }
 
+let addProduct = document.getElementById("add__product");
+let products = document.getElementById("products");
+let advert = document.getElementById("js_advert");
+let form = document.getElementById('form')
+
+let tabElementsTitle = document.getElementById("tab1");
+let tabElementsTitle2 = document.getElementById("tab2");
+
+
+addProduct.addEventListener('click', function() {
+    tabElementsTitle.style.display = "none";
+    advert.style.display = "none";
+
+    tabElementsTitle2.style.display = "block";
+    tabElementsTitle2.style.display = "flex";
+    form.style.display = "flex";
+
+    addProduct.classList.toggle("a_active")
+    products.classList.remove("a_active")
+})
+
+products.addEventListener('click', function() {
+    tabElementsTitle.style.display = "flex";
+    advert.style.display = "flex";
+
+    tabElementsTitle2.style.display = "none";
+    tabElementsTitle2.style.display = "none";
+    form.style.display = "none";
+
+    products.classList.toggle("a_active")
+    addProduct.classList.remove("a_active")
+})
+
+
+let addAdvert = document.getElementById('addAdvert')
+
+addAdvert.addEventListener('click', function (){
+    let title = document.getElementById('title').value;
+    let content = document.getElementById('content').value;
+    let location = document.getElementById('location').value;
+    let price = document.getElementById('price').value;
+    let image = document.getElementById('image').value;
+
+    let addAdvertPost = {
+        title: title,
+        content: content,
+        location: location,
+        price: price,
+        image: image
+    }
+
+    axios.post('/createadv', addAdvertPost)
+        .then((response) =>{
+
+            if (response.data.success) {
+                alert('Объявление успешно загружено');
+            } else {
+                alert("Наебни говна олух");
+            }
+        });
+})
+
 // let logoutBtn = document.getElementById('logout_btn');
 // if (logoutBtn) {
 //     logoutBtn.addEventListener('click', (event) => {

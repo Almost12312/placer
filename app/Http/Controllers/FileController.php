@@ -10,6 +10,17 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileController extends Controller
 {
+    public $id = 0;
+
+    public function getId()
+    {
+        if (Auth::check()){
+            return $id = Auth::user()->id;
+        } else {
+            return $id = null;
+        }
+    }
+
     public function file(FileRequest $request)
     {
         /** @var UploadedFile $file */
@@ -21,14 +32,7 @@ class FileController extends Controller
             . "."
             . $uploadedFile->getClientOriginalExtension();
 
-        $id = 0;
 
-        if (Auth::check())
-        {
-            $id = Auth::user()->id;
-        } else {
-            $id = null;
-        }
 
         $newFile = File::create([
             'original_name' => $uploadedFile->getClientOriginalName(),
@@ -36,7 +40,7 @@ class FileController extends Controller
             'location' => '/uploads',
             'new_hash_name' => $uploadedFileName,
             'extension' => $uploadedFile->getClientOriginalExtension(),
-            'loaded_by' => $id
+            'loaded_by' => $this->getId()
         ]);
 
 

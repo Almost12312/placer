@@ -2084,6 +2084,52 @@ if (loginBtn) {
     console.log(credentials.login);
   });
 }
+var addProduct = document.getElementById("add__product");
+var products = document.getElementById("products");
+var advert = document.getElementById("js_advert");
+var form = document.getElementById('form');
+var tabElementsTitle = document.getElementById("tab1");
+var tabElementsTitle2 = document.getElementById("tab2");
+addProduct.addEventListener('click', function () {
+  tabElementsTitle.style.display = "none";
+  advert.style.display = "none";
+  tabElementsTitle2.style.display = "block";
+  tabElementsTitle2.style.display = "flex";
+  form.style.display = "flex";
+  addProduct.classList.toggle("a_active");
+  products.classList.remove("a_active");
+});
+products.addEventListener('click', function () {
+  tabElementsTitle.style.display = "flex";
+  advert.style.display = "flex";
+  tabElementsTitle2.style.display = "none";
+  tabElementsTitle2.style.display = "none";
+  form.style.display = "none";
+  products.classList.toggle("a_active");
+  addProduct.classList.remove("a_active");
+});
+var addAdvert = document.getElementById('addAdvert');
+addAdvert.addEventListener('click', function () {
+  var title = document.getElementById('title').value;
+  var content = document.getElementById('content').value;
+  var location = document.getElementById('location').value;
+  var price = document.getElementById('price').value;
+  var image = document.getElementById('image').value;
+  var addAdvertPost = {
+    title: title,
+    content: content,
+    location: location,
+    price: price,
+    image: image
+  };
+  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/createadv', addAdvertPost).then(function (response) {
+    if (response.data.success) {
+      alert('Объявление успешно загружено');
+    } else {
+      alert("Наебни говна олух");
+    }
+  });
+});
 
 // let logoutBtn = document.getElementById('logout_btn');
 // if (logoutBtn) {
