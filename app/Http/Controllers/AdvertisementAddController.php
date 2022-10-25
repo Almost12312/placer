@@ -2,33 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FileRequest;
 use App\Models\Advertisement;
-use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class AdvertisementController extends FileController
+
+class AdvertisementAddController extends Controller
 {
-    
-   public function advertisement(Request $request)
-   {
+    public function addAdvert(Request $request) {
+
         $title = $request->get('title');
         $content = $request->get('content');
         $location = $request->get('location');
         $price = $request->get('price');
 
         Advertisement::create([
-            'author_id' => parent::getId(),
+            'author_id' => $request->user()->id,
             'title' => $title,
             'content' => $content,
             'location' => $location,
-            'price' => $price
+            'price' => $price,
+            'status' => 1,
+
+
         ]);
 
         return response()->json([
            'success' => true
         ]);
-   }
+    }
 }

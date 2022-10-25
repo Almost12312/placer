@@ -2108,27 +2108,50 @@ products.addEventListener('click', function () {
   products.classList.toggle("a_active");
   addProduct.classList.remove("a_active");
 });
+var imageIds = [];
+document.querySelector('#image').addEventListener('change', function (event) {
+  var files = event.target.files;
+  if (files.length === 0) {
+    return;
+  }
+  var file = files[0];
+  var fd = new FormData();
+  fd.append('file', file);
+  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/file/upload', fd).then(function (response) {
+    imageIds.push(response.data.id);
+  });
+});
+
+// let ad = {
+//     title: 'Кошка',
+//     content: "очень хорошая кошка продам бесплатно",
+//     location: 'г белгород',
+//     price: 0,
+//     image_ids: imageIds
+// }
+
 var addAdvert = document.getElementById('addAdvert');
 addAdvert.addEventListener('click', function () {
   var title = document.getElementById('title').value;
   var content = document.getElementById('content').value;
   var location = document.getElementById('location').value;
   var price = document.getElementById('price').value;
-  var image = document.getElementById('image').value;
   var addAdvertPost = {
     title: title,
     content: content,
     location: location,
     price: price,
-    image: image
+    image_ids: imageIds
   };
-  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/createadv', addAdvertPost).then(function (response) {
-    if (response.data.success) {
-      alert('Объявление успешно загружено');
-    } else {
-      alert("Наебни говна олух");
-    }
-  });
+  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/create', addAdvertPost);
+  // .then((response) =>{
+  //
+  //     if (response.data.success) {
+  //         alert('Объявление успешно загружено');
+  //     } else {
+  //         // alert("Наебни говна олух");
+  //     }
+  // });
 });
 
 // let logoutBtn = document.getElementById('logout_btn');

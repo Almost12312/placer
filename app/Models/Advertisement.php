@@ -9,6 +9,8 @@ class Advertisement extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['author_id', 'title', 'content', 'location', 'delete_at', 'price', 'category_id' , 'status'];
+
     public function category()
     {
         return $this->belongsTo(Category::class);

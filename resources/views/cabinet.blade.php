@@ -10,7 +10,7 @@
                     <p>Dmitry Bublik</p>
                 </div>
                 <ul class="cabinet__options">
-                    <li><a class="cabinet__options_a a_active" href="#" id="products">Мои объявления()</a></li>
+                    <li><a class="cabinet__options_a a_active" href="#" id="products">Мои объявления({{}})</a></li>
                     <li><a class="cabinet__options_a" href="#" id="add__product">Добавить объявление</a></li>
                 </ul>
             </header>

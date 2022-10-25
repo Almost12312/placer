@@ -21,7 +21,7 @@ class CreateAdvertisementsTable extends Migration
             $table->string('location');
             $table->dateTime('delete_at')->nullable();
             $table->integer('price');
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->integer('status');
             $table->timestamps();
 

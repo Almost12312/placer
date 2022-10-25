@@ -36,6 +36,19 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10)
         ]);
 
+        User::create([
+            'name' => 'Дефолт',
+            'age' => '123',
+            'email' => 'defolt@def.def',
+            'favorite' => json_encode([
+
+            ]),
+            'password' => Hash::make('def'),
+            'phone' => '89092097493',
+            'is_admin' => false,
+            'remember_token' => Str::random(10)
+        ]);
+
         Category::create([
            'name' => 'cars'
         ]);

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AdvertisementController;
+use App\Http\Controllers\AdvertisementAddController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\FileController;
@@ -27,8 +27,10 @@ Route::view('/cabinet', 'cabinet')
 
 Route::get('/', [HomeController::class, 'home']);
 
-Route::post('/file', [FileController::class, 'file']);
 
-Route::post('/createadv', [AdvertisementController::class, 'advertisement']);
+Route::post('/file/upload', [FileController::class, 'file'])
+    ->name('fileUpload');
+
+Route::post('/advertisement/create', [AdvertisementAddController::class, 'addAdvert']);
 
 Route::post('/login', [AuthorizationController::class, 'login']);

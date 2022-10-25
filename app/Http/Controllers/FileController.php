@@ -4,35 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FileRequest;
 use App\Models\File;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileController extends Controller
 {
-    public $id = 0;
-
-    public function getId()
-    {
-        if (Auth::check()){
-            return $id = Auth::user()->id;
-        } else {
-            return $id = null;
-        }
-    }
 
     public function file(FileRequest $request)
     {
         /** @var UploadedFile $file */
         $uploadedFile = $request->files->get('file');
-//        dd(
-//            $uploadedFile = $request->safe()->except(['name', 'email']);
-//        );
         $uploadedFileName = md5($uploadedFile->getClientOriginalName().time())
             . "."
             . $uploadedFile->getClientOriginalExtension();
 
+        $id = 0;
 
+        if (Auth::check()){
+            $id = Auth::user()->id;
+        } else {
+            $id = null;
+        }
 
         $newFile = File::create([
             'original_name' => $uploadedFile->getClientOriginalName(),
@@ -40,7 +32,7 @@ class FileController extends Controller
             'location' => '/uploads',
             'new_hash_name' => $uploadedFileName,
             'extension' => $uploadedFile->getClientOriginalExtension(),
-            'loaded_by' => $this->getId()
+            'loaded_by' => $id
         ]);
 
 
@@ -50,8 +42,5 @@ class FileController extends Controller
             "id" => $newFile->id,
             "url" => $newFile->getUrl()
         ]);
-//        dd(
-//          $newFile->getUrl()
-//        );
     }
 }

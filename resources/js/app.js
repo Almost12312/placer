@@ -63,6 +63,35 @@ products.addEventListener('click', function() {
     addProduct.classList.remove("a_active")
 })
 
+let imageIds = [];
+
+document.querySelector('#image')
+    .addEventListener('change', event => {
+
+        const files = event.target.files;
+
+        if (files.length === 0) {
+            return;
+        }
+
+        let file = files[0];
+
+        let fd = new FormData;
+        fd.append('file', file);
+
+        axios.post('/file/upload', fd)
+            .then((response) => {
+                imageIds.push(response.data.id);
+            });
+});
+
+// let ad = {
+//     title: 'Кошка',
+//     content: "очень хорошая кошка продам бесплатно",
+//     location: 'г белгород',
+//     price: 0,
+//     image_ids: imageIds
+// }
 
 let addAdvert = document.getElementById('addAdvert')
 
@@ -71,25 +100,24 @@ addAdvert.addEventListener('click', function (){
     let content = document.getElementById('content').value;
     let location = document.getElementById('location').value;
     let price = document.getElementById('price').value;
-    let image = document.getElementById('image').value;
 
     let addAdvertPost = {
         title: title,
         content: content,
         location: location,
         price: price,
-        image: image
+        image_ids: imageIds
     }
 
-    axios.post('/createadv', addAdvertPost)
-        .then((response) =>{
-
-            if (response.data.success) {
-                alert('Объявление успешно загружено');
-            } else {
-                alert("Наебни говна олух");
-            }
-        });
+    axios.post('/advertisement/create', addAdvertPost)
+        // .then((response) =>{
+        //
+        //     if (response.data.success) {
+        //         alert('Объявление успешно загружено');
+        //     } else {
+        //         // alert("Наебни говна олух");
+        //     }
+        // });
 })
 
 // let logoutBtn = document.getElementById('logout_btn');
