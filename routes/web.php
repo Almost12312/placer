@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdvertisementAddController;
+use App\Http\Controllers\CabinetController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\FileController;
@@ -22,7 +23,7 @@ Route::view('/authorization', 'authorization')
 Route::view('/dashboard', 'authorization')
     ->name('dashboard');
 
-Route::view('/cabinet', 'cabinet')
+Route::get('/cabinet', [CabinetController::class, 'cabinet'])
     ->name('cabinet');
 
 Route::get('/', [HomeController::class, 'home']);

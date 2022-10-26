@@ -2143,15 +2143,26 @@ addAdvert.addEventListener('click', function () {
     price: price,
     image_ids: imageIds
   };
-  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/create', addAdvertPost);
-  // .then((response) =>{
-  //
-  //     if (response.data.success) {
-  //         alert('Объявление успешно загружено');
-  //     } else {
-  //         // alert("Наебни говна олух");
-  //     }
-  // });
+  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/create', addAdvertPost).then(function (response) {
+    if (response.data.success) {
+      alert('Объявление успешно загружено');
+    } else {
+      alert("Наебни говна олух");
+    }
+  });
+});
+var redBtn = document.querySelectorAll('.redaction');
+for (var i = 0; i < redBtn.length; i++) {
+  redBtn[i].addEventListener('click', function () {
+    var modalBD = document.querySelector('.modalBackdrop');
+    modalBD.style.display = "block";
+  });
+}
+var cancelBtn = document.querySelector('.cancel__btn');
+cancelBtn.addEventListener('click', function () {
+  var modalBD = document.querySelector('.modalBackdrop');
+  modalBD.style.display = "none";
+  modalBD.style.transition = 0.3;
 });
 
 // let logoutBtn = document.getElementById('logout_btn');

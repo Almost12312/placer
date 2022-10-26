@@ -5,6 +5,20 @@
 
     </div>
 
+    {{--
+    @foreach($ads as $ad)
+
+        {{ $ad->title }}
+
+        @foreach($ad->files as $file)
+
+            <img src="{{ $file->getUrl() }}" alt="">
+
+        @endforeach
+
+    @endforeach
+    --}}
+
     <section class="advertisements__body">
         <header>
             <h2>Все объявления</h2>
@@ -12,7 +26,7 @@
 
         <div class="advertisements">
             <div class="advertisement">
-                <img src="images/advertisement.jpg" alt="">
+                <img class="adv_img" src="images/advertisement.jpg" alt="">
                 <div class="advertisement__description">
                     <h3 class="ad__title">Дом что ахуеть</h3>
                     <h4 class="ad__content">Классический текст-«рыба». Является искажённым отрывком из философского трактата Марка Туллия Цицерона «О пределах добра и зла», написанного в 45 году до н. э. на латинском языке, обнаружение сходства приписывается Ричарду Макклинтоку.…</h4>

@@ -227,15 +227,21 @@ body {
     flex-direction: column;
 
     position: relative;
-
-    img {
-        border-radius: $borderRad;
-        overflow: hidden;
-        -webkit-box-shadow: 0px -45px 23px -3px rgba(34, 60, 80, 0.2) inset;
-        -moz-box-shadow: 0px -45px 23px -3px rgba(34, 60, 80, 0.2) inset;
-        box-shadow: 0px -45px 23px -3px rgba(34, 60, 80, 0.2) inset;
-    }
 }
+
+.adv_img {
+    width: 450px;
+    height: 300px;
+
+    display: block;
+
+    border-radius: $borderRad;
+    overflow: hidden;
+    -webkit-box-shadow: 0px -45px 23px -3px rgba(34, 60, 80, 0.2) inset;
+    -moz-box-shadow: 0px -45px 23px -3px rgba(34, 60, 80, 0.2) inset;
+    box-shadow: 0px -45px 23px -3px rgba(34, 60, 80, 0.2) inset;
+}
+
 .advertisement__description {
     display: flex;
     flex-direction: column;
@@ -289,6 +295,27 @@ body {
     vertical-align: bottom;
 }
 
+.function__button {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.redaction, .delete {
+    width: 45%;
+
+    margin-top: 20px;
+    padding: 10px 0;
+
+    font-family: $ffManrope;
+    font-weight: 500;
+    font-size: 20px;
+
+    background: transparent;
+    border: 1px solid #000000;
+}
 
 
 .favorite {
@@ -536,6 +563,65 @@ body {
 
 #tab2 {
     display: none;
+}
+
+.ads__redactor {
+    padding: 50px;
+
+    position: absolute;
+    top: 30%;
+    left: 40%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background: #ffffff;
+    border-radius: $borderRad;
+    -webkit-box-shadow: 2px 5px 100px 100px rgba(34, 60, 80, 0.24);
+    -moz-box-shadow: 2px 5px 100px 100px rgba(34, 60, 80, 0.24);
+    box-shadow: 2px 5px 100px 100px rgba(34, 60, 80, 0.24);
+
+    z-index: 999;
+
+    h3 {
+        margin-bottom: 20px;
+
+        font-family: $ffManrope;
+        font-weight: 600;
+        font-size: 28px;
+    }
+
+    input {
+        width: 400px;
+        height: 40px;
+
+        margin-top: 25px;
+        padding-left: 10px;
+    }
+}
+
+.cancel__btn {
+    padding: 15px 20px;
+
+    background: transparent;
+
+    font-family: $ffManrope;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.modalBackdrop {
+    display: none;
+
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background-color:rgba(0,0,0,0.2);
+
+    z-index: 2;
 }
 
 .form_add {

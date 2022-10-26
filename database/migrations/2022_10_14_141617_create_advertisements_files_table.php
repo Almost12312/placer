@@ -13,11 +13,11 @@ class CreateAdvertisementsFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('advertisements_files', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_advertisements');
-            $table->unsignedBigInteger('id_files');
-            $table->foreign('id_advertisements')->references('id')->on('advertisements');
-            $table->foreign('id_files')->references('id')->on('files');
+        Schema::create('advertisement_file', function (Blueprint $table) {
+            $table->unsignedBigInteger('advertisement_id');
+            $table->unsignedBigInteger('file_id');
+            $table->foreign('advertisement_id')->references('id')->on('advertisements');
+            $table->foreign('file_id')->references('id')->on('files');
         });
     }
 
@@ -28,6 +28,6 @@ class CreateAdvertisementsFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('advertisements_files');
+        Schema::dropIfExists('advertisement_file');
     }
 }

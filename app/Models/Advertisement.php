@@ -17,7 +17,7 @@ class Advertisement extends Model
 
     }
 
-    public function file()
+    public function files()
     {
         return $this->belongsToMany(File::class);
     }

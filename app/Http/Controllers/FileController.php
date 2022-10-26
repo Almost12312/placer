@@ -21,7 +21,7 @@ class FileController extends Controller
         $id = 0;
 
         if (Auth::check()){
-            $id = Auth::user()->id;
+            $id = Auth::id();
         } else {
             $id = null;
         }

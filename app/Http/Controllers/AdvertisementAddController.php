@@ -15,17 +15,18 @@ class AdvertisementAddController extends Controller
         $content = $request->get('content');
         $location = $request->get('location');
         $price = $request->get('price');
+        $imageIds = $request->get('image_ids');
 
-        Advertisement::create([
+        $advertisement = Advertisement::create([
             'author_id' => $request->user()->id,
             'title' => $title,
             'content' => $content,
             'location' => $location,
             'price' => $price,
             'status' => 1,
-
-
         ]);
+
+        $advertisement->files()->sync($imageIds);
 
         return response()->json([
            'success' => true

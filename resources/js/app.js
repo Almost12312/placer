@@ -110,15 +110,36 @@ addAdvert.addEventListener('click', function (){
     }
 
     axios.post('/advertisement/create', addAdvertPost)
-        // .then((response) =>{
-        //
-        //     if (response.data.success) {
-        //         alert('Объявление успешно загружено');
-        //     } else {
-        //         // alert("Наебни говна олух");
-        //     }
-        // });
+        .then((response) =>{
+
+            if (response.data.success) {
+                alert('Объявление успешно загружено');
+            } else {
+                alert("Наебни говна олух");
+            }
+        });
 })
+
+
+let redBtn = document.querySelectorAll('.redaction')
+
+for (let i = 0; i < redBtn.length; i++)  {
+    redBtn[i].addEventListener('click', function (){
+        let modalBD = document.querySelector('.modalBackdrop')
+
+        modalBD.style.display = "block";
+    })
+}
+
+
+let cancelBtn = document.querySelector('.cancel__btn')
+cancelBtn.addEventListener('click', function (){
+    let modalBD = document.querySelector('.modalBackdrop')
+
+    modalBD.style.display = "none";
+    modalBD.style.transition = 0.3;
+})
+
 
 // let logoutBtn = document.getElementById('logout_btn');
 // if (logoutBtn) {
