@@ -227,6 +227,10 @@ body {
   bottom: -2px;
 }
 
+.ad__price:after {
+  content: "₽";
+}
+
 .ad__content, .ad__location {
   font-family: "Manrope", sans-serif;
   color: #4a5568;
@@ -454,9 +458,10 @@ body {
 }
 
 .ads__redactor {
+  max-height: 80%;
   padding: 50px;
   position: absolute;
-  top: 30%;
+  top: 10%;
   left: 40%;
   display: flex;
   flex-direction: column;
@@ -467,20 +472,82 @@ body {
   z-index: 999;
 }
 .ads__redactor h3 {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   font-family: "Manrope", sans-serif;
   font-weight: 600;
   font-size: 28px;
 }
-.ads__redactor input {
+
+.red__input {
   width: 400px;
   height: 40px;
   margin-top: 25px;
   padding-left: 10px;
 }
 
+.image__now {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.image__now h4 {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.img__red {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.files__download {
+  width: 100%;
+  margin: 50px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.files__download__button {
+  max-height: 53px;
+  width: 150px;
+  padding: 15px;
+  background-color: #009800;
+  border-radius: 10px;
+  position: relative;
+}
+
+.upload__img {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  margin: 0;
+}
+
+.upload__img + label {
+  display: inline-block;
+  font-size: 15px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  color: white;
+}
+
+.images__preview img {
+  display: none;
+}
+
 .cancel__btn {
+  margin-top: 40px;
   padding: 15px 20px;
+  display: inline-block;
   background: transparent;
   font-family: "Manrope", sans-serif;
   font-weight: 600;

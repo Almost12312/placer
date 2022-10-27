@@ -1,4 +1,6 @@
 import axios from 'axios'
+import {value} from "lodash/seq";
+import {toInteger} from "lodash";
 
 
 
@@ -85,6 +87,26 @@ document.querySelector('#image')
             });
 });
 
+// document.querySelector('#image__change')
+//     .addEventListener('change', event => {
+//
+//         const files = event.target.files;
+//
+//         if (files.length === 0) {
+//             return;
+//         }
+//
+//         let file = files[0];
+//
+//         let fd = new FormData;
+//         fd.append('file', file);
+//
+//         axios.post('/file/upload', fd)
+//             .then((response) => {
+//                 imageIds.push(response.data.id);
+//             });
+//     });
+
 // let ad = {
 //     title: 'Кошка',
 //     content: "очень хорошая кошка продам бесплатно",
@@ -127,6 +149,20 @@ for (let i = 0; i < redBtn.length; i++)  {
     redBtn[i].addEventListener('click', function (){
         let modalBD = document.querySelector('.modalBackdrop')
 
+        let title = document.querySelectorAll('.ad__title')[i].textContent;
+        let content = document.querySelectorAll('.ad__content')[i].textContent;
+        let location = document.querySelectorAll('.ad__location')[i].textContent;
+        let price = document.querySelectorAll('.ad__price')[i].textContent;
+        let image = document.querySelectorAll('.adv_img')[i].src;
+
+        console.log(image)
+
+        let titleRed = document.querySelector('.title__red').value = title;
+        let contentRed = document.querySelector('.content__red').value = content;
+        let locationRed = document.querySelector('.location__red').value = location;
+        let priceRed = document.querySelector('.price__red').value = toInteger(price);
+        let imageRed = document.querySelector('.img__red').src = image;
+
         modalBD.style.display = "block";
     })
 }
@@ -138,7 +174,33 @@ cancelBtn.addEventListener('click', function (){
 
     modalBD.style.display = "none";
     modalBD.style.transition = 0.3;
+
+    document.querySelector('#img__preview').style.display = "none";
 })
+
+
+document.querySelector('.upload__img')
+    .addEventListener('change', function (files){
+        let imgContainer = document.querySelector('.images__preview')
+
+        let newImg = document.createElement('img')
+
+        newImg.appendChild(imgContainer)
+        // let img = document.querySelectorAll('#img__preview').src = url;
+
+        // for (let i = 0; files.length; i++) {
+        //     document.querySelectorAll('#img__preview')[i].style.display = "block";
+        //
+        //     let imgContainer = document.querySelector('.images__preview')
+        //
+        //     let newImg = document.createElement('img')
+        //     newImg.tagName = "img__preview"
+        //
+        //     newImg.append(imgContainer)
+        // }
+    })
+
+
 
 
 // let logoutBtn = document.getElementById('logout_btn');

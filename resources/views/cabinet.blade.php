@@ -30,8 +30,6 @@
 
             <div class="advertisement__container" id="js_advert">
                 @foreach($ads as $ad)
-{{--                @foreach(\App\Models\Advertisement::г as $ad)--}}
-
                     <div class="advertisement">
                         @foreach($ad->files as $file)
                         <img class="adv_img" src="{{ $file->getUrl() }}" alt="">
@@ -41,7 +39,7 @@
                             <h4 class="ad__content">{{ $ad->content }}</h4>
                             <div class="location_price">
                                 <h5 class="ad__location">{{ $ad->location }}</h5>
-                                <h6 class="ad__price">{{ $ad->price }}₽</h6>
+                                <h6 class="ad__price">{{ $ad->price }}</h6>
                             </div>
                         </div>
                         <div class="function__button">
@@ -55,11 +53,23 @@
             <div class="modalBackdrop">
                 <div class="ads__redactor">
                     <h3>Редактировать объявление</h3>
-                    <input type="file" id="image__red">
-                    <input type="text" id="title__red" placeholder="Заголовок">
-                    <input type="text" id="content__red" placeholder="Описание">
-                    <input type="text" id="location__red" placeholder="Расположение">
-                    <input type="number" id="price__red" placeholder="Цена">
+                    <div class="image__now">
+                        <h4>Картинка сейчас</h4>
+                        <img class="img__red" src="" alt="">
+                    </div>
+                    <div class="files__download">
+                        <div class="files__download__button">
+                            <input type="file" name="file" class="upload__img" id="#image__change" placeholder="Выберите файл" multiple>
+                            <label class="file__label" for="file">Загрузите файл</label>
+                        </div>
+                        <div class="images__preview">
+                            <img id="img__preview" class="img__red" src="" alt="">
+                        </div>
+                    </div>
+                    <input type="text" class="red__input title__red" id="title__red" placeholder="Заголовок">
+                    <input type="text" class="red__input content__red" id="content__red" placeholder="Описание">
+                    <input type="text" class="red__input location__red" id="location__red" placeholder="Расположение">
+                    <input type="number" class="red__input price__red" id="price__red" placeholder="Цена">
                     <button class="cancel__btn">Отменить</button>
                 </div>
             </div>
