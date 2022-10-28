@@ -30,7 +30,7 @@
 
             <div class="advertisement__container" id="js_advert">
                 @foreach($ads as $ad)
-                    <div class="advertisement">
+                    <div class="advertisement" data-id="{{ $ad->id }}">
                         @foreach($ad->files as $file)
                         <img class="adv_img" src="{{ $file->getUrl() }}" alt="">
                         @endforeach
@@ -59,11 +59,10 @@
                     </div>
                     <div class="files__download">
                         <div class="files__download__button">
-                            <input type="file" name="file" class="upload__img" id="#image__change" placeholder="Выберите файл" multiple>
+                            <input type="file" name="file" id="image" class="upload__img" placeholder="Выберите файл" multiple>
                             <label class="file__label" for="file">Загрузите файл</label>
                         </div>
                         <div class="images__preview">
-                            <img id="img__preview" class="img__red" src="" alt="">
                         </div>
                     </div>
                     <input type="text" class="red__input title__red" id="title__red" placeholder="Заголовок">

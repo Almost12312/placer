@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Дефолт',
             'age' => '123',
-            'email' => 'defolt@def.def',
+            'email' => 'default@def.def',
             'favorite' => json_encode([
 
             ]),

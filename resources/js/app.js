@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {value} from "lodash/seq";
 import {toInteger} from "lodash";
+import * as Url from "url";
 
 
 
@@ -67,6 +68,8 @@ products.addEventListener('click', function() {
 
 let imageIds = [];
 
+let imgsPrev = [];
+
 document.querySelector('#image')
     .addEventListener('change', event => {
 
@@ -84,36 +87,39 @@ document.querySelector('#image')
         axios.post('/file/upload', fd)
             .then((response) => {
                 imageIds.push(response.data.id);
+                imgsPrev.push(response.data.url)
+
+                if (document.querySelector('.upload__img')){
+                    let newImg = document.createElement('img')
+
+                    newImg.setAttribute("id", "img__preview")
+                    newImg.className = "img__red"
+                    newImg.src = imgsPrev[imgsPrev.length-1];
+                    console.log(imgsPrev)
+
+                    document.querySelector('.images__preview').prepend(newImg)
+                    newImg.style.display = "block"
+                }
             });
 });
 
-// document.querySelector('#image__change')
-//     .addEventListener('change', event => {
-//
-//         const files = event.target.files;
-//
-//         if (files.length === 0) {
-//             return;
-//         }
-//
-//         let file = files[0];
-//
-//         let fd = new FormData;
-//         fd.append('file', file);
-//
-//         axios.post('/file/upload', fd)
-//             .then((response) => {
-//                 imageIds.push(response.data.id);
-//             });
-//     });
+// let upImg = document.querySelector('.upload__img')
 
-// let ad = {
-//     title: 'Кошка',
-//     content: "очень хорошая кошка продам бесплатно",
-//     location: 'г белгород',
-//     price: 0,
-//     image_ids: imageIds
+// if (imgsPrev.length !== 0) {
+//     upImg.addEventListener('change', function (){
+//         let newImg = document.createElement('img')
+//
+//         newImg.setAttribute("id", "img__preview")
+//         newImg.className = "img__red"
+//         console.log(imgsPrev)
+//         newImg.src = imgsPrev[0];
+//         console.log(imgsPrev)
+//
+//         document.querySelector('.images__preview').prepend(newImg)
+//     })
 // }
+
+
 
 let addAdvert = document.getElementById('addAdvert')
 
@@ -179,26 +185,32 @@ cancelBtn.addEventListener('click', function (){
 })
 
 
-document.querySelector('.upload__img')
-    .addEventListener('change', function (files){
-        let imgContainer = document.querySelector('.images__preview')
-
-        let newImg = document.createElement('img')
-
-        newImg.appendChild(imgContainer)
-        // let img = document.querySelectorAll('#img__preview').src = url;
-
-        // for (let i = 0; files.length; i++) {
-        //     document.querySelectorAll('#img__preview')[i].style.display = "block";
-        //
-        //     let imgContainer = document.querySelector('.images__preview')
-        //
-        //     let newImg = document.createElement('img')
-        //     newImg.tagName = "img__preview"
-        //
-        //     newImg.append(imgContainer)
-        // }
-    })
+// document.querySelector('.upload__img')
+//     .addEventListener('change', function (files){
+//
+//         let newImg = document.createElement('img')
+//         // let src = document.querySelector(".images__preview").src = url
+//
+//         newImg.setAttribute("id", "img__preview")
+//         newImg.className = "img__red"
+//         // newImg.src = URL.createObjectURL(newImg)
+//
+//         document.querySelector('.images__preview').prepend(newImg)
+//
+//         document.querySelector('.images__preview').src = URL.createObjectURL(this.files[0])
+//         // let img = document.querySelectorAll('#img__preview').src = url;
+//
+//         // for (let i = 0; files.length; i++) {
+//         //     document.querySelectorAll('#img__preview')[i].style.display = "block";
+//         //
+//         //     let imgContainer = document.querySelector('.images__preview')
+//         //
+//         //     let newImg = document.createElement('img')
+//         //     newImg.tagName = "img__preview"
+//         //
+//         //     newImg.append(imgContainer)
+//         // }
+//     })
 
 
 
