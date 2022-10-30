@@ -70,8 +70,10 @@ let imageIds = [];
 
 let imgsPrev = [];
 
-document.querySelector('#image')
-    .addEventListener('change', event => {
+let addRed = document.querySelectorAll('#image')
+
+for(let b=0; b<addRed.length; b++) {
+    addRed[b].addEventListener('change', event => {
 
         const files = event.target.files;
 
@@ -89,19 +91,21 @@ document.querySelector('#image')
                 imageIds.push(response.data.id);
                 imgsPrev.push(response.data.url)
 
-                if (document.querySelector('.upload__img')){
+                if (document.querySelector('.upload__img')) {
                     let newImg = document.createElement('img')
 
                     newImg.setAttribute("id", "img__preview")
                     newImg.className = "img__red"
-                    newImg.src = imgsPrev[imgsPrev.length-1];
+                    newImg.src = imgsPrev[imgsPrev.length - 1];
                     console.log(imgsPrev)
 
                     document.querySelector('.images__preview').prepend(newImg)
                     newImg.style.display = "block"
                 }
-            });
-});
+            })
+    })
+
+}
 
 // let upImg = document.querySelector('.upload__img')
 

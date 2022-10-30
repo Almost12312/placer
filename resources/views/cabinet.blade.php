@@ -39,7 +39,13 @@
                             <h4 class="ad__content">{{ $ad->content }}</h4>
                             <div class="location_price">
                                 <h5 class="ad__location">{{ $ad->location }}</h5>
-                                <h6 class="ad__price">{{ $ad->price }}</h6>
+                                <h6 class="ad__price">
+                                @if($ad->price == 0)
+                                    <p class="no__price">Бесплатно</p>
+                                @else
+                                    <p class="num__price">{{$ad->price}}</p>
+                                @endif
+                                </h6>
                             </div>
                         </div>
                         <div class="function__button">

@@ -2118,28 +2118,31 @@ products.addEventListener('click', function () {
 });
 var imageIds = [];
 var imgsPrev = [];
-document.querySelector('#image').addEventListener('change', function (event) {
-  var files = event.target.files;
-  if (files.length === 0) {
-    return;
-  }
-  var file = files[0];
-  var fd = new FormData();
-  fd.append('file', file);
-  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/file/upload', fd).then(function (response) {
-    imageIds.push(response.data.id);
-    imgsPrev.push(response.data.url);
-    if (document.querySelector('.upload__img')) {
-      var newImg = document.createElement('img');
-      newImg.setAttribute("id", "img__preview");
-      newImg.className = "img__red";
-      newImg.src = imgsPrev[imgsPrev.length - 1];
-      console.log(imgsPrev);
-      document.querySelector('.images__preview').prepend(newImg);
-      newImg.style.display = "block";
+var addRed = document.querySelectorAll('#image');
+for (var b = 0; b < addRed.length; b++) {
+  addRed[b].addEventListener('change', function (event) {
+    var files = event.target.files;
+    if (files.length === 0) {
+      return;
     }
+    var file = files[0];
+    var fd = new FormData();
+    fd.append('file', file);
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/file/upload', fd).then(function (response) {
+      imageIds.push(response.data.id);
+      imgsPrev.push(response.data.url);
+      if (document.querySelector('.upload__img')) {
+        var newImg = document.createElement('img');
+        newImg.setAttribute("id", "img__preview");
+        newImg.className = "img__red";
+        newImg.src = imgsPrev[imgsPrev.length - 1];
+        console.log(imgsPrev);
+        document.querySelector('.images__preview').prepend(newImg);
+        newImg.style.display = "block";
+      }
+    });
   });
-});
+}
 
 // let upImg = document.querySelector('.upload__img')
 

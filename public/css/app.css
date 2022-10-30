@@ -227,7 +227,11 @@ body {
   bottom: -2px;
 }
 
-.ad__price:after {
+.num__price {
+  width: 100%;
+}
+
+.num__price:after {
   content: "₽";
 }
 
