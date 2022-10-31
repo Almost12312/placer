@@ -1,7 +1,5 @@
 import axios from 'axios'
-import {value} from "lodash/seq";
 import {toInteger} from "lodash";
-import * as Url from "url";
 
 
 
@@ -68,7 +66,8 @@ products.addEventListener('click', function() {
 
 let imageIds = [];
 
-let imgsPrev = [];
+// let imgsPrev = [];
+// let imgsPrevId = [];
 
 let addRed = document.querySelectorAll('#image')
 
@@ -88,19 +87,30 @@ for(let b=0; b<addRed.length; b++) {
 
         axios.post('/file/upload', fd)
             .then((response) => {
-                imageIds.push(response.data.id);
-                imgsPrev.push(response.data.url)
+                imageIds.push(response.data)
+                console.log(response.data.url)
+                console.log(imageIds)
 
                 if (document.querySelector('.upload__img')) {
-                    let newImg = document.createElement('img')
+                    console.log(response.data.id)
+                    console.log(response.data.url)
 
-                    newImg.setAttribute("id", "img__preview")
-                    newImg.className = "img__red"
-                    newImg.src = imgsPrev[imgsPrev.length - 1];
-                    console.log(imgsPrev)
+                    let addImg = document.querySelector('.upload__img')
 
-                    document.querySelector('.images__preview').prepend(newImg)
-                    newImg.style.display = "block"
+                    addImg.addEventListener('change', function (event){
+                        console.log(response.data.url)
+
+                        let newImg = document.createElement('img')
+
+                        newImg.setAttribute("id", "img__preview")
+                        document.querySelector('.images__preview').prepend(newImg)
+                        newImg.className = "img__red";
+                        newImg.dataset.id = response.data.id;
+                        newImg.src = response.data.url;
+                        console.log(newImg.src)
+
+                        newImg.style.display = "block"
+                    })
                 }
             })
     })
@@ -109,7 +119,7 @@ for(let b=0; b<addRed.length; b++) {
 
 // let upImg = document.querySelector('.upload__img')
 
-// if (imgsPrev.length !== 0) {
+// // if (imgsPrev.length !== 0) {
 //     upImg.addEventListener('change', function (){
 //         let newImg = document.createElement('img')
 //
@@ -120,10 +130,10 @@ for(let b=0; b<addRed.length; b++) {
 //         console.log(imgsPrev)
 //
 //         document.querySelector('.images__preview').prepend(newImg)
-//     })
+//     // })
 // }
 
-
+/* Создание объявления */
 
 let addAdvert = document.getElementById('addAdvert')
 
@@ -153,19 +163,23 @@ addAdvert.addEventListener('click', function (){
 })
 
 
-let redBtn = document.querySelectorAll('.redaction')
 
-for (let i = 0; i < redBtn.length; i++)  {
-    redBtn[i].addEventListener('click', function (){
+let jsAdv = document.querySelector('#js_advert')
+
+jsAdv.addEventListener('click', event => {
+    let target = event.target;
+
+    if (target.closest('.advertisement').querySelector('.redaction'))
+    {
         let modalBD = document.querySelector('.modalBackdrop')
 
-        let title = document.querySelectorAll('.ad__title')[i].textContent;
-        let content = document.querySelectorAll('.ad__content')[i].textContent;
-        let location = document.querySelectorAll('.ad__location')[i].textContent;
-        let price = document.querySelectorAll('.ad__price')[i].textContent;
-        let image = document.querySelectorAll('.adv_img')[i].src;
+        let title = target.closest('.advertisement').querySelector('.ad__title').textContent
+        let content = target.closest('.advertisement').querySelector('.ad__content').textContent
+        let location = target.closest('.advertisement').querySelector('.ad__location').textContent
+        let price = target.closest('.advertisement').querySelector('.ad__price').textContent
+        let image = target.closest('.advertisement').querySelector('.adv_img').src
 
-        console.log(image)
+        // console.log(image)
 
         let titleRed = document.querySelector('.title__red').value = title;
         let contentRed = document.querySelector('.content__red').value = content;
@@ -174,19 +188,122 @@ for (let i = 0; i < redBtn.length; i++)  {
         let imageRed = document.querySelector('.img__red').src = image;
 
         modalBD.style.display = "block";
-    })
+    }
+
+
+
+
+    // console.log(target.closest('.redaction').eventPhase)
+
+    // console.log(target.closest('.ad__title'))
+    // let title = document.querySelector('.ad__title').textContent
+    // let content = target.closest('.ad__content').textContent
+    // let location = target.closest('.ad__location').textContent
+    // let price = target.closest('.ad__price').textContent
+    // let image = target.closest('.adv_img').sr
+
+    // console.log(title)
+
+    // if (!redaction)
+    // {
+    //     return
+    //
+    // } else {
+
+    // if (document.querySelector('.advertisement__description'))
+    // {
+    //     let title = target.querySelector('.ad__title').textContent;
+    //     console.log(title)
+    // }
+    //
+    // console.log(target.closest('.advertisement'))
+    //
+    //     let modalBD = document.querySelector('.modalBackdrop')
+    //
+    //     let title = target.querySelector('.ad__title').textContent;
+    //      console.log(title)
+    //     let content = document.querySelector('.ad__content').textContent;
+    //     let location = document.querySelector('.ad__location').textContent;
+    //     let price = document.querySelector('.ad__price').textContent;
+    //     let image = document.querySelector('.adv_img').src;
+    //
+    //     console.log(title)
+    //
+    //     let titleRed = document.querySelector('.title__red').value = title;
+    //     let contentRed = document.querySelector('.content__red').value = content;
+    //     let locationRed = document.querySelector('.location__red').value = location;
+    //     let priceRed = document.querySelector('.price__red').value = toInteger(price);
+    //     let imageRed = document.querySelector('.img__red').src = image;
+    //
+    //     modalBD.style.display = "block";
+    // // }
+})
+
+// let redBtn = document.querySelectorAll('.redaction')
+
+// for (let i = 0; i < redBtn.length; i++)  {
+//     redBtn[i].addEventListener('click', function (){
+//         let modalBD = document.querySelector('.modalBackdrop')
+//
+//         let title = document.querySelectorAll('.ad__title')[i].textContent;
+//         let content = document.querySelectorAll('.ad__content')[i].textContent;
+//         let location = document.querySelectorAll('.ad__location')[i].textContent;
+//         let price = document.querySelectorAll('.ad__price')[i].textContent;
+//         let image = document.querySelectorAll('.adv_img')[i].src;
+//
+//         console.log(title)
+//
+//         let titleRed = document.querySelector('.title__red').value = title;
+//         let contentRed = document.querySelector('.content__red').value = content;
+//         let locationRed = document.querySelector('.location__red').value = location;
+//         let priceRed = document.querySelector('.price__red').value = toInteger(price);
+//         let imageRed = document.querySelector('.img__red').src = image;
+//
+//         modalBD.style.display = "block";
+//     })
+// }
+
+function rmImg (id) {
+    let image = document.querySelector(`#imgs img[data-id="${id}"]`);
+
+    if (image)
+    {
+        image.remove()
+
+        let index = imageIds.findIndex(item => item.id === id);
+
+        if (index !== -1) {
+            imageIds.splice(index, 1);
+        }
+    }
 }
 
 
-let cancelBtn = document.querySelector('.cancel__btn')
-cancelBtn.addEventListener('click', function (){
-    let modalBD = document.querySelector('.modalBackdrop')
-
-    modalBD.style.display = "none";
-    modalBD.style.transition = 0.3;
-
-    document.querySelector('#img__preview').style.display = "none";
-})
+// let cancelBtn = document.querySelector('.cancel__btn')
+// cancelBtn.addEventListener('click', function (){
+//     let modalBD = document.querySelector('.modalBackdrop')
+//
+//     modalBD.style.display = "none";
+//     modalBD.style.transition = 0.3;
+//
+//     // imgsPrev.length = 0
+//
+//     if (document.querySelectorAll('#img__preview')) {
+//         let delImgs = document.querySelectorAll('#img__preview')
+//
+//         for (let c = 0; c<delImgs.length; c++)
+//         {
+//             delImgs[c].remove(delImgs[c])
+//         }
+//
+//         for (let delCount = 0; delCount < imgsPrevId.length; delCount++)
+//         {
+//             imageIds.pop()
+//         }
+//
+//         console.log(imageIds)
+//     }
+// })
 
 
 // document.querySelector('.upload__img')

@@ -6,17 +6,8 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\FileController;
 use \App\Http\Controllers\AuthorizationController;
+use App\Http\Controllers\TestController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 Route::view('/authorization', 'authorization')
     ->name('authorization');
 
@@ -27,6 +18,8 @@ Route::get('/cabinet', [CabinetController::class, 'cabinet'])
     ->name('cabinet');
 
 Route::get('/', [HomeController::class, 'home']);
+
+Route::get('/test', [TestController::class, 'test']);
 
 
 Route::post('/file/upload', [FileController::class, 'file'])
