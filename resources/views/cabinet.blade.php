@@ -68,8 +68,7 @@
                             <input type="file" name="file" id="image" class="upload__img" placeholder="Выберите файл" multiple>
                             <label class="file__label" for="file">Загрузите файл</label>
                         </div>
-                        <div class="images__preview">
-                        </div>
+                        <div class="images__preview"></div>
                     </div>
                     <input type="text" class="red__input title__red" id="title__red" placeholder="Заголовок">
                     <input type="text" class="red__input content__red" id="content__red" placeholder="Описание">

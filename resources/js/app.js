@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {toInteger} from "lodash";
+import * as events from "events";
 
 
 
@@ -66,72 +67,102 @@ products.addEventListener('click', function() {
 
 let imageIds = [];
 
-// let imgsPrev = [];
-// let imgsPrevId = [];
+let modalBtn = document.querySelector('.modalBackdrop').querySelector('#image')
 
-let addRed = document.querySelectorAll('#image')
+modalBtn.addEventListener('change', event => {
+    upload()
+})
 
-for(let b=0; b<addRed.length; b++) {
-    addRed[b].addEventListener('change', event => {
+function upload() {
+    const files = event.target.files;
 
-        const files = event.target.files;
+    if (files.length === 0) {
+        return;
+    }
 
-        if (files.length === 0) {
-            return;
-        }
+    let file = files[0];
 
-        let file = files[0];
+    let fd = new FormData;
+    fd.append('file', file);
 
-        let fd = new FormData;
-        fd.append('file', file);
+    axios.post('/file/upload', fd)
+        .then((response) => {
+            imageIds.push(response.data)
 
-        axios.post('/file/upload', fd)
-            .then((response) => {
-                imageIds.push(response.data)
-                console.log(response.data.url)
-                console.log(imageIds)
+            if (modalBtn) {
 
-                if (document.querySelector('.upload__img')) {
-                    console.log(response.data.id)
-                    console.log(response.data.url)
+                let prevCont = document.createElement('div')
+                prevCont.className = "preview__container"
+                document.querySelector('.images__preview').prepend(prevCont)
 
-                    let addImg = document.querySelector('.upload__img')
+                let newImg = document.createElement('img')
+                newImg.className = "img__red preview";
+                newImg.dataset.id = response.data.id;
+                newImg.src = response.data.url;
+                document.querySelector('.preview__container').prepend(newImg)
 
-                    addImg.addEventListener('change', function (event){
-                        console.log(response.data.url)
+                let cancelXCont = document.createElement('div')
+                cancelXCont.className = "cancelX__container"
+                document.querySelector('.preview__container').append(cancelXCont)
 
-                        let newImg = document.createElement('img')
+                let cancelX = document.createElement('div')
+                cancelX.className = "cancelX"
+                document.querySelector('.cancelX__container').prepend(cancelX)
 
-                        newImg.setAttribute("id", "img__preview")
-                        document.querySelector('.images__preview').prepend(newImg)
-                        newImg.className = "img__red";
-                        newImg.dataset.id = response.data.id;
-                        newImg.src = response.data.url;
-                        console.log(newImg.src)
+                newImg.style.display = "block"
 
-                        newImg.style.display = "block"
-                    })
-                }
-            })
-    })
-
+            }
+        })
 }
 
-// let upImg = document.querySelector('.upload__img')
+function rmImg (id) {
+    let image = document.querySelector(`.preview__container img[data-id="${id}"]`);
 
-// // if (imgsPrev.length !== 0) {
-//     upImg.addEventListener('change', function (){
-//         let newImg = document.createElement('img')
-//
-//         newImg.setAttribute("id", "img__preview")
-//         newImg.className = "img__red"
-//         console.log(imgsPrev)
-//         newImg.src = imgsPrev[0];
-//         console.log(imgsPrev)
-//
-//         document.querySelector('.images__preview').prepend(newImg)
-//     // })
-// }
+    if (image)
+    {
+        document.querySelector('.preview__container').remove()
+
+        let index = imageIds.findIndex(item => item.id === id);
+
+        if (index !== -1) {
+            imageIds.splice(index, 1);
+        }
+    }
+}
+
+let imgsPrevCont = document.querySelector('.images__preview')
+
+imgsPrevCont.addEventListener('click', event => {
+    let target = event.target
+
+    if (target.closest('.cancelX__container')){
+        let canselXIds = target.closest('.images__preview').querySelector('.preview').dataset.id
+
+        rmImg(canselXIds)
+
+    } else {
+        return
+    }
+})
+
+
+
+let cancelBtn = document.querySelector('.cancel__btn')
+
+cancelBtn.addEventListener('click', function() {
+    let allRedImgs = document.querySelectorAll('.preview')
+
+    for (let i = 0; i < allRedImgs.length; ++i)
+    {
+        rmImg(allRedImgs[i].dataset.id)
+    }
+
+    modalBD.style.display = "none";
+
+})
+
+
+
 
 /* Создание объявления */
 
@@ -166,77 +197,33 @@ addAdvert.addEventListener('click', function (){
 
 let jsAdv = document.querySelector('#js_advert')
 
+let modalBD = document.querySelector('.modalBackdrop')
+
 jsAdv.addEventListener('click', event => {
     let target = event.target;
 
-    if (target.closest('.advertisement').querySelector('.redaction'))
-    {
-        let modalBD = document.querySelector('.modalBackdrop')
+        if (target.closest('.redaction'))
+        {
 
-        let title = target.closest('.advertisement').querySelector('.ad__title').textContent
-        let content = target.closest('.advertisement').querySelector('.ad__content').textContent
-        let location = target.closest('.advertisement').querySelector('.ad__location').textContent
-        let price = target.closest('.advertisement').querySelector('.ad__price').textContent
-        let image = target.closest('.advertisement').querySelector('.adv_img').src
+            let title = target.closest('.advertisement').querySelector('.ad__title').textContent
+            let content = target.closest('.advertisement').querySelector('.ad__content').textContent
+            let location = target.closest('.advertisement').querySelector('.ad__location').textContent
+            let price = target.closest('.advertisement').querySelector('.ad__price').textContent
+            let image = target.closest('.advertisement').querySelector('.adv_img').src
 
-        // console.log(image)
+            // console.log(image)
 
-        let titleRed = document.querySelector('.title__red').value = title;
-        let contentRed = document.querySelector('.content__red').value = content;
-        let locationRed = document.querySelector('.location__red').value = location;
-        let priceRed = document.querySelector('.price__red').value = toInteger(price);
-        let imageRed = document.querySelector('.img__red').src = image;
+            let titleRed = document.querySelector('.title__red').value = title;
+            let contentRed = document.querySelector('.content__red').value = content;
+            let locationRed = document.querySelector('.location__red').value = location;
+            let priceRed = document.querySelector('.price__red').value = toInteger(price);
+            let imageRed = document.querySelector('.img__red').src = image;
 
-        modalBD.style.display = "block";
-    }
+            modalBD.style.display = "block";
 
-
-
-
-    // console.log(target.closest('.redaction').eventPhase)
-
-    // console.log(target.closest('.ad__title'))
-    // let title = document.querySelector('.ad__title').textContent
-    // let content = target.closest('.ad__content').textContent
-    // let location = target.closest('.ad__location').textContent
-    // let price = target.closest('.ad__price').textContent
-    // let image = target.closest('.adv_img').sr
-
-    // console.log(title)
-
-    // if (!redaction)
-    // {
-    //     return
-    //
-    // } else {
-
-    // if (document.querySelector('.advertisement__description'))
-    // {
-    //     let title = target.querySelector('.ad__title').textContent;
-    //     console.log(title)
-    // }
-    //
-    // console.log(target.closest('.advertisement'))
-    //
-    //     let modalBD = document.querySelector('.modalBackdrop')
-    //
-    //     let title = target.querySelector('.ad__title').textContent;
-    //      console.log(title)
-    //     let content = document.querySelector('.ad__content').textContent;
-    //     let location = document.querySelector('.ad__location').textContent;
-    //     let price = document.querySelector('.ad__price').textContent;
-    //     let image = document.querySelector('.adv_img').src;
-    //
-    //     console.log(title)
-    //
-    //     let titleRed = document.querySelector('.title__red').value = title;
-    //     let contentRed = document.querySelector('.content__red').value = content;
-    //     let locationRed = document.querySelector('.location__red').value = location;
-    //     let priceRed = document.querySelector('.price__red').value = toInteger(price);
-    //     let imageRed = document.querySelector('.img__red').src = image;
-    //
-    //     modalBD.style.display = "block";
-    // // }
+        } else {
+            return
+        }
 })
 
 // let redBtn = document.querySelectorAll('.redaction')
@@ -263,20 +250,7 @@ jsAdv.addEventListener('click', event => {
 //     })
 // }
 
-function rmImg (id) {
-    let image = document.querySelector(`#imgs img[data-id="${id}"]`);
 
-    if (image)
-    {
-        image.remove()
-
-        let index = imageIds.findIndex(item => item.id === id);
-
-        if (index !== -1) {
-            imageIds.splice(index, 1);
-        }
-    }
-}
 
 
 // let cancelBtn = document.querySelector('.cancel__btn')
