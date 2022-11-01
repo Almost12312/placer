@@ -485,7 +485,7 @@ body {
 
 .red__input {
   width: 400px;
-  height: 40px;
+  min-height: 40px;
   margin-top: 25px;
   padding-left: 10px;
 }
@@ -520,9 +520,11 @@ body {
   max-height: 53px;
   width: 150px;
   padding: 15px;
+  position: relative;
+  top: 0;
   background-color: #009800;
   border-radius: 10px;
-  position: relative;
+  cursor: pointer;
 }
 
 .upload__img {
@@ -600,14 +602,36 @@ body {
   flex-direction: column;
   align-items: center;
 }
-.form_add input {
+.form_add button {
+  width: 200px;
+  height: 40px;
+  margin-top: 50px;
+}
+
+.form_add__inputs {
   width: 400px;
   height: 50px;
   margin-top: 40px;
   padding-left: 10px;
 }
-.form_add button {
-  width: 200px;
-  height: 40px;
-  margin-top: 50px;
+
+.sendAdd {
+  max-width: 190px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #429800;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.addAdv__btn_container {
+  position: relative;
+}
+
+.addAdvert {
+  max-width: 190px;
+  height: 100%;
 }

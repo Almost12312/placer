@@ -80,39 +80,42 @@ function upload() {
         return;
     }
 
-    let file = files[0];
+    // let file = files[0];
 
-    let fd = new FormData;
-    fd.append('file', file);
+    for (let i = 0; i < files.length; i++)
+    {
+        let fd = new FormData;
+        fd.append('file', files[i]);
 
-    axios.post('/file/upload', fd)
-        .then((response) => {
-            imageIds.push(response.data)
+        axios.post('/file/upload', fd)
+            .then((response) => {
+                imageIds.push(response.data)
 
-            if (modalBtn) {
+                if (modalBtn) {
 
-                let prevCont = document.createElement('div')
-                prevCont.className = "preview__container"
-                document.querySelector('.images__preview').prepend(prevCont)
+                    let prevCont = document.createElement('div')
+                    prevCont.className = "preview__container"
+                    document.querySelector('.images__preview').prepend(prevCont)
 
-                let newImg = document.createElement('img')
-                newImg.className = "img__red preview";
-                newImg.dataset.id = response.data.id;
-                newImg.src = response.data.url;
-                document.querySelector('.preview__container').prepend(newImg)
+                    let newImg = document.createElement('img')
+                    newImg.className = "img__red preview";
+                    newImg.dataset.id = response.data.id;
+                    newImg.src = response.data.url;
+                    document.querySelector('.preview__container').prepend(newImg)
 
-                let cancelXCont = document.createElement('div')
-                cancelXCont.className = "cancelX__container"
-                document.querySelector('.preview__container').append(cancelXCont)
+                    let cancelXCont = document.createElement('div')
+                    cancelXCont.className = "cancelX__container"
+                    document.querySelector('.preview__container').append(cancelXCont)
 
-                let cancelX = document.createElement('div')
-                cancelX.className = "cancelX"
-                document.querySelector('.cancelX__container').prepend(cancelX)
+                    let cancelX = document.createElement('div')
+                    cancelX.className = "cancelX"
+                    document.querySelector('.cancelX__container').prepend(cancelX)
 
-                newImg.style.display = "block"
+                    newImg.style.display = "block"
 
-            }
-        })
+                }
+            })
+    }
 }
 
 function rmImg (id) {
@@ -166,20 +169,46 @@ cancelBtn.addEventListener('click', function() {
 
 /* Создание объявления */
 
-let addAdvert = document.getElementById('addAdvert')
+let uplImgAdv = document.getElementById('imageAddAdvert')
 
+uplImgAdv.addEventListener('change', function (){
+    upload()
+})
+
+let ids = []
+
+let addAdvert = document.querySelector('#addAdvert')
 addAdvert.addEventListener('click', function (){
+    let idsImgMap = []
+    console.log(imageIds)
+
+    for (let i = 0; i < imageIds.length; i++)
+    {
+        console.log(imageIds)
+        idsImgMap.push(Object.values(imageIds[i]))
+        console.log(idsImgMap)
+
+        if (!ids.includes(idsImgMap[idsImgMap.length-1][0]))
+        {
+            ids.push(idsImgMap[idsImgMap.length-1][0])
+
+        }
+        console.log(ids)
+    }
+
     let title = document.getElementById('title').value;
     let content = document.getElementById('content').value;
     let location = document.getElementById('location').value;
     let price = document.getElementById('price').value;
+
+    // console.log(imageIds.length)
 
     let addAdvertPost = {
         title: title,
         content: content,
         location: location,
         price: price,
-        image_ids: imageIds
+        image_ids: ids
     }
 
     axios.post('/advertisement/create', addAdvertPost)
@@ -193,7 +222,13 @@ addAdvert.addEventListener('click', function (){
         });
 })
 
+// let uplAdd = document.querySelector('.form_add').querySelector('.files__download__button').querySelector('#addAdvert')
+// console.log(uplAdd)
+// uplAdd.addEventListener('change', function (){
+//     upload()
+// })
 
+/* Модальное окно */
 
 let jsAdv = document.querySelector('#js_advert')
 

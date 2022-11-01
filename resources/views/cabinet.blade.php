@@ -80,12 +80,23 @@
 
 
             <div class="form_add" id="form">
-                <input type="text" id="title" placeholder="Заголовок">
-                <input type="text" id="content" placeholder="Описание товара">
-                <input type="text" id="location" placeholder="Место">
-                <input type="number" id="price" placeholder="Цена">
-                <input type="file" id="image" placeholder="Загрузите картинку">
-                <button id="addAdvert">Отправить</button>
+                <input type="text" class="form_add__inputs" id="title" placeholder="Заголовок">
+                <input type="text" class="form_add__inputs" id="content" placeholder="Описание товара">
+                <input type="text" class="form_add__inputs" id="location" placeholder="Место">
+                <input type="number" class="form_add__inputs" id="price" placeholder="Цена">
+                <div class="files__download">
+                    <div class="files__download__button">
+                        <input type="file" name="file" id="imageAddAdvert" class="upload__img" placeholder="Выберите файл" multiple>
+                        <label class="file__label" for="file">Загрузите файл</label>
+                    </div>
+                    <div class="images__preview"></div>
+                </div>
+                <div class="addAdv__btn_container">
+                    <input class="addAdvert upload__img" name="sendAdd" id="addAdvert">
+                    <label for="sendAdd" class="sendAdd">Создать объявление</label>
+                </div>
+
+
             </div>
         </div>
     </section>

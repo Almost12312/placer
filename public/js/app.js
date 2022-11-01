@@ -2124,29 +2124,33 @@ function upload() {
   if (files.length === 0) {
     return;
   }
-  var file = files[0];
-  var fd = new FormData();
-  fd.append('file', file);
-  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/file/upload', fd).then(function (response) {
-    imageIds.push(response.data);
-    if (modalBtn) {
-      var prevCont = document.createElement('div');
-      prevCont.className = "preview__container";
-      document.querySelector('.images__preview').prepend(prevCont);
-      var newImg = document.createElement('img');
-      newImg.className = "img__red preview";
-      newImg.dataset.id = response.data.id;
-      newImg.src = response.data.url;
-      document.querySelector('.preview__container').prepend(newImg);
-      var cancelXCont = document.createElement('div');
-      cancelXCont.className = "cancelX__container";
-      document.querySelector('.preview__container').append(cancelXCont);
-      var cancelX = document.createElement('div');
-      cancelX.className = "cancelX";
-      document.querySelector('.cancelX__container').prepend(cancelX);
-      newImg.style.display = "block";
-    }
-  });
+
+  // let file = files[0];
+
+  for (var i = 0; i < files.length; i++) {
+    var fd = new FormData();
+    fd.append('file', files[i]);
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/file/upload', fd).then(function (response) {
+      imageIds.push(response.data);
+      if (modalBtn) {
+        var prevCont = document.createElement('div');
+        prevCont.className = "preview__container";
+        document.querySelector('.images__preview').prepend(prevCont);
+        var newImg = document.createElement('img');
+        newImg.className = "img__red preview";
+        newImg.dataset.id = response.data.id;
+        newImg.src = response.data.url;
+        document.querySelector('.preview__container').prepend(newImg);
+        var cancelXCont = document.createElement('div');
+        cancelXCont.className = "cancelX__container";
+        document.querySelector('.preview__container').append(cancelXCont);
+        var cancelX = document.createElement('div');
+        cancelX.className = "cancelX";
+        document.querySelector('.cancelX__container').prepend(cancelX);
+        newImg.style.display = "block";
+      }
+    });
+  }
 }
 function rmImg(id) {
   var image = document.querySelector(".preview__container img[data-id=\"".concat(id, "\"]"));
@@ -2181,18 +2185,37 @@ cancelBtn.addEventListener('click', function () {
 
 /* Создание объявления */
 
-var addAdvert = document.getElementById('addAdvert');
+var uplImgAdv = document.getElementById('imageAddAdvert');
+uplImgAdv.addEventListener('change', function () {
+  upload();
+});
+var ids = [];
+var addAdvert = document.querySelector('#addAdvert');
 addAdvert.addEventListener('click', function () {
+  var idsImgMap = [];
+  console.log(imageIds);
+  for (var i = 0; i < imageIds.length; i++) {
+    console.log(imageIds);
+    idsImgMap.push(Object.values(imageIds[i]));
+    console.log(idsImgMap);
+    if (!ids.includes(idsImgMap[idsImgMap.length - 1][0])) {
+      ids.push(idsImgMap[idsImgMap.length - 1][0]);
+    }
+    console.log(ids);
+  }
   var title = document.getElementById('title').value;
   var content = document.getElementById('content').value;
   var location = document.getElementById('location').value;
   var price = document.getElementById('price').value;
+
+  // console.log(imageIds.length)
+
   var addAdvertPost = {
     title: title,
     content: content,
     location: location,
     price: price,
-    image_ids: imageIds
+    image_ids: ids
   };
   axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/create', addAdvertPost).then(function (response) {
     if (response.data.success) {
@@ -2202,6 +2225,15 @@ addAdvert.addEventListener('click', function () {
     }
   });
 });
+
+// let uplAdd = document.querySelector('.form_add').querySelector('.files__download__button').querySelector('#addAdvert')
+// console.log(uplAdd)
+// uplAdd.addEventListener('change', function (){
+//     upload()
+// })
+
+/* Модальное окно */
+
 var jsAdv = document.querySelector('#js_advert');
 var modalBD = document.querySelector('.modalBackdrop');
 jsAdv.addEventListener('click', function (event) {
