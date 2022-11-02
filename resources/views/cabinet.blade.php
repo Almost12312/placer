@@ -74,7 +74,10 @@
                     <input type="text" class="red__input content__red" id="content__red" placeholder="Описание">
                     <input type="text" class="red__input location__red" id="location__red" placeholder="Расположение">
                     <input type="number" class="red__input price__red" id="price__red" placeholder="Цена">
-                    <button class="cancel__btn">Отменить</button>
+                    <div class="function__button">
+                        <button class="cancel__btn">Отменить</button>
+                        <button class="cancel__btn" id="addRedaction">Редактировать</button>
+                    </div>
                 </div>
             </div>
 

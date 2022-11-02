@@ -2114,6 +2114,9 @@ products.addEventListener('click', function () {
   products.classList.toggle("a_active");
   addProduct.classList.remove("a_active");
 });
+
+/* Модальное окно. Функционал */
+
 var imageIds = [];
 var modalBtn = document.querySelector('.modalBackdrop').querySelector('#image');
 modalBtn.addEventListener('change', function (event) {
@@ -2174,6 +2177,13 @@ imgsPrevCont.addEventListener('click', function (event) {
     return;
   }
 });
+
+// let addRedBtn = document.querySelector('#addRedaction')
+//
+// addRedBtn.addEventListener('click', function (){
+//
+// })
+
 var cancelBtn = document.querySelector('.cancel__btn');
 cancelBtn.addEventListener('click', function () {
   var allRedImgs = document.querySelectorAll('.preview');
@@ -2192,16 +2202,14 @@ uplImgAdv.addEventListener('change', function () {
 var ids = [];
 var addAdvert = document.querySelector('#addAdvert');
 addAdvert.addEventListener('click', function () {
-  var idsImgMap = [];
-  console.log(imageIds);
-  for (var i = 0; i < imageIds.length; i++) {
-    console.log(imageIds);
-    idsImgMap.push(Object.values(imageIds[i]));
-    console.log(idsImgMap);
-    if (!ids.includes(idsImgMap[idsImgMap.length - 1][0])) {
-      ids.push(idsImgMap[idsImgMap.length - 1][0]);
+  var findInx = document.querySelector(".preview__container img[data-id=\"".concat(id, "\"]"));
+  if (findInx) {
+    var index = imageIds.findIndex(function (item) {
+      return item.id === id;
+    });
+    if (index !== -1) {
+      imageIds.splice(index, 1);
     }
-    console.log(ids);
   }
   var title = document.getElementById('title').value;
   var content = document.getElementById('content').value;
@@ -2220,41 +2228,68 @@ addAdvert.addEventListener('click', function () {
   axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/create', addAdvertPost).then(function (response) {
     if (response.data.success) {
       alert('Объявление успешно загружено');
+      console.log(ids);
     } else {
       alert("Наебни говна олух");
     }
   });
 });
 
-// let uplAdd = document.querySelector('.form_add').querySelector('.files__download__button').querySelector('#addAdvert')
-// console.log(uplAdd)
-// uplAdd.addEventListener('change', function (){
-//     upload()
-// })
-
-/* Модальное окно */
+/* Сбор инфы из таргет объявления */
 
 var jsAdv = document.querySelector('#js_advert');
 var modalBD = document.querySelector('.modalBackdrop');
 jsAdv.addEventListener('click', function (event) {
   var target = event.target;
+  var title = target.closest('.advertisement').querySelector('.ad__title').textContent;
+  var content = target.closest('.advertisement').querySelector('.ad__content').textContent;
+  var location = target.closest('.advertisement').querySelector('.ad__location').textContent;
+  var price = target.closest('.advertisement').querySelector('.ad__price').textContent;
+  var image = target.closest('.advertisement').querySelector('.adv_img').src;
+  var dataId = target.closest('.advertisement').dataset.id;
   if (target.closest('.redaction')) {
-    var title = target.closest('.advertisement').querySelector('.ad__title').textContent;
-    var content = target.closest('.advertisement').querySelector('.ad__content').textContent;
-    var _location = target.closest('.advertisement').querySelector('.ad__location').textContent;
-    var price = target.closest('.advertisement').querySelector('.ad__price').textContent;
-    var image = target.closest('.advertisement').querySelector('.adv_img').src;
-
-    // console.log(image)
-
     var titleRed = document.querySelector('.title__red').value = title;
     var contentRed = document.querySelector('.content__red').value = content;
-    var locationRed = document.querySelector('.location__red').value = _location;
+    var locationRed = document.querySelector('.location__red').value = location;
     var priceRed = document.querySelector('.price__red').value = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.toInteger)(price);
     var imageRed = document.querySelector('.img__red').src = image;
     modalBD.style.display = "block";
-  } else {
-    return;
+  }
+  if (target.closest('.delete')) {
+    console.log('ce');
+    console.log(dataId);
+    var delPost = {
+      id: dataId
+    };
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/delete', delPost).then(function (response) {
+      console.log(response.data.del);
+      var delAdv = target.closest('.advertisement').style.display = "none";
+    });
+  }
+  if (modalBD) {
+    // modal.addEventListener('click', function (){
+    //
+    //     let target = event.target
+    //
+    //     if (target.closest('.addRedaction'))
+
+    var addRedBtn = document.querySelector('#addRedaction');
+    addRedBtn.addEventListener('click', function () {
+      var title = document.querySelector('.title__red').value;
+      var content = document.querySelector('.content__red').value;
+      var location = document.querySelector('.location__red').value;
+      var price = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.toInteger)(document.querySelector('.price__red').value);
+      var imgs = document.querySelector('.preview').src;
+      var addRed = {
+        title: title,
+        content: content,
+        location: location,
+        price: price,
+        imgs: imgs,
+        id: dataId
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/redaction', addRed);
+    });
   }
 });
 

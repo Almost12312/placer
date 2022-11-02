@@ -65,6 +65,8 @@ products.addEventListener('click', function() {
     addProduct.classList.remove("a_active")
 })
 
+/* Модальное окно. Функционал */
+
 let imageIds = [];
 
 let modalBtn = document.querySelector('.modalBackdrop').querySelector('#image')
@@ -72,6 +74,8 @@ let modalBtn = document.querySelector('.modalBackdrop').querySelector('#image')
 modalBtn.addEventListener('change', event => {
     upload()
 })
+
+
 
 function upload() {
     const files = event.target.files;
@@ -148,7 +152,11 @@ imgsPrevCont.addEventListener('click', event => {
     }
 })
 
-
+// let addRedBtn = document.querySelector('#addRedaction')
+//
+// addRedBtn.addEventListener('click', function (){
+//
+// })
 
 let cancelBtn = document.querySelector('.cancel__btn')
 
@@ -178,22 +186,17 @@ uplImgAdv.addEventListener('change', function (){
 let ids = []
 
 let addAdvert = document.querySelector('#addAdvert')
-addAdvert.addEventListener('click', function (){
-    let idsImgMap = []
-    console.log(imageIds)
+addAdvert.addEventListener('click', function ()
+{
+    let findInx = document.querySelector(`.preview__container img[data-id="${id}"]`);
 
-    for (let i = 0; i < imageIds.length; i++)
+    if (findInx)
     {
-        console.log(imageIds)
-        idsImgMap.push(Object.values(imageIds[i]))
-        console.log(idsImgMap)
+        let index = imageIds.findIndex(item => item.id === id);
 
-        if (!ids.includes(idsImgMap[idsImgMap.length-1][0]))
-        {
-            ids.push(idsImgMap[idsImgMap.length-1][0])
-
+        if (index !== -1) {
+            imageIds.splice(index, 1);
         }
-        console.log(ids)
     }
 
     let title = document.getElementById('title').value;
@@ -214,21 +217,18 @@ addAdvert.addEventListener('click', function (){
     axios.post('/advertisement/create', addAdvertPost)
         .then((response) =>{
 
+
+
             if (response.data.success) {
                 alert('Объявление успешно загружено');
+                console.log(ids)
             } else {
                 alert("Наебни говна олух");
             }
         });
 })
 
-// let uplAdd = document.querySelector('.form_add').querySelector('.files__download__button').querySelector('#addAdvert')
-// console.log(uplAdd)
-// uplAdd.addEventListener('change', function (){
-//     upload()
-// })
-
-/* Модальное окно */
+/* Сбор инфы из таргет объявления */
 
 let jsAdv = document.querySelector('#js_advert')
 
@@ -237,28 +237,74 @@ let modalBD = document.querySelector('.modalBackdrop')
 jsAdv.addEventListener('click', event => {
     let target = event.target;
 
-        if (target.closest('.redaction'))
+    let title = target.closest('.advertisement').querySelector('.ad__title').textContent
+    let content = target.closest('.advertisement').querySelector('.ad__content').textContent
+    let location = target.closest('.advertisement').querySelector('.ad__location').textContent
+    let price = target.closest('.advertisement').querySelector('.ad__price').textContent
+    let image = target.closest('.advertisement').querySelector('.adv_img').src
+    let dataId = target.closest('.advertisement').dataset.id
+
+    if (target.closest('.redaction'))
         {
-
-            let title = target.closest('.advertisement').querySelector('.ad__title').textContent
-            let content = target.closest('.advertisement').querySelector('.ad__content').textContent
-            let location = target.closest('.advertisement').querySelector('.ad__location').textContent
-            let price = target.closest('.advertisement').querySelector('.ad__price').textContent
-            let image = target.closest('.advertisement').querySelector('.adv_img').src
-
-            // console.log(image)
-
             let titleRed = document.querySelector('.title__red').value = title;
             let contentRed = document.querySelector('.content__red').value = content;
             let locationRed = document.querySelector('.location__red').value = location;
             let priceRed = document.querySelector('.price__red').value = toInteger(price);
             let imageRed = document.querySelector('.img__red').src = image;
 
-            modalBD.style.display = "block";
 
-        } else {
-            return
+            modalBD.style.display = "block";
         }
+
+        if (target.closest('.delete'))
+        {
+            console.log('ce')
+
+            console.log(dataId)
+
+            let delPost = {
+                id: dataId
+            }
+
+            axios.post('/advertisement/delete', delPost)
+                .then((response) => {
+                    console.log(response.data.del)
+
+                    let delAdv = target.closest('.advertisement').style.display = "none"
+                })
+        }
+    if (modalBD){
+        // modal.addEventListener('click', function (){
+        //
+        //     let target = event.target
+        //
+        //     if (target.closest('.addRedaction'))
+
+        let addRedBtn = document.querySelector('#addRedaction')
+        addRedBtn.addEventListener('click', function ()
+        {
+            let title = document.querySelector('.title__red').value
+            let content = document.querySelector('.content__red').value
+            let location = document.querySelector('.location__red').value
+            let price = toInteger(document.querySelector('.price__red').value)
+            let imgs = document.querySelector('.preview').src
+
+            let addRed = {
+                title: title,
+                content: content,
+                location: location,
+                price: price,
+                imgs: imgs,
+                id: dataId
+            }
+
+            axios.post('/advertisement/redaction', addRed)
+        })
+
+
+    }
+
+
 })
 
 // let redBtn = document.querySelectorAll('.redaction')
