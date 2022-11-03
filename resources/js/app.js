@@ -2,6 +2,19 @@ import axios from 'axios'
 import {toInteger} from "lodash";
 import * as events from "events";
 
+import Vue from 'vue'
+import Test from './components/Test'
+import AddAd from './components/AddAd'
+
+if (document.getElementById('vue-app')) {
+
+    new Vue({
+        el: '#vue-app',
+        components: {
+            Test, AddAd
+        }
+    });
+}
 
 
 let loginBtn = document.getElementById('auth__submit');
@@ -32,38 +45,38 @@ if (loginBtn) {
     })
 }
 
-let addProduct = document.getElementById("add__product");
-let products = document.getElementById("products");
-let advert = document.getElementById("js_advert");
-let form = document.getElementById('form')
-
-let tabElementsTitle = document.getElementById("tab1");
-let tabElementsTitle2 = document.getElementById("tab2");
-
-
-addProduct.addEventListener('click', function() {
-    tabElementsTitle.style.display = "none";
-    advert.style.display = "none";
-
-    tabElementsTitle2.style.display = "block";
-    tabElementsTitle2.style.display = "flex";
-    form.style.display = "flex";
-
-    addProduct.classList.toggle("a_active")
-    products.classList.remove("a_active")
-})
-
-products.addEventListener('click', function() {
-    tabElementsTitle.style.display = "flex";
-    advert.style.display = "flex";
-
-    tabElementsTitle2.style.display = "none";
-    tabElementsTitle2.style.display = "none";
-    form.style.display = "none";
-
-    products.classList.toggle("a_active")
-    addProduct.classList.remove("a_active")
-})
+// let addProduct = document.getElementById("add__product");
+// let products = document.getElementById("products");
+// let advert = document.getElementById("js_advert");
+// let form = document.getElementById('form')
+//
+// let tabElementsTitle = document.getElementById("tab1");
+// let tabElementsTitle2 = document.getElementById("tab2");
+//
+//
+// addProduct.addEventListener('click', function() {
+//     tabElementsTitle.style.display = "none";
+//     advert.style.display = "none";
+//
+//     tabElementsTitle2.style.display = "block";
+//     tabElementsTitle2.style.display = "flex";
+//     form.style.display = "flex";
+//
+//     addProduct.classList.toggle("a_active")
+//     products.classList.remove("a_active")
+// })
+//
+// products.addEventListener('click', function() {
+//     tabElementsTitle.style.display = "flex";
+//     advert.style.display = "flex";
+//
+//     tabElementsTitle2.style.display = "none";
+//     tabElementsTitle2.style.display = "none";
+//     form.style.display = "none";
+//
+//     products.classList.toggle("a_active")
+//     addProduct.classList.remove("a_active")
+// })
 
 /* Модальное окно. Функционал */
 

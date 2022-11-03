@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AdvertisementAddController extends Controller
 {
+
     public function addAdvert(Request $request)
     {
 
@@ -72,14 +73,10 @@ class AdvertisementAddController extends Controller
             'location' => $locationRed,
             'price' => $priceRed
         ]);
+    }
 
-//        $xer = $red->files()->where('advertisement_id', '=', "$imageRed")->get();
-//        $xer = $red->whereHas('files', function ($query, $id){
-//            $query->where('id', $id);
-//        });
-
-//        Advertisement::where([
-//            'id' => $id
-//        ])->files()->sync($imageRed);
+    public function view()
+    {
+        return view('addAdvert');
     }
 }

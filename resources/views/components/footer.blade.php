@@ -11,7 +11,7 @@
         <div class="interface">
             <ul>
                 <li>
-                    <img src="images/world.svg" alt="world">
+                    <img src="/images/world.svg" alt="world">
                     <span>Русский</span>
                 </li>
             </ul>
