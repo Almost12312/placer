@@ -2086,6 +2086,87 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Preview.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Preview.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+// import AdvImgs from "./AdvImgs";
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      images: []
+    };
+  },
+  methods: {
+    upload: function upload(event) {
+      var _this = this;
+      var files = event.target.files;
+      if (files.length === 0) {
+        return;
+      }
+
+      // let file = files[0];
+
+      for (var i = 0; i < files.length; i++) {
+        var fd = new FormData();
+        fd.append('file', files[i]);
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post('/file/upload', fd).then(function (response) {
+          _this.images.push(response.data);
+        });
+      }
+    },
+    deleteImage: function deleteImage(index) {
+      this.images.splice(index, 1);
+    } //
+    // deleteAll() {
+    //
+    //     this.images = [];
+    // },
+    //
+    // greet() {
+    //
+    // }
+  }
+
+  // components: {
+  //     AdvImgs
+  // }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Test.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Test.vue?vue&type=script&lang=js& ***!
@@ -2128,7 +2209,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      images: []
+      imagess: []
     };
   },
   methods: {
@@ -2139,7 +2220,7 @@ __webpack_require__.r(__webpack_exports__);
         var fd = new FormData();
         fd.append('file', files[i]);
         axios__WEBPACK_IMPORTED_MODULE_0___default().post('/file/upload', fd).then(function (response) {
-          _this.images.push(response.data);
+          _this.imagess.push(response.data);
         });
       }
     },
@@ -2172,21 +2253,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var events__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! events */ "./node_modules/events/events.js");
 /* harmony import */ var events__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _components_Test__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Test */ "./resources/js/components/Test.vue");
 /* harmony import */ var _components_AddAd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/AddAd */ "./resources/js/components/AddAd.vue");
+/* harmony import */ var _components_Preview__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Preview */ "./resources/js/components/Preview.vue");
 
 
 
 
 
 
-if (document.getElementById('vue-app')) {
-  new vue__WEBPACK_IMPORTED_MODULE_5__["default"]({
-    el: '#vue-app',
+
+
+// if (document.getElementById('vue-app')) {
+//
+//     new Vue({
+//         el: '#vue-app',
+//         components: {
+//             Test, AddAd
+//         }
+//     });
+// }
+
+if (document.querySelector('.files__download__container')) {
+  new vue__WEBPACK_IMPORTED_MODULE_6__["default"]({
+    el: '.files__download__container',
     components: {
-      Test: _components_Test__WEBPACK_IMPORTED_MODULE_3__["default"],
-      AddAd: _components_AddAd__WEBPACK_IMPORTED_MODULE_4__["default"]
+      Preview: _components_Preview__WEBPACK_IMPORTED_MODULE_5__["default"]
     }
   });
 }
@@ -2245,181 +2338,245 @@ if (loginBtn) {
 
 /* Модальное окно. Функционал */
 
-var imageIds = [];
-var modalBtn = document.querySelector('.modalBackdrop').querySelector('#image');
-modalBtn.addEventListener('change', function (event) {
-  upload();
-});
-function upload() {
-  var files = event.target.files;
-  if (files.length === 0) {
-    return;
-  }
-
-  // let file = files[0];
-
-  for (var i = 0; i < files.length; i++) {
-    var fd = new FormData();
-    fd.append('file', files[i]);
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/file/upload', fd).then(function (response) {
-      imageIds.push(response.data);
-      if (modalBtn) {
-        var prevCont = document.createElement('div');
-        prevCont.className = "preview__container";
-        document.querySelector('.images__preview').prepend(prevCont);
-        var newImg = document.createElement('img');
-        newImg.className = "img__red preview";
-        newImg.dataset.id = response.data.id;
-        newImg.src = response.data.url;
-        document.querySelector('.preview__container').prepend(newImg);
-        var cancelXCont = document.createElement('div');
-        cancelXCont.className = "cancelX__container";
-        document.querySelector('.preview__container').append(cancelXCont);
-        var cancelX = document.createElement('div');
-        cancelX.className = "cancelX";
-        document.querySelector('.cancelX__container').prepend(cancelX);
-        newImg.style.display = "block";
-      }
-    });
-  }
-}
-function rmImg(id) {
-  var image = document.querySelector(".preview__container img[data-id=\"".concat(id, "\"]"));
-  if (image) {
-    document.querySelector('.preview__container').remove();
-    var index = imageIds.findIndex(function (item) {
-      return item.id === id;
-    });
-    if (index !== -1) {
-      imageIds.splice(index, 1);
-    }
-  }
-}
-var imgsPrevCont = document.querySelector('.images__preview');
-imgsPrevCont.addEventListener('click', function (event) {
-  var target = event.target;
-  if (target.closest('.cancelX__container')) {
-    var canselXIds = target.closest('.images__preview').querySelector('.preview').dataset.id;
-    rmImg(canselXIds);
-  } else {
-    return;
-  }
-});
-
-// let addRedBtn = document.querySelector('#addRedaction')
+// let imageIds = [];
 //
-// addRedBtn.addEventListener('click', function (){
+// let modalBtn = document.querySelector('.modalBackdrop').querySelector('#image')
+//
+// modalBtn.addEventListener('change', event => {
+//     upload()
+// })
+//
+//
+//
+// function upload() {
+//     const files = event.target.files;
+//
+//     if (files.length === 0) {
+//         return;
+//     }
+//
+//     // let file = files[0];
+//
+//     for (let i = 0; i < files.length; i++)
+//     {
+//         let fd = new FormData;
+//         fd.append('file', files[i]);
+//
+//         axios.post('/file/upload', fd)
+//             .then((response) => {
+//                 imageIds.push(response.data)
+//
+//                 if (modalBtn) {
+//
+//                     let prevCont = document.createElement('div')
+//                     prevCont.className = "preview__container"
+//                     document.querySelector('.images__preview').prepend(prevCont)
+//
+//                     let newImg = document.createElement('img')
+//                     newImg.className = "img__red preview";
+//                     newImg.dataset.id = response.data.id;
+//                     newImg.src = response.data.url;
+//                     document.querySelector('.preview__container').prepend(newImg)
+//
+//                     let cancelXCont = document.createElement('div')
+//                     cancelXCont.className = "cancelX__container"
+//                     document.querySelector('.preview__container').append(cancelXCont)
+//
+//                     let cancelX = document.createElement('div')
+//                     cancelX.className = "cancelX"
+//                     document.querySelector('.cancelX__container').prepend(cancelX)
+//
+//                     newImg.style.display = "block"
+//
+//                 }
+//             })
+//     }
+// }
+//
+// function rmImg (id) {
+//     let image = document.querySelector(`.preview__container img[data-id="${id}"]`);
+//
+//     if (image)
+//     {
+//         document.querySelector('.preview__container').remove()
+//
+//         let index = imageIds.findIndex(item => item.id === id);
+//
+//         if (index !== -1) {
+//             imageIds.splice(index, 1);
+//         }
+//     }
+// }
+//
+// let imgsPrevCont = document.querySelector('.images__preview')
+//
+// imgsPrevCont.addEventListener('click', event => {
+//     let target = event.target
+//
+//     if (target.closest('.cancelX__container')){
+//         let canselXIds = target.closest('.images__preview').querySelector('.preview').dataset.id
+//
+//         rmImg(canselXIds)
+//
+//     } else {
+//         return
+//     }
+// })
+//
+// // let addRedBtn = document.querySelector('#addRedaction')
+// //
+// // addRedBtn.addEventListener('click', function (){
+// //
+// // })
+//
+// let cancelBtn = document.querySelector('.cancel__btn')
+//
+// cancelBtn.addEventListener('click', function() {
+//     let allRedImgs = document.querySelectorAll('.preview')
+//
+//     for (let i = 0; i < allRedImgs.length; ++i)
+//     {
+//         rmImg(allRedImgs[i].dataset.id)
+//     }
+//
+//     modalBD.style.display = "none";
 //
 // })
-
-var cancelBtn = document.querySelector('.cancel__btn');
-cancelBtn.addEventListener('click', function () {
-  var allRedImgs = document.querySelectorAll('.preview');
-  for (var i = 0; i < allRedImgs.length; ++i) {
-    rmImg(allRedImgs[i].dataset.id);
-  }
-  modalBD.style.display = "none";
-});
-
-/* Создание объявления */
-
-var uplImgAdv = document.getElementById('imageAddAdvert');
-uplImgAdv.addEventListener('change', function () {
-  upload();
-});
-var ids = [];
-var addAdvert = document.querySelector('#addAdvert');
-addAdvert.addEventListener('click', function () {
-  var findInx = document.querySelector(".preview__container img[data-id=\"".concat(id, "\"]"));
-  if (findInx) {
-    var index = imageIds.findIndex(function (item) {
-      return item.id === id;
-    });
-    if (index !== -1) {
-      imageIds.splice(index, 1);
-    }
-  }
-  var title = document.getElementById('title').value;
-  var content = document.getElementById('content').value;
-  var location = document.getElementById('location').value;
-  var price = document.getElementById('price').value;
-
-  // console.log(imageIds.length)
-
-  var addAdvertPost = {
-    title: title,
-    content: content,
-    location: location,
-    price: price,
-    image_ids: ids
-  };
-  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/create', addAdvertPost).then(function (response) {
-    if (response.data.success) {
-      alert('Объявление успешно загружено');
-      console.log(ids);
-    } else {
-      alert("Наебни говна олух");
-    }
-  });
-});
-
-/* Сбор инфы из таргет объявления */
-
-var jsAdv = document.querySelector('#js_advert');
-var modalBD = document.querySelector('.modalBackdrop');
-jsAdv.addEventListener('click', function (event) {
-  var target = event.target;
-  var title = target.closest('.advertisement').querySelector('.ad__title').textContent;
-  var content = target.closest('.advertisement').querySelector('.ad__content').textContent;
-  var location = target.closest('.advertisement').querySelector('.ad__location').textContent;
-  var price = target.closest('.advertisement').querySelector('.ad__price').textContent;
-  var image = target.closest('.advertisement').querySelector('.adv_img').src;
-  var dataId = target.closest('.advertisement').dataset.id;
-  if (target.closest('.redaction')) {
-    var titleRed = document.querySelector('.title__red').value = title;
-    var contentRed = document.querySelector('.content__red').value = content;
-    var locationRed = document.querySelector('.location__red').value = location;
-    var priceRed = document.querySelector('.price__red').value = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.toInteger)(price);
-    var imageRed = document.querySelector('.img__red').src = image;
-    modalBD.style.display = "block";
-  }
-  if (target.closest('.delete')) {
-    console.log('ce');
-    console.log(dataId);
-    var delPost = {
-      id: dataId
-    };
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/delete', delPost).then(function (response) {
-      console.log(response.data.del);
-      var delAdv = target.closest('.advertisement').style.display = "none";
-    });
-  }
-  if (modalBD) {
-    // modal.addEventListener('click', function (){
-    //
-    //     let target = event.target
-    //
-    //     if (target.closest('.addRedaction'))
-
-    var addRedBtn = document.querySelector('#addRedaction');
-    addRedBtn.addEventListener('click', function () {
-      var title = document.querySelector('.title__red').value;
-      var content = document.querySelector('.content__red').value;
-      var location = document.querySelector('.location__red').value;
-      var price = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.toInteger)(document.querySelector('.price__red').value);
-      var imgs = document.querySelector('.preview').src;
-      var addRed = {
-        title: title,
-        content: content,
-        location: location,
-        price: price,
-        imgs: imgs,
-        id: dataId
-      };
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/redaction', addRed);
-    });
-  }
-});
+//
+//
+//
+//
+// /* Создание объявления */
+//
+// let uplImgAdv = document.getElementById('imageAddAdvert')
+//
+// uplImgAdv.addEventListener('change', function (){
+//     upload()
+// })
+//
+// let ids = []
+//
+// let addAdvert = document.querySelector('#addAdvert')
+// addAdvert.addEventListener('click', function ()
+// {
+//     let findInx = document.querySelector(`.preview__container img[data-id="${id}"]`);
+//
+//     if (findInx)
+//     {
+//         let index = imageIds.findIndex(item => item.id === id);
+//
+//         if (index !== -1) {
+//             imageIds.splice(index, 1);
+//         }
+//     }
+//
+//     let title = document.getElementById('title').value;
+//     let content = document.getElementById('content').value;
+//     let location = document.getElementById('location').value;
+//     let price = document.getElementById('price').value;
+//
+//     // console.log(imageIds.length)
+//
+//     let addAdvertPost = {
+//         title: title,
+//         content: content,
+//         location: location,
+//         price: price,
+//         image_ids: ids
+//     }
+//
+//     axios.post('/advertisement/create', addAdvertPost)
+//         .then((response) =>{
+//
+//
+//
+//             if (response.data.success) {
+//                 alert('Объявление успешно загружено');
+//                 console.log(ids)
+//             } else {
+//                 alert("Наебни говна олух");
+//             }
+//         });
+// })
+//
+// /* Сбор инфы из таргет объявления */
+//
+// let jsAdv = document.querySelector('#js_advert')
+//
+// let modalBD = document.querySelector('.modalBackdrop')
+//
+// jsAdv.addEventListener('click', event => {
+//     let target = event.target;
+//
+//     let title = target.closest('.advertisement').querySelector('.ad__title').textContent
+//     let content = target.closest('.advertisement').querySelector('.ad__content').textContent
+//     let location = target.closest('.advertisement').querySelector('.ad__location').textContent
+//     let price = target.closest('.advertisement').querySelector('.ad__price').textContent
+//     let image = target.closest('.advertisement').querySelector('.adv_img').src
+//     let dataId = target.closest('.advertisement').dataset.id
+//
+//     if (target.closest('.redaction'))
+//         {
+//             let titleRed = document.querySelector('.title__red').value = title;
+//             let contentRed = document.querySelector('.content__red').value = content;
+//             let locationRed = document.querySelector('.location__red').value = location;
+//             let priceRed = document.querySelector('.price__red').value = toInteger(price);
+//             let imageRed = document.querySelector('.img__red').src = image;
+//
+//
+//             modalBD.style.display = "block";
+//         }
+//
+//         if (target.closest('.delete'))
+//         {
+//             console.log('ce')
+//
+//             console.log(dataId)
+//
+//             let delPost = {
+//                 id: dataId
+//             }
+//
+//             axios.post('/advertisement/delete', delPost)
+//                 .then((response) => {
+//                     console.log(response.data.del)
+//
+//                     let delAdv = target.closest('.advertisement').style.display = "none"
+//                 })
+//         }
+//     if (modalBD){
+//         // modal.addEventListener('click', function (){
+//         //
+//         //     let target = event.target
+//         //
+//         //     if (target.closest('.addRedaction'))
+//
+//         let addRedBtn = document.querySelector('#addRedaction')
+//         addRedBtn.addEventListener('click', function ()
+//         {
+//             let title = document.querySelector('.title__red').value
+//             let content = document.querySelector('.content__red').value
+//             let location = document.querySelector('.location__red').value
+//             let price = toInteger(document.querySelector('.price__red').value)
+//             let imgs = document.querySelector('.preview').src
+//
+//             let addRed = {
+//                 title: title,
+//                 content: content,
+//                 location: location,
+//                 price: price,
+//                 imgs: imgs,
+//                 id: dataId
+//             }
+//
+//             axios.post('/advertisement/redaction', addRed)
+//         })
+//
+//
+//     }
+//
+//
+// })
 
 // let redBtn = document.querySelectorAll('.redaction')
 
@@ -20510,6 +20667,45 @@ component.options.__file = "resources/js/components/AddAd.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/Preview.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/components/Preview.vue ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Preview_vue_vue_type_template_id_eaf22da6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Preview.vue?vue&type=template&id=eaf22da6&scoped=true& */ "./resources/js/components/Preview.vue?vue&type=template&id=eaf22da6&scoped=true&");
+/* harmony import */ var _Preview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Preview.vue?vue&type=script&lang=js& */ "./resources/js/components/Preview.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Preview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Preview_vue_vue_type_template_id_eaf22da6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Preview_vue_vue_type_template_id_eaf22da6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "eaf22da6",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Preview.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Test.vue":
 /*!******************************************!*\
   !*** ./resources/js/components/Test.vue ***!
@@ -20565,6 +20761,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Preview.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/Preview.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Preview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Preview.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Preview.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Preview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Test.vue?vue&type=script&lang=js&":
 /*!*******************************************************************!*\
   !*** ./resources/js/components/Test.vue?vue&type=script&lang=js& ***!
@@ -20594,6 +20806,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAd_vue_vue_type_template_id_9a85396e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddAd_vue_vue_type_template_id_9a85396e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AddAd.vue?vue&type=template&id=9a85396e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AddAd.vue?vue&type=template&id=9a85396e&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Preview.vue?vue&type=template&id=eaf22da6&scoped=true&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/Preview.vue?vue&type=template&id=eaf22da6&scoped=true& ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Preview_vue_vue_type_template_id_eaf22da6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Preview_vue_vue_type_template_id_eaf22da6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Preview_vue_vue_type_template_id_eaf22da6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Preview.vue?vue&type=template&id=eaf22da6&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Preview.vue?vue&type=template&id=eaf22da6&scoped=true&");
 
 
 /***/ }),
@@ -20634,6 +20863,86 @@ var render = function () {
   return _c("div", [_vm._v("\n\n    добавить ad\n\n")])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Preview.vue?vue&type=template&id=eaf22da6&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Preview.vue?vue&type=template&id=eaf22da6&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "files__download" }, [
+    _c(
+      "div",
+      { staticClass: "images__preview" },
+      [
+        _c("div", { staticClass: "files__download__button" }, [
+          _c("input", {
+            staticClass: "upload__img",
+            attrs: {
+              type: "file",
+              name: "file",
+              id: "image",
+              placeholder: "Выберите файл",
+              multiple: "",
+            },
+            on: { change: _vm.upload },
+          }),
+          _vm._v(" "),
+          _vm._m(0),
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.images, function (image, index) {
+          return _c("div", { staticClass: "preview__container" }, [
+            _c("img", {
+              staticClass: "adv_img",
+              attrs: { src: image.url, alt: "preview", "data-id": "" },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "cancelX__container" }, [
+              _c("div", {
+                staticClass: "cancelX",
+                on: {
+                  click: function ($event) {
+                    return _vm.deleteImage(index)
+                  },
+                },
+              }),
+            ]),
+          ])
+        }),
+      ],
+      2
+    ),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "file__label", attrs: { for: "file" } }, [
+      _c("img", {
+        staticClass: "plus",
+        attrs: { src: "/images/plus.svg", alt: "" },
+      }),
+    ])
+  },
+]
 render._withStripped = true
 
 

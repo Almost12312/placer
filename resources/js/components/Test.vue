@@ -29,7 +29,7 @@ export default {
 
     data() {
         return {
-            images: [],
+            imagess: [],
         }
     },
 
@@ -48,7 +48,7 @@ export default {
                 axios.post('/file/upload', fd)
                     .then((response) => {
 
-                        this.images.push(response.data);
+                        this.imagess.push(response.data);
                     });
             }
 
