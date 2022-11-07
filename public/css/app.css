@@ -217,6 +217,10 @@ body {
   width: 100%;
 }
 
+.no__price {
+  width: 100%;
+}
+
 .num__price:after {
   content: " ₽";
 }

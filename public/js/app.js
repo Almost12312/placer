@@ -2242,6 +2242,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 // import AdvImgs from "./AdvImgs";
@@ -21447,17 +21450,21 @@ var render = function () {
         ]),
         _vm._v(" "),
         _c("h6", { staticClass: "ad__price" }, [
-          _c("p", { staticClass: "num__price" }, [
-            _vm._v(
-              _vm._s(
-                _vm.inputs_info_data.price
-                  ? _vm.inputs_info_data.price == 0
-                    ? "Бесплатно"
-                    : _vm.inputs_info_data.price
-                  : "Цена в"
-              )
-            ),
-          ]),
+          _vm.inputs_info_data.price == 0
+            ? _c("p", { staticClass: "no__price" }, [
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(
+                      _vm.inputs_info_data.price === 0
+                        ? "Бесплатно"
+                        : "Цена в ₽"
+                    ) +
+                    "\n                    "
+                ),
+              ])
+            : _c("p", { staticClass: "num__price" }, [
+                _vm._v(_vm._s(_vm.inputs_info_data.price)),
+              ]),
         ]),
       ]),
     ]),

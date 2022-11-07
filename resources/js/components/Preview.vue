@@ -24,7 +24,10 @@
             <div class="location_price">
                 <h5 class="ad__location">{{inputs_info_data.location ? inputs_info_data.location : "Местоположение"}}</h5>
                 <h6 class="ad__price">
-                    <p class="num__price">{{inputs_info_data.price ? (inputs_info_data.price == 0 ? "Бесплатно" : inputs_info_data.price)  : "Цена в"}}</p>
+                        <p v-if="inputs_info_data.price == 0" class="no__price">
+                            {{inputs_info_data.price === 0 ? "Бесплатно"  : "Цена в ₽"}}
+                        </p>
+                        <p v-else class="num__price">{{inputs_info_data.price}}</p>
                 </h6>
             </div>
         </div>
