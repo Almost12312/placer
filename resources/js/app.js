@@ -2,30 +2,39 @@ import axios from 'axios'
 import {toInteger} from "lodash";
 import * as events from "events";
 
-
-
 import Vue from 'vue'
 import Test from './components/Test'
 import AddAd from './components/AddAd'
 import Preview from "./components/Preview";
+import InputsAdvert from "./components/InputsAdvert";
+import InputPrevCont from "./components/InputPrevCont";
 
-// if (document.getElementById('vue-app')) {
-//
+if (document.getElementById('vue-app')) {
+
+    new Vue({
+        el: '#vue-app',
+        components: {
+            Test, AddAd
+        }
+    });
+}
+
+// if (document.querySelector('.files__download__container')) {
 //     new Vue({
-//         el: '#vue-app',
+//         el: '.files__download__container',
 //         components: {
-//             Test, AddAd
+//             Preview
 //         }
 //     });
 // }
 
-if (document.querySelector('.files__download__container')) {
+if (document.querySelector('.ads__redactor')) {
     new Vue({
-        el: '.files__download__container',
+        el: '.ads__redactor',
         components: {
-            Preview
+            InputPrevCont
         }
-    });
+    })
 }
 
 

@@ -3,10 +3,10 @@
 
         <div>
 
-            <div v-for="(image, index) in images">
-                <img :src="image.url" alt="">
-                <div @click="deleteImage(index)">Удалить</div>
-            </div>
+<!--            <div v-for="(image, index) in images">-->
+<!--                <img :src="image.url" alt="">-->
+<!--                <div @click="deleteImage(index)">Удалить</div>-->
+<!--            </div>-->
 
         </div>
 
@@ -15,7 +15,9 @@
             <input type="file" hidden multiple @change="upload">
         </label>
 
-        <button @click="deleteAll">Удалить все</button>
+<!--        <button @click="deleteAll">Удалить все</button>-->
+
+        <AddAd :images_data="images"></AddAd>
 
     </div>
 </template>
@@ -26,10 +28,11 @@ import axios from 'axios'
 import AddAd from './AddAd'
 
 export default {
+    name: "Test",
 
     data() {
         return {
-            imagess: [],
+            images: [],
         }
     },
 
@@ -48,25 +51,13 @@ export default {
                 axios.post('/file/upload', fd)
                     .then((response) => {
 
-                        this.imagess.push(response.data);
+                        this.images.push(response.data);
                     });
             }
 
         },
 
-        deleteImage(index) {
 
-            this.images.splice(index, 1);
-        },
-
-        deleteAll() {
-
-            this.images = [];
-        },
-
-        greet() {
-
-        }
     },
 
     components: {
