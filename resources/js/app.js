@@ -5,9 +5,10 @@ import * as events from "events";
 import Vue from 'vue'
 import Test from './components/Test'
 import AddAd from './components/AddAd'
+import InputPrevCont from "./components/InputPrevCont";
 import Preview from "./components/Preview";
 import InputsAdvert from "./components/InputsAdvert";
-import InputPrevCont from "./components/InputPrevCont";
+import Buttons from "./components/Buttons";
 
 if (document.getElementById('vue-app')) {
 
@@ -28,11 +29,11 @@ if (document.getElementById('vue-app')) {
 //     });
 // }
 
-if (document.querySelector('.ads__redactor')) {
+if (document.querySelector('.redForm')) {
     new Vue({
-        el: '.ads__redactor',
+        el: '.redForm',
         components: {
-            InputPrevCont
+            InputPrevCont, Preview, InputsAdvert, Buttons
         }
     })
 }
@@ -219,19 +220,22 @@ if (loginBtn) {
 //
 // let ids = []
 //
-// let addAdvert = document.querySelector('#addAdvert')
+// let addAdvert = document.querySelector('#addRedaction')
 // addAdvert.addEventListener('click', function ()
 // {
-//     let findInx = document.querySelector(`.preview__container img[data-id="${id}"]`);
+//     let findInx = document.querySelectorAll(`.preview__container img[data-id="${id}"]`);
 //
-//     if (findInx)
-//     {
-//         let index = imageIds.findIndex(item => item.id === id);
+//     for (let i = 0; i < findInx.length, i++) {
+//         if (findInx)
+//         {
+//             let index = imageIds.findIndex(item => item.id === id);
 //
-//         if (index !== -1) {
-//             imageIds.splice(index, 1);
+//             if (index !== -1) {
+//                 imageIds.splice(index, 1);
+//             }
 //         }
 //     }
+//
 //
 //     let title = document.getElementById('title').value;
 //     let content = document.getElementById('content').value;
@@ -245,7 +249,7 @@ if (loginBtn) {
 //         content: content,
 //         location: location,
 //         price: price,
-//         image_ids: ids
+//         images_ids: ids
 //     }
 //
 //     axios.post('/advertisement/create', addAdvertPost)
@@ -264,49 +268,77 @@ if (loginBtn) {
 //
 // /* Сбор инфы из таргет объявления */
 //
-// let jsAdv = document.querySelector('#js_advert')
-//
-// let modalBD = document.querySelector('.modalBackdrop')
-//
-// jsAdv.addEventListener('click', event => {
-//     let target = event.target;
-//
-//     let title = target.closest('.advertisement').querySelector('.ad__title').textContent
-//     let content = target.closest('.advertisement').querySelector('.ad__content').textContent
-//     let location = target.closest('.advertisement').querySelector('.ad__location').textContent
-//     let price = target.closest('.advertisement').querySelector('.ad__price').textContent
-//     let image = target.closest('.advertisement').querySelector('.adv_img').src
-//     let dataId = target.closest('.advertisement').dataset.id
-//
-//     if (target.closest('.redaction'))
-//         {
-//             let titleRed = document.querySelector('.title__red').value = title;
-//             let contentRed = document.querySelector('.content__red').value = content;
-//             let locationRed = document.querySelector('.location__red').value = location;
-//             let priceRed = document.querySelector('.price__red').value = toInteger(price);
-//             let imageRed = document.querySelector('.img__red').src = image;
-//
-//
-//             modalBD.style.display = "block";
-//         }
-//
-//         if (target.closest('.delete'))
-//         {
-//             console.log('ce')
-//
-//             console.log(dataId)
-//
-//             let delPost = {
-//                 id: dataId
-//             }
-//
-//             axios.post('/advertisement/delete', delPost)
-//                 .then((response) => {
-//                     console.log(response.data.del)
-//
-//                     let delAdv = target.closest('.advertisement').style.display = "none"
-//                 })
-//         }
+
+if (document.querySelector('#createAdd'))
+{
+    let dataIdAdv = null
+
+    let idAdv = {
+        idAdv: dataIdAdv
+    }
+
+    axios.post('/advertisement/create', idAdv)
+        .then((response) => {
+            console.log(response.data.id)
+        })
+}
+
+if (document.querySelector('#js_advert'))
+{
+    let jsAdv = document.querySelector('#js_advert')
+
+    jsAdv.addEventListener('click', event => {
+        let target = event.target;
+
+        // let title = target.closest('.advertisement').querySelector('.ad__title').textContent
+        // let content = target.closest('.advertisement').querySelector('.ad__content').textContent
+        // let location = target.closest('.advertisement').querySelector('.ad__location').textContent
+        // let price = target.closest('.advertisement').querySelector('.ad__price').textContent
+        let dataIdAdv = target.closest('.advertisement').dataset.id
+
+        console.log(dataIdAdv)
+
+        let idAdv = {
+            idAdv: dataIdAdv
+        }
+        // let dataIdImg = target.closest('.advertisement').querySelectorAll('.adv_img');
+        console.log(idAdv)
+
+        axios.post('/advertisement/create', idAdv)
+            .then((response) => {
+                console.log(response.data.id)
+            })
+
+
+        // if (target.closest('.redaction'))
+        //     {
+        //         let titleRed = document.querySelector('.title__red').value = title;
+        //         let contentRed = document.querySelector('.content__red').value = content;
+        //         let locationRed = document.querySelector('.location__red').value = location;
+        //         let priceRed = document.querySelector('.price__red').value = toInteger(price);
+        //         let imageRed = document.querySelector('.img__red').src = image;
+        //
+        //
+        //         modalBD.style.display = "block";
+        //     }
+        //
+        //     if (target.closest('.delete'))
+        //     {
+        //         console.log('ce')
+        //
+        //         console.log(dataId)
+        //
+        //         let delPost = {
+        //             id: dataId
+        //         }
+        //
+        //         axios.post('/advertisement/delete', delPost)
+        //             .then((response) => {
+        //                 console.log(response.data.del)
+        //
+        //                 let delAdv = target.closest('.advertisement').style.display = "none"
+        //             })
+        //     }
 //     if (modalBD){
 //         // modal.addEventListener('click', function (){
 //         //
@@ -339,7 +371,9 @@ if (loginBtn) {
 //     }
 //
 //
-// })
+    })
+}
+
 
 // let redBtn = document.querySelectorAll('.redaction')
 

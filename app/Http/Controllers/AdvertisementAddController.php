@@ -17,7 +17,7 @@ class AdvertisementAddController extends Controller
         $content = $request->get('content');
         $location = $request->get('location');
         $price = $request->get('price');
-        $imageIds = $request->get('image_ids');
+        $imageIds = $request->get('images_ids');
 
         $advertisement = Advertisement::create([
             'author_id' => $request->user()->id,
@@ -31,7 +31,10 @@ class AdvertisementAddController extends Controller
         $advertisement->files()->sync($imageIds);
 
         return response()->json([
-           'success' => true
+           'success' => true,
+//            dd(
+//                $imageIds
+//            )
         ]);
     }
 
@@ -75,8 +78,22 @@ class AdvertisementAddController extends Controller
         ]);
     }
 
-    public function view()
+    public function view(Request $request)
     {
-        return view('addAdvert');
+        $thisAdv = $request->get('idAdv');
+
+//        return response()->json([
+//           'id' => $thisAdv
+//        ]);
+        if ($thisAdv !== null) {
+            $thisAdvReturn = Advertisement::where([
+                'id' => $thisAdv
+            ]);
+
+            return view('addAdvert', ['thisAdv' => $thisAdvReturn]);
+        } else {
+            return view('addAdvert', ['thisAdv' => null]);
+        }
+
     }
 }

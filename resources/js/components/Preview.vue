@@ -24,10 +24,10 @@
             <div class="location_price">
                 <h5 class="ad__location">{{inputs_info_data.location ? inputs_info_data.location : "Местоположение"}}</h5>
                 <h6 class="ad__price">
-                        <p v-if="inputs_info_data.price == 0" class="no__price">
-                            {{inputs_info_data.price === 0 ? "Бесплатно"  : "Цена в ₽"}}
+                        <p v-if="parseInt(inputs_info_data.price) === 0 || inputs_info_data.price.length === 0" class="no__price">
+                            {{inputs_info_data.price.length === 0 ? "Цена в ₽"  : "Бесплатно" }}
                         </p>
-                        <p v-else class="num__price">{{inputs_info_data.price}}</p>
+                        <p v-else class="num__price">{{inputs_info_data.price > 0 ? inputs_info_data.price : "Цена в"}}</p>
                 </h6>
             </div>
         </div>
@@ -38,21 +38,27 @@
 <script>
 
 import axios from 'axios'
-// import AdvImgs from "./AdvImgs";
 
 export default {
 
-    data() {
-        return {
-            images: [],
-        }
-    },
+    // data() {
+    //     return {
+    //         images_ge: [],
+    //     }
+    // },
 
     props: {
         inputs_info_data: {
             type: Object,
             default() {
                 return {}
+            }
+        },
+
+        images: {
+            type: Array,
+            default() {
+                return undefined;
             }
         }
     },

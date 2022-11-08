@@ -30,27 +30,16 @@
 
 
         <div class="redForm">
-            <div class="ads__redactor">
-                <h3>Редактировать объявление</h3>
 
-                    <input-prev-cont>
-
-                    </input-prev-cont>
-{{--                    <inputs-advert></inputs-advert>--}}
-{{--                    --}}{{--                <div class="image__now">--}}
-{{--                    --}}{{--                    <h4>Картинка сейчас</h4>--}}
-{{--                    --}}{{--                    <img class="img__red" src="" alt="">--}}
-{{--                    --}}{{--                </div>--}}
-
-                    <div class="function__button">
-                        <button class="cancel__btn">Отменить</button>
-                        <button class="cancel__btn" id="addRedaction">Редактировать</button>
-                    </div>
-
-{{--                    <preview></preview>--}}
+                @if($thisAdv === null)
+                    <input-prev-cont></input-prev-cont>
+                @elseif($thisAdv !== null)
+                    <p>Вы передали объявление</p>
+                @endif
 
 
         </div>
+
     </div>
 
 @endsection
