@@ -271,16 +271,19 @@ if (loginBtn) {
 
 if (document.querySelector('#createAdd'))
 {
-    let dataIdAdv = null
+    let createAdd = document.querySelector('#createAdd')
+    createAdd.addEventListener('click', function (){
+        let id = null
 
-    let idAdv = {
-        idAdv: dataIdAdv
-    }
+        let idAdv = {
+            id: id
+        }
 
-    axios.post('/advertisement/create', idAdv)
-        .then((response) => {
-            console.log(response.data.id)
-        })
+        console.log(idAdv)
+
+        axios.post('/advertisement/view', idAdv)
+            .then()
+    })
 }
 
 if (document.querySelector('#js_advert'))
@@ -294,20 +297,17 @@ if (document.querySelector('#js_advert'))
         // let content = target.closest('.advertisement').querySelector('.ad__content').textContent
         // let location = target.closest('.advertisement').querySelector('.ad__location').textContent
         // let price = target.closest('.advertisement').querySelector('.ad__price').textContent
-        let dataIdAdv = target.closest('.advertisement').dataset.id
+        let id = target.closest('.advertisement').dataset.id
 
-        console.log(dataIdAdv)
+        console.log(id)
 
         let idAdv = {
-            idAdv: dataIdAdv
+            id: id
         }
         // let dataIdImg = target.closest('.advertisement').querySelectorAll('.adv_img');
         console.log(idAdv)
 
-        axios.post('/advertisement/create', idAdv)
-            .then((response) => {
-                console.log(response.data.id)
-            })
+        axios.post('/advertisement/view', idAdv)
 
 
         // if (target.closest('.redaction'))

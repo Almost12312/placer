@@ -30,12 +30,16 @@
 
 
         <div class="redForm">
+            @isset($thisAdv)
+                    <input-prev-cont v-bind:this-adv.push='@json($thisAdv[0])'
+                    @foreach($thisAdv[0]->files as $file)
+                        :this-adv-imgs.push="@json($file)"
+                    @endforeach
 
-                @if($thisAdv === null)
-                    <input-prev-cont></input-prev-cont>
-                @elseif($thisAdv !== null)
-                    <p>Вы передали объявление</p>
-                @endif
+                    >
+
+                    </input-prev-cont>
+            @endisset
 
 
         </div>

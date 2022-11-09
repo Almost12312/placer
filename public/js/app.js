@@ -2211,6 +2211,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -2228,6 +2230,14 @@ __webpack_require__.r(__webpack_exports__);
       },
       images: []
     };
+  },
+  props: {
+    thisAdv: {
+      type: Object
+    },
+    thisAdvImgs: {
+      type: Object
+    }
   },
   methods: {},
   components: {
@@ -2332,6 +2342,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2353,6 +2368,9 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return undefined;
       }
+    },
+    thisAdv: {
+      type: Object
     }
   },
   methods: {
@@ -2745,12 +2763,14 @@ if (loginBtn) {
 //
 
 if (document.querySelector('#createAdd')) {
-  var dataIdAdv = null;
-  var idAdv = {
-    idAdv: dataIdAdv
-  };
-  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/create', idAdv).then(function (response) {
-    console.log(response.data.id);
+  var createAdd = document.querySelector('#createAdd');
+  createAdd.addEventListener('click', function () {
+    var id = null;
+    var idAdv = {
+      id: id
+    };
+    console.log(idAdv);
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/view', idAdv).then();
   });
 }
 if (document.querySelector('#js_advert')) {
@@ -2762,16 +2782,14 @@ if (document.querySelector('#js_advert')) {
     // let content = target.closest('.advertisement').querySelector('.ad__content').textContent
     // let location = target.closest('.advertisement').querySelector('.ad__location').textContent
     // let price = target.closest('.advertisement').querySelector('.ad__price').textContent
-    var dataIdAdv = target.closest('.advertisement').dataset.id;
-    console.log(dataIdAdv);
+    var id = target.closest('.advertisement').dataset.id;
+    console.log(id);
     var idAdv = {
-      idAdv: dataIdAdv
+      id: id
     };
     // let dataIdImg = target.closest('.advertisement').querySelectorAll('.adv_img');
     console.log(idAdv);
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/create', idAdv).then(function (response) {
-      console.log(response.data.id);
-    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/view', idAdv);
 
     // if (target.closest('.redaction'))
     //     {
@@ -21448,6 +21466,7 @@ var render = function () {
             attrs: {
               inputs_info_data: _vm.inputs_info_cont,
               images: _vm.images,
+              "this-adv": _vm.thisAdv,
             },
           }),
         ],
@@ -21675,49 +21694,73 @@ var render = function () {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "advertisement__description" }, [
-      _c("h3", { staticClass: "ad__title" }, [
-        _vm._v(
-          _vm._s(
-            _vm.inputs_info_data.title
-              ? _vm.inputs_info_data.title
-              : "Заголовок"
-          )
-        ),
-      ]),
+      _vm.inputs_info_data.title.length > 0
+        ? _c("h3", { staticClass: "ad__title" }, [
+            _vm._v(
+              _vm._s(
+                _vm.inputs_info_data.title
+                  ? _vm.inputs_info_data.title
+                  : "Заголовок"
+              )
+            ),
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c("h4", { staticClass: "ad__content" }, [
-        _vm._v(
-          _vm._s(
-            _vm.inputs_info_data.content
-              ? _vm.inputs_info_data.content
-              : "Описание"
-          )
-        ),
-      ]),
+      _vm.inputs_info_data.title.length === 0
+        ? _c("h3", { staticClass: "ad__title" }, [
+            _vm._v(_vm._s(_vm.thisAdv.title)),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.inputs_info_data.content.length > 0
+        ? _c("h4", { staticClass: "ad__content" }, [
+            _vm._v(
+              _vm._s(
+                _vm.inputs_info_data.content
+                  ? _vm.inputs_info_data.content
+                  : "Описание"
+              )
+            ),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.inputs_info_data.content.length === 0
+        ? _c("h4", { staticClass: "ad__content" }, [
+            _vm._v(_vm._s(_vm.thisAdv.content)),
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "location_price" }, [
-        _c("h5", { staticClass: "ad__location" }, [
-          _vm._v(
-            _vm._s(
-              _vm.inputs_info_data.location
-                ? _vm.inputs_info_data.location
-                : "Местоположение"
-            )
-          ),
-        ]),
+        _vm.inputs_info_data.location.length > 0
+          ? _c("h5", { staticClass: "ad__location" }, [
+              _vm._v(
+                _vm._s(
+                  _vm.inputs_info_data.location
+                    ? _vm.inputs_info_data.location
+                    : "Местоположение"
+                )
+              ),
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.inputs_info_data.location.length === 0
+          ? _c("h5", { staticClass: "ad__location" }, [
+              _vm._v(_vm._s(_vm.thisAdv.location)),
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c("h6", { staticClass: "ad__price" }, [
           parseInt(_vm.inputs_info_data.price) === 0 ||
           _vm.inputs_info_data.price.length === 0
             ? _c("p", { staticClass: "no__price" }, [
                 _vm._v(
-                  "\n                        " +
+                  "\n                    " +
                     _vm._s(
                       _vm.inputs_info_data.price.length === 0
                         ? "Цена в ₽"
                         : "Бесплатно"
                     ) +
-                    "\n                    "
+                    "\n                "
                 ),
               ])
             : _c("p", { staticClass: "num__price" }, [

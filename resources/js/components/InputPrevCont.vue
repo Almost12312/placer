@@ -5,7 +5,9 @@
         <div class="advertisement__form">
             <inputs-advert v-bind:inputs_info_data="inputs_info_cont"></inputs-advert>
             <preview v-bind:inputs_info_data="inputs_info_cont"
-                           :images="images">
+                            :images="images"
+                            :this-adv="thisAdv"
+            >
 
             </preview>
         </div>
@@ -39,6 +41,16 @@ export default {
             },
 
             images: []
+        }
+    },
+
+    props: {
+        thisAdv: {
+            type: Object
+        },
+
+        thisAdvImgs: {
+            type: Object
         }
     },
 

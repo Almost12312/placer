@@ -19,15 +19,20 @@
             </div>
         </div>
         <div class="advertisement__description">
-            <h3 class="ad__title">{{inputs_info_data.title ? inputs_info_data.title : "Заголовок"}}</h3>
-            <h4 class="ad__content">{{inputs_info_data.content ? inputs_info_data.content : "Описание"}}</h4>
+            <h3 v-if="inputs_info_data.title.length > 0" class="ad__title">{{inputs_info_data.title ? inputs_info_data.title : "Заголовок"}}</h3>
+            <h3 v-if="inputs_info_data.title.length === 0" class="ad__title">{{thisAdv.title}}</h3>
+
+            <h4 v-if="inputs_info_data.content.length > 0" class="ad__content">{{inputs_info_data.content ? inputs_info_data.content : "Описание"}}</h4>
+            <h4 v-if="inputs_info_data.content.length === 0" class="ad__content">{{thisAdv.content}}</h4>
+
             <div class="location_price">
-                <h5 class="ad__location">{{inputs_info_data.location ? inputs_info_data.location : "Местоположение"}}</h5>
+                <h5 v-if="inputs_info_data.location.length > 0" class="ad__location">{{inputs_info_data.location ? inputs_info_data.location : "Местоположение"}}</h5>
+                <h5 v-if="inputs_info_data.location.length === 0" class="ad__location">{{thisAdv.location}}</h5>
                 <h6 class="ad__price">
-                        <p v-if="parseInt(inputs_info_data.price) === 0 || inputs_info_data.price.length === 0" class="no__price">
-                            {{inputs_info_data.price.length === 0 ? "Цена в ₽"  : "Бесплатно" }}
-                        </p>
-                        <p v-else class="num__price">{{inputs_info_data.price > 0 ? inputs_info_data.price : "Цена в"}}</p>
+                    <p v-if="parseInt(inputs_info_data.price) === 0 || inputs_info_data.price.length === 0" class="no__price">
+                        {{inputs_info_data.price.length === 0 ? "Цена в ₽" : "Бесплатно" }}
+                    </p>
+                    <p v-else class="num__price">{{inputs_info_data.price > 0 ? inputs_info_data.price : "Цена в"}}</p>
                 </h6>
             </div>
         </div>
@@ -60,6 +65,10 @@ export default {
             default() {
                 return undefined;
             }
+        },
+
+        thisAdv: {
+            type: Object
         }
     },
 

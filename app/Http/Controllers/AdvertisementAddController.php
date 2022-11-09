@@ -80,20 +80,12 @@ class AdvertisementAddController extends Controller
 
     public function view(Request $request)
     {
-        $thisAdv = $request->get('idAdv');
+            $id = $request->get('id');
 
-//        return response()->json([
-//           'id' => $thisAdv
-//        ]);
-        if ($thisAdv !== null) {
-            $thisAdvReturn = Advertisement::where([
-                'id' => $thisAdv
-            ]);
+            $thisAdv = Advertisement::where([
+                'id' => 12
+            ])->get();
 
-            return view('addAdvert', ['thisAdv' => $thisAdvReturn]);
-        } else {
-            return view('addAdvert', ['thisAdv' => null]);
-        }
-
+            return view('addAdvert', ['thisAdv' => $thisAdv]);
     }
 }
