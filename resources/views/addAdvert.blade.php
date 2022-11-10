@@ -30,12 +30,11 @@
 
 
         <div class="redForm">
+
+
             @isset($thisAdv)
                     <input-prev-cont v-bind:this-adv.push='@json($thisAdv[0])'
-                    @foreach($thisAdv[0]->files as $file)
-                        :this-adv-imgs.push="@json($file)"
-                    @endforeach
-
+                                     v-bind:images-props.push='@json($thisImgs)'
                     >
 
                     </input-prev-cont>

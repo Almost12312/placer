@@ -9,6 +9,9 @@ import InputPrevCont from "./components/InputPrevCont";
 import Preview from "./components/Preview";
 import InputsAdvert from "./components/InputsAdvert";
 import Buttons from "./components/Buttons";
+import VueSlickCarousel from 'vue-slick-carousel'
+
+Vue.use(VueSlickCarousel)
 
 if (document.getElementById('vue-app')) {
 
@@ -276,13 +279,15 @@ if (document.querySelector('#createAdd'))
         let id = null
 
         let idAdv = {
-            id: id
+            idAd: id
         }
-
-        console.log(idAdv)
 
         axios.post('/advertisement/view', idAdv)
             .then()
+
+        console.log(idAdv)
+
+
     })
 }
 
@@ -302,7 +307,7 @@ if (document.querySelector('#js_advert'))
         console.log(id)
 
         let idAdv = {
-            id: id
+            idAd: id
         }
         // let dataIdImg = target.closest('.advertisement').querySelectorAll('.adv_img');
         console.log(idAdv)

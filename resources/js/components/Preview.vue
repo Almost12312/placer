@@ -8,6 +8,7 @@
                         <label class="file__label" for="file"><img class="plus" src="/images/plus.svg" alt=""></label>
                     </div>
                     <div  v-for="(image, id) in images" class="preview__container">
+
                         <img :src="image.url" alt="preview" class="adv_img" :data-id="image.id">
                         <div  class="cancelX__container">
                             <div @click="deleteImage(id)" class="cancelX">
@@ -43,6 +44,8 @@
 <script>
 
 import axios from 'axios'
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import '@splidejs/splide/dist/css/themes/splide-skyblue.min.css';
 
 export default {
 
@@ -69,7 +72,11 @@ export default {
 
         thisAdv: {
             type: Object
-        }
+        },
+
+        // thisAdvImgs: {
+        //     type: Array,
+        // }
     },
 
     methods: {
@@ -80,8 +87,6 @@ export default {
             if (files.length === 0) {
                 return;
             }
-
-            // let file = files[0];
 
             for (let i = 0; i < files.length; i++)
             {
@@ -110,9 +115,7 @@ export default {
         // }
     },
 
-    // components: {
-    //     AdvImgs
-    // }
+    components: {}
 }
 </script>
 

@@ -6,7 +6,8 @@
             <inputs-advert v-bind:inputs_info_data="inputs_info_cont"></inputs-advert>
             <preview v-bind:inputs_info_data="inputs_info_cont"
                             :images="images"
-                            :this-adv="thisAdv"
+                            :thisAdv="thisAdv"
+
             >
 
             </preview>
@@ -27,6 +28,9 @@ import Preview from "./Preview";
 import InputsAdvert from "./InputsAdvert";
 import Buttons from "./Buttons";
 
+
+
+
 export default {
     name: "InputPrevCont",
 
@@ -40,7 +44,7 @@ export default {
                 tags: ""
             },
 
-            images: []
+            images: this.imagesProps
         }
     },
 
@@ -49,9 +53,13 @@ export default {
             type: Object
         },
 
-        thisAdvImgs: {
-            type: Object
+        imagesProps: {
+            type: Array
         }
+
+        // thisAdvImgs: {
+        //     type: Array,
+        // }
     },
 
     methods: {

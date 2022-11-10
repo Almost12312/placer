@@ -33,7 +33,7 @@ Route::post('/advertisement/delete', [AdvertisementAddController::class, 'delAdv
 
 Route::post('/advertisement/redaction', [AdvertisementAddController::class, 'redAdvert']);
 
-Route::get('/advertisement/create', [AdvertisementAddController::class, 'view'])
+Route::get('/advertisement/create', [AdvertisementAddController::class, 'getView'])
     ->name('addAdvert');
 Route::post('/advertisement/view', [AdvertisementAddController::class, 'view'])
     ->name('thisAdv');
