@@ -39,14 +39,14 @@ export default {
     data() {
         return {
             inputs_info_cont: {
-                title: '',
-                content: '',
-                location: '',
-                price:  '',
+                title: this.thisAdv.title,
+                content: this.thisAdv.content,
+                location: this.thisAdv.location,
+                price:  this.thisAdv.price,
                 tags: ""
             },
 
-            images: []
+            images: this.imagesProps
         }
     },
 

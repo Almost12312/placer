@@ -5057,13 +5057,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       inputs_info_cont: {
-        title: '',
-        content: '',
-        location: '',
-        price: '',
+        title: this.thisAdv.title,
+        content: this.thisAdv.content,
+        location: this.thisAdv.location,
+        price: this.thisAdv.price,
         tags: ""
       },
-      images: []
+      images: this.imagesProps
     };
   },
   props: {
@@ -5411,24 +5411,12 @@ if (document.getElementById('vue-app')) {
     }
   });
 }
-
-// if (document.querySelector('.redaction__adv')) {
-//     new Vue ({
-//         el: '.redaction__adv',
-//         components: {
-//             Categories, InputPrevCont
-//         }
-//     })
-// }
-
-if (document.querySelector('.redForm')) {
+if (document.querySelector('.redaction__adv')) {
   new vue__WEBPACK_IMPORTED_MODULE_11__["default"]({
-    el: '.redForm',
+    el: '.redaction__adv',
     components: {
-      InputPrevCont: _components_InputPrevCont__WEBPACK_IMPORTED_MODULE_5__["default"],
-      Preview: _components_Preview__WEBPACK_IMPORTED_MODULE_6__["default"],
-      InputsAdvert: _components_InputsAdvert__WEBPACK_IMPORTED_MODULE_7__["default"],
-      Buttons: _components_Buttons__WEBPACK_IMPORTED_MODULE_8__["default"]
+      Categories: _components_Categories__WEBPACK_IMPORTED_MODULE_10__["default"],
+      InputPrevCont: _components_InputPrevCont__WEBPACK_IMPORTED_MODULE_5__["default"]
     }
   });
 }

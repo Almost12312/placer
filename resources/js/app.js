@@ -24,20 +24,11 @@ if (document.getElementById('vue-app')) {
     });
 }
 
-// if (document.querySelector('.redaction__adv')) {
-//     new Vue ({
-//         el: '.redaction__adv',
-//         components: {
-//             Categories, InputPrevCont
-//         }
-//     })
-// }
-
-if (document.querySelector('.redForm')) {
-    new Vue({
-        el: '.redForm',
+if (document.querySelector('.redaction__adv')) {
+    new Vue ({
+        el: '.redaction__adv',
         components: {
-            InputPrevCont, Preview, InputsAdvert, Buttons
+            Categories, InputPrevCont
         }
     })
 }

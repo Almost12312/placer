@@ -30,13 +30,14 @@ Route::get('/test', [TestController::class, 'test']);
 Route::post('/file/upload', [FileController::class, 'file'])
     ->name('fileUpload');
 
-Route::post('/advertisement/create', [AdvertisementAddController::class, 'addAdvert']);
 
 Route::post('/advertisement/delete', [AdvertisementAddController::class, 'delAdvert']);
 
 Route::post('/advertisement/redaction', [AdvertisementAddController::class, 'redAdvert']);
 
+Route::post('/advertisement/create', [AdvertisementAddController::class, 'addAdvert']);
 Route::get('/advertisement/create', [AdvertisementAddController::class, 'view'])
     ->name('addAdvert');
+
 Route::post('/advertisement/view', [AdvertisementAddController::class, 'view'])
     ->name('thisAdv');
