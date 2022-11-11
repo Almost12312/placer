@@ -3,10 +3,12 @@
         <h3>Редактировать объявление</h3>
 
         <div class="advertisement__form">
-            <inputs-advert v-bind:inputs_info_data="inputs_info_cont"></inputs-advert>
+            <inputs-advert v-bind:inputs_info_data="inputs_info_cont"
+                           v-bind:thisAdv="thisAdv"
+            ></inputs-advert>
             <preview v-bind:inputs_info_data="inputs_info_cont"
-                            :images="images"
-                            :thisAdv="thisAdv"
+                           :images="images"
+                           :thisAdv="thisAdv"
 
             >
 
@@ -37,14 +39,14 @@ export default {
     data() {
         return {
             inputs_info_cont: {
-                title: "",
-                content: "",
-                location: "",
-                price:  "",
+                title: '',
+                content: '',
+                location: '',
+                price:  '',
                 tags: ""
             },
 
-            images: this.imagesProps
+            images: []
         }
     },
 

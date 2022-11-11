@@ -9,9 +9,10 @@ import InputPrevCont from "./components/InputPrevCont";
 import Preview from "./components/Preview";
 import InputsAdvert from "./components/InputsAdvert";
 import Buttons from "./components/Buttons";
-import VueSlickCarousel from 'vue-slick-carousel'
+import Registration from "./components/registration";
+import Categories from "./components/Categories";
 
-Vue.use(VueSlickCarousel)
+
 
 if (document.getElementById('vue-app')) {
 
@@ -23,13 +24,13 @@ if (document.getElementById('vue-app')) {
     });
 }
 
-// if (document.querySelector('.files__download__container')) {
-//     new Vue({
-//         el: '.files__download__container',
+// if (document.querySelector('.redaction__adv')) {
+//     new Vue ({
+//         el: '.redaction__adv',
 //         components: {
-//             Preview
+//             Categories, InputPrevCont
 //         }
-//     });
+//     })
 // }
 
 if (document.querySelector('.redForm')) {
@@ -37,6 +38,15 @@ if (document.querySelector('.redForm')) {
         el: '.redForm',
         components: {
             InputPrevCont, Preview, InputsAdvert, Buttons
+        }
+    })
+}
+
+if (document.querySelector('.registrationCont')) {
+    new Vue ({
+        el: '.registrationCont',
+        components: {
+            Registration
         }
     })
 }
@@ -313,6 +323,7 @@ if (document.querySelector('#js_advert'))
         console.log(idAdv)
 
         axios.post('/advertisement/view', idAdv)
+            // .then(location.href = '/advertisement/create')
 
 
         // if (target.closest('.redaction'))

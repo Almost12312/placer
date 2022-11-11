@@ -23,7 +23,11 @@ export default {
     props: {
         inputs_info_data: {
             type: Object
-        }
+        },
+
+        thisAdv: {
+            type: Object
+        },
     },
 
     methods: {

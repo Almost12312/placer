@@ -11,13 +11,16 @@ use App\Http\Controllers\TestController;
 Route::view('/authorization', 'authorization')
     ->name('authorization');
 
+Route::view('/registration', 'registration');
+
 Route::view('/dashboard', 'authorization')
     ->name('dashboard');
 
 Route::get('/cabinet', [CabinetController::class, 'cabinet'])
     ->name('cabinet');
 
-Route::get('/', [HomeController::class, 'home']);
+Route::get('/', [HomeController::class, 'home'])
+    ->name('home');
 
 Route::post('/login', [AuthorizationController::class, 'login']);
 
@@ -33,7 +36,7 @@ Route::post('/advertisement/delete', [AdvertisementAddController::class, 'delAdv
 
 Route::post('/advertisement/redaction', [AdvertisementAddController::class, 'redAdvert']);
 
-Route::get('/advertisement/create', [AdvertisementAddController::class, 'getView'])
+Route::get('/advertisement/create', [AdvertisementAddController::class, 'view'])
     ->name('addAdvert');
 Route::post('/advertisement/view', [AdvertisementAddController::class, 'view'])
     ->name('thisAdv');

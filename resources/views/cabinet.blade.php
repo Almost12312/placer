@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         <div class="function__button">
-                            <a class="redaction" href="{{ route('addAdvert') }}">Редактировать</a>
+                            <a class="redaction">Редактировать</a>
                             <a class="delete">Удалить</a>
                         </div>
                     </div>

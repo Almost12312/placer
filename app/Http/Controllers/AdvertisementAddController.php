@@ -75,40 +75,56 @@ class AdvertisementAddController extends Controller
 
     public function view(Request $request)
     {
-        $id = $request->get('idAd');
+//        $id = null;
+//
+//        if ($id !== null)
+//        {
+            $thisAdv = Advertisement::where([
+                'id' => 9
+            ])->get();
+
+            $thisAdvContent = Advertisement::where([
+                'id' => 9
+            ])->get(['title', 'location', 'price', 'content']);
+
+            $thisImgs = [];
 
 
-        $thisAdv = Advertisement::where([
-            'id' => $id
-        ])->get();
-
-        $thisAdvContent = Advertisement::where([
-            'id' => $id
-        ])->get(['title', 'location', 'price', 'content']);
-
-        $thisImgs = [];
+            foreach ($thisAdv[0]->files as $file)
+            {
+                $thisImgs[] = ["id" => $file["id"], "url" => $file->getUrl()];
+            }
 
 
-        foreach ($thisAdv[0]->files as $file)
-        {
-            $thisImgs[] = ["id" => $file["id"], "url" => $file->getUrl()];
-        }
+//            return redirect()->route('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
+            return view('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
+//        } else {
 
+//            $thisAdvContent = [
+//                'title' => '',
+//                'location' => '',
+//                'price' => '',
+//                'content' => ''
+//            ];
+//
+//            $thisImgs = [];
+//
+//            return view('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
+//
+//        }
 
-        return redirect()->route('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
-//        return view('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
     }
 
     public function getView(Request $request) {
 
-        if (isset($thisAdvContent, $thisImgs))
-        {
+//        if (isset($thisAdvContent, $thisImgs))
+//        {
             $thisAdvContent = $request->get('thisAdv');
             $thisImgs = $request->get('thisImgs');
             return view('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
-        } else {
-            return view('addAdvert');
-
-        }
+//        } else {
+//            return view('addAdvert');
+//
+//        }
     }
 }

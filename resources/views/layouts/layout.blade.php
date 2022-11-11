@@ -14,15 +14,16 @@
     <title>Document</title>
 </head>
 <body>
-@include('components.head')
 
 <div class="container">
+    @include('components.head')
+
 
     @yield('content')
 
+    @include('components.footer')
 </div>
 
-@include('components.footer')
 
 <script src="{{ mix("/js/app.js") }}"></script>
 </body>

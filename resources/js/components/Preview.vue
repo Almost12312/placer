@@ -1,5 +1,5 @@
 <template>
-    <div class="advertisement">
+    <div class="advertisement adv__preview">
         <div class="files__download__container">
             <div class="files__download">
                 <div class="images__preview">
@@ -10,8 +10,8 @@
                     <div  v-for="(image, id) in images" class="preview__container">
 
                         <img :src="image.url" alt="preview" class="adv_img" :data-id="image.id">
-                        <div  class="cancelX__container">
-                            <div @click="deleteImage(id)" class="cancelX">
+                        <div @click="deleteImage(id)" class="cancelX__container">
+                            <div  class="cancelX">
 
                             </div>
                         </div>
@@ -20,15 +20,19 @@
             </div>
         </div>
         <div class="advertisement__description">
+<!--            <h3 class="ad__title">{{inputs_info_data.title ? inputs_info_data.title : "Заголовок"}}</h3>-->
             <h3 v-if="inputs_info_data.title.length > 0" class="ad__title">{{inputs_info_data.title ? inputs_info_data.title : "Заголовок"}}</h3>
-            <h3 v-if="inputs_info_data.title.length === 0" class="ad__title">{{thisAdv.title}}</h3>
+            <h3 v-if="inputs_info_data.title.length === 0" class="ad__title">{{inputs_info_data.title.placeholder}}</h3>
 
-            <h4 v-if="inputs_info_data.content.length > 0" class="ad__content">{{inputs_info_data.content ? inputs_info_data.content : "Описание"}}</h4>
-            <h4 v-if="inputs_info_data.content.length === 0" class="ad__content">{{thisAdv.content}}</h4>
+            <h4 class="ad__content">{{inputs_info_data.content ? inputs_info_data.content : "Описание"}}</h4>
+
+            <!--            <h4 v-if="inputs_info_data.content.length > 0" class="ad__content">{{inputs_info_data.content ? inputs_info_data.content : "Описание"}}</h4>-->
+<!--            <h4 v-if="inputs_info_data.content.length === 0 && thisAdv.title.length > 0" class="ad__content">{{thisAdv.content}}</h4>-->
 
             <div class="location_price">
-                <h5 v-if="inputs_info_data.location.length > 0" class="ad__location">{{inputs_info_data.location ? inputs_info_data.location : "Местоположение"}}</h5>
-                <h5 v-if="inputs_info_data.location.length === 0" class="ad__location">{{thisAdv.location}}</h5>
+                <h5 class="ad__location">{{inputs_info_data.location ? inputs_info_data.location : "Местоположение"}}</h5>
+<!--                <h5 v-if="inputs_info_data.location.length > 0" class="ad__location">{{inputs_info_data.location ? inputs_info_data.location : "Местоположение"}}</h5>-->
+<!--                <h5 v-if="inputs_info_data.location.length === 0" class="ad__location">{{thisAdv.location}}</h5>-->
                 <h6 class="ad__price">
                     <p v-if="parseInt(inputs_info_data.price) === 0 || inputs_info_data.price.length === 0" class="no__price">
                         {{inputs_info_data.price.length === 0 ? "Цена в ₽" : "Бесплатно" }}
@@ -120,6 +124,8 @@ export default {
 </script>
 
 
-<style scoped>
-
+<style>
+    .adv__preview {
+        margin-left: 250px;
+    }
 </style>

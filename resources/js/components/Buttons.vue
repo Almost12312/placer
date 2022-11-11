@@ -1,5 +1,5 @@
 <template>
-    <div class="function__button">
+    <div class="function__button buttons__prev">
         <button class="cancel__btn">Отменить</button>
         <button class="cancel__btn" @click="addAdvert(advertisement, inputs_info_data, images_data)" id="addRedaction">Редактировать</button>
     </div>
@@ -45,7 +45,7 @@ export default {
 
     methods: {
         addAdvert(advertisement, inputs_info_data, images_data) {
-            advertisement.id =
+            advertisement.id = 12
             advertisement.title = inputs_info_data.title,
             advertisement.content = inputs_info_data.content,
             advertisement.location = inputs_info_data.location,
@@ -63,5 +63,7 @@ export default {
 </script>
 
 <style>
-
+    .buttons__prev {
+        margin-top: 100px;
+    }
 </style>
