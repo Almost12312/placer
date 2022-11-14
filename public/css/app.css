@@ -204,11 +204,9 @@ body {
 
 .advertisement {
   width: 350px;
-  max-height: 450px;
   height: 100%;
   margin-bottom: 50px;
-  position: static;
-  display: block;
+  display: flex;
   flex-direction: column;
 }
 
@@ -277,6 +275,13 @@ body {
   font-family: "Manrope", sans-serif;
   color: #4a5568;
   vertical-align: bottom;
+}
+
+.ad__content {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  height: 2.6em;
 }
 
 .tags {
@@ -591,6 +596,12 @@ body {
 
 .red__input:first-child {
   margin-top: 70px;
+}
+
+.content__red {
+  resize: none;
+  height: 120px;
+  padding: 10px;
 }
 
 .image__now {

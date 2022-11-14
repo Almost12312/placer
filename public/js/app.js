@@ -4922,7 +4922,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   data: function data() {
     return {
       advertisement: {
-        id: '',
+        id: 12,
         title: "",
         content: "",
         location: "",
@@ -4947,7 +4947,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   },
   methods: {
     addAdvert: function addAdvert(advertisement, inputs_info_data, images_data) {
-      advertisement.id = 12;
+      advertisement.id = 13;
       advertisement.title = inputs_info_data.title, advertisement.content = inputs_info_data.content, advertisement.location = inputs_info_data.location, advertisement.price = parseInt(inputs_info_data.price);
       advertisement.images_ids = images_data.map(function (_ref) {
         var id = _ref.id;
@@ -5204,7 +5204,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   // data() {
   //     return {
-  //         images_ge: [],
+  //         adContentHeight: ""
   //     }
   // },
 
@@ -5255,7 +5255,6 @@ __webpack_require__.r(__webpack_exports__);
     //
     // greet() {
     //
-    // }
   },
   components: {}
 });
@@ -5932,7 +5931,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.adv__preview {\n    margin-left: 250px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.adv__preview {\n    margin-left: 250px;\n}\n.adv__preview {\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -25200,7 +25199,7 @@ var render = function () {
       },
     }),
     _vm._v(" "),
-    _c("input", {
+    _c("textarea", {
       directives: [
         {
           name: "model",
@@ -25380,17 +25379,15 @@ var render = function () {
         : _vm._e(),
       _vm._v(" "),
       _vm.inputs_info_data.title.length === 0
-        ? _c("h3", { staticClass: "ad__title" }, [
-            _vm._v(_vm._s(_vm.inputs_info_data.title.placeholder)),
-          ])
+        ? _c("h3", { staticClass: "ad__title" }, [_vm._v("Заголовок")])
         : _vm._e(),
       _vm._v(" "),
-      _c("h4", { staticClass: "ad__content" }, [
+      _c("div", { staticClass: "ad__content" }, [
         _vm._v(
           _vm._s(
             _vm.inputs_info_data.content
               ? _vm.inputs_info_data.content
-              : "Описание"
+              : "Тут ваше описание"
           )
         ),
       ]),

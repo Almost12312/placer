@@ -22,9 +22,9 @@
         <div class="advertisement__description">
 <!--            <h3 class="ad__title">{{inputs_info_data.title ? inputs_info_data.title : "Заголовок"}}</h3>-->
             <h3 v-if="inputs_info_data.title.length > 0" class="ad__title">{{inputs_info_data.title ? inputs_info_data.title : "Заголовок"}}</h3>
-            <h3 v-if="inputs_info_data.title.length === 0" class="ad__title">{{inputs_info_data.title.placeholder}}</h3>
+            <h3 v-if="inputs_info_data.title.length === 0" class="ad__title">Заголовок</h3>
 
-            <h4 class="ad__content">{{inputs_info_data.content ? inputs_info_data.content : "Описание"}}</h4>
+            <div class="ad__content">{{inputs_info_data.content ? inputs_info_data.content : "Тут ваше описание"}}</div>
 
             <!--            <h4 v-if="inputs_info_data.content.length > 0" class="ad__content">{{inputs_info_data.content ? inputs_info_data.content : "Описание"}}</h4>-->
 <!--            <h4 v-if="inputs_info_data.content.length === 0 && thisAdv.title.length > 0" class="ad__content">{{thisAdv.content}}</h4>-->
@@ -55,7 +55,7 @@ export default {
 
     // data() {
     //     return {
-    //         images_ge: [],
+    //         adContentHeight: ""
     //     }
     // },
 
@@ -116,7 +116,7 @@ export default {
         //
         // greet() {
         //
-        // }
+
     },
 
     components: {}
@@ -127,5 +127,8 @@ export default {
 <style>
     .adv__preview {
         margin-left: 250px;
+    }
+
+    .adv__preview {
     }
 </style>

@@ -20,36 +20,40 @@ class AdvertisementAddController extends Controller
         $price = $request->get('price');
         $imageIds = $request->get('images_ids');
 
-        $advertisement = Advertisement::updateOrCreate([
-            'id' => $id,
-            'author_id' => $request->user()->id,
-            'title' => $title,
-            'content' => $content,
-            'location' => $location,
-            'price' => $price,
-            'status' => 1,
-        ]);
+        $advertisement = Advertisement::updateOrCreate(
+            [
+                'id' => $id
+            ],
+
+            [
+                'author_id' => $request->user()->id,
+                'title' => $title,
+                'content' => $content,
+                'location' => $location,
+                'price' => $price,
+                'status' => 1,
+            ]);
 
         $advertisement->files()->sync($imageIds);
     }
 
-    public function delAdvert(Request $request)
-    {
-        $id = $request->get('id');
-
-        $del = Advertisement::where([
-           'id' => $id
-        ]);
-
-        $del->update([
-            "status" => 2,
-            "delete_at" => date('Y-d-m H:i:s.v')
-        ]);
-
-        return response()->json([
-            $del
-        ]);
-    }
+//    public function delAdvert(Request $request)
+//    {
+//        $id = $request->get('id');
+//
+//        $del = Advertisement::where([
+//           'id' => $id
+//        ]);
+//
+//        $del->update([
+//            "status" => 2,
+//            "delete_at" => date('Y-d-m H:i:s.v')
+//        ]);
+//
+//        return response()->json([
+//            $del
+//        ]);
+//    }
 
 //    public function redAdvert(Request $request)
 //    {
@@ -75,17 +79,17 @@ class AdvertisementAddController extends Controller
 
     public function view(Request $request)
     {
-//        $id = null;
-//
-//        if ($id !== null)
-//        {
+        $id = null;
+
+        if ($id !== null)
+        {
             $thisAdv = Advertisement::where([
-                'id' => 9
+                'id' => $id
             ])->get();
 
             $thisAdvContent = Advertisement::where([
-                'id' => 9
-            ])->get(['title', 'location', 'price', 'content']);
+                'id' => $id
+            ])->get(['id', 'title', 'location', 'price', 'content']);
 
             $thisImgs = [];
 
@@ -98,20 +102,20 @@ class AdvertisementAddController extends Controller
 
 //            return redirect()->route('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
             return view('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
-//        } else {
+        } else {
 
-//            $thisAdvContent = [
-//                'title' => '',
-//                'location' => '',
-//                'price' => '',
-//                'content' => ''
-//            ];
-//
-//            $thisImgs = [];
-//
-//            return view('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
-//
-//        }
+            $thisAdvContent = [
+                'title' => '',
+                'location' => '',
+                'price' => '',
+                'content' => ''
+            ];
+
+            $thisImgs = [];
+
+            return view('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
+
+        }
 
     }
 

@@ -17,7 +17,7 @@ export default {
     data() {
         return {
             advertisement: {
-                id: '',
+                id: 12,
                 title: "",
                 content: "",
                 location: "",
@@ -45,7 +45,7 @@ export default {
 
     methods: {
         addAdvert(advertisement, inputs_info_data, images_data) {
-            advertisement.id = 12
+            advertisement.id = 13
             advertisement.title = inputs_info_data.title,
             advertisement.content = inputs_info_data.content,
             advertisement.location = inputs_info_data.location,
