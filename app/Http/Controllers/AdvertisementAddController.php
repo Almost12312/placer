@@ -35,6 +35,11 @@ class AdvertisementAddController extends Controller
             ]);
 
         $advertisement->files()->sync($imageIds);
+
+        return response()->json([
+            "success" => true,
+            "redirect" => "/cabinet"
+        ]);
     }
 
 //    public function delAdvert(Request $request)
@@ -77,58 +82,63 @@ class AdvertisementAddController extends Controller
 //        ]);
 //    }
 
-    public function view(Request $request)
+    public function view(Request $request, int $id)
     {
-        $id = null;
+        $thisAdv = Advertisement::find($id);
 
-        if ($id !== null)
-        {
-            $thisAdv = Advertisement::where([
-                'id' => $id
-            ])->get();
+        $thisAdvContent = [
+            "id" => $id,
+            "title" => $thisAdv->title,
+            "content" => $thisAdv->content,
+            "location" => $thisAdv->location,
+            "price" => $thisAdv->price
+        ];
 
-            $thisAdvContent = Advertisement::where([
-                'id' => $id
-            ])->get(['id', 'title', 'location', 'price', 'content']);
+        $thisAdvFiles = [];
 
-            $thisImgs = [];
-
-
-            foreach ($thisAdv[0]->files as $file)
-            {
-                $thisImgs[] = ["id" => $file["id"], "url" => $file->getUrl()];
-            }
-
-
-//            return redirect()->route('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
-            return view('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
-        } else {
-
-            $thisAdvContent = [
-                'title' => '',
-                'location' => '',
-                'price' => '',
-                'content' => ''
-            ];
-
-            $thisImgs = [];
-
-            return view('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
-
+        foreach ($thisAdv->files as $file) {
+            $thisAdvFiles [] = ["id" => $file["id"], "url" => $file->getUrl()];
         }
 
-    }
+        return view('redAdvert', ['thisAdvContent' => $thisAdvContent, "thisAdvFiles" => $thisAdvFiles]);
 
-    public function getView(Request $request) {
-
-//        if (isset($thisAdvContent, $thisImgs))
+//        $id = null;
+//
+//        if ($id !== null)
 //        {
-            $thisAdvContent = $request->get('thisAdv');
-            $thisImgs = $request->get('thisImgs');
-            return view('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
+//            $thisAdv = Advertisement::where([
+//                'id' => $id
+//            ])->get();
+//
+//            $thisAdvContent = Advertisement::where([
+//                'id' => $id
+//            ])->get(['id', 'title', 'location', 'price', 'content']);
+//
+//            $thisImgs = [];
+//
+//
+//            foreach ($thisAdv[0]->files as $file)
+//            {
+//                $thisImgs[] = ["id" => $file["id"], "url" => $file->getUrl()];
+//            }
+//
+//
+////            return redirect()->route('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
+//            return view('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
 //        } else {
-//            return view('addAdvert');
+//
+//            $thisAdvContent = [
+//                'title' => '',
+//                'location' => '',
+//                'price' => '',
+//                'content' => ''
+//            ];
+//
+//            $thisImgs = [];
+//
+//            return view('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
 //
 //        }
+
     }
 }

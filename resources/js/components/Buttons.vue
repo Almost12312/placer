@@ -1,7 +1,7 @@
 <template>
     <div class="function__button buttons__prev">
-        <button class="cancel__btn">Отменить</button>
-        <button class="cancel__btn" @click="addAdvert(advertisement, inputs_info_data, images_data)" id="addRedaction">Редактировать</button>
+        <button class="cancel__btn cancelPrew">Отменить</button>
+        <button class="cancel__btn redPrew" @click="addAdvert(advertisement, inputs_info_data, images_data)" id="addRedaction">Редактировать</button>
     </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
     data() {
         return {
             advertisement: {
-                id: 12,
+                id: this.thisAdv.id,
                 title: "",
                 content: "",
                 location: "",
@@ -35,6 +35,19 @@ export default {
             }
         },
 
+        thisAdv: {
+            type: Object,
+            default() {
+                return {
+                    id: null,
+                    title: "",
+                    content: "",
+                    location: "",
+                    price: ""
+                }
+            }
+        },
+
         images_data: {
             type: Array,
             default() {
@@ -45,18 +58,22 @@ export default {
 
     methods: {
         addAdvert(advertisement, inputs_info_data, images_data) {
-            advertisement.id = 13
-            advertisement.title = inputs_info_data.title,
-            advertisement.content = inputs_info_data.content,
-            advertisement.location = inputs_info_data.location,
+            advertisement.title = inputs_info_data.title
+            advertisement.content = inputs_info_data.content
+            advertisement.location = inputs_info_data.location
             advertisement.price = parseInt(inputs_info_data.price)
             advertisement.images_ids = images_data.map(({id}) => (id))
 
 
             axios.post('/advertisement/create', advertisement)
+                .then((response) => {
 
-            console.log(advertisement.images_ids)
-            console.log(typeof advertisement.images_ids)
+                    if (response.data.success) {
+                        alert("Вы успешно загрузили объявление")
+                        setTimeout(location.href = response.data.redirect, 5000)
+                    }
+                })
+
         }
     }
 }

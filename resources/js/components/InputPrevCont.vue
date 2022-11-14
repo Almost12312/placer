@@ -17,6 +17,7 @@
 
         <buttons v-bind:inputs_info_data="inputs_info_cont"
                  :images_data="images"
+                 :thisAdv="thisAdv"
         ></buttons>
     </div>
 
@@ -52,11 +53,23 @@ export default {
 
     props: {
         thisAdv: {
-            type: Object
+            type: Object,
+            default() {
+                return {
+                    id: null,
+                    title: "",
+                    content: "",
+                    location: "",
+                    price: ""
+                }
+            }
         },
 
         imagesProps: {
-            type: Array
+            type: Array,
+            default() {
+                return [];
+            }
         }
 
         // thisAdvImgs: {

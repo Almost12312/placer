@@ -28,7 +28,7 @@
                     <p class="adv_status">Черновики</p>
                     <p class="adv_status">История</p>
                 </div>
-                <a href="{{ route('addAdvert') }}" id="createAdd" class="addAdvert">
+                <a id="createAdd" class="addAdvert">
                     <p class="adv_status adv_status__active">Добавить объвление</p>
                 </a>
             </div>
@@ -53,8 +53,8 @@
                             </div>
                         </div>
                         <div class="function__button">
-                            <a class="redaction">Редактировать</a>
-                            <a class="delete">Удалить</a>
+                            <a class="cancel__btn">Редактировать</a>
+                            <a class="cancel__btn">Удалить</a>
                         </div>
                     </div>
                 @endforeach

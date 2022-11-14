@@ -279,16 +279,7 @@ if (document.querySelector('#createAdd'))
     createAdd.addEventListener('click', function (){
         let id = null
 
-        let idAdv = {
-            idAd: id
-        }
-
-        axios.post('/advertisement/view', idAdv)
-            .then()
-
-        console.log(idAdv)
-
-
+        location.href = `/advertisement/create`
     })
 }
 
@@ -313,7 +304,9 @@ if (document.querySelector('#js_advert'))
         // let dataIdImg = target.closest('.advertisement').querySelectorAll('.adv_img');
         console.log(idAdv)
 
-        axios.post('/advertisement/view', idAdv)
+        location.href = `/advertisement/` + id + `/redaction`
+
+        // axios.post('/advertisement/view', idAdv)
             // .then(location.href = '/advertisement/create')
 
 

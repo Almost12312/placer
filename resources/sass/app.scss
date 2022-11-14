@@ -325,14 +325,24 @@ body {
 
 .ad__title {
     margin: 12px 0 5px 0;
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    line-height: 1.3em;
+    height: 1.3em;
 }
 
 .ad__price {
+    width: 50%;
+
     position: relative;
     bottom: -2px;
 }
 
 .num__price {
+    text-align: right;
     width: 100%;
 }
 
@@ -350,18 +360,27 @@ body {
     vertical-align: bottom;
 }
 
+.ad__location {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    line-height: 1.3em;
+    height: 1.3em;
+}
+
 .ad__content {
     max-width: 100%;
 
     display: flex;
     flex-wrap: wrap;
 
-    //overflow: hidden;
-    //display: -webkit-box;
-    //-webkit-line-clamp: 2;
-    //-webkit-box-orient: vertical;
-    //line-height: 1.3em;
-    height: 2.6em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.3em;
+    height: 1.3em;
 }
 
 .tags {
@@ -678,10 +697,12 @@ body {
 .advertisement__container {
     padding-top: 60px;
 
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 80px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 350px);
+    grid-template-rows: repeat(auto-fit, 460px);
+    gap: 60px;
 }
 
 .adv__preview__container {
@@ -823,7 +844,6 @@ body {
 
 .files__download__container {
     width: 100%;
-    margin-bottom: 20px;
 
     scrollbar-width: auto;
     scrollbar-color: #d6d6d6 #ffffff;
@@ -949,11 +969,15 @@ body {
 
     display: inline-block;
 
-    background: transparent;
 
     font-family: $ffManrope;
     font-weight: 600;
     font-size: 20px;
+
+    background: transparent;
+
+    border-radius: $borderRad;
+    border: 2px solid #000000;
 }
 
 .categories {

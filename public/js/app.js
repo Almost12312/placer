@@ -4906,7 +4906,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 //
 //
 //
@@ -4922,7 +4921,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   data: function data() {
     return {
       advertisement: {
-        id: 12,
+        id: this.thisAdv.id,
         title: "",
         content: "",
         location: "",
@@ -4938,6 +4937,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         return {};
       }
     },
+    thisAdv: {
+      type: Object,
+      "default": function _default() {
+        return {
+          id: null,
+          title: "",
+          content: "",
+          location: "",
+          price: ""
+        };
+      }
+    },
     images_data: {
       type: Array,
       "default": function _default() {
@@ -4947,15 +4958,20 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   },
   methods: {
     addAdvert: function addAdvert(advertisement, inputs_info_data, images_data) {
-      advertisement.id = 13;
-      advertisement.title = inputs_info_data.title, advertisement.content = inputs_info_data.content, advertisement.location = inputs_info_data.location, advertisement.price = parseInt(inputs_info_data.price);
+      advertisement.title = inputs_info_data.title;
+      advertisement.content = inputs_info_data.content;
+      advertisement.location = inputs_info_data.location;
+      advertisement.price = parseInt(inputs_info_data.price);
       advertisement.images_ids = images_data.map(function (_ref) {
         var id = _ref.id;
         return id;
       });
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/create', advertisement);
-      console.log(advertisement.images_ids);
-      console.log(_typeof(advertisement.images_ids));
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/create', advertisement).then(function (response) {
+        if (response.data.success) {
+          alert("Вы успешно загрузили объявление");
+          setTimeout(location.href = response.data.redirect, 5000);
+        }
+      });
     }
   }
 });
@@ -5048,6 +5064,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -5068,10 +5085,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     thisAdv: {
-      type: Object
+      type: Object,
+      "default": function _default() {
+        return {
+          id: null,
+          title: "",
+          content: "",
+          location: "",
+          price: ""
+        };
+      }
     },
     imagesProps: {
-      type: Array
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
     }
 
     // thisAdvImgs: {
@@ -5653,11 +5682,7 @@ if (document.querySelector('#createAdd')) {
   var createAdd = document.querySelector('#createAdd');
   createAdd.addEventListener('click', function () {
     var id = null;
-    var idAdv = {
-      idAd: id
-    };
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/view', idAdv).then();
-    console.log(idAdv);
+    location.href = "/advertisement/create";
   });
 }
 if (document.querySelector('#js_advert')) {
@@ -5676,7 +5701,9 @@ if (document.querySelector('#js_advert')) {
     };
     // let dataIdImg = target.closest('.advertisement').querySelectorAll('.adv_img');
     console.log(idAdv);
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/view', idAdv);
+    location.href = "/advertisement/" + id + "/redaction";
+
+    // axios.post('/advertisement/view', idAdv)
     // .then(location.href = '/advertisement/create')
 
     // if (target.closest('.redaction'))
@@ -24981,12 +25008,14 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "function__button buttons__prev" }, [
-    _c("button", { staticClass: "cancel__btn" }, [_vm._v("Отменить")]),
+    _c("button", { staticClass: "cancel__btn cancelPrew" }, [
+      _vm._v("Отменить"),
+    ]),
     _vm._v(" "),
     _c(
       "button",
       {
-        staticClass: "cancel__btn",
+        staticClass: "cancel__btn redPrew",
         attrs: { id: "addRedaction" },
         on: {
           click: function ($event) {
@@ -25147,6 +25176,7 @@ var render = function () {
         attrs: {
           inputs_info_data: _vm.inputs_info_cont,
           images_data: _vm.images,
+          thisAdv: _vm.thisAdv,
         },
       }),
     ],
