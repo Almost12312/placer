@@ -9,6 +9,9 @@ $ffPoppins: 'Poppins', sans-serif;
 $clrDisable: #9f9f9f;
 $borderRad: 10px;
 
+$iconWidth: 42px;
+$iconHeight: 42px;
+
 body {
     height: 100vh;
     background: #f8f7f7;
@@ -21,7 +24,7 @@ body {
 
 .container {
     width: 90%;
-    height: 100%;
+    height: 100vh;
     max-width: 1920px;
 
     margin: 0 auto;
@@ -138,22 +141,26 @@ body {
     z-index: 23;
 
     p {
+        padding: 10px 40px 10px 40px;
+
         font-size: 16px;
         font-family: $ffManrope;
         font-weight: 500;
 
         background: #ffffff;
-        padding: 10px 40px 10px 40px;
 
         a {
+            white-space: nowrap;
+
             text-decoration: none;
+            text-align: center;
             color: #000;
         }
     }
 }
 
 .user_menu:hover .menu {
-    display: block;
+    display: flex;
 }
 
 /* Подвальный сайта */
@@ -262,19 +269,17 @@ body {
 }
 
 .advertisement {
-    width: 350px;
-    height: 100%;
+    width: 300px;
 
-    margin-bottom: 50px;
-
+    position: relative;
 
     display: flex;
     flex-direction: column;
 }
 
 .adv_img {
-    width: 350px;
-    height: 250px;
+    width: 300px;
+    height: 220px;
 
     display: block;
 
@@ -295,8 +300,12 @@ body {
         font-weight: 700;
     }
 
-    h3, h4, h5, h6 {
-        font-size: 20px;
+    h3 {
+        font-size: 24px;
+    }
+
+    h4, h5, h6 {
+        font-size: 16px;
     }
 
     h4 {
@@ -335,19 +344,22 @@ body {
 }
 
 .ad__price {
-    width: 50%;
+    width: 45%;
 
     position: relative;
     bottom: -2px;
 }
 
 .num__price {
-    text-align: right;
     width: 100%;
+
+    text-align: right;
 }
 
 .no__price {
     width: 100%;
+
+    text-align: right;
 }
 
 .num__price:after {
@@ -355,8 +367,9 @@ body {
 }
 
 .ad__content,  .ad__location {
+    font-size: 14px;
     font-family: $ffManrope;
-    color: #4a5568;
+    color: #6b7586;
     vertical-align: bottom;
 }
 
@@ -377,7 +390,7 @@ body {
 
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     line-height: 1.3em;
     height: 1.3em;
@@ -396,6 +409,127 @@ body {
     font-family: $ffManrope;
     font-size: 14px;
 }
+
+.setting__container {
+    width: $iconWidth;
+    height: $iconHeight;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+    border-bottom-left-radius: $borderRad;
+
+    img {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+.setting__container:hover {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+
+    transition: .2s;
+    cursor: pointer;
+
+    .settingBtns {
+        visibility: visible;
+        opacity: 1;
+        transition: .2s;
+
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .redBtn:hover {
+        svg {
+            fill: #7396da;
+
+            transition: .2s;
+        }
+
+        .afterStng {
+            visibility: visible;
+            opacity: 1;
+            transition: .5s;
+        }
+    }
+
+    .canBtn:hover {
+        svg {
+            fill: #da7171;
+
+            transition: .2s;
+        }
+
+        .afterStng {
+            visibility: visible;
+            opacity: 1;
+            transition: .5s;
+        }
+    }
+}
+
+.afterStng {
+    padding: 10px;
+
+    position: absolute;
+    top: -80%;
+    visibility: hidden;
+    opacity: 0;
+
+    font-family: $ffManrope;
+    font-weight: 400;
+    font-size: 12px;
+    color: white;
+
+    background: #a2a2a2;
+    border-radius: $borderRad;
+}
+
+
+.settingBtns {
+    position: absolute;
+    top: 0;
+    right: 40px;
+
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
+    flex-direction: row;
+
+    background: #ffffff;
+    border-radius: $borderRad;
+    border-top-right-radius: 0;
+
+
+    a  {
+        width: $iconWidth;
+        height: $iconHeight;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-align: left;
+        cursor: pointer;
+    }
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+
+
+}
+
+
 
 .function__button {
     width: 100%;
@@ -565,6 +699,7 @@ body {
 .cabinet__container {
     display: flex;
 
+    margin: 100px 0;
     padding: 40px;
 
     background: #ffffff;
@@ -697,11 +832,12 @@ body {
 .advertisement__container {
     padding-top: 60px;
 
-    margin: 0 auto;
 
-    display: grid;
-    grid-template-columns: repeat(3, 350px);
-    grid-template-rows: repeat(auto-fit, 460px);
+    display: flex;
+    flex-wrap: wrap;
+    //display: grid;
+    //grid-template-columns: repeat(3, 350px);
+    //grid-template-rows: repeat(auto-fit, 460px);
     gap: 60px;
 }
 
@@ -727,19 +863,18 @@ body {
     padding: 0 40px 0 40px;
 
     //overflow-y: scroll;
+}
 
+.adPrew__title {
+    width: 100%;
 
-    h3 {
-        width: 100%;
+    margin-top: 30px;
+    margin-bottom: 20px;
 
-        margin-top: 30px;
-        margin-bottom: 20px;
-
-        font-family: $ffManrope;
-        font-weight: 600;
-        font-size: 28px;
-        text-align: left;
-    }
+    font-family: $ffManrope;
+    font-weight: 600;
+    font-size: 28px;
+    text-align: left;
 }
 
 .advertisement__form {
@@ -864,8 +999,8 @@ body {
 }
 
 .files__download__button {
-    height: 250px;
-    width: 350px;
+    height: 220px;
+    width: 300px;
 
     padding: 15px;
 
@@ -965,20 +1100,34 @@ body {
 
 .cancel__btn {
     margin-top: 20px;
-    padding: 15px 20px;
+    padding: 8px 10px;
 
     display: inline-block;
 
 
     font-family: $ffManrope;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 16px;
 
     background: transparent;
 
     border-radius: $borderRad;
     border: 2px solid #000000;
 }
+//
+//.canBtn:hover {
+//    cursor: pointer;
+//    background: #e77373;
+//
+//    transition: .5s;
+//}
+//
+//.redBtn:hover {
+//    cursor: pointer;
+//    background: #8cea8c;
+//
+//    transition: .5s;
+//}
 
 .categories {
     width: 400px;

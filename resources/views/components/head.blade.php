@@ -1,4 +1,4 @@
-
+@php use Illuminate\Support\Facades\Auth; @endphp
 <header class="header">
     <div class="header__container">
         <a href="{{ route('home') }}" class="logo">
@@ -13,8 +13,13 @@
                 <img class="burger_img" src="/images/menu_burger.svg" alt="Menu">
             </div>
             <div class="menu">
-                <p><a href="{{ route('authorization') }}">Авторизация</a></p>
-                <p><a href="{{ route('authorization') }}">Регистрация</a></p>
+                @if(Auth::check())
+                    <p><a href="{{ route('home') }}">Выйти</a></p>
+                    <p><a href="{{ route('cabinet') }}">Личный кабинет</a></p>
+                @else
+                    <p><a href="{{ route('authorization') }}">Авторизация</a></p>
+                    <p><a href="{{ route('authorization') }}">Регистрация</a></p>
+                @endif
             </div>
         </button>
     </div>

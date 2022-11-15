@@ -127,6 +127,7 @@ export default {
 <style>
     .adv__preview {
         margin-left: 250px;
+        margin-top: 70px;
     }
 
     .adv__preview {

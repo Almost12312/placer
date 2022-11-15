@@ -12,7 +12,7 @@ body {
 
 .container {
   width: 90%;
-  height: 100%;
+  height: 100vh;
   max-width: 1920px;
   margin: 0 auto;
   position: relative;
@@ -103,19 +103,21 @@ body {
   z-index: 23;
 }
 .menu p {
+  padding: 10px 40px 10px 40px;
   font-size: 16px;
   font-family: "Manrope", sans-serif;
   font-weight: 500;
   background: #ffffff;
-  padding: 10px 40px 10px 40px;
 }
 .menu p a {
+  white-space: nowrap;
   text-decoration: none;
+  text-align: center;
   color: #000;
 }
 
 .user_menu:hover .menu {
-  display: block;
+  display: flex;
 }
 
 /* Подвальный сайта */
@@ -203,16 +205,15 @@ body {
 }
 
 .advertisement {
-  width: 350px;
-  height: 100%;
-  margin-bottom: 50px;
+  width: 300px;
+  position: relative;
   display: flex;
   flex-direction: column;
 }
 
 .adv_img {
-  width: 350px;
-  height: 250px;
+  width: 300px;
+  height: 220px;
   display: block;
   border-radius: 10px;
   overflow: hidden;
@@ -227,8 +228,11 @@ body {
 .advertisement__description h3, .advertisement__description h6 {
   font-weight: 700;
 }
-.advertisement__description h3, .advertisement__description h4, .advertisement__description h5, .advertisement__description h6 {
-  font-size: 20px;
+.advertisement__description h3 {
+  font-size: 24px;
+}
+.advertisement__description h4, .advertisement__description h5, .advertisement__description h6 {
+  font-size: 16px;
 }
 .advertisement__description h4 {
   font-weight: 500;
@@ -261,18 +265,19 @@ body {
 }
 
 .ad__price {
-  width: 50%;
+  width: 45%;
   position: relative;
   bottom: -2px;
 }
 
 .num__price {
-  text-align: right;
   width: 100%;
+  text-align: right;
 }
 
 .no__price {
   width: 100%;
+  text-align: right;
 }
 
 .num__price:after {
@@ -280,8 +285,9 @@ body {
 }
 
 .ad__content, .ad__location {
+  font-size: 14px;
   font-family: "Manrope", sans-serif;
-  color: #4a5568;
+  color: #6b7586;
   vertical-align: bottom;
 }
 
@@ -300,7 +306,7 @@ body {
   flex-wrap: wrap;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   line-height: 1.3em;
   height: 1.3em;
@@ -315,6 +321,95 @@ body {
   resize: none;
   font-family: "Manrope", sans-serif;
   font-size: 14px;
+}
+
+.setting__container {
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-bottom-left-radius: 10px;
+}
+.setting__container img {
+  width: 25px;
+  height: 25px;
+}
+
+.setting__container:hover {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.setting__container:hover .settingBtns {
+  visibility: visible;
+  opacity: 1;
+  transition: 0.2s;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.setting__container:hover .redBtn:hover svg {
+  fill: #7396da;
+  transition: 0.2s;
+}
+.setting__container:hover .redBtn:hover .afterStng {
+  visibility: visible;
+  opacity: 1;
+  transition: 0.5s;
+}
+.setting__container:hover .canBtn:hover svg {
+  fill: #da7171;
+  transition: 0.2s;
+}
+.setting__container:hover .canBtn:hover .afterStng {
+  visibility: visible;
+  opacity: 1;
+  transition: 0.5s;
+}
+
+.afterStng {
+  padding: 10px;
+  position: absolute;
+  top: -80%;
+  visibility: hidden;
+  opacity: 0;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: white;
+  background: #a2a2a2;
+  border-radius: 10px;
+}
+
+.settingBtns {
+  position: absolute;
+  top: 0;
+  right: 40px;
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
+  flex-direction: row;
+  background: #ffffff;
+  border-radius: 10px;
+  border-top-right-radius: 0;
+}
+.settingBtns a {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  cursor: pointer;
+}
+.settingBtns svg {
+  width: 20px;
+  height: 20px;
 }
 
 .function__button {
@@ -434,6 +529,7 @@ body {
 /* Личный кабинет */
 .cabinet__container {
   display: flex;
+  margin: 100px 0;
   padding: 40px;
   background: #ffffff;
 }
@@ -549,10 +645,8 @@ body {
 
 .advertisement__container {
   padding-top: 60px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 350px);
-  grid-template-rows: repeat(auto-fit, 460px);
+  display: flex;
+  flex-wrap: wrap;
   gap: 60px;
 }
 
@@ -570,7 +664,8 @@ body {
   align-items: flex-start;
   padding: 0 40px 0 40px;
 }
-.ads__redactor h3 {
+
+.adPrew__title {
   width: 100%;
   margin-top: 30px;
   margin-bottom: 20px;
@@ -670,8 +765,8 @@ body {
 }
 
 .files__download__button {
-  height: 250px;
-  width: 350px;
+  height: 220px;
+  width: 300px;
   padding: 15px;
   position: relative;
   display: flex;
@@ -743,11 +838,11 @@ body {
 
 .cancel__btn {
   margin-top: 20px;
-  padding: 15px 20px;
+  padding: 8px 10px;
   display: inline-block;
   font-family: "Manrope", sans-serif;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 16px;
   background: transparent;
   border-radius: 10px;
   border: 2px solid #000000;

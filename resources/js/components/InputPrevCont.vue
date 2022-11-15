@@ -1,6 +1,6 @@
 <template>
     <div class="ads__redactor">
-        <h3>Редактировать объявление</h3>
+        <h3 class="adPrew__title">Редактировать объявление</h3>
 
         <div class="advertisement__form">
             <inputs-advert v-bind:inputs_info_data="inputs_info_cont"

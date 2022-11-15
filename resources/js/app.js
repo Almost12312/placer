@@ -11,6 +11,7 @@ import InputsAdvert from "./components/InputsAdvert";
 import Buttons from "./components/Buttons";
 import Registration from "./components/registration";
 import Categories from "./components/Categories";
+import Profile from "./components/Profile";
 
 
 
@@ -38,6 +39,15 @@ if (document.querySelector('.registrationCont')) {
         el: '.registrationCont',
         components: {
             Registration
+        }
+    })
+}
+
+if (document.querySelector('.cabinet__container')) {
+    new Vue ({
+        el: '.cabinet__container',
+        components: {
+            Profile
         }
     })
 }
@@ -290,22 +300,26 @@ if (document.querySelector('#js_advert'))
     jsAdv.addEventListener('click', event => {
         let target = event.target;
 
-        // let title = target.closest('.advertisement').querySelector('.ad__title').textContent
-        // let content = target.closest('.advertisement').querySelector('.ad__content').textContent
-        // let location = target.closest('.advertisement').querySelector('.ad__location').textContent
-        // let price = target.closest('.advertisement').querySelector('.ad__price').textContent
-        let id = target.closest('.advertisement').dataset.id
+        if (target.closest('.redBtn')) {
 
-        console.log(id)
+            // let title = target.closest('.advertisement').querySelector('.ad__title').textContent
+            // let content = target.closest('.advertisement').querySelector('.ad__content').textContent
+            // let location = target.closest('.advertisement').querySelector('.ad__location').textContent
+            // let price = target.closest('.advertisement').querySelector('.ad__price').textContent
+            let id = target.closest('.redBtn').closest('.advertisement').dataset.id
 
-        let idAdv = {
-            idAd: id
+            console.log(id)
+
+            let idAdv = {
+                idAd: id
+            }
+            // let dataIdImg = target.closest('.advertisement').querySelectorAll('.adv_img');
+            console.log(idAdv)
+
+            location.href = `/advertisement/` + id + `/redaction`
+        } else {
+            return
         }
-        // let dataIdImg = target.closest('.advertisement').querySelectorAll('.adv_img');
-        console.log(idAdv)
-
-        location.href = `/advertisement/` + id + `/redaction`
-
         // axios.post('/advertisement/view', idAdv)
             // .then(location.href = '/advertisement/create')
 
