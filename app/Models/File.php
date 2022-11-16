@@ -26,7 +26,7 @@ class File extends Model
 
     public function getUrl()
     {
-        return "$this->location/$this->new_hash_name" ;
+        return "$this->location/$this->new_hash_name";
     }
 
 //    public function user() {

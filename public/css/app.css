@@ -254,6 +254,11 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+.ad__price {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .ad__title {
   margin: 12px 0 5px 0;
   overflow: hidden;
@@ -357,7 +362,7 @@ body {
   fill: #7396da;
   transition: 0.2s;
 }
-.setting__container:hover .redBtn:hover .afterStng {
+.setting__container:hover .redBtn:hover .afterSettng {
   visibility: visible;
   opacity: 1;
   transition: 0.5s;
@@ -366,23 +371,24 @@ body {
   fill: #da7171;
   transition: 0.2s;
 }
-.setting__container:hover .canBtn:hover .afterStng {
+.setting__container:hover .canBtn:hover .afterSettng {
   visibility: visible;
   opacity: 1;
   transition: 0.5s;
 }
 
-.afterStng {
+.afterSettng {
   padding: 10px;
   position: absolute;
   top: -80%;
   visibility: hidden;
   opacity: 0;
-  font-family: "Manrope", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 12px;
+  letter-spacing: 1px;
   color: white;
-  background: #a2a2a2;
+  background: #8d8d8d;
   border-radius: 10px;
 }
 
@@ -648,6 +654,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 60px;
+  background: #ffffff;
 }
 
 .adv__preview__container {

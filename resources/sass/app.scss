@@ -332,6 +332,11 @@ body {
     font-family: $ffPoppins;
 }
 
+.ad__price {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .ad__title {
     margin: 12px 0 5px 0;
 
@@ -454,7 +459,7 @@ body {
             transition: .2s;
         }
 
-        .afterStng {
+        .afterSettng {
             visibility: visible;
             opacity: 1;
             transition: .5s;
@@ -468,7 +473,7 @@ body {
             transition: .2s;
         }
 
-        .afterStng {
+        .afterSettng {
             visibility: visible;
             opacity: 1;
             transition: .5s;
@@ -476,7 +481,7 @@ body {
     }
 }
 
-.afterStng {
+.afterSettng {
     padding: 10px;
 
     position: absolute;
@@ -484,12 +489,13 @@ body {
     visibility: hidden;
     opacity: 0;
 
-    font-family: $ffManrope;
+    font-family: $ffPoppins;
     font-weight: 400;
     font-size: 12px;
+    letter-spacing: 1px;
     color: white;
 
-    background: #a2a2a2;
+    background: #8d8d8d;
     border-radius: $borderRad;
 }
 
@@ -830,8 +836,8 @@ body {
 }
 
 .advertisement__container {
-    padding-top: 60px;
 
+    padding-top: 60px;
 
     display: flex;
     flex-wrap: wrap;
@@ -839,6 +845,8 @@ body {
     //grid-template-columns: repeat(3, 350px);
     //grid-template-rows: repeat(auto-fit, 460px);
     gap: 60px;
+
+    background: #ffffff;
 }
 
 .adv__preview__container {

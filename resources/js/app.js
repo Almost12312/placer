@@ -12,6 +12,7 @@ import Buttons from "./components/Buttons";
 import Registration from "./components/registration";
 import Categories from "./components/Categories";
 import Profile from "./components/Profile";
+import AdvertisementContainer from "./components/AdvertisementContainer";
 
 
 
@@ -47,7 +48,7 @@ if (document.querySelector('.cabinet__container')) {
     new Vue ({
         el: '.cabinet__container',
         components: {
-            Profile
+            Profile, AdvertisementContainer
         }
     })
 }
@@ -282,44 +283,44 @@ if (loginBtn) {
 //
 // /* Сбор инфы из таргет объявления */
 //
-
-if (document.querySelector('#createAdd'))
-{
-    let createAdd = document.querySelector('#createAdd')
-    createAdd.addEventListener('click', function (){
-        let id = null
-
-        location.href = `/advertisement/create`
-    })
-}
-
-if (document.querySelector('#js_advert'))
-{
-    let jsAdv = document.querySelector('#js_advert')
-
-    jsAdv.addEventListener('click', event => {
-        let target = event.target;
-
-        if (target.closest('.redBtn')) {
-
-            // let title = target.closest('.advertisement').querySelector('.ad__title').textContent
-            // let content = target.closest('.advertisement').querySelector('.ad__content').textContent
-            // let location = target.closest('.advertisement').querySelector('.ad__location').textContent
-            // let price = target.closest('.advertisement').querySelector('.ad__price').textContent
-            let id = target.closest('.redBtn').closest('.advertisement').dataset.id
-
-            console.log(id)
-
-            let idAdv = {
-                idAd: id
-            }
-            // let dataIdImg = target.closest('.advertisement').querySelectorAll('.adv_img');
-            console.log(idAdv)
-
-            location.href = `/advertisement/` + id + `/redaction`
-        } else {
-            return
-        }
+console.log("sd")
+// if (document.querySelector('#createAdd'))
+// {
+//     let createAdd = document.querySelector('#createAdd')
+//     createAdd.addEventListener('click', function (){
+//         let id = null
+//
+//         location.href = `/advertisement/create`
+//     })
+// }
+//
+// if (document.querySelector('#js_advert'))
+// {
+//     let jsAdv = document.querySelector('#js_advert')
+//
+//     jsAdv.addEventListener('click', event => {
+//         let target = event.target;
+//
+//         if (target.closest('.redBtn')) {
+//
+//             // let title = target.closest('.advertisement').querySelector('.ad__title').textContent
+//             // let content = target.closest('.advertisement').querySelector('.ad__content').textContent
+//             // let location = target.closest('.advertisement').querySelector('.ad__location').textContent
+//             // let price = target.closest('.advertisement').querySelector('.ad__price').textContent
+//             let id = target.closest('.redBtn').closest('.advertisement').dataset.id
+//
+//             console.log(id)
+//
+//             let idAdv = {
+//                 idAd: id
+//             }
+//             // let dataIdImg = target.closest('.advertisement').querySelectorAll('.adv_img');
+//             console.log(idAdv)
+//
+//             location.href = `/advertisement/` + id + `/redaction`
+//         } else {
+//             return
+//         }
         // axios.post('/advertisement/view', idAdv)
             // .then(location.href = '/advertisement/create')
 
@@ -385,8 +386,8 @@ if (document.querySelector('#js_advert'))
 //     }
 //
 //
-    })
-}
+//     })
+// }
 
 
 // let redBtn = document.querySelectorAll('.redaction')
