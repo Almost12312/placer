@@ -1,6 +1,4 @@
 import axios from 'axios'
-import {toInteger} from "lodash";
-import * as events from "events";
 
 import Vue from 'vue'
 import Test from './components/Test'
@@ -321,6 +319,7 @@ console.log("sd")
 //         } else {
 //             return
 //         }
+// }
         // axios.post('/advertisement/view', idAdv)
             // .then(location.href = '/advertisement/create')
 

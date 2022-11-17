@@ -205,15 +205,15 @@ body {
 }
 
 .advertisement {
-  width: 300px;
+  width: 320px;
   position: relative;
   display: flex;
   flex-direction: column;
 }
 
 .adv_img {
-  width: 300px;
-  height: 220px;
+  width: 320px;
+  height: 240px;
   display: block;
   border-radius: 10px;
   overflow: hidden;
@@ -378,7 +378,7 @@ body {
 }
 
 .afterSettng {
-  padding: 10px;
+  padding: 6px 10px;
   position: absolute;
   top: -80%;
   visibility: hidden;
@@ -653,7 +653,7 @@ body {
   padding-top: 60px;
   display: flex;
   flex-wrap: wrap;
-  gap: 60px;
+  gap: 2vw;
   background: #ffffff;
 }
 
@@ -772,7 +772,7 @@ body {
 }
 
 .files__download__button {
-  height: 220px;
+  height: 240px;
   width: 300px;
   padding: 15px;
   position: relative;

@@ -14,13 +14,15 @@ class AdvertisementResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'content' => $this->content,
-            'location' => $this->location,
-            'price' => $this->price,
-            'images' => $this->resource->files
+            'id' => $this->resource->id,
+            'title' => $this->resource->title,
+            'content' => $this->resource->content,
+            'location' => $this->resource->location,
+            'price' => $this->resource->price,
+            'status' => $this->status,
+            'images' => $this->resource->files[0]->getUrl()
         ];
     }
 }

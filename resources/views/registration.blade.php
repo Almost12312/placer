@@ -9,7 +9,7 @@
     <title>Регистрация</title>
 </head>
 <body>
-<section class="containerAuth registrationCont">
+<section class="registrationCont containerAuth ">
     <registration></registration>
 {{--    <div class="from__container">--}}
 {{--        <div class="social">--}}

@@ -6,6 +6,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Middleware\Authorization;
 use App\Http\Middleware\CreateMDW;
 use App\Http\Middleware\Redaction;
+use App\Http\Resources\AdvertisementResource;
+use App\Models\Advertisement;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\FileController;
 use \App\Http\Controllers\AuthorizationController;
@@ -46,3 +49,12 @@ Route::post('/advertisement/delete', [AdvertisementAddController::class, 'delAdv
 
 
 Route::get('/test', [TestController::class, 'test']);
+
+
+Route::post('/resource', function () {
+    $allAdv = $ads = Advertisement::where([
+        'author_id' => Auth::id(),
+        'status' => 1
+    ])->get();
+    return new \App\Http\Resources\AdvertisementCollection($allAdv);
+});

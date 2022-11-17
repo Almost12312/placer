@@ -7,10 +7,7 @@
                 <div class="auth__slider">SLIDER</div>
             </div>
             <div class="auth__window">
-                <h3>Авторизация</h3>
-                <input type="text" id="login" placeholder="Email">
-                <input type="password" id="password" placeholder="Пароль">
-                <button id="auth__submit">Войти</button>
+                <h3>Регистрация</h3>
             </div>
         </div>
     </section>
