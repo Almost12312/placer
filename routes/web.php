@@ -14,6 +14,7 @@ use \App\Http\Controllers\FileController;
 use \App\Http\Controllers\AuthorizationController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\AdController;
+use App\Http\Controllers\RegistrationController;
 
 Route::get('/', [HomeController::class, 'home'])
     ->name('home');
@@ -24,6 +25,8 @@ Route::view('/authorization', 'authorization')
 Route::post('/login', [AuthorizationController::class, 'login']);
 
 Route::view('/registration', 'registration');
+
+Route::post('/reg-or-update', [RegistrationController::class, 'reg']);
 
 Route::get('/cabinet', [CabinetController::class, 'cabinet'])
     ->name('cabinet')

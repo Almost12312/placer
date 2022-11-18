@@ -22,7 +22,7 @@
                 <h3>Авторизация</h3>
                 <input type="text" id="login" placeholder="Email">
                 <input type="password" id="password" placeholder="Пароль">
-                <button id="auth__submit">Войти</button>
+                <button class="submit" id="auth__submit">Войти</button>
             </div>
         </div>
     </section>

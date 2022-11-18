@@ -466,16 +466,14 @@ body {
 }
 
 .from__container {
-  width: 900px;
-  height: 400px;
   display: flex;
-  background: #ffffff;
   border-radius: 10px;
   box-shadow: 4px 4px 31px 8px rgba(34, 60, 80, 0.2);
 }
 
 .social {
-  width: 60%;
+  width: 540px;
+  height: 400px;
   flex-direction: column;
   display: flex;
   align-items: center;
@@ -496,14 +494,16 @@ body {
 }
 
 .auth__window {
-  width: 40%;
+  width: 360px;
+  padding-bottom: 20px;
   display: flex;
   align-items: center;
   flex-direction: column;
+  background: #ffffff;
 }
 .auth__window h3 {
   margin-top: 50px;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   text-align: center;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
@@ -515,8 +515,11 @@ body {
   margin-top: 20px;
   padding-left: 10px;
 }
+.auth__window input:last-child {
+  margin-bottom: 20px;
+}
 
-#auth__submit {
+.submit {
   width: 100px;
   height: 35px;
   margin-top: 80px;

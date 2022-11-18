@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Дмитрий',
-            'age' => '19',
+            'age' => 19,
             'email' => 'admin@admin.admin',
             'favorite' => json_encode([
 
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Дефолт',
-            'age' => '123',
+            'age' => 123,
             'email' => 'default@def.def',
             'favorite' => json_encode([
 
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Дефолт2',
-            'age' => '1232',
+            'age' => 1232,
             'email' => 'default@def.def2',
             'favorite' => json_encode([
 

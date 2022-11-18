@@ -5707,6 +5707,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5724,8 +5733,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "registration"
+  name: "registration",
+  data: function data() {
+    return {
+      regInfo: {}
+    };
+  },
+  methods: {
+    reg: function reg() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('reg-or-update', this.regInfo).then(function (response) {
+        if (response.data.success === true) {
+          location.href = response.data.redirect;
+        } else {
+          alert('Вы ввели невалидные данные');
+        }
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -26174,27 +26200,142 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("section", { staticClass: "containerAuth" }, [
+    _c("div", { staticClass: "from__container" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "auth__window reg__window" }, [
+        _c("h3", [_vm._v("Регистрация")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.regInfo.name,
+              expression: "regInfo.name",
+            },
+          ],
+          attrs: { type: "text", placeholder: "ФИО" },
+          domProps: { value: _vm.regInfo.name },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.regInfo, "name", $event.target.value)
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.regInfo.age,
+              expression: "regInfo.age",
+            },
+          ],
+          attrs: { type: "text", placeholder: "Возвраст" },
+          domProps: { value: _vm.regInfo.age },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.regInfo, "age", $event.target.value)
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.regInfo.email,
+              expression: "regInfo.email",
+            },
+          ],
+          attrs: { type: "text", placeholder: "Email" },
+          domProps: { value: _vm.regInfo.email },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.regInfo, "email", $event.target.value)
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.regInfo.password,
+              expression: "regInfo.password",
+            },
+          ],
+          attrs: { type: "password", placeholder: "Пароль" },
+          domProps: { value: _vm.regInfo.password },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.regInfo, "password", $event.target.value)
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.regInfo.phone,
+              expression: "regInfo.phone",
+            },
+          ],
+          attrs: { type: "text", placeholder: "Телефон" },
+          domProps: { value: _vm.regInfo.phone },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.regInfo, "phone", $event.target.value)
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "submit",
+            attrs: { id: "register__submit" },
+            on: { click: _vm.reg },
+          },
+          [_vm._v("Войти")]
+        ),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "containerAuth" }, [
-      _c("div", { staticClass: "from__container" }, [
-        _c("div", { staticClass: "social" }, [
-          _c("h4", [_vm._v("Совсем немного и")]),
-          _vm._v(" "),
-          _c("h3", [_vm._v("откроется новый мир")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "auth__slider" }, [_vm._v("SLIDER")]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "auth__window" }, [
-          _c("h3", [_vm._v("Регистрация")]),
-        ]),
-      ]),
+    return _c("div", { staticClass: "social" }, [
+      _c("h4", [_vm._v("Совсем немного и")]),
+      _vm._v(" "),
+      _c("h3", [_vm._v("откроется новый мир")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "auth__slider" }, [_vm._v("SLIDER")]),
     ])
   },
 ]
