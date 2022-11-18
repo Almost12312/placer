@@ -21,7 +21,7 @@ class AdvertisementResource extends JsonResource
             'content' => $this->resource->content,
             'location' => $this->resource->location,
             'price' => $this->resource->price,
-            'status' => $this->status,
+//            'status' => $this->resource->status,
             'images' => $this->resource->files[0]->getUrl()
         ];
     }

@@ -4914,6 +4914,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -4949,20 +4950,9 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return;
       }
-    }
-  },
-  props: {
-    allAdvert: {
-      type: Array,
-      "default": function _default() {
-        return [];
-      }
     },
-    allAdvertImgs: {
-      type: Array,
-      "default": function _default() {
-        return [];
-      }
+    removeAdv: function removeAdv() {
+      var index = this.allAdv.indexOf();
     }
   },
   mounted: function mounted() {
@@ -5056,6 +5046,9 @@ __webpack_require__.r(__webpack_exports__);
           setTimeout(location.href = response.data.redirect, 5000);
         }
       });
+    },
+    cancel: function cancel() {
+      location.href = '/cabinet';
     }
   }
 });
@@ -5385,6 +5378,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -5407,8 +5402,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Profile"
+  name: "Profile",
+  data: function data() {
+    return {
+      userinfo: {}
+    };
+  },
+  methods: {
+    getUser: function getUser() {
+      var _this = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/profile').then(function (response) {
+        _this.userinfo = response.data.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getUser();
+  }
 });
 
 /***/ }),
@@ -5691,6 +5703,11 @@ __webpack_require__.r(__webpack_exports__);
         return {};
       }
     }
+  },
+  methods: {
+    removeAdv: function removeAdv() {
+      this.$emit('removeAdv', this.advInfo);
+    }
   }
 });
 
@@ -5709,6 +5726,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
 //
 //
 //
@@ -5834,13 +5855,27 @@ if (loginBtn) {
       password: password
     };
     axios__WEBPACK_IMPORTED_MODULE_0___default().post('/login', credentials).then(function (response) {
-      if (response.data.success) {
+      console.log(response);
+      if (response.data.success === true) {
         location.href = response.data.redirect;
       } else {
         alert('Неверный логин и/или пароль');
       }
     });
-    console.log(credentials.login);
+  });
+}
+if (document.querySelector('#goAdd')) {
+  var goAdd = document.querySelector('#goAdd');
+  goAdd.addEventListener('click', function () {
+    location.href = '/advertisement/create';
+  });
+}
+if (document.querySelector('#logout')) {
+  var logout = document.querySelector('#logout');
+  logout.addEventListener('click', function () {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/logout').then(function (response) {
+      location.href = response.data.redirect;
+    });
   });
 }
 
@@ -25320,7 +25355,10 @@ var render = function () {
       on: { click: _vm.target },
     },
     _vm._l(_vm.allAdv, function (adv) {
-      return _c("advertisement", { attrs: { "adv-info": adv } })
+      return _c("advertisement", {
+        attrs: { "adv-info": adv },
+        on: { removeAdv: _vm.removeAdv },
+      })
     }),
     1
   )
@@ -25349,9 +25387,11 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "function__button buttons__prev" }, [
-    _c("button", { staticClass: "cancel__btn cancelPrew" }, [
-      _vm._v("Отменить"),
-    ]),
+    _c(
+      "button",
+      { staticClass: "cancel__btn cancelPrew", on: { click: _vm.cancel } },
+      [_vm._v("Отменить")]
+    ),
     _vm._v(" "),
     _c(
       "button",
@@ -25368,7 +25408,7 @@ var render = function () {
           },
         },
       },
-      [_vm._v("Редактировать")]
+      [_vm._v("Отправить")]
     ),
   ])
 }
@@ -25839,49 +25879,55 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("article", { staticClass: "cabinet" }, [
+    _c("aside", { staticClass: "cabinet__menu" }, [
+      _c("header", [
+        _c("div", { staticClass: "profile" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("p", { staticClass: "name" }, [_vm._v(_vm._s(_vm.userinfo.name))]),
+          _vm._v(" "),
+          _c("ul", { staticClass: "profile__subtitle" }, [
+            _c("li", [
+              _c("p", { staticClass: "profile__intro" }, [
+                _vm._v(_vm._s(_vm.userinfo.city)),
+              ]),
+            ]),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c("li", [
+              _c("p", { staticClass: "profile__intro" }, [
+                _vm._v(_vm._s(_vm.userinfo.created_at)),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "profile__intro" }, [
+            _vm._v("Объявлений: "),
+            _c("span", { staticClass: "countAdvert" }, [
+              _vm._v(_vm._s(_vm.userinfo.advertisements)),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("article", { staticClass: "cabinet" }, [
-      _c("aside", { staticClass: "cabinet__menu" }, [
-        _c("header", [
-          _c("div", { staticClass: "profile" }, [
-            _c("div", { staticClass: "avatar" }, [
-              _c("img", { attrs: { src: "/images/me.jpg", alt: "" } }),
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "name" }, [_vm._v("Dmitry Bublik")]),
-            _vm._v(" "),
-            _c("ul", { staticClass: "profile__subtitle" }, [
-              _c("li", [
-                _c("p", { staticClass: "profile__intro" }, [
-                  _vm._v("Нижние бибки"),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("li", [_c("div", { staticClass: "circle" })]),
-              _vm._v(" "),
-              _c("li", [
-                _c("p", { staticClass: "profile__intro" }, [
-                  _vm._v("32 февраля 2021"),
-                ]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "profile__intro" }, [
-              _vm._v("Объявлений: "),
-              _c("span", { staticClass: "countAdvert" }, [
-                _vm._v("(передать блейд или вью)"),
-              ]),
-            ]),
-          ]),
-        ]),
-      ]),
+    return _c("div", { staticClass: "avatar" }, [
+      _c("img", { attrs: { src: "/images/me.jpg", alt: "" } }),
     ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("div", { staticClass: "circle" })])
   },
 ]
 render._withStripped = true
@@ -26168,9 +26214,11 @@ var render = function () {
               ]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "afterSettng" }, [
-              _vm._v("\n                    Удалить\n                "),
-            ]),
+            _c(
+              "div",
+              { staticClass: "afterSettng", on: { click: _vm.removeAdv } },
+              [_vm._v("\n                    Удалить\n                ")]
+            ),
           ]),
         ]),
       ]),
@@ -26312,15 +26360,44 @@ var render = function () {
           },
         }),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "submit",
-            attrs: { id: "register__submit" },
-            on: { click: _vm.reg },
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.regInfo.city,
+              expression: "regInfo.city",
+            },
+          ],
+          attrs: { type: "text", placeholder: "Город" },
+          domProps: { value: _vm.regInfo.city },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.regInfo, "city", $event.target.value)
+            },
           },
-          [_vm._v("Войти")]
-        ),
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "button__container" }, [
+          _c(
+            "button",
+            {
+              staticClass: "submit",
+              attrs: { id: "register__submit" },
+              on: { click: _vm.reg },
+            },
+            [_vm._v("Зарегестрироваться")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "submit", attrs: { href: "/authorization" } },
+            [_vm._v("Войти")]
+          ),
+        ]),
       ]),
     ]),
   ])

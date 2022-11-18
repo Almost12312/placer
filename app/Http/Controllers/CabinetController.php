@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\AdvertisementCollection;
 use App\Http\Resources\AdvertisementResource;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResourse;
 use App\Models\Advertisement;
 use App\Models\File;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,5 +51,19 @@ class CabinetController extends Controller
 
 
         return view('cabinet');
+    }
+
+    public function profile(Request $request)
+    {
+//        $id = $request->route('id');
+//
+//        if ($id === null)
+//        {
+//            $id = Auth::id();
+//        }
+
+        $myProfile = User::find(Auth::id());
+
+        return new UserResourse($myProfile);
     }
 }

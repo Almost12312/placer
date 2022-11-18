@@ -17,6 +17,7 @@ class RegistrationController extends Controller
         $email = $request->get('email');
         $password = $request->get('password');
         $phone = $request->get('phone');
+        $city = $request->get('city');
 
         $createUser = User::create([
             'name' => $name,
@@ -27,6 +28,7 @@ class RegistrationController extends Controller
             'email' => $email,
             'password' => Hash::make($password),
             'phone' => $phone,
+            'city' => $city,
             'is_admin' => false
         ]);
 

@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdvertisementAddController;
 use App\Http\Controllers\CabinetController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FullAdvResourceController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Middleware\Authorization;
 use App\Http\Middleware\CreateMDW;
 use App\Http\Middleware\Redaction;
@@ -23,15 +25,19 @@ Route::view('/authorization', 'authorization')
     ->name('authorization');
 
 Route::post('/login', [AuthorizationController::class, 'login']);
+Route::post('/logout', [LogoutController::class, 'logout']);
 
-Route::view('/registration', 'registration');
-
+Route::view('/registration', 'registration')
+    ->name('registration');
+// Resource
 Route::post('/reg-or-update', [RegistrationController::class, 'reg']);
+
 
 Route::get('/cabinet', [CabinetController::class, 'cabinet'])
     ->name('cabinet')
     ->middleware(Authorization::class);
-
+//Resource
+Route::post('/profile', [CabinetController::class, 'profile']);
 
 
 Route::post('/advertisement/create', [AdvertisementAddController::class, 'addAdvert'])
@@ -51,13 +57,10 @@ Route::post('/file/upload', [FileController::class, 'file'])
 Route::post('/advertisement/delete', [AdvertisementAddController::class, 'delAdvert']);
 
 
+
+
+
+
 Route::get('/test', [TestController::class, 'test']);
 
-
-Route::post('/resource', function () {
-    $allAdv = $ads = Advertisement::where([
-        'author_id' => Auth::id(),
-        'status' => 1
-    ])->get();
-    return new \App\Http\Resources\AdvertisementCollection($allAdv);
-});
+Route::post('/resource', [FullAdvResourceController::class, 'res']);

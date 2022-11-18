@@ -14,11 +14,11 @@
             </div>
             <div class="menu">
                 @if(Auth::check())
-                    <p><a href="{{ route('home') }}">Выйти</a></p>
+                    <p><a id="logout">Выйти</a></p>
                     <p><a href="{{ route('cabinet') }}">Личный кабинет</a></p>
                 @else
                     <p><a href="{{ route('authorization') }}">Авторизация</a></p>
-                    <p><a href="{{ route('authorization') }}">Регистрация</a></p>
+                    <p><a href="{{ route('registration') }}">Регистрация</a></p>
                 @endif
             </div>
         </button>

@@ -60,7 +60,7 @@
                                             </g>
                                         </g>
                                     </svg>
-                    <div class="afterSettng">
+                    <div class="afterSettng" @click="removeAdv">
                         Удалить
                     </div>
                 </a>
@@ -79,6 +79,12 @@ export default {
             default() {
                 return {}
             }
+        }
+    },
+
+    methods: {
+        removeAdv() {
+            this.$emit('removeAdv', this.advInfo)
         }
     }
 }

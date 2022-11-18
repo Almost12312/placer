@@ -13,12 +13,12 @@ class User extends Authenticatable
 {
     public function advertisements()
     {
-        return $this->hasMany(Advertisement::class);
+        return $this->hasMany(Advertisement::class, 'author_id', 'id');
     }
 
     public function file()
     {
-        return $this->belongsToMany(File::class);
+        return $this->belongsToMany(File::class, 'files_users');
     }
 
     use HasApiTokens, HasFactory, Notifiable;
@@ -35,6 +35,7 @@ class User extends Authenticatable
         'age',
         'favorite',
         'phone',
+        'city',
         'is_admin'
     ];
 

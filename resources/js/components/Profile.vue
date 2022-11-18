@@ -6,13 +6,13 @@
                     <div class="avatar">
                         <img src="/images/me.jpg" alt="">
                     </div>
-                    <p class="name">Dmitry Bublik</p>
+                    <p class="name">{{userinfo.name}}</p>
                     <ul class="profile__subtitle">
-                        <li><p class="profile__intro">Нижние бибки</p></li>
+                        <li><p class="profile__intro">{{ userinfo.city }}</p></li>
                         <li><div class="circle"></div></li>
-                        <li><p class="profile__intro">32 февраля 2021</p></li>
+                        <li><p class="profile__intro">{{ userinfo.created_at }}</p></li>
                     </ul>
-                    <p class="profile__intro">Объявлений: <span class="countAdvert">(передать блейд или вью)</span></p>
+                    <p class="profile__intro">Объявлений: <span class="countAdvert">{{ userinfo.advertisements }}</span></p>
                 </div>
             </header>
         </aside>
@@ -20,8 +20,30 @@
 </template>
 
 <script>
+
+import axios from "axios";
+
 export default {
-    name: "Profile"
+    name: "Profile",
+
+    data() {
+        return {
+            userinfo: {}
+        }
+    },
+
+    methods: {
+        getUser() {
+            axios.post('/profile')
+                 .then(response => {
+                     this.userinfo = response.data.data
+                 })
+        }
+    },
+
+    mounted() {
+        this.getUser()
+    }
 }
 </script>
 

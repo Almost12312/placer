@@ -13,8 +13,12 @@
                 <input v-model="regInfo.email" type="text" placeholder="Email">
                 <input v-model="regInfo.password" type="password" placeholder="Пароль">
                 <input v-model="regInfo.phone" type="text" placeholder="Телефон">
+                <input v-model="regInfo.city" type="text" placeholder="Город">
 
-                <button class="submit" @click="reg" id="register__submit">Войти</button>
+                <div class="button__container">
+                    <button class="submit" @click="reg" id="register__submit">Зарегестрироваться</button>
+                    <a href="/authorization" class="submit">Войти</a>
+                </div>
             </div>
         </div>
     </section>

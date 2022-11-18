@@ -1,7 +1,7 @@
 <template>
     <div class="function__button buttons__prev">
-        <button class="cancel__btn cancelPrew">Отменить</button>
-        <button class="cancel__btn redPrew" @click="addAdvert(advertisement, inputs_info_data, images_data)" id="addRedaction">Редактировать</button>
+        <button class="cancel__btn cancelPrew" @click="cancel">Отменить</button>
+        <button class="cancel__btn redPrew" @click="addAdvert(advertisement, inputs_info_data, images_data)" id="addRedaction">Отправить</button>
     </div>
 </template>
 
@@ -58,6 +58,7 @@ export default {
 
     methods: {
         addAdvert(advertisement, inputs_info_data, images_data) {
+
             advertisement.title = inputs_info_data.title
             advertisement.content = inputs_info_data.content
             advertisement.location = inputs_info_data.location
@@ -74,6 +75,10 @@ export default {
                     }
                 })
 
+        },
+
+        cancel() {
+            location.href = '/cabinet'
         }
     }
 }

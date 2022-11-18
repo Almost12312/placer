@@ -12,7 +12,7 @@
                     <p class="adv_status">История</p>
                 </div>
                 <a id="createAdd" class="addAdvert">
-                    <p class="adv_status adv_status__active">Добавить объвление</p>
+                    <p class="adv_status adv_status__active" id="goAdd">Добавить объвление</p>
                 </a>
             </div>
             <advertisement-container

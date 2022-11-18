@@ -25,12 +25,12 @@ class AuthorizationController extends Controller
             $user = Auth::user();
 
             return response()->json([
-                'success' => 'true',
+                'success' => true,
                 'redirect' => route($user->is_admin ? 'dashboard' : 'cabinet')
             ]);
         } else {
             return response()->json([
-                'success' => 'false'
+                'success' => false
             ]);
         }
 

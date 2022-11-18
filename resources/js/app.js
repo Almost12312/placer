@@ -63,9 +63,10 @@ if (loginBtn) {
         }
 
         axios.post('/login', credentials)
-            .then((response) => {
+             .then((response) => {
+                 console.log(response)
 
-                if (response.data.success) {
+                if (response.data.success === true) {
 
                     location.href = response.data.redirect;
                 }
@@ -74,11 +75,33 @@ if (loginBtn) {
                     alert('Неверный логин и/или пароль');
                 }
 
-            });
-
-        console.log(credentials.login)
+             });
     })
 }
+
+if (document.querySelector('#goAdd'))
+{
+    let goAdd = document.querySelector('#goAdd')
+
+    goAdd.addEventListener('click', function () {
+        location.href = '/advertisement/create'
+    })
+}
+
+if (document.querySelector('#logout'))
+{
+    let logout = document.querySelector('#logout')
+    logout.addEventListener('click', function () {
+        axios.post('/logout')
+             .then(response => {
+                location.href = response.data.redirect
+             })
+    })
+
+
+}
+
+
 
 // let addProduct = document.getElementById("add__product");
 // let products = document.getElementById("products");

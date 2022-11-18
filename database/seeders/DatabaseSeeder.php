@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        User::factory(10)->create();
+//        User::factory(10)->create();
 
         User::create([
             'name' => 'Дмитрий',
@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             ]),
             'password' => Hash::make('admin'),
             'phone' => '89092097493',
+            'city' => 'Moscow',
             'is_admin' => true,
             'remember_token' => Str::random(10)
         ]);
@@ -45,6 +46,7 @@ class DatabaseSeeder extends Seeder
             ]),
             'password' => Hash::make('def'),
             'phone' => '89092097493',
+            'city' => 'Moscow',
             'is_admin' => false,
             'remember_token' => Str::random(10)
         ]);
@@ -58,6 +60,7 @@ class DatabaseSeeder extends Seeder
             ]),
             'password' => Hash::make('def'),
             'phone' => '89092097494',
+            'city' => 'Moscow',
             'is_admin' => false,
             'remember_token' => Str::random(10)
         ]);
@@ -85,12 +88,12 @@ class DatabaseSeeder extends Seeder
             'status' => 1
         ]);
 
-        $category = Tag::find([2,3]);
-        $product->tag()->attach($category);
+//        $category = Tag::find([2,3]);
+//        $product->tag()->attach($category);
 
 
-        Advertisement::factory(10)->create();
-        Tag::factory(20)->create();
+//        Advertisement::factory(10)->create();
+//        Tag::factory(20)->create();
 
 
     }

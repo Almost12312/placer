@@ -22,7 +22,10 @@
                 <h3>Авторизация</h3>
                 <input type="text" id="login" placeholder="Email">
                 <input type="password" id="password" placeholder="Пароль">
-                <button class="submit" id="auth__submit">Войти</button>
+                <div class="button__container">
+                    <a class="submit" id="auth__submit">Войти</a>
+                    <a href="{{ route('registration') }}" class="submit">Регистрация</a>
+                </div>
             </div>
         </div>
     </section>

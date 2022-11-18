@@ -3,6 +3,7 @@
         <advertisement
             v-for="adv in allAdv"
             v-bind:adv-info="adv"
+            @removeAdv="removeAdv"
         ></advertisement>
     </div>
 </template>
@@ -51,25 +52,13 @@ export default {
                 location.href = `/advertisement/` + id + `/redaction`
             } else {
                 return
-                    }
-         }
-
-    },
-
-    props: {
-        allAdvert: {
-            type: Array,
-            default() {
-                return []
             }
-        },
+         },
 
-        allAdvertImgs: {
-            type: Array,
-            default() {
-                return [];
-            }
+        removeAdv() {
+            let index = this.allAdv.indexOf()
         }
+
     },
 
     mounted() {
