@@ -12,7 +12,7 @@ class File extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['original_name', 'size_bytes', 'location', 'new_hash_name', 'extension'];
+    protected $fillable = ['original_name', 'size_bytes', 'location', 'new_hash_name', 'extension', 'loaded_by'];
 
     public function user()
     {

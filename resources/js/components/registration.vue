@@ -2,9 +2,20 @@
     <section class="containerAuth">
         <div class="from__container">
             <div class="social">
-                <h4>Совсем немного и</h4>
-                <h3>откроется новый мир</h3>
-                <div class="auth__slider">SLIDER</div>
+                <span class="regPhotoTitle">Загрузить фотографию</span>
+                <div class="avatar">
+                    <input id="regUpl" type="file" @change="uplAvatar" hidden>
+                    <label for="regUpl" class="uplAvatarLabel">
+                        <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <rect width="16" height="16" id="icon-bound" fill="none" />
+                            <path d="M3.294,7.706l1.416,1.416L7,6.828V16h2V6.828l2.294,2.294l1.416-1.416L8,3L3.294,7.706z M0,2h16V0H0V2z" />
+                        </svg>
+                    </label>
+
+<!--                    <img v-if="regInfo.imgUrl === undefined || regInfo.imgUrl.length === 0" src="/images/avatar.png" alt="avatar">-->
+<!--                    <p v-for="image in regInfo.img">{{image.url}}</p>-->
+                    <img :src="regInfo. url" alt="avatar">
+                </div>
             </div>
             <div class="auth__window reg__window">
                 <h3>Регистрация</h3>
@@ -35,7 +46,7 @@ export default {
     data() {
         return {
             regInfo: {
-
+                url: "/images/avatar.png"
             }
         }
     },
@@ -50,10 +61,27 @@ export default {
                     } else {
                         alert('Вы ввели невалидные данные')
                     }
-
-
                 })
-        }
+        },
+
+        uplAvatar() {
+            let input = document.querySelector('#regUpl');
+
+            let fd = new FormData
+            fd.append('file', input.files[0])
+            console.log(fd)
+
+            axios.post('/file/upload', fd)
+                .then(response => {
+                    console.log(response)
+                    this.regInfo.url = response.data.url
+                    this.regInfo.id = response.data.id
+                })
+        },
+
+        // mounted() {
+        //     document.querySelector('#regUpl').files[0] = "/images/avatar.png"
+        // }
     }
 }
 </script>

@@ -56,7 +56,9 @@ export default {
          },
 
         removeAdv() {
-            let index = this.allAdv.indexOf()
+            let index = this.allAdv.indexOf(this.adv.id)
+
+            console.log(index)
         }
 
     },

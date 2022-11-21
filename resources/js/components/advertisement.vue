@@ -7,7 +7,8 @@
             <div class="location_price">
                 <h5 class="ad__location">{{ advInfo.location }}</h5>
                 <h6 class="ad__price">
-                    <span class="num__price">{{ advInfo.price === 0 ? "Бесплатно" : advInfo.price}}</span>
+                    <span v-if="advInfo.price === 0" class="no__price">Бесплатно</span>
+                    <span v-if="advInfo.price > 0" class="num__price">{{advInfo.price}}</span>
                 </h6>
             </div>
         </div>

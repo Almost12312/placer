@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Advertisement;
 use App\Models\Category;
+use App\Models\File;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -23,7 +24,7 @@ class DatabaseSeeder extends Seeder
 
 //        User::factory(10)->create();
 
-        User::create([
+        $admin = User::create([
             'name' => 'Дмитрий',
             'age' => 19,
             'email' => 'admin@admin.admin',
@@ -37,7 +38,7 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10)
         ]);
 
-        User::create([
+        $default1 = User::create([
             'name' => 'Дефолт',
             'age' => 123,
             'email' => 'default@def.def',
@@ -51,7 +52,7 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10)
         ]);
 
-        User::create([
+        $default2 = User::create([
             'name' => 'Дефолт2',
             'age' => 1232,
             'email' => 'default@def.def2',
@@ -64,6 +65,7 @@ class DatabaseSeeder extends Seeder
             'is_admin' => false,
             'remember_token' => Str::random(10)
         ]);
+
 
         Category::create([
            'name' => 'cars'

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdvertisementAddController;
+use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\CabinetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FullAdvResourceController;
@@ -38,6 +39,8 @@ Route::get('/cabinet', [CabinetController::class, 'cabinet'])
     ->middleware(Authorization::class);
 //Resource
 Route::post('/profile', [CabinetController::class, 'profile']);
+Route::post('/file/upload-avatar', [AvatarController::class, 'changeAvatar'])
+    ->name('avatar');
 
 
 Route::post('/advertisement/create', [AdvertisementAddController::class, 'addAdvert'])

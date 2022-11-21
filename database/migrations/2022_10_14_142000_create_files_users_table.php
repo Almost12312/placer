@@ -14,8 +14,8 @@ class CreateFilesUsersTable extends Migration
     public function up()
     {
         Schema::create('files_users', function (Blueprint $table) {
-            $table->unsignedBigInteger('files_id');
-            $table->unsignedBigInteger('users_id');
+            $table->unsignedBigInteger('file_id');
+            $table->unsignedBigInteger('user_id');
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('file_id')->references('id')->on('files');

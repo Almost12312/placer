@@ -18,6 +18,7 @@ class RegistrationController extends Controller
         $password = $request->get('password');
         $phone = $request->get('phone');
         $city = $request->get('city');
+        $imagesId = $request->get('id');
 
         $createUser = User::create([
             'name' => $name,
@@ -31,6 +32,10 @@ class RegistrationController extends Controller
             'city' => $city,
             'is_admin' => false
         ]);
+
+//        $defaultPhoto = public_path('images/avatar.svg');
+
+        $createUser->file()->sync($imagesId);
 
         $credentials = [
             'email' => $email,

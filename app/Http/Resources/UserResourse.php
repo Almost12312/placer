@@ -20,8 +20,8 @@ class UserResourse extends JsonResource
         return [
             'name' => $this->resource->name,
             'city' => $this->resource->city,
-            'created_at' => date($this->resource->created_at->format('Y-m-d')),
-//            'avatar' => $this->resource->file,
+            'created_at' => date($this->resource->created_at->format('d m Y')),
+            'avatar' => $this->resource->file[0]->getUrl(),
             'advertisements' => $this->resource->advertisements->count()
         ];
     }
