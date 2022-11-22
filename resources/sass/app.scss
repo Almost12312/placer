@@ -290,6 +290,20 @@ body {
     box-shadow: 0px -45px 23px -3px rgba(34, 60, 80, 0.2) inset;
 }
 
+.noPhotoCont {
+    width: 320px;
+    height: 240px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.noPhoto {
+    width: 200px;
+    height: 150px;
+}
+
 .advertisement__description {
     display: flex;
     flex-direction: column;
@@ -780,6 +794,24 @@ body {
         width: 150px;
         height: 150px;
     }
+
+
+}
+
+.withoutRegPhoto__bg {
+    width: 140px;
+    height: 140px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    font-family: $ffManrope;
+    font-weight: 600;
+    font-size: 45px;
+
+    z-index: 10000;
 }
 
 .uplAvatarLabel {
@@ -875,31 +907,51 @@ body {
     color: #000000;
 }
 
-.advertisement_status_container {
+.advertisement__status__container {
     width: 100%;
 
     margin-top: 70px;
 
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.exists__status {
-    display: flex;
-    gap: 40px;
-}
-
-.adv_status {
+.adv__status {
     font-family: $ffPoppins;
     font-weight: 300;
-    font-size: 22px;
+    font-size: 18px;
     color: $clrDisable;
     text-decoration: none;
 }
 
-.adv_status__active {
+
+
+.adv__status__active {
+    display: flex;
+
+    margin-bottom: 3px;
+
     color: #000000;
+
+    .status__after {
+        position: relative;
+    }
+
+    .status__after:after {
+
+        width: 100%;
+
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+
+        content: "";
+        border-bottom: 1px solid red;
+    }
 }
+
+
 
 .addAdvert {
     text-decoration: none;

@@ -5,16 +5,16 @@
         <profile></profile>
         <article class="advertisements__container">
             <p class="adv__con__title">Мои объявления</p>
-            <div class="advertisement_status_container">
-                <div class="exists__status">
-                    <p class="adv_status adv_status__active">Размещенные <span class="countAdvert">(передать блейд или вью)</span></p>
-                    <p class="adv_status">Черновики</p>
-                    <p class="adv_status">История</p>
-                </div>
-                <a id="createAdd" class="addAdvert">
-                    <p class="adv_status adv_status__active" id="goAdd">Добавить объвление</p>
-                </a>
-            </div>
+{{--            <div class="advertisement_status_container">--}}
+{{--                <div class="exists__status">--}}
+{{--                    <p class="adv_status adv_status__active">Размещенные <span class="countAdvert">(передать блейд или вью)</span></p>--}}
+{{--                    <p class="adv_status">Черновики</p>--}}
+{{--                    <p class="adv_status">История</p>--}}
+{{--                </div>--}}
+{{--                <a id="createAdd" class="addAdvert">--}}
+{{--                    <p class="adv_status adv_status__active" id="goAdd">Добавить объвление</p>--}}
+{{--                </a>--}}
+{{--            </div>--}}
             <advertisement-container
 {{--                v-bind:all-advert-imgs='@json($files)'--}}
             >

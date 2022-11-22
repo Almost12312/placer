@@ -1,6 +1,9 @@
 <template>
     <div class="advertisement" :data-id="advInfo.id">
-        <img class="adv_img" :src="advInfo.images" alt="">
+        <img v-if="advInfo.images" class="adv_img" :src="advInfo.images" alt="">
+        <div v-else class="noPhotoCont">
+            <img class="noPhoto" src="/images/noPhoto.svg" alt="">
+        </div>
         <div class="advertisement__description">
             <h3 class="ad__title">{{ advInfo.title }}</h3>
             <h4 class="ad__content">{{ advInfo.content }}</h4>
@@ -33,7 +36,7 @@
                     </div>
                 </a>
                 <a class="canBtn">
-                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    <svg version="1.1" @click="removeAdv()" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                          viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
                                         <g>
                                             <g>
@@ -45,23 +48,23 @@
                                                 />
                                             </g>
                                         </g>
-                        <g>
+                                        <g>
                                             <g>
                                                 <rect x="235.243" y="249.081" width="41.514" height="179.892"/>
                                             </g>
                                         </g>
-                        <g>
+                                        <g>
                                             <g>
                                                 <rect x="152.216" y="249.081" width="41.513" height="179.892"/>
                                             </g>
                                         </g>
-                        <g>
+                                        <g>
                                             <g>
                                                 <rect x="318.27" y="249.081" width="41.514" height="179.892"/>
                                             </g>
                                         </g>
                                     </svg>
-                    <div class="afterSettng" @click="removeAdv">
+                    <div class="afterSettng">
                         Удалить
                     </div>
                 </a>
@@ -85,7 +88,7 @@ export default {
 
     methods: {
         removeAdv() {
-            this.$emit('removeAdv', this.advInfo)
+            this.$emit('remove-adv', this.advInfo)
         }
     }
 }

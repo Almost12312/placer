@@ -3,7 +3,7 @@
         <advertisement
             v-for="adv in allAdv"
             v-bind:adv-info="adv"
-            @removeAdv="removeAdv"
+            @remove-adv="removeAdv"
         ></advertisement>
     </div>
 </template>
@@ -55,10 +55,19 @@ export default {
             }
          },
 
-        removeAdv() {
-            let index = this.allAdv.indexOf(this.adv.id)
+        removeAdv(advInfo) {
+            console.log(advInfo)
+            let index = this.allAdv.indexOf(advInfo)
+
+            this.allAdv.splice(index, 1)
 
             console.log(index)
+
+            let delAdvert = {
+                id: advInfo.id
+            }
+
+            axios.post('/advertisement/delete', delAdvert)
         }
 
     },

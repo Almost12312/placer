@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-class AdvertisementAddController extends Controller
+class AdvertisementController extends Controller
 {
 
     public function addAdvert(Request $request)
@@ -34,7 +34,10 @@ class AdvertisementAddController extends Controller
                 'status' => 1,
             ]);
 
-        $advertisement->files()->sync($imageIds);
+        if ($imageIds !== null)
+        {
+            $advertisement->files()->sync($imageIds);
+        }
 
         return response()->json([
             "success" => true,
@@ -42,23 +45,16 @@ class AdvertisementAddController extends Controller
         ]);
     }
 
-//    public function delAdvert(Request $request)
-//    {
-//        $id = $request->get('id');
-//
-//        $del = Advertisement::where([
-//           'id' => $id
-//        ]);
-//
-//        $del->update([
-//            "status" => 2,
-//            "delete_at" => date('Y-d-m H:i:s.v')
-//        ]);
-//
-//        return response()->json([
-//            $del
-//        ]);
-//    }
+    public function delAdvert(Request $request)
+    {
+        $id = $request->get('id');
+
+        $delAdvert = Advertisement::find($id);
+
+        $delAdvert->status = 2;
+
+        $delAdvert->save();
+    }
 
 //    public function redAdvert(Request $request)
 //    {

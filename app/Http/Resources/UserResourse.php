@@ -15,14 +15,27 @@ class UserResourse extends JsonResource
     public function toArray($request)
     {
 
+        if (count($this->resource->file) > 0)
+        {
+            return [
+                'name' => $this->resource->name,
+                'lastname' => $this->resource->lastname,
+                'middlename' => $this->resource->middlename,
+                'city' => $this->resource->city,
+                'created_at' => date($this->resource->created_at->format('d m Y')),
+                'avatar' => $this->resource->file[0]->getUrl(),
+                'advertisements' => $this->resource->advertisements->where('status', '=', 1)->count()
+            ];
+        } else {
+            return [
+                'name' => $this->resource->name,
+                'lastname' => $this->resource->lastname,
+                'middlename' => $this->resource->middlename,
+                'city' => $this->resource->city,
+                'created_at' => date($this->resource->created_at->format('d m Y')),
+                'advertisements' => $this->resource->advertisements->where('status', '=', 1)->count()
+            ];
+        }
 
-
-        return [
-            'name' => $this->resource->name,
-            'city' => $this->resource->city,
-            'created_at' => date($this->resource->created_at->format('d m Y')),
-            'avatar' => $this->resource->file[0]->getUrl(),
-            'advertisements' => $this->resource->advertisements->count()
-        ];
     }
 }

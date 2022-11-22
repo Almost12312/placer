@@ -14,12 +14,17 @@
 
 <!--                    <img v-if="regInfo.imgUrl === undefined || regInfo.imgUrl.length === 0" src="/images/avatar.png" alt="avatar">-->
 <!--                    <p v-for="image in regInfo.img">{{image.url}}</p>-->
-                    <img :src="regInfo. url" alt="avatar">
+                    <img v-if="regInfo.url" :src="regInfo.url" alt="аватарка">
+                    <div v-else class="withoutRegPhoto__bg">
+                        <div v-if="regInfo.name" class="withoutRegPhoto">{{ regInfo.name.substring(0, 1) }}</div>
+                    </div>
                 </div>
             </div>
             <div class="auth__window reg__window">
                 <h3>Регистрация</h3>
-                <input v-model="regInfo.name" type="text" placeholder="ФИО">
+                <input v-model="regInfo.name" type="text" placeholder="Имя">
+                <input v-model="regInfo.lastname" type="text" placeholder="Фамилия">
+                <input v-model="regInfo.middlename" type="text" placeholder="Отчество">
                 <input v-model="regInfo.age" type="text" placeholder="Возвраст">
                 <input v-model="regInfo.email" type="text" placeholder="Email">
                 <input v-model="regInfo.password" type="password" placeholder="Пароль">
@@ -46,7 +51,7 @@ export default {
     data() {
         return {
             regInfo: {
-                url: "/images/avatar.png"
+                url: null
             }
         }
     },
@@ -79,9 +84,17 @@ export default {
                 })
         },
 
-        // mounted() {
-        //     document.querySelector('#regUpl').files[0] = "/images/avatar.png"
-        // }
+        randomBg() {
+            // console.log('xer')
+            console.log('#'+Math.random().toString(16).substr(2,6))
+            document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#'+Math.random().toString(16).substr(2,6)
+        },
+
+
+    },
+
+    mounted() {
+        this.randomBg()
     }
 }
 </script>

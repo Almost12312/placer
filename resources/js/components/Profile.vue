@@ -12,9 +12,14 @@
                             </svg>
                         </label>
 
-                        <img :src="userinfo.avatar" alt="">
+                        <img v-if="userinfo.avatar" :src="userinfo.avatar" alt="аватарка">
+                        <div v-else class="withoutRegPhoto__bg">
+                            <div class="withoutRegPhoto">{{ userinfo.name }}</div>
+<!--                            <div class="withoutRegPhoto">{{ userinfo.name.substring(0, 1) }}</div>-->
+                        </div>
                     </div>
-                    <p class="name">{{userinfo.name}}</p>
+                    <p class="name">{{ userinfo.name + ' ' + userinfo.lastname }}.</p>
+                    <p class="name">{{ // userinfo.name + ' ' + userinfo.lastname.substring(0, 1).toUpperCase() }}.</p>
                     <ul class="profile__subtitle">
                         <li><p class="profile__intro">{{ userinfo.city }}</p></li>
                         <li><div class="circle"></div></li>
@@ -23,6 +28,12 @@
                     <p class="profile__intro">Объявлений: <span class="countAdvert">{{ userinfo.advertisements }}</span></p>
                 </div>
             </header>
+
+            <div class="advertisement__status__container">
+                <span class="adv__status adv__status__active"><p class="status__after">Активные объявления ({{userinfo.advertisements}})</p></span>
+                <p class="adv__status">Черновики</p>
+                <p class="adv__status">История объявлений</p>
+            </div>
         </aside>
     </article>
 </template>
@@ -36,7 +47,9 @@ export default {
 
     data() {
         return {
-            userinfo: {}
+            userinfo: {
+                url: null
+            }
         }
     },
 
@@ -66,11 +79,16 @@ export default {
                      }
                      axios.post('/file/upload-avatar', avatarInfo)
                  })
-        }
+        },
+
+        randomBg() {
+            document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#'+Math.random().toString(16).substr(2,6)
+        },
     },
 
     mounted() {
         this.getUser()
+        this.randomBg()
     }
 }
 </script>

@@ -9,16 +9,5 @@ use Illuminate\Support\Facades\Auth;
 
 class AvatarController extends Controller
 {
-    public function changeAvatar(Request $request)
-    {
-        $idFile = $request->get('id');
 
-        $user = Auth::user();
-
-        $user->file()->sync($idFile);
-
-        return response()->json([
-           'url' => $user->file[0]->getUrl()
-        ]);
-    }
 }

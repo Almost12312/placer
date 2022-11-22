@@ -36,7 +36,9 @@ class User extends Authenticatable
         'favorite',
         'phone',
         'city',
-        'is_admin'
+        'is_admin',
+        'lastname',
+        'middlename'
     ];
 
     protected $casts = [

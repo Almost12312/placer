@@ -15,55 +15,28 @@ use Illuminate\Support\Facades\Auth;
 class CabinetController extends Controller
 {
 
-    public function cabinet(Request $request) {
-
-//        $ads = Advertisement::where([
-//            'author_id' => Auth::id(),
-//            'status' => 1
-//        ])->get();
-
-//        for ($i = 0; $i < count($ads); $i++)
-//        {
-//
-//        }
-
-//        $ads = array_map(function(Advertisement $ad) {
-//            return [
-//                'id' => $ad->id,
-//                'images' => array_map(function(File $file) {
-//                    return [
-//                        'id' => $file->id,
-//                        'src' => $file->getUrl(),
-//                    ];
-//                }, $ad->files->toArray())
-//            ];
-//        }, $ads->toArray());
-//
-//        $ads = [
-//            [
-//                'id' => 1,
-//                'images' => [
-//                    'id' => 1,
-//                    'src' => ''
-//                ]
-//            ]
-//        ];
-
-
+    public function cabinet(Request $request)
+    {
         return view('cabinet');
+    }
+
+    public function changeAvatar(Request $request)
+    {
+        $idFile = $request->get('id');
+
+        $user = Auth::user();
+
+        $user->file()->sync($idFile);
+
+        return response()->json([
+            'url' => $user->file[0]->getUrl()
+        ]);
     }
 
     public function profile(Request $request)
     {
-//        $id = $request->route('id');
-//
-//        if ($id === null)
-//        {
-//            $id = Auth::id();
-//        }
+        $user = User::find(Auth::user()->id);
 
-        $myProfile = User::find(Auth::id());
-
-        return new UserResourse($myProfile);
+        return new UserResourse($user);
     }
 }

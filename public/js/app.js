@@ -2166,9 +2166,15 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
     },
-    removeAdv: function removeAdv() {
-      var index = this.allAdv.indexOf(this.adv.id);
+    removeAdv: function removeAdv(advInfo) {
+      console.log(advInfo);
+      var index = this.allAdv.indexOf(advInfo);
+      this.allAdv.splice(index, 1);
       console.log(index);
+      var delAdvert = {
+        id: advInfo.id
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/delete', delAdvert);
     }
   },
   mounted: function mounted() {
@@ -2621,13 +2627,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Profile",
   data: function data() {
     return {
-      userinfo: {}
+      userinfo: {
+        url: null
+      }
     };
   },
   methods: {
@@ -2651,10 +2670,14 @@ __webpack_require__.r(__webpack_exports__);
         };
         axios__WEBPACK_IMPORTED_MODULE_0___default().post('/file/upload-avatar', avatarInfo);
       });
+    },
+    randomBg: function randomBg() {
+      document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#' + Math.random().toString(16).substr(2, 6);
     }
   },
   mounted: function mounted() {
     this.getUser();
+    this.randomBg();
   }
 });
 
@@ -2929,6 +2952,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "advertisement",
@@ -2942,7 +2968,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     removeAdv: function removeAdv() {
-      this.$emit('removeAdv', this.advInfo);
+      this.$emit('remove-adv', this.advInfo);
     }
   }
 });
@@ -3000,6 +3026,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3007,7 +3038,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       regInfo: {
-        url: "/images/avatar.png"
+        url: null
       }
     };
   },
@@ -3032,9 +3063,15 @@ __webpack_require__.r(__webpack_exports__);
         _this.regInfo.url = response.data.url;
         _this.regInfo.id = response.data.id;
       });
-    } // mounted() {
-    //     document.querySelector('#regUpl').files[0] = "/images/avatar.png"
-    // }
+    },
+    randomBg: function randomBg() {
+      // console.log('xer')
+      console.log('#' + Math.random().toString(16).substr(2, 6));
+      document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#' + Math.random().toString(16).substr(2, 6);
+    }
+  },
+  mounted: function mounted() {
+    this.randomBg();
   }
 });
 
@@ -22566,7 +22603,7 @@ var render = function () {
     _vm._l(_vm.allAdv, function (adv) {
       return _c("advertisement", {
         attrs: { "adv-info": adv },
-        on: { removeAdv: _vm.removeAdv },
+        on: { "remove-adv": _vm.removeAdv },
       })
     }),
     1
@@ -23084,102 +23121,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function () {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("article", { staticClass: "cabinet" }, [
-    _c("aside", { staticClass: "cabinet__menu" }, [
-      _c("header", [
-        _c("div", { staticClass: "profile" }, [
-          _c("div", { staticClass: "avatar" }, [
-            _c("input", {
-              attrs: {
-                id: "uplAvatar",
-                type: "file",
-                name: "uplAvatar",
-                hidden: "",
-              },
-              on: { change: _vm.uplAvatar },
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "uplAvatarLabel", attrs: { for: "uplAvatar" } },
-              [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "16px",
-                      height: "16px",
-                      viewBox: "0 0 16 16",
-                      version: "1.1",
-                      xmlns: "http://www.w3.org/2000/svg",
-                      "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                    },
-                  },
-                  [
-                    _c("rect", {
-                      attrs: {
-                        width: "16",
-                        height: "16",
-                        id: "icon-bound",
-                        fill: "none",
-                      },
-                    }),
-                    _vm._v(" "),
-                    _c("path", {
-                      attrs: {
-                        d: "M3.294,7.706l1.416,1.416L7,6.828V16h2V6.828l2.294,2.294l1.416-1.416L8,3L3.294,7.706z M0,2h16V0H0V2z",
-                      },
-                    }),
-                  ]
-                ),
-              ]
-            ),
-            _vm._v(" "),
-            _c("img", { attrs: { src: _vm.userinfo.avatar, alt: "" } }),
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "name" }, [_vm._v(_vm._s(_vm.userinfo.name))]),
-          _vm._v(" "),
-          _c("ul", { staticClass: "profile__subtitle" }, [
-            _c("li", [
-              _c("p", { staticClass: "profile__intro" }, [
-                _vm._v(_vm._s(_vm.userinfo.city)),
-              ]),
-            ]),
-            _vm._v(" "),
-            _vm._m(0),
-            _vm._v(" "),
-            _c("li", [
-              _c("p", { staticClass: "profile__intro" }, [
-                _vm._v(_vm._s(_vm.userinfo.created_at)),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "profile__intro" }, [
-            _vm._v("Объявлений: "),
-            _c("span", { staticClass: "countAdvert" }, [
-              _vm._v(_vm._s(_vm.userinfo.advertisements)),
-            ]),
-          ]),
-        ]),
-      ]),
-    ]),
-  ])
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [_c("div", { staticClass: "circle" })])
-  },
-]
-render._withStripped = true
+var render = function () {}
+var staticRenderFns = []
 
 
 
@@ -23330,10 +23273,17 @@ var render = function () {
     "div",
     { staticClass: "advertisement", attrs: { "data-id": _vm.advInfo.id } },
     [
-      _c("img", {
-        staticClass: "adv_img",
-        attrs: { src: _vm.advInfo.images, alt: "" },
-      }),
+      _vm.advInfo.images
+        ? _c("img", {
+            staticClass: "adv_img",
+            attrs: { src: _vm.advInfo.images, alt: "" },
+          })
+        : _c("div", { staticClass: "noPhotoCont" }, [
+            _c("img", {
+              staticClass: "noPhoto",
+              attrs: { src: "/images/noPhoto.svg", alt: "" },
+            }),
+          ]),
       _vm._v(" "),
       _c("div", { staticClass: "advertisement__description" }, [
         _c("h3", { staticClass: "ad__title" }, [
@@ -23412,6 +23362,11 @@ var render = function () {
                   viewBox: "0 0 512 512",
                   "xml:space": "preserve",
                 },
+                on: {
+                  click: function ($event) {
+                    return _vm.removeAdv()
+                  },
+                },
               },
               [
                 _c("g", [
@@ -23465,11 +23420,9 @@ var render = function () {
               ]
             ),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "afterSettng", on: { click: _vm.removeAdv } },
-              [_vm._v("\n                    Удалить\n                ")]
-            ),
+            _c("div", { staticClass: "afterSettng" }, [
+              _vm._v("\n                    Удалить\n                "),
+            ]),
           ]),
         ]),
       ]),
@@ -23548,7 +23501,15 @@ var render = function () {
             ]
           ),
           _vm._v(" "),
-          _c("img", { attrs: { src: _vm.regInfo.url, alt: "avatar" } }),
+          _vm.regInfo.url
+            ? _c("img", { attrs: { src: _vm.regInfo.url, alt: "аватарка" } })
+            : _c("div", { staticClass: "withoutRegPhoto__bg" }, [
+                _vm.regInfo.name
+                  ? _c("div", { staticClass: "withoutRegPhoto" }, [
+                      _vm._v(_vm._s(_vm.regInfo.name.substring(0, 1))),
+                    ])
+                  : _vm._e(),
+              ]),
         ]),
       ]),
       _vm._v(" "),
@@ -23564,7 +23525,7 @@ var render = function () {
               expression: "regInfo.name",
             },
           ],
-          attrs: { type: "text", placeholder: "ФИО" },
+          attrs: { type: "text", placeholder: "Имя" },
           domProps: { value: _vm.regInfo.name },
           on: {
             input: function ($event) {
@@ -23572,6 +23533,48 @@ var render = function () {
                 return
               }
               _vm.$set(_vm.regInfo, "name", $event.target.value)
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.regInfo.lastname,
+              expression: "regInfo.lastname",
+            },
+          ],
+          attrs: { type: "text", placeholder: "Фамилия" },
+          domProps: { value: _vm.regInfo.lastname },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.regInfo, "lastname", $event.target.value)
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.regInfo.middlename,
+              expression: "regInfo.middlename",
+            },
+          ],
+          attrs: { type: "text", placeholder: "Отчество" },
+          domProps: { value: _vm.regInfo.middlename },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.regInfo, "middlename", $event.target.value)
             },
           },
         }),

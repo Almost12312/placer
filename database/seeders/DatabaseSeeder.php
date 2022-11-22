@@ -25,7 +25,9 @@ class DatabaseSeeder extends Seeder
 //        User::factory(10)->create();
 
         $admin = User::create([
+            'lastname' => 'цйуф',
             'name' => 'Дмитрий',
+            'middlename' => 'цйу',
             'age' => 19,
             'email' => 'admin@admin.admin',
             'favorite' => json_encode([
@@ -39,7 +41,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $default1 = User::create([
+            'lastname' => 'Дефолт',
             'name' => 'Дефолт',
+            'middlename' => 'Дефолт',
             'age' => 123,
             'email' => 'default@def.def',
             'favorite' => json_encode([
@@ -53,7 +57,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $default2 = User::create([
+            'lastname' => 'Дефолт2',
             'name' => 'Дефолт2',
+            'middlename' => 'Дефолт2',
             'age' => 1232,
             'email' => 'default@def.def2',
             'favorite' => json_encode([
