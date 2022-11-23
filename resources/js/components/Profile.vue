@@ -12,9 +12,8 @@
                             </svg>
                         </label>
 
-                        <img v-if="userinfo.avatar" :src="userinfo.avatar" alt="аватарка">
+                        <img v-if="userinfo.url" :src="userinfo.url" alt="аватарка">
                         <div v-else class="withoutRegPhoto__bg">
-                            <div class="withoutRegPhoto"></div>
                             <div v-if="userinfo.name" class="withoutRegPhoto">{{ userinfo.name.substring(0, 1).toUpperCase() }}</div>
                         </div>
                     </div>
@@ -31,9 +30,18 @@
             </header>
 
             <div class="advertisement__status__container">
-                <span class="adv__status adv__status__active"><p class="status__after">Активные объявления ({{userinfo.advertisements}})</p></span>
-                <p class="adv__status">Черновики</p>
-                <p class="adv__status">История объявлений</p>
+                <a class="adv__status" href="">
+                    <div class="adv__status__active"><p class="status__after">Активные объявления ({{userinfo.advertisements}})</p></div>
+                </a>
+<!--                <a class="adv__status"><div><p>Черновики</p></div></a>-->
+                <router-link to="/foo" class="adv__status"><div><p>Черновики</p></div></router-link>
+                <a class="adv__status"><div><p>История объявлений</p></div></a>
+                <a class="adv__status" @click="createAdv">
+                    <div class="adv__status__active">
+                        <p>Добавить объявление</p>
+                    </div>
+                </a>
+
             </div>
         </aside>
     </article>
@@ -42,6 +50,7 @@
 <script>
 
 import axios from "axios";
+import VueRouter from "vue-router";
 
 export default {
     name: "Profile",
@@ -49,7 +58,6 @@ export default {
     data() {
         return {
             userinfo: {
-                url: null
             }
         }
     },
@@ -73,7 +81,7 @@ export default {
                  .then(response => {
                      console.log(response.data.id)
 
-                     this.userinfo.avatar = response.data.url
+                     this.userinfo.url = response.data.url
 
                      let avatarInfo = {
                         id: response.data.id
@@ -86,13 +94,17 @@ export default {
             document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#'+Math.random().toString(16).substring(2, 6)
             // document.querySelector('.withoutRegPhoto').textContent = this.userinfo.name.substring(0, 1).toUpperCase()
         },
-    },
 
-    created() {
-        this.getUser()
+        createAdv() {
+            location.href = '/advertisement/create'
+        }
     },
+    //
+    // created() {
+    // },
 
     mounted() {
+        this.getUser()
         this.randomBg()
     }
 }

@@ -712,6 +712,10 @@ body {
   text-decoration: none;
 }
 
+.adv__status:last-child {
+  margin-top: 10px;
+}
+
 .adv__status__active {
   display: flex;
   margin-bottom: 3px;

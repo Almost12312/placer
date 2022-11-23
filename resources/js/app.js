@@ -1,6 +1,8 @@
 import axios from 'axios'
 
 import Vue from 'vue'
+import VueRouter from 'vue-router'
+
 import Test from './components/Test'
 import AddAd from './components/AddAd'
 import InputPrevCont from "./components/InputPrevCont";
@@ -12,7 +14,16 @@ import Categories from "./components/Categories";
 import Profile from "./components/Profile";
 import AdvertisementContainer from "./components/AdvertisementContainer";
 
+Vue.use(VueRouter)
 
+const Foo = { template: '<div>foo</div>' }
+const routes = [
+    { path: '/foo', component: Foo },
+]
+
+const router = new VueRouter({
+    routes // сокращённая запись для `routes: routes`
+})
 
 if (document.getElementById('vue-app')) {
 
@@ -45,6 +56,7 @@ if (document.querySelector('.registrationCont')) {
 if (document.querySelector('.cabinet__container')) {
     new Vue ({
         el: '.cabinet__container',
+        router,
         components: {
             Profile, AdvertisementContainer
         }

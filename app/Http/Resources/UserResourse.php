@@ -23,7 +23,7 @@ class UserResourse extends JsonResource
                 'middlename' => $this->resource->middlename,
                 'city' => $this->resource->city,
                 'created_at' => date($this->resource->created_at->format('d m Y')),
-                'avatar' => $this->resource->file[0]->getUrl(),
+                'url' => $this->resource->file[0]->getUrl(),
                 'advertisements' => $this->resource->advertisements->where('status', '=', 1)->count()
             ];
         } else {
@@ -33,6 +33,7 @@ class UserResourse extends JsonResource
                 'middlename' => $this->resource->middlename,
                 'city' => $this->resource->city,
                 'created_at' => date($this->resource->created_at->format('d m Y')),
+                'url' => null,
                 'advertisements' => $this->resource->advertisements->where('status', '=', 1)->count()
             ];
         }
