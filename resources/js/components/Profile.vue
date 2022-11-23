@@ -14,12 +14,13 @@
 
                         <img v-if="userinfo.avatar" :src="userinfo.avatar" alt="аватарка">
                         <div v-else class="withoutRegPhoto__bg">
-                            <div class="withoutRegPhoto">{{ userinfo.name }}</div>
-<!--                            <div class="withoutRegPhoto">{{ userinfo.name.substring(0, 1) }}</div>-->
+                            <div class="withoutRegPhoto"></div>
+                            <div v-if="userinfo.name" class="withoutRegPhoto">{{ userinfo.name.substring(0, 1).toUpperCase() }}</div>
                         </div>
                     </div>
-                    <p class="name">{{ userinfo.name + ' ' + userinfo.lastname }}.</p>
-                    <p class="name">{{ // userinfo.name + ' ' + userinfo.lastname.substring(0, 1).toUpperCase() }}.</p>
+                    <p v-if="userinfo.name && userinfo.lastname" class="name">
+                        {{ userinfo.name + ' ' + userinfo.lastname.substring(0, 1).toUpperCase() }}.
+                    </p>
                     <ul class="profile__subtitle">
                         <li><p class="profile__intro">{{ userinfo.city }}</p></li>
                         <li><div class="circle"></div></li>
@@ -82,12 +83,16 @@ export default {
         },
 
         randomBg() {
-            document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#'+Math.random().toString(16).substr(2,6)
+            document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#'+Math.random().toString(16).substring(2, 6)
+            // document.querySelector('.withoutRegPhoto').textContent = this.userinfo.name.substring(0, 1).toUpperCase()
         },
     },
 
-    mounted() {
+    created() {
         this.getUser()
+    },
+
+    mounted() {
         this.randomBg()
     }
 }

@@ -2638,6 +2638,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2672,11 +2673,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     randomBg: function randomBg() {
-      document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#' + Math.random().toString(16).substr(2, 6);
+      document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#' + Math.random().toString(16).substring(2, 6);
+      // document.querySelector('.withoutRegPhoto').textContent = this.userinfo.name.substring(0, 1).toUpperCase()
     }
   },
-  mounted: function mounted() {
+  created: function created() {
     this.getUser();
+  },
+  mounted: function mounted() {
     this.randomBg();
   }
 });
@@ -23121,8 +23125,146 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function () {}
-var staticRenderFns = []
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("article", { staticClass: "cabinet" }, [
+    _c("aside", { staticClass: "cabinet__menu" }, [
+      _c("header", [
+        _c("div", { staticClass: "profile" }, [
+          _c("div", { staticClass: "avatar" }, [
+            _c("input", {
+              attrs: {
+                id: "uplAvatar",
+                type: "file",
+                name: "uplAvatar",
+                hidden: "",
+              },
+              on: { change: _vm.uplAvatar },
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "uplAvatarLabel", attrs: { for: "uplAvatar" } },
+              [
+                _c(
+                  "svg",
+                  {
+                    attrs: {
+                      width: "16px",
+                      height: "16px",
+                      viewBox: "0 0 16 16",
+                      version: "1.1",
+                      xmlns: "http://www.w3.org/2000/svg",
+                      "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                    },
+                  },
+                  [
+                    _c("rect", {
+                      attrs: {
+                        width: "16",
+                        height: "16",
+                        id: "icon-bound",
+                        fill: "none",
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("path", {
+                      attrs: {
+                        d: "M3.294,7.706l1.416,1.416L7,6.828V16h2V6.828l2.294,2.294l1.416-1.416L8,3L3.294,7.706z M0,2h16V0H0V2z",
+                      },
+                    }),
+                  ]
+                ),
+              ]
+            ),
+            _vm._v(" "),
+            _vm.userinfo.avatar
+              ? _c("img", {
+                  attrs: { src: _vm.userinfo.avatar, alt: "аватарка" },
+                })
+              : _c("div", { staticClass: "withoutRegPhoto__bg" }, [
+                  _c("div", { staticClass: "withoutRegPhoto" }),
+                  _vm._v(" "),
+                  _vm.userinfo.name
+                    ? _c("div", { staticClass: "withoutRegPhoto" }, [
+                        _vm._v(
+                          _vm._s(
+                            _vm.userinfo.name.substring(0, 1).toUpperCase()
+                          )
+                        ),
+                      ])
+                    : _vm._e(),
+                ]),
+          ]),
+          _vm._v(" "),
+          _vm.userinfo.name && _vm.userinfo.lastname
+            ? _c("p", { staticClass: "name" }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(
+                      _vm.userinfo.name +
+                        " " +
+                        _vm.userinfo.lastname.substring(0, 1).toUpperCase()
+                    ) +
+                    ".\n                "
+                ),
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("ul", { staticClass: "profile__subtitle" }, [
+            _c("li", [
+              _c("p", { staticClass: "profile__intro" }, [
+                _vm._v(_vm._s(_vm.userinfo.city)),
+              ]),
+            ]),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c("li", [
+              _c("p", { staticClass: "profile__intro" }, [
+                _vm._v(_vm._s(_vm.userinfo.created_at)),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "profile__intro" }, [
+            _vm._v("Объявлений: "),
+            _c("span", { staticClass: "countAdvert" }, [
+              _vm._v(_vm._s(_vm.userinfo.advertisements)),
+            ]),
+          ]),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "advertisement__status__container" }, [
+        _c("span", { staticClass: "adv__status adv__status__active" }, [
+          _c("p", { staticClass: "status__after" }, [
+            _vm._v(
+              "Активные объявления (" +
+                _vm._s(_vm.userinfo.advertisements) +
+                ")"
+            ),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "adv__status" }, [_vm._v("Черновики")]),
+        _vm._v(" "),
+        _c("p", { staticClass: "adv__status" }, [_vm._v("История объявлений")]),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("div", { staticClass: "circle" })])
+  },
+]
+render._withStripped = true
 
 
 
