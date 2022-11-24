@@ -4,7 +4,7 @@ use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\CabinetController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\FullAdvResourceController;
+use App\Http\Controllers\AdvResourceController;
 use App\Http\Middleware\Authorization;
 use App\Http\Middleware\CreateMDW;
 use App\Http\Middleware\Redaction;
@@ -16,7 +16,6 @@ use \App\Http\Controllers\FileController;
 use \App\Http\Controllers\AuthorizationController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\AdController;
-use App\Http\Controllers\RegistrationController;
 
 Route::get('/', [HomeController::class, 'home'])
     ->name('home');
@@ -45,6 +44,9 @@ Route::post('/file/upload-avatar', [CabinetController::class, 'changeAvatar'])
 Route::post('/advertisement/create', [AdvertisementController::class, 'addAdvert'])
     ->name('createPostAdvert');
 
+Route::post('/advertisement/change-status', [AdvertisementController::class, 'changeStatus'])
+    ->name('draftAdvert');
+
 Route::view('/advertisement/create', 'addAdvert')
     ->name('createBladeAdvert')
     ->middleware(CreateMDW::class);
@@ -65,4 +67,4 @@ Route::post('/advertisement/delete', [AdvertisementController::class, 'delAdvert
 
 Route::get('/test', [TestController::class, 'test']);
 
-Route::post('/resource', [FullAdvResourceController::class, 'res']);
+Route::post('/resource', [AdvResourceController::class, 'res']);

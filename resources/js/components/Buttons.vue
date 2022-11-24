@@ -1,7 +1,7 @@
 <template>
     <div class="function__button buttons__prev">
         <button class="cancel__btn cancelPrew" @click="cancel">Отменить</button>
-        <button class="cancel__btn redPrew" @click="addAdvert(advertisement, inputs_info_data, images_data)" id="addRedaction">Отправить</button>
+        <button class="cancel__btn redPrew" @click="addAdvert" id="addRedaction">Отправить</button>
     </div>
 </template>
 
@@ -9,23 +9,11 @@
 
 import axios from "axios";
 import {forEach} from "lodash";
+import advertisement from "./advertisement";
 
 
 export default {
     name: "Buttons",
-
-    data() {
-        return {
-            advertisement: {
-                id: this.thisAdv.id,
-                title: "",
-                content: "",
-                location: "",
-                price: 0,
-                images_ids: []
-            }
-        }
-    },
 
     props: {
         inputs_info_data: {
@@ -57,16 +45,22 @@ export default {
     },
 
     methods: {
-        addAdvert(advertisement, inputs_info_data, images_data) {
+        getAdv(status) {
+            let advertisement = {
+                title: this.inputs_info_data.title,
+                content: this.inputs_info_data.content,
+                location: this.inputs_info_data.location,
+                price: parseInt(this.inputs_info_data.price),
+                images_ids: this.images_data.map(({id}) => (id)),
+                status: status
+            }
 
-            advertisement.title = inputs_info_data.title
-            advertisement.content = inputs_info_data.content
-            advertisement.location = inputs_info_data.location
-            advertisement.price = parseInt(inputs_info_data.price)
-            advertisement.images_ids = images_data.map(({id}) => (id))
+            return advertisement
+        },
 
+        addAdvert() {
 
-            axios.post('/advertisement/create', advertisement)
+            axios.post('/advertisement/create', this.getAdv(1))
                 .then((response) => {
 
                     if (response.data.success) {
@@ -78,7 +72,13 @@ export default {
         },
 
         cancel() {
-            location.href = '/cabinet'
+
+            axios.post('/advertisement/create', this.getAdv(1))
+                 .then((response) => {
+                     if (response.data.success) {
+                         location.href = '/cabinet'
+                     }
+                 })
         }
     }
 }

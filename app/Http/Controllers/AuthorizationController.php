@@ -75,7 +75,6 @@ class AuthorizationController extends Controller
             'password' => Hash::make($password),
             'phone' => $phone,
             'city' => $city,
-            'is_admin' => false
         ]);
 
         if ($imagesId !== null)

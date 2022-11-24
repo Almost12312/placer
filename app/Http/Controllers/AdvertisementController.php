@@ -19,6 +19,7 @@ class AdvertisementController extends Controller
         $location = $request->get('location');
         $price = $request->get('price');
         $imageIds = $request->get('images_ids');
+        $status = $request->get('status');
 
         $advertisement = Advertisement::updateOrCreate(
             [
@@ -31,7 +32,7 @@ class AdvertisementController extends Controller
                 'content' => $content,
                 'location' => $location,
                 'price' => $price,
-                'status' => 1,
+                'status' => $status
             ]);
 
         if ($imageIds !== null)
@@ -45,38 +46,52 @@ class AdvertisementController extends Controller
         ]);
     }
 
+    public function changeStatus(Request $request)
+    {
+        $id = $request->get('id');
+        $status = $request->get('status');
+
+        $thisAdv = Advertisement::find($id);
+
+        //Delete
+        if ($status === 1)
+        {
+            $thisAdv->status = 0;
+        }
+
+        //Publish
+        if ($status === 2) {
+            $thisAdv->status = 1;
+        }
+
+        //To draft
+
+        $thisAdv->save();
+
+        if ($thisAdv->status === $status)
+        {
+            return response()->json([
+                'success' => true
+            ]);
+
+        }   else
+        {
+            return response()->json([
+                'success' => false
+            ]);
+        }
+    }
+
     public function delAdvert(Request $request)
     {
         $id = $request->get('id');
 
         $delAdvert = Advertisement::find($id);
 
-        $delAdvert->status = 2;
+        $delAdvert->status = 0;
 
         $delAdvert->save();
     }
-
-//    public function redAdvert(Request $request)
-//    {
-//        $id = $request->get('id');
-//
-//        $titleRed = $request->get('title');
-//        $contentRed = $request->get('content');
-//        $locationRed = $request->get('price');
-//        $priceRed = $request->get('price');
-//        $imageRed = $request->get('imgs');
-//
-//        $red = Advertisement::where([
-//            'id' => $id
-//        ]);
-//
-//        $red->update([
-//            'title' => $titleRed,
-//            'content' => $contentRed,
-//            'location' => $locationRed,
-//            'price' => $priceRed
-//        ]);
-//    }
 
     public function view(Request $request, int $id)
     {
@@ -97,44 +112,6 @@ class AdvertisementController extends Controller
         }
 
         return view('redAdvert', ['thisAdvContent' => $thisAdvContent, "thisAdvFiles" => $thisAdvFiles]);
-
-//        $id = null;
-//
-//        if ($id !== null)
-//        {
-//            $thisAdv = Advertisement::where([
-//                'id' => $id
-//            ])->get();
-//
-//            $thisAdvContent = Advertisement::where([
-//                'id' => $id
-//            ])->get(['id', 'title', 'location', 'price', 'content']);
-//
-//            $thisImgs = [];
-//
-//
-//            foreach ($thisAdv[0]->files as $file)
-//            {
-//                $thisImgs[] = ["id" => $file["id"], "url" => $file->getUrl()];
-//            }
-//
-//
-////            return redirect()->route('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
-//            return view('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
-//        } else {
-//
-//            $thisAdvContent = [
-//                'title' => '',
-//                'location' => '',
-//                'price' => '',
-//                'content' => ''
-//            ];
-//
-//            $thisImgs = [];
-//
-//            return view('addAdvert', ['thisAdv' => $thisAdvContent, "thisImgs" => $thisImgs]);
-//
-//        }
 
     }
 }

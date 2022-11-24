@@ -16,7 +16,7 @@
 <!--                    <p v-for="image in regInfo.img">{{image.url}}</p>-->
                     <img v-if="regInfo.url" :src="regInfo.url" alt="аватарка">
                     <div v-else class="withoutRegPhoto__bg">
-                        <div v-if="regInfo.name" class="withoutRegPhoto">{{ regInfo.name.substring(0, 1) }}</div>
+                        <div v-if="regInfo.name" class="withoutRegPhoto">{{ regInfo.name.substring(0, 1).toUpperCase() }}</div>
                     </div>
                 </div>
             </div>

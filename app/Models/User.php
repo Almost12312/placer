@@ -36,7 +36,6 @@ class User extends Authenticatable
         'favorite',
         'phone',
         'city',
-        'is_admin',
         'lastname',
         'middlename'
     ];

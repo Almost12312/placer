@@ -15,11 +15,11 @@
 {{--                    <p class="adv_status adv_status__active" id="goAdd">Добавить объвление</p>--}}
 {{--                </a>--}}
 {{--            </div>--}}
-            <advertisement-container
-{{--                v-bind:all-advert-imgs='@json($files)'--}}
-            >
+{{--            <advertisement-container>--}}
+{{----}}
+            <router-view></router-view>
 
-            </advertisement-container>
+            {{--            </advertisement-container>--}}
 {{--            <div class="advertisement__container" id="js_advert">--}}
 {{--                {{dd($ads)}}--}}
 

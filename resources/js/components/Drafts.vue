@@ -17,42 +17,41 @@ export default {
     name: "AdvertisementContainer",
 
     data() {
-      return {
-          allAdv: []
-      }
+        return {
+            allAdv: []
+        }
     },
 
     methods: {
-         loadAdv() {
-             let advStatus = {
-                 status: 1
-             }
+        loadAdv() {
+            let advStatus = {
+                status: 2
+            }
 
-             axios.post('/resource', advStatus)
-                  .then((response) => {
-                      this.allAdv = response.data.data
-                  })
-         },
+            axios.post('/resource', advStatus)
+                .then((response) => {
+                    this.allAdv = response.data.data
+                })
+        },
 
-         target(event) {
+        target(event) {
             let target = event.target;
 
             if (target.closest('.redBtn')) {
-                let id = target.closest('.redBtn').closest('.advertisement').dataset.id
-
-                console.log(id)
+                let id = target.closest('.advertisement').dataset.id
 
                 let idAdv = {
                     idAd: id
                 }
-                // let dataIdImg = target.closest('.advertisement').querySelectorAll('.adv_img');
+
                 console.log(idAdv)
 
                 location.href = `/advertisement/` + id + `/redaction`
-            }   else {
+
+            } else {
                 return
             }
-         },
+        },
 
         remove(advInfo) {
             console.log(advInfo)
@@ -68,6 +67,21 @@ export default {
 
             axios.post('/advertisement/delete', delAdvert)
         },
+
+        // remove(advInfo) {
+        //     console.log(advInfo)
+        //     let index = this.allAdv.indexOf(advInfo)
+        //
+        //     this.allAdv.splice(index, 1)
+        //
+        //     console.log(index)
+        //
+        //     let delAdvert = {
+        //         id: advInfo.id
+        //     }
+        //
+        //     axios.post('/advertisement/delete', delAdvert)
+        // }
 
     },
 

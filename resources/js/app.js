@@ -13,16 +13,30 @@ import Registration from "./components/registration";
 import Categories from "./components/Categories";
 import Profile from "./components/Profile";
 import AdvertisementContainer from "./components/AdvertisementContainer";
+import Router from "./components/router";
+import Foo from "./components/Foo";
+import Drafts from "./components/Drafts";
+
 
 Vue.use(VueRouter)
 
-const Foo = { template: '<div>foo</div>' }
-const routes = [
-    { path: '/foo', component: Foo },
-]
-
 const router = new VueRouter({
-    routes // сокращённая запись для `routes: routes`
+    routes: [
+        {
+            path: '/foo',
+            component: Foo
+        },
+        {
+            path: '/',
+            component: AdvertisementContainer,
+            props: true
+        },
+        {
+            path: '/draft',
+            component: Drafts,
+        }
+
+    ]
 })
 
 if (document.getElementById('vue-app')) {
@@ -54,13 +68,15 @@ if (document.querySelector('.registrationCont')) {
 }
 
 if (document.querySelector('.cabinet__container')) {
-    new Vue ({
+    const cabinet = new Vue ({
         el: '.cabinet__container',
         router,
         components: {
             Profile, AdvertisementContainer
-        }
+        },
     })
+
+    // cabinet.use(Router)
 }
 
 

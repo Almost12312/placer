@@ -8,14 +8,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-class FullAdvResourceController extends Controller
+class AdvResourceController extends Controller
 {
-    public function res()
+    public function res(Request $request)
     {
+        $status = $request->get('status');
+
         $allAdv = Advertisement::where([
             'author_id' => Auth::id(),
-            'status' => 1
+            'status' => $status
         ])->get();
+
         return new AdvertisementCollection($allAdv);
     }
 }

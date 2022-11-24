@@ -22,7 +22,7 @@ class CreateAdvertisementsTable extends Migration
             $table->dateTime('delete_at')->nullable();
             $table->integer('price');
             $table->unsignedBigInteger('category_id')->nullable();
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
 
 

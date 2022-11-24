@@ -30,18 +30,17 @@
             </header>
 
             <div class="advertisement__status__container">
-                <a class="adv__status" href="">
+                <router-link to="/" class="adv__status" href="">
                     <div class="adv__status__active"><p class="status__after">Активные объявления ({{userinfo.advertisements}})</p></div>
-                </a>
+                </router-link>
 <!--                <a class="adv__status"><div><p>Черновики</p></div></a>-->
-                <router-link to="/foo" class="adv__status"><div><p>Черновики</p></div></router-link>
+                <router-link to="/draft" class="adv__status"><div><p>Черновики</p></div></router-link>
                 <a class="adv__status"><div><p>История объявлений</p></div></a>
                 <a class="adv__status" @click="createAdv">
                     <div class="adv__status__active">
                         <p>Добавить объявление</p>
                     </div>
                 </a>
-
             </div>
         </aside>
     </article>
@@ -50,7 +49,7 @@
 <script>
 
 import axios from "axios";
-import VueRouter from "vue-router";
+// import Router from "./router";
 
 export default {
     name: "Profile",
@@ -106,7 +105,9 @@ export default {
     mounted() {
         this.getUser()
         this.randomBg()
-    }
+        // console.log(Router)
+
+    },
 }
 </script>
 
