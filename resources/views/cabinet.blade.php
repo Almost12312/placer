@@ -2,9 +2,10 @@
 @extends('layouts.layout')
 @section('content')
     <section class="cabinet__container">
-        <profile></profile>
-        <article class="advertisements__container">
-            <p class="adv__con__title">Мои объявления</p>
+        <cabinet></cabinet>
+        {{--        <profile></profile>--}}
+{{--        <article class="advertisements__container">--}}
+{{--            <p class="adv__con__title">Мои объявления</p>--}}
 {{--            <div class="advertisement_status_container">--}}
 {{--                <div class="exists__status">--}}
 {{--                    <p class="adv_status adv_status__active">Размещенные <span class="countAdvert">(передать блейд или вью)</span></p>--}}
@@ -17,9 +18,9 @@
 {{--            </div>--}}
 {{--            <advertisement-container>--}}
 {{----}}
-            <router-view></router-view>
+{{--            <router-view></router-view>--}}
 
-            {{--            </advertisement-container>--}}
+{{--            --}}{{--            </advertisement-container>--}}
 {{--            <div class="advertisement__container" id="js_advert">--}}
 {{--                {{dd($ads)}}--}}
 
@@ -101,8 +102,8 @@
 {{--                        </div>--}}
 {{--                    </div>--}}
 {{--                @endforeach--}}
-            </div>
-        </article>
+{{--            </div>--}}
+{{--        </article>--}}
     </section>
 
 @endsection

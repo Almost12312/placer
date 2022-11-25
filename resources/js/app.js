@@ -16,6 +16,8 @@ import AdvertisementContainer from "./components/AdvertisementContainer";
 import Router from "./components/router";
 import Foo from "./components/Foo";
 import Drafts from "./components/Drafts";
+import HistoryAdv from "./components/HistoryAdv";
+import Cabinet from "./components/Cabinet";
 
 
 Vue.use(VueRouter)
@@ -34,6 +36,10 @@ const router = new VueRouter({
         {
             path: '/draft',
             component: Drafts,
+        },
+        {
+            path: '/history',
+            component: HistoryAdv
         }
 
     ]
@@ -68,15 +74,13 @@ if (document.querySelector('.registrationCont')) {
 }
 
 if (document.querySelector('.cabinet__container')) {
-    const cabinet = new Vue ({
+    new Vue ({
         el: '.cabinet__container',
         router,
         components: {
-            Profile, AdvertisementContainer
+            Cabinet
         },
     })
-
-    // cabinet.use(Router)
 }
 
 

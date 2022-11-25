@@ -4,6 +4,7 @@
             v-for="adv in allAdv"
             v-bind:adv-info="adv"
             @remove="remove"
+            @complete="complete"
         ></advertisement>
     </div>
 </template>
@@ -23,7 +24,8 @@ export default {
     },
 
     methods: {
-         loadAdv() {
+         loadAdv()
+         {
              let advStatus = {
                  status: 1
              }
@@ -34,27 +36,24 @@ export default {
                   })
          },
 
-         target(event) {
+         target(event)
+         {
             let target = event.target;
 
-            if (target.closest('.redBtn')) {
+            if (target.closest('.redBtn'))
+            {
                 let id = target.closest('.redBtn').closest('.advertisement').dataset.id
 
-                console.log(id)
-
-                let idAdv = {
-                    idAd: id
-                }
-                // let dataIdImg = target.closest('.advertisement').querySelectorAll('.adv_img');
-                console.log(idAdv)
-
                 location.href = `/advertisement/` + id + `/redaction`
-            }   else {
+
+            }   else
+            {
                 return
             }
          },
 
-        remove(advInfo) {
+        remove(advInfo)
+        {
             console.log(advInfo)
             let index = this.allAdv.indexOf(advInfo)
 
@@ -66,8 +65,34 @@ export default {
                 id: advInfo.id
             }
 
+            this.$emit('remove', advInfo)
+
             axios.post('/advertisement/delete', delAdvert)
         },
+
+        complete(advInfo)
+        {
+            let index = this.allAdv.indexOf(advInfo)
+
+            this.allAdv.splice(index, 1)
+
+            let info = {
+                id: advInfo.id,
+                status: 1
+            }
+
+            axios.post('/advertisement/change-status', info)
+                 .then((response) => {
+                     if (response.data.success === true)
+                     {
+                         alert('Завершено')
+
+                     }  else
+                     {
+                         alert("Что-то пошло не так")
+                     }
+                 })
+        }
 
     },
 

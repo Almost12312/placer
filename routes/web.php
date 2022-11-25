@@ -9,6 +9,7 @@ use App\Http\Middleware\Authorization;
 use App\Http\Middleware\CreateMDW;
 use App\Http\Middleware\Redaction;
 use App\Http\Resources\AdvertisementResource;
+use App\Http\Resources\AdvFileResourse;
 use App\Models\Advertisement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -47,13 +48,16 @@ Route::post('/advertisement/create', [AdvertisementController::class, 'addAdvert
 Route::post('/advertisement/change-status', [AdvertisementController::class, 'changeStatus'])
     ->name('draftAdvert');
 
-Route::view('/advertisement/create', 'addAdvert')
+Route::view('/advertisement/create', 'redAdvert')
     ->name('createBladeAdvert')
     ->middleware(CreateMDW::class);
 
 Route::get('/advertisement/{id?}/redaction', [AdvertisementController::class, 'view'])
     ->name('addAdvert')
     ->middleware(Redaction::class);
+
+Route::post('/preview/get-imgs', [FileController::class, 'getCurrentFile'])
+    ->name('getCurrentImgs');
 
 Route::post('/file/upload', [FileController::class, 'file'])
     ->name('fileUpload');

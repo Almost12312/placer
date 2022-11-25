@@ -25,17 +25,27 @@
                         <li><div class="circle"></div></li>
                         <li><p class="profile__intro">{{ userinfo.created_at }}</p></li>
                     </ul>
-                    <p class="profile__intro">Объявлений: <span class="countAdvert">{{ userinfo.advertisements }}</span></p>
+                    <p class="profile__intro">Объявлений: <span class="countAdvert">{{ userinfo.advPublish ? userinfo.advPublish : 0 }}</span></p>
                 </div>
             </header>
 
-            <div class="advertisement__status__container">
+            <div class="advertisement__status__container" @click="target">
                 <router-link to="/" class="adv__status" href="">
-                    <div class="adv__status__active"><p class="status__after">Активные объявления ({{userinfo.advertisements}})</p></div>
+                    <div class="adv__status__noActive adv__status__active">
+                        <p class="status__after">Активные объявления ({{userinfo.advPublish ? userinfo.advPublish : 0}})</p>
+                    </div>
                 </router-link>
 <!--                <a class="adv__status"><div><p>Черновики</p></div></a>-->
-                <router-link to="/draft" class="adv__status"><div><p>Черновики</p></div></router-link>
-                <a class="adv__status"><div><p>История объявлений</p></div></a>
+                <router-link to="/draft" class="adv__status">
+                    <div class="adv__status__noActive">
+                        <p class="status__after">Черновики ({{userinfo.advDrafts ? userinfo.advDrafts : 0}})</p>
+                    </div>
+                </router-link>
+                <router-link to="/history" class="adv__status">
+                    <div class="adv__status__noActive">
+                        <p class="status__after">История объявлений</p>
+                    </div>
+                </router-link>
                 <a class="adv__status" @click="createAdv">
                     <div class="adv__status__active">
                         <p>Добавить объявление</p>
@@ -74,7 +84,6 @@ export default {
 
             let fd = new FormData
             fd.append('file', input.files[0])
-            console.log(fd)
 
             axios.post('/file/upload', fd)
                  .then(response => {
@@ -91,11 +100,26 @@ export default {
 
         randomBg() {
             document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#'+Math.random().toString(16).substring(2, 6)
-            // document.querySelector('.withoutRegPhoto').textContent = this.userinfo.name.substring(0, 1).toUpperCase()
+
         },
 
         createAdv() {
             location.href = '/advertisement/create'
+        },
+
+        target(event)
+        {
+            let target = event.target
+
+            if (target.closest('.adv__status__noActive'))
+            {
+                let allNoActive = document.querySelectorAll('.adv__status__noActive')
+                for (let i = 0; i < allNoActive.length; i++)
+                {
+                    allNoActive[i].classList.remove('adv__status__active')
+                    target.closest('.adv__status__noActive').classList.add('adv__status__active')
+                }
+            }
         }
     },
     //

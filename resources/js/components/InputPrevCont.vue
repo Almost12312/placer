@@ -16,8 +16,8 @@
         </div>
 
         <buttons v-bind:inputs_info_data="inputs_info_cont"
-                 :images_data="images"
-                 :thisAdv="thisAdv"
+                       :images_data="images"
+                       :thisAdv="thisAdv"
         ></buttons>
     </div>
 
@@ -27,6 +27,7 @@
 
 <script>
 
+import axios from "axios";
 import Preview from "./Preview";
 import InputsAdvert from "./InputsAdvert";
 import Buttons from "./Buttons";
@@ -47,7 +48,7 @@ export default {
                 tags: ""
             },
 
-            images: this.imagesProps
+            images: []
         }
     },
 
@@ -65,23 +66,31 @@ export default {
             }
         },
 
-        imagesProps: {
-            type: Array,
-            default() {
-                return [];
-            }
-        }
-
         // thisAdvImgs: {
         //     type: Array,
         // }
     },
 
     methods: {
+        loadImgs()
+        {
+            let id = {
+                id: this.thisAdv.id
+            }
+
+            axios.post('/preview/get-imgs', id)
+                 .then((response) => {
+                     this.images = response.data.data
+                 })
+        }
     },
 
     components: {
         Preview, InputsAdvert, Buttons
+    },
+
+    mounted() {
+        this.loadImgs()
     }
 }
 </script>

@@ -7,7 +7,7 @@
                         <input @change="upload" type="file" name="file" id="image" class="upload__img" placeholder="Выберите файл" multiple>
                         <label class="file__label" for="file"><img class="plus" src="/images/plus.svg" alt=""></label>
                     </div>
-                    <div  v-for="(image, id) in images" class="preview__container">
+                    <div v-for="(image, id) in thisAdv.images" class="preview__container">
 
                         <img :src="image.url" alt="preview" class="adv_img" :data-id="image.id">
                         <div @click="deleteImage(id)" class="cancelX__container">
@@ -21,8 +21,8 @@
         </div>
         <div class="advertisement__description">
 <!--            <h3 class="ad__title">{{inputs_info_data.title ? inputs_info_data.title : "Заголовок"}}</h3>-->
-            <h3 v-if="inputs_info_data.title.length > 0" class="ad__title">{{inputs_info_data.title ? inputs_info_data.title : "Заголовок"}}</h3>
-            <h3 v-if="inputs_info_data.title.length === 0" class="ad__title">Заголовок</h3>
+            <h3 v-if="inputs_info_data.title && inputs_info_data.title.length > 0" class="ad__title">{{inputs_info_data.title ? inputs_info_data.title : "Заголовок"}}</h3>
+            <h3 v-if="inputs_info_data.title && inputs_info_data.title.length === 0" class="ad__title">Заголовок</h3>
 
             <div class="ad__content">{{inputs_info_data.content ? inputs_info_data.content : "Тут ваше описание"}}</div>
 
@@ -33,12 +33,14 @@
                 <h5 class="ad__location">{{inputs_info_data.location ? inputs_info_data.location : "Местоположение"}}</h5>
 <!--                <h5 v-if="inputs_info_data.location.length > 0" class="ad__location">{{inputs_info_data.location ? inputs_info_data.location : "Местоположение"}}</h5>-->
 <!--                <h5 v-if="inputs_info_data.location.length === 0" class="ad__location">{{thisAdv.location}}</h5>-->
-                <h6 class="ad__price">
-                    <p v-if="parseInt(inputs_info_data.price) === 0 || inputs_info_data.price.length === 0" class="no__price">
+                <div class="ad__price">
+                    <p v-if="inputs_info_data.price && (parseInt(inputs_info_data.price) === 0 || inputs_info_data.price.length === 0)" class="no__price">
                         {{inputs_info_data.price.length === 0 ? "Цена в ₽" : "Бесплатно" }}
                     </p>
-                    <p v-else class="num__price">{{inputs_info_data.price > 0 ? inputs_info_data.price : "Цена в"}}</p>
-                </h6>
+                    <p v-else-if="inputs_info_data.price" class="num__price">{{inputs_info_data.price > 0 ? inputs_info_data.price : "Цена в"}}</p>
+                    <p v-else-if="!(inputs_info_data.price) || inputs_info_data.price.length === 0" class="num__price">Цена в</p>
+
+                </div>
             </div>
         </div>
     </div>
@@ -51,11 +53,11 @@ import axios from 'axios'
 
 export default {
 
-    // data() {
-    //     return {
-    //         adContentHeight: ""
-    //     }
-    // },
+    data() {
+        return {
+            adContentHeight: ""
+        }
+    },
 
     props: {
         inputs_info_data: {
@@ -98,6 +100,7 @@ export default {
                 axios.post('/file/upload', fd)
                     .then((response) => {
                         this.images.push(response.data)
+
                     })
             }
         },

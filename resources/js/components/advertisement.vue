@@ -15,9 +15,22 @@
                 </h6>
             </div>
         </div>
-        <div class="setting__container">
+        <div v-if="advInfo.status !== 3" class="setting__container">
             <img src="/images/threeDots.svg" alt="dots">
             <div v-if="advInfo.status === 1" class="settingBtns">
+                <a class="compBtn" @click="complete">
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         viewBox="0 0 17.837 17.837" xml:space="preserve">
+                        <g>
+                            <path d="M16.145,2.571c-0.272-0.273-0.718-0.273-0.99,0L6.92,10.804l-4.241-4.27
+                                c-0.272-0.274-0.715-0.274-0.989,0L0.204,8.019c-0.272,0.271-0.272,0.717,0,0.99l6.217,6.258c0.272,0.271,0.715,0.271,0.99,0
+                                L17.63,5.047c0.276-0.273,0.276-0.72,0-0.994L16.145,2.571z"/>
+                        </g>
+                    </svg>
+                    <div class="afterSettng">
+                        Завершить
+                    </div>
+                </a>
                 <a class="redBtn">
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                          viewBox="0 0 495.339 495.339" style="enable-background:new 0 0 495.339 495.339;" xml:space="preserve">
@@ -70,13 +83,17 @@
                 </a>
             </div>
             <div v-if="advInfo.status === 2" class="settingBtns">
-                <a class="pubBtn">
+                <a @click="publish" class="pubBtn">
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                         viewBox="0 0 17.837 17.837" style="enable-background:new 0 0 17.837 17.837;" xml:space="preserve">
+                         viewBox="0 0 268.476 268.476" style="enable-background:new 0 0 268.476 268.476;" xml:space="preserve">
                         <g>
-                            <path style="fill:#030104;" d="M16.145,2.571c-0.272-0.273-0.718-0.273-0.99,0L6.92,10.804l-4.241-4.27
-                                c-0.272-0.274-0.715-0.274-0.989,0L0.204,8.019c-0.272,0.271-0.272,0.717,0,0.99l6.217,6.258c0.272,0.271,0.715,0.271,0.99,0
-                                L17.63,5.047c0.276-0.273,0.276-0.72,0-0.994L16.145,2.571z"/>
+                            <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M254.958,245.159c-0.5-11.909-10.124-21.429-22.015-21.429H35.533
+                                c-12.21,0-22.109,10.017-22.109,22.373c0,12.356,9.899,22.373,22.109,22.373h197.41c11.888,0,21.509-9.515,22.014-21.419
+                                c0.014-0.323,0.096-0.627,0.096-0.954C255.053,245.78,254.971,245.479,254.958,245.159z M79.261,109.806l32.711-32.756v106.41
+                                c0,12.356,10.032,22.373,22.407,22.373c12.375,0,22.406-10.017,22.406-22.373V77.05l32.71,32.756c8.874,8.876,23.26,8.876,32.134,0
+                                c8.874-8.876,8.874-23.266,0-32.143L150.76,6.696c-4.047-4.048-9.248-6.155-14.542-6.511C135.601,0.134,135.008,0,134.378,0
+                                c-0.628,0-1.218,0.134-1.832,0.184c-5.298,0.354-10.502,2.462-14.551,6.512L47.127,77.663c-8.874,8.877-8.874,23.267,0,32.143
+                                C56,118.681,70.388,118.681,79.261,109.806z"/>
                         </g>
                     </svg>
                     <div class="afterSettng">
@@ -100,7 +117,7 @@
                         Редактировать
                     </div>
                 </a>
-                <a class="canBtn">
+                <a @click="remove" class="canBtn">
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                          viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
                         <g>
@@ -160,6 +177,10 @@ export default {
 
         publish() {
             this.$emit('publish', this.advInfo)
+        },
+
+        complete() {
+            this.$emit('complete', this.advInfo)
         }
     }
 }

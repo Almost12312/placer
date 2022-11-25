@@ -15,12 +15,12 @@ class CreateAdvertisementsTable extends Migration
     {
         Schema::create('advertisements', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('author_id');
-            $table->string('title');
-            $table->text('content');
-            $table->string('location');
+            $table->unsignedBigInteger('author_id')->nullable();
+            $table->string('title')->nullable();
+            $table->text('content')->nullable();
+            $table->string('location')->nullable();
             $table->dateTime('delete_at')->nullable();
-            $table->integer('price');
+            $table->integer('price')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();

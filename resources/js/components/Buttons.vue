@@ -47,6 +47,7 @@ export default {
     methods: {
         getAdv(status) {
             let advertisement = {
+                id: this.thisAdv.id,
                 title: this.inputs_info_data.title,
                 content: this.inputs_info_data.content,
                 location: this.inputs_info_data.location,
@@ -59,6 +60,8 @@ export default {
         },
 
         addAdvert() {
+
+            console.log(this.getAdv(1))
 
             axios.post('/advertisement/create', this.getAdv(1))
                 .then((response) => {
@@ -73,12 +76,18 @@ export default {
 
         cancel() {
 
-            axios.post('/advertisement/create', this.getAdv(1))
-                 .then((response) => {
-                     if (response.data.success) {
-                         location.href = '/cabinet'
-                     }
-                 })
+            if (this.thisAdv.title !== null || this.thisAdv.content !== null || this.thisAdv.price !== null || this.thisAdv.location !== null) {
+                axios.post('/advertisement/create', this.getAdv(2))
+                    .then((response) => {
+                        if (response.data.success) {
+                            location.href = '/cabinet'
+                        }
+                    })
+
+            } else
+            {
+                location.href = '/cabinet'
+            }
         }
     }
 }

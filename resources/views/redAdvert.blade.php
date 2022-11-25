@@ -11,14 +11,11 @@
 
                 @isset($thisAdvContent)
                     <input-prev-cont v-bind:this-adv.push='@json($thisAdvContent)'
-                                     v-bind:images-props.push='@json($thisAdvFiles)'
                     >
                     </input-prev-cont>
 
                 @else
-                    <input-prev-cont v-bind:this-adv.push='@json($thisAdvContent)'
-                                     v-bind:images-props.push='@json($thisAdvFiles)'>
-                    </input-prev-cont>
+                    <input-prev-cont></input-prev-cont>
                 @endisset
 
 

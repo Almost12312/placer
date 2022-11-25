@@ -13,8 +13,9 @@ $iconWidth: 42px;
 $iconHeight: 42px;
 
 body {
-    height: 100vh;
     background: #f8f7f7;
+
+    padding: 100px 0;
 
     //display: flex;
     //flex-direction: column;
@@ -24,8 +25,8 @@ body {
 
 .container {
     width: 90%;
-    height: 100vh;
     max-width: 1920px;
+    height: 100%;
 
     margin: 0 auto;
 
@@ -167,7 +168,7 @@ body {
 
 .footer {
     width: 100%;
-    height: 60px;
+    height: 80px;
 
     position: fixed;
     bottom: 0;
@@ -349,6 +350,9 @@ body {
 .ad__price {
     display: flex;
     justify-content: flex-end;
+
+    font-weight: 800;
+    font-size: 18px;
 }
 
 .ad__title {
@@ -483,6 +487,34 @@ body {
     .canBtn:hover {
         svg {
             fill: #da7171;
+
+            transition: .2s;
+        }
+
+        .afterSettng {
+            visibility: visible;
+            opacity: 1;
+            transition: .5s;
+        }
+    }
+
+    .pubBtn:hover {
+        svg {
+            fill: #61c902;
+
+            transition: .2s;
+        }
+
+        .afterSettng {
+            visibility: visible;
+            opacity: 1;
+            transition: .5s;
+        }
+    }
+
+    .compBtn:hover {
+        svg {
+            fill: #61c902;
 
             transition: .2s;
         }
@@ -745,9 +777,9 @@ body {
 /* Личный кабинет */
 
 .cabinet__container {
+    height: 100%;
     display: flex;
 
-    margin: 100px 0;
     padding: 40px;
 
     background: #ffffff;
@@ -951,7 +983,7 @@ body {
         left: 0;
 
         content: "";
-        border-bottom: 1px solid red;
+        border-bottom: 2px solid red;
     }
 }
 

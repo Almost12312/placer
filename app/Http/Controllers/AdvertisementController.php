@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Http\Resources\AdvFileResourse;
+use App\Http\Resources\AdvPrevResourse;
 use App\Models\Advertisement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,22 +56,21 @@ class AdvertisementController extends Controller
 
         $thisAdv = Advertisement::find($id);
 
-        //Delete
+        //Complete advert (to History)
         if ($status === 1)
         {
-            $thisAdv->status = 0;
+            $thisAdv->status = 3;
         }
 
-        //Publish
-        if ($status === 2) {
+        //Publish advert (To Active adverts)
+        if ($status === 2)
+        {
             $thisAdv->status = 1;
         }
 
-        //To draft
-
         $thisAdv->save();
 
-        if ($thisAdv->status === $status)
+        if (!($thisAdv->status === $status))
         {
             return response()->json([
                 'success' => true
@@ -97,21 +99,17 @@ class AdvertisementController extends Controller
     {
         $thisAdv = Advertisement::find($id);
 
-        $thisAdvContent = [
-            "id" => $id,
-            "title" => $thisAdv->title,
-            "content" => $thisAdv->content,
-            "location" => $thisAdv->location,
-            "price" => $thisAdv->price
-        ];
+        $thisAdvInfo = new AdvPrevResourse($thisAdv);
 
-        $thisAdvFiles = [];
+//        $files = new AdvFileResourse($thisAdv);
 
-        foreach ($thisAdv->files as $file) {
-            $thisAdvFiles [] = ["id" => $file["id"], "url" => $file->getUrl()];
-        }
+//        $thisAdvFiles = [];
+//
+//        foreach ($thisAdv->files as $file) {
+//            $thisAdvFiles [] = ["id" => $file["id"], "url" => $file->getUrl()];
+//        }
 
-        return view('redAdvert', ['thisAdvContent' => $thisAdvContent, "thisAdvFiles" => $thisAdvFiles]);
+        return view('redAdvert', ['thisAdvContent' => $thisAdvInfo]);
 
     }
 }

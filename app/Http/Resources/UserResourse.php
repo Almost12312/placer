@@ -24,7 +24,9 @@ class UserResourse extends JsonResource
                 'city' => $this->resource->city,
                 'created_at' => date($this->resource->created_at->format('d m Y')),
                 'url' => $this->resource->file[0]->getUrl(),
-                'advertisements' => $this->resource->advertisements->where('status', '=', 1)->count()
+                'advPublish' => $this->resource->advertisements->where('status', '=', 1)->count(),
+                'advDrafts' => $this->resource->advertisements->where('status', '=', 2)->count(),
+//                'advHistory' => $this->resource->advertisements->where('status', '=', 3)->count()
             ];
         } else {
             return [
@@ -34,7 +36,9 @@ class UserResourse extends JsonResource
                 'city' => $this->resource->city,
                 'created_at' => date($this->resource->created_at->format('d m Y')),
                 'url' => null,
-                'advertisements' => $this->resource->advertisements->where('status', '=', 1)->count()
+                'advPublish' => $this->resource->advertisements->where('status', '=', 1)->count(),
+                'advDrafts' => $this->resource->advertisements->where('status', '=', 2)->count(),
+//                'advHistory' => $this->resource->advertisements->where('status', '=', 3)->count()
             ];
         }
 

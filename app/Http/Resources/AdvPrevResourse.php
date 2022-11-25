@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AdvertisementResource extends JsonResource
+class AdvPrevResourse extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -12,10 +12,8 @@ class AdvertisementResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-
     public function toArray($request)
     {
-
         if (count($this->resource->files) > 0)
 
         {
@@ -26,7 +24,6 @@ class AdvertisementResource extends JsonResource
                 'location' => $this->resource->location,
                 'price' => $this->resource->price,
                 'status' => $this->resource->status,
-                'images' => $this->resource->files[0]->getUrl()
             ];
         } else {
             return [
@@ -36,9 +33,7 @@ class AdvertisementResource extends JsonResource
                 'location' => $this->resource->location,
                 'price' => $this->resource->price,
                 'status' => $this->resource->status,
-                'images' => null
             ];
         }
-
     }
 }

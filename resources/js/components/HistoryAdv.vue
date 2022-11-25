@@ -3,14 +3,12 @@
         <advertisement
             v-for="adv in allAdv"
             v-bind:adv-info="adv"
-            @remove="remove"
-            @publish="publish"
         ></advertisement>
     </div>
 </template>
 
 <script>
-// @remove="remove"
+
 import axios from "axios";
 import Advertisement from "./advertisement";
 
@@ -27,7 +25,7 @@ export default {
         loadAdv()
         {
             let advStatus = {
-                status: 2
+                status: 3
             }
 
             axios.post('/resource', advStatus)
@@ -41,7 +39,7 @@ export default {
         {
             let target = event.target;
 
-            if (target.closest('.redBtn'))
+            if (target.closest('.advertisement'))
             {
                 let id = target.closest('.advertisement').dataset.id
 
@@ -49,9 +47,9 @@ export default {
                     idAd: id
                 }
 
-                console.log(idAdv)
+                //create post for redirect to redirect adv page
 
-                location.href = `/advertisement/` + id + `/redaction`
+                // location.href = `/advertisement/` + id + `/redaction`
 
             } else
             {
@@ -59,42 +57,42 @@ export default {
             }
         },
 
-        remove(advInfo)
-        {
-            let index = this.allAdv.indexOf(advInfo)
-
-            this.allAdv.splice(index, 1)
-
-            let delAdvert = {
-                id: advInfo.id
-            }
-
-            axios.post('/advertisement/delete', delAdvert)
-        },
-
-        publish(advInfo)
-        {
-            let info = {
-                id: advInfo.id,
-                status: advInfo.status
-            }
-
-            axios.post('/advertisement/change-status', info)
-                 .then((response) =>
-                 {
-                     if (response.data.success)
-                     {
-                         let index = this.allAdv.indexOf(advInfo)
-                         this.allAdv.splice(index, 1)
-
-                         alert('Опубликовано')
-
-                     } else
-                     {
-                         alert("Что-то пошло не так")
-                     }
-                 })
-        }
+        // remove(advInfo)
+        // {
+        //     let index = this.allAdv.indexOf(advInfo)
+        //
+        //     this.allAdv.splice(index, 1)
+        //
+        //     let delAdvert = {
+        //         id: advInfo.id
+        //     }
+        //
+        //     axios.post('/advertisement/delete', delAdvert)
+        // },
+        //
+        // publish(advInfo)
+        // {
+        //     let info = {
+        //         id: advInfo.id,
+        //         status: advInfo.status
+        //     }
+        //
+        //     axios.post('/advertisement/change-status', info)
+        //         .then((response) =>
+        //         {
+        //             if (response.data.success)
+        //             {
+        //                 let index = this.allAdv.indexOf(advInfo)
+        //                 this.allAdv.splice(index, 1)
+        //
+        //                 alert('Опубликовано')
+        //
+        //             } else
+        //             {
+        //                 alert("Что-то пошло не так")
+        //             }
+        //         })
+        // }
 
         // remove(advInfo) {
         //     console.log(advInfo)
