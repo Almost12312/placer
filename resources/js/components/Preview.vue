@@ -7,7 +7,7 @@
                         <input @change="upload" type="file" name="file" id="image" class="upload__img" placeholder="Выберите файл" multiple>
                         <label class="file__label" for="file"><img class="plus" src="/images/plus.svg" alt=""></label>
                     </div>
-                    <div v-for="(image, id) in thisAdv.images" class="preview__container">
+                    <div v-for="(image, id) in this.images" class="preview__container">
 
                         <img :src="image.url" alt="preview" class="adv_img" :data-id="image.id">
                         <div @click="deleteImage(id)" class="cancelX__container">
@@ -70,7 +70,7 @@ export default {
         images: {
             type: Array,
             default() {
-                return undefined;
+                return [];
             }
         },
 

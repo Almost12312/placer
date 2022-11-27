@@ -51,8 +51,12 @@ class FileController extends Controller
     {
         $id = $request->get('id');
 
-        $adv = Advertisement::find($id);
+        if ($id !== null)
+        {
+            $adv = Advertisement::find($id);
 
-        return new AdvFileResourse($adv);
+            return new AdvFileResourse($adv);
+        }
+
     }
 }

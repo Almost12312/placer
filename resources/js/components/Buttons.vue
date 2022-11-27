@@ -39,7 +39,7 @@ export default {
         images_data: {
             type: Array,
             default() {
-                return undefined;
+                return [];
             }
         }
     },

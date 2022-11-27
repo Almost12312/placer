@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdvertisementsFilesTable extends Migration
+class CreateAdvertisementsCategories extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateAdvertisementsFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('advertisement_file', function (Blueprint $table) {
+        Schema::create('advertisements_categories', function (Blueprint $table) {
             $table->unsignedBigInteger('advertisement_id');
-            $table->unsignedBigInteger('file_id');
+            $table->unsignedBigInteger('category_id');
 
             $table->foreign('advertisement_id')->references('id')->on('advertisements');
-            $table->foreign('file_id')->references('id')->on('files');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateAdvertisementsFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('advertisement_file');
+        Schema::dropIfExists('advertisements_categories');
     }
 }

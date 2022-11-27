@@ -12,7 +12,7 @@
                             </svg>
                         </label>
 
-                        <img v-if="userinfo.url" :src="userinfo.url" alt="аватарка">
+                        <img v-if="userinfo.url !== null" :src="userinfo.url" alt="аватарка">
                         <div v-else class="withoutRegPhoto__bg">
                             <div v-if="userinfo.name" class="withoutRegPhoto">{{ userinfo.name.substring(0, 1).toUpperCase() }}</div>
                         </div>
@@ -67,6 +67,7 @@ export default {
     data() {
         return {
             userinfo: {
+                url: null
             }
         }
     },
@@ -75,7 +76,7 @@ export default {
         getUser() {
             axios.post('/profile')
                  .then(response => {
-                     this.userinfo = response.data.data
+                     this.userinfo = response.data
                  })
         },
 

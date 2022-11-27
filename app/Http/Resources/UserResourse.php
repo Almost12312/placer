@@ -15,7 +15,7 @@ class UserResourse extends JsonResource
     public function toArray($request)
     {
 
-        if (count($this->resource->file) > 0)
+        if (count($this->resource->files) > 0)
         {
             return [
                 'name' => $this->resource->name,
@@ -23,7 +23,7 @@ class UserResourse extends JsonResource
                 'middlename' => $this->resource->middlename,
                 'city' => $this->resource->city,
                 'created_at' => date($this->resource->created_at->format('d m Y')),
-                'url' => $this->resource->file[0]->getUrl(),
+                'url' => $this->resource->files[0]->getUrl(),
                 'advPublish' => $this->resource->advertisements->where('status', '=', 1)->count(),
                 'advDrafts' => $this->resource->advertisements->where('status', '=', 2)->count(),
 //                'advHistory' => $this->resource->advertisements->where('status', '=', 3)->count()

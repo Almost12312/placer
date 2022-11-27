@@ -18,6 +18,7 @@ import Foo from "./components/Foo";
 import Drafts from "./components/Drafts";
 import HistoryAdv from "./components/HistoryAdv";
 import Cabinet from "./components/Cabinet";
+import RedContainer from "./components/RedContainer";
 
 
 Vue.use(VueRouter)
@@ -59,7 +60,7 @@ if (document.querySelector('.redaction__adv')) {
     new Vue ({
         el: '.redaction__adv',
         components: {
-            Categories, InputPrevCont
+            RedContainer, Categories, InputPrevCont
         }
     })
 }

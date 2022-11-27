@@ -15,19 +15,18 @@ class AdvFileResourse extends JsonResource
     public function toArray($request)
     {
         $adv = $this->resource->files;
-
         $advFile = [];
 
         foreach ($adv as $file)
         {
             $advFile[] = [
-              "id" => $file->id,
-              "url" => $file->getUrl()
+                "id" => $file->id,
+                "url" => $file->getUrl()
             ];
         }
 
         return [
-            $advFile
-        ];
+                'data' => $advFile
+            ];
+        }
     }
-}

@@ -14,6 +14,7 @@
 </template>
 
 <script>
+
 import Profile from "./Profile";
 import AdvertisementContainer from "./AdvertisementContainer";
 

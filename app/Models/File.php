@@ -14,12 +14,12 @@ class File extends Model
 
     protected $fillable = ['original_name', 'size_bytes', 'location', 'new_hash_name', 'extension', 'loaded_by'];
 
-    public function user()
+    public function users()
     {
         return $this->belongsToMany(User::class);
     }
 
-    public function advertisement()
+    public function advertisements()
     {
         return $this->belongsToMany(Advertisement::class);
     }

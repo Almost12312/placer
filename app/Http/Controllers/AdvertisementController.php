@@ -101,7 +101,8 @@ class AdvertisementController extends Controller
 
         $thisAdvInfo = new AdvPrevResourse($thisAdv);
 
-//        $files = new AdvFileResourse($thisAdv);
+
+        $files = new AdvFileResourse($thisAdv);
 
 //        $thisAdvFiles = [];
 //
@@ -109,7 +110,7 @@ class AdvertisementController extends Controller
 //            $thisAdvFiles [] = ["id" => $file["id"], "url" => $file->getUrl()];
 //        }
 
-        return view('redAdvert', ['thisAdvContent' => $thisAdvInfo]);
+        return view('redAdvert', ['thisAdvContent' => $thisAdvInfo, 'files' => $files]);
 
     }
 }

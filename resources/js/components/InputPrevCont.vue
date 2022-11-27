@@ -7,7 +7,7 @@
                            v-bind:thisAdv="thisAdv"
             ></inputs-advert>
             <preview v-bind:inputs_info_data="inputs_info_cont"
-                           :images="images"
+                           :images="this.images"
                            :thisAdv="thisAdv"
 
             >
@@ -16,7 +16,7 @@
         </div>
 
         <buttons v-bind:inputs_info_data="inputs_info_cont"
-                       :images_data="images"
+                       :images_data="this.images"
                        :thisAdv="thisAdv"
         ></buttons>
     </div>
@@ -47,8 +47,6 @@ export default {
                 price:  this.thisAdv.price,
                 tags: ""
             },
-
-            images: []
         }
     },
 
@@ -66,6 +64,9 @@ export default {
             }
         },
 
+        images: []
+
+
         // thisAdvImgs: {
         //     type: Array,
         // }
@@ -80,7 +81,9 @@ export default {
 
             axios.post('/preview/get-imgs', id)
                  .then((response) => {
-                     this.images = response.data.data
+                     if(response.data.data){
+                         this.images = response.data.data
+                     }
                  })
         }
     },

@@ -2,26 +2,36 @@
 
 @section('content')
     <div class="redaction__adv">
-        <div class="redContainer">
+        @isset($thisAdvContent)
+{{--            {{ dd($thisAdvContent) }}--}}
+            <red-container
+                v-bind:this-adv='@json($thisAdvContent)'
+            ></red-container>
+        @else
+            <red-container></red-container>
+        @endif
 
-            <categories></categories>
+{{--        <div class="redContainer">--}}
 
-            <div class="redForm">
+{{--            <categories></categories>--}}
 
-
-                @isset($thisAdvContent)
-                    <input-prev-cont v-bind:this-adv.push='@json($thisAdvContent)'
-                    >
-                    </input-prev-cont>
-
-                @else
-                    <input-prev-cont></input-prev-cont>
-                @endisset
+{{--            <div class="redForm">--}}
 
 
-            </div>
+{{--                @isset($thisAdvContent)--}}
+{{--                    <input-prev-cont v-bind:this-adv.push='@json($thisAdvContent)'--}}
 
-        </div>
+{{--                    >--}}
+{{--                    </input-prev-cont>--}}
+
+{{--                @else--}}
+{{--                    <input-prev-cont></input-prev-cont>--}}
+{{--                @endisset--}}
+
+
+{{--            </div>--}}
+
+{{--        </div>--}}
     </div>
 
 

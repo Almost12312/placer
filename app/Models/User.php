@@ -16,7 +16,7 @@ class User extends Authenticatable
         return $this->hasMany(Advertisement::class, 'author_id', 'id');
     }
 
-    public function file()
+    public function files()
     {
         return $this->belongsToMany(File::class, 'files_users');
     }

@@ -26,10 +26,10 @@ class CabinetController extends Controller
 
         $user = Auth::user();
 
-        $user->file()->sync($idFile);
+        $user->files()->sync($idFile);
 
         return response()->json([
-            'url' => $user->file[0]->getUrl()
+            'url' => $user->files[0]->getUrl()
         ]);
     }
 
