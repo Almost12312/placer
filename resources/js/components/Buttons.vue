@@ -15,6 +15,12 @@ import advertisement from "./advertisement";
 export default {
     name: "Buttons",
 
+    data() {
+        return {
+            isSave: false
+        }
+    },
+
     props: {
         inputs_info_data: {
             type: Object,
@@ -75,19 +81,30 @@ export default {
         },
 
         cancel() {
-
             if (this.thisAdv.title !== null || this.thisAdv.content !== null || this.thisAdv.price !== null || this.thisAdv.location !== null) {
                 axios.post('/advertisement/create', this.getAdv(2))
                     .then((response) => {
-                        if (response.data.success) {
-                            location.href = '/cabinet'
+                        if (response.data.success === true)
+                        {
+                            this.isSave = true
                         }
                     })
-
-            } else
-            {
-                location.href = '/cabinet'
             }
+        },
+
+
+    },
+
+    beforeRouteLeave(to, from, next)
+    {
+        if (this.isSave !== true)
+        {
+            console.log('asdf')
+            this.cancel()
+                next()
+        }   else
+        {
+            next(false)
         }
     }
 }

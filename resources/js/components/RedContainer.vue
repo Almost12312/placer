@@ -28,7 +28,7 @@ export default {
 
     data() {
         return {
-            images: []
+            images: [],
         }
     },
 
@@ -41,7 +41,8 @@ export default {
                     title: "",
                     content: "",
                     location: "",
-                    price: ""
+                    price: "",
+                    category: ''
                 }
             }
         }
@@ -49,6 +50,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>

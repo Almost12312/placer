@@ -23,6 +23,7 @@ class AdvertisementController extends Controller
         $price = $request->get('price');
         $imageIds = $request->get('images_ids');
         $status = $request->get('status');
+        $category = $request->get('category');
 
         $advertisement = Advertisement::updateOrCreate(
             [
@@ -42,6 +43,10 @@ class AdvertisementController extends Controller
         {
             $advertisement->files()->sync($imageIds);
         }
+
+//        $advertisement->category()->dissociate($category);
+
+        $advertisement->save($category);
 
         return response()->json([
             "success" => true,

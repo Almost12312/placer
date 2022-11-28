@@ -24,6 +24,7 @@ class AdvPrevResourse extends JsonResource
                 'location' => $this->resource->location,
                 'price' => $this->resource->price,
                 'status' => $this->resource->status,
+                'category' => ''
             ];
         } else {
             return [
@@ -33,6 +34,7 @@ class AdvPrevResourse extends JsonResource
                 'location' => $this->resource->location,
                 'price' => $this->resource->price,
                 'status' => $this->resource->status,
+                'category' => ''
             ];
         }
     }
