@@ -24,8 +24,6 @@
                 <div>Бытовая техника</div>
             </label>
 
-            {{thisAdv.categories}}
-
         </div>
     </div>
 </template>

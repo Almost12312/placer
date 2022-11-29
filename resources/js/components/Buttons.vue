@@ -67,17 +67,23 @@ export default {
         },
 
         addAdvert() {
+            if (this.inputs_info_data.title === "" || this.inputs_info_data.content === "" ||
+                this.inputs_info_data.location === "" || parseInt(this.inputs_info_data.price) === null ||
+                this.inputs_info_data.images_data === "" || this.thisAdv.category === "")
+            {
+                alert('Не все поля заполнены')
+                return
+            } else
+            {
+                axios.post('/advertisement/create', this.getAdv(1))
+                    .then((response) => {
 
-            console.log(this.getAdv(1))
-
-            axios.post('/advertisement/create', this.getAdv(1))
-                .then((response) => {
-
-                    if (response.data.success) {
-                        alert("Вы успешно загрузили объявление")
-                        setTimeout(location.href = response.data.redirect, 5000)
-                    }
-                })
+                        if (response.data.success) {
+                            alert("Вы успешно загрузили объявление")
+                            setTimeout(location.href = response.data.redirect, 5000)
+                        }
+                    })
+            }
 
         },
 

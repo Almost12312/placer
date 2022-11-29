@@ -2276,13 +2276,17 @@ __webpack_require__.r(__webpack_exports__);
       return advertisement;
     },
     addAdvert: function addAdvert() {
-      console.log(this.getAdv(1));
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/create', this.getAdv(1)).then(function (response) {
-        if (response.data.success) {
-          alert("Вы успешно загрузили объявление");
-          setTimeout(location.href = response.data.redirect, 5000);
-        }
-      });
+      if (this.inputs_info_data.title === "" || this.inputs_info_data.content === "" || this.inputs_info_data.location === "" || parseInt(this.inputs_info_data.price) === null || this.inputs_info_data.images_data === "" || this.thisAdv.category === "") {
+        alert('Не все поля заполнены');
+        return;
+      } else {
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/create', this.getAdv(1)).then(function (response) {
+          if (response.data.success) {
+            alert("Вы успешно загрузили объявление");
+            setTimeout(location.href = response.data.redirect, 5000);
+          }
+        });
+      }
     },
     cancel: function cancel() {
       var _this = this;
@@ -2370,8 +2374,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
 //
 //
 //
@@ -4266,7 +4268,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.categories__container input{\r\n    width: 0;\r\n    height: 0;\r\n    opacity: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.categories__container input{\n    width: 0;\n    height: 0;\n    opacity: 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23859,7 +23861,6 @@ var render = function () {
         }),
         _vm._v(" "),
         _vm._m(3),
-        _vm._v("\n\n        " + _vm._s(_vm.thisAdv.categories) + "\n\n    "),
       ]
     ),
   ])
