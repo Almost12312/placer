@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\AdvFileResourse;
 use App\Http\Resources\AdvPrevResourse;
 use App\Models\Advertisement;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +24,8 @@ class AdvertisementController extends Controller
         $price = $request->get('price');
         $imageIds = $request->get('images_ids');
         $status = $request->get('status');
-        $category = $request->get('category');
+
+        $getCategory = (int)$request->get('category');
 
         $advertisement = Advertisement::updateOrCreate(
             [
@@ -44,9 +46,12 @@ class AdvertisementController extends Controller
             $advertisement->files()->sync($imageIds);
         }
 
-//        $advertisement->category()->dissociate($category);
+        $category = Category::find($getCategory);
 
-        $advertisement->save($category);
+
+        $category->advertisements()->save($advertisement);
+
+        $advertisement->save();
 
         return response()->json([
             "success" => true,

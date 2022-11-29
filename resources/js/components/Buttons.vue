@@ -59,6 +59,7 @@ export default {
                 location: this.inputs_info_data.location,
                 price: parseInt(this.inputs_info_data.price),
                 images_ids: this.images_data.map(({id}) => (id)),
+                category: parseInt(this.thisAdv.category),
                 status: status
             }
 
@@ -81,14 +82,21 @@ export default {
         },
 
         cancel() {
-            if (this.thisAdv.title !== null || this.thisAdv.content !== null || this.thisAdv.price !== null || this.thisAdv.location !== null) {
-                axios.post('/advertisement/create', this.getAdv(2))
-                    .then((response) => {
-                        if (response.data.success === true)
-                        {
-                            this.isSave = true
-                        }
-                    })
+            if (this.thisAdv.status !== 1)
+            {
+                if (this.thisAdv.title !== null || this.thisAdv.content !== null || this.thisAdv.price !== null || this.thisAdv.location !== null) {
+                    axios.post('/advertisement/create', this.getAdv(2))
+                        .then((response) => {
+                            if (response.data.success === true)
+                            {
+                                this.isSave = true
+                                location.href = '/cabinet'
+                            }
+                        })
+                }
+            } else
+            {
+                location.href = '/cabinet'
             }
         },
 

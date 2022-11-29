@@ -30,7 +30,7 @@ export default {
                  status: 1
              }
 
-             axios.post('/resource', advStatus)
+             axios.post('/load-adv', advStatus)
                   .then((response) => {
                       this.allAdv = response.data.data
                   })

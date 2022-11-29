@@ -71,4 +71,4 @@ Route::post('/advertisement/delete', [AdvertisementController::class, 'delAdvert
 
 Route::get('/test', [TestController::class, 'test']);
 
-Route::post('/resource', [AdvResourceController::class, 'res']);
+Route::post('/load-adv', [AdvResourceController::class, 'res']);

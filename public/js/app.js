@@ -2148,7 +2148,7 @@ __webpack_require__.r(__webpack_exports__);
       var advStatus = {
         status: 1
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/resource', advStatus).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/load-adv', advStatus).then(function (response) {
         _this.allAdv = response.data.data;
       });
     },
@@ -2270,6 +2270,7 @@ __webpack_require__.r(__webpack_exports__);
           var id = _ref.id;
           return id;
         }),
+        category: parseInt(this.thisAdv.category),
         status: status
       };
       return advertisement;
@@ -2285,12 +2286,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     cancel: function cancel() {
       var _this = this;
-      if (this.thisAdv.title !== null || this.thisAdv.content !== null || this.thisAdv.price !== null || this.thisAdv.location !== null) {
-        axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/create', this.getAdv(2)).then(function (response) {
-          if (response.data.success === true) {
-            _this.isSave = true;
-          }
-        });
+      if (this.thisAdv.status !== 1) {
+        if (this.thisAdv.title !== null || this.thisAdv.content !== null || this.thisAdv.price !== null || this.thisAdv.location !== null) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/create', this.getAdv(2)).then(function (response) {
+            if (response.data.success === true) {
+              _this.isSave = true;
+              location.href = '/cabinet';
+            }
+          });
+        }
+      } else {
+        location.href = '/cabinet';
       }
     }
   },
@@ -2797,6 +2803,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2812,7 +2821,12 @@ __webpack_require__.r(__webpack_exports__);
       type: Object
     }
   },
-  methods: {}
+  methods: {
+    pushTags: function pushTags(e) {
+      this.thisAdv.tags.push(this.inputs_info_data.tags);
+      this.inputs_info_data.tags = null;
+    }
+  }
 
   // components: {
   //     Preview
@@ -23763,15 +23777,15 @@ var render = function () {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.thisAdv.categories,
-              expression: "thisAdv.categories",
+              value: _vm.thisAdv.category,
+              expression: "thisAdv.category",
             },
           ],
-          attrs: { id: "cars", type: "radio", name: "cars", value: "cars" },
-          domProps: { checked: _vm._q(_vm.thisAdv.categories, "cars") },
+          attrs: { id: "cars", type: "radio", name: "cars", value: "1" },
+          domProps: { checked: _vm._q(_vm.thisAdv.category, "1") },
           on: {
             change: function ($event) {
-              return _vm.$set(_vm.thisAdv, "categories", "cars")
+              return _vm.$set(_vm.thisAdv, "category", "1")
             },
           },
         }),
@@ -23785,20 +23799,15 @@ var render = function () {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.thisAdv.categories,
-              expression: "thisAdv.categories",
+              value: _vm.thisAdv.category,
+              expression: "thisAdv.category",
             },
           ],
-          attrs: {
-            id: "phones",
-            type: "radio",
-            name: "phones",
-            value: "phones",
-          },
-          domProps: { checked: _vm._q(_vm.thisAdv.categories, "phones") },
+          attrs: { id: "phones", type: "radio", name: "phones", value: "2" },
+          domProps: { checked: _vm._q(_vm.thisAdv.category, "2") },
           on: {
             change: function ($event) {
-              return _vm.$set(_vm.thisAdv, "categories", "phones")
+              return _vm.$set(_vm.thisAdv, "category", "2")
             },
           },
         }),
@@ -23810,15 +23819,15 @@ var render = function () {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.thisAdv.categories,
-              expression: "thisAdv.categories",
+              value: _vm.thisAdv.category,
+              expression: "thisAdv.category",
             },
           ],
-          attrs: { id: "moto", type: "radio", name: "moto", value: "bike" },
-          domProps: { checked: _vm._q(_vm.thisAdv.categories, "bike") },
+          attrs: { id: "moto", type: "radio", name: "moto", value: "3" },
+          domProps: { checked: _vm._q(_vm.thisAdv.category, "3") },
           on: {
             change: function ($event) {
-              return _vm.$set(_vm.thisAdv, "categories", "bike")
+              return _vm.$set(_vm.thisAdv, "category", "3")
             },
           },
         }),
@@ -23830,8 +23839,8 @@ var render = function () {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.thisAdv.categories,
-              expression: "thisAdv.categories",
+              value: _vm.thisAdv.category,
+              expression: "thisAdv.category",
             },
           ],
           staticClass: "categories",
@@ -23839,12 +23848,12 @@ var render = function () {
             id: "appliances",
             type: "radio",
             name: "appliances",
-            value: "appliances",
+            value: "4",
           },
-          domProps: { checked: _vm._q(_vm.thisAdv.categories, "appliances") },
+          domProps: { checked: _vm._q(_vm.thisAdv.category, "4") },
           on: {
             change: function ($event) {
-              return _vm.$set(_vm.thisAdv, "categories", "appliances")
+              return _vm.$set(_vm.thisAdv, "category", "4")
             },
           },
         }),
@@ -24201,6 +24210,15 @@ var render = function () {
       attrs: { name: "tags", id: "", placeholder: "Теги" },
       domProps: { value: _vm.inputs_info_data.tags },
       on: {
+        keyup: function ($event) {
+          if (
+            !$event.type.indexOf("key") &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
+          }
+          return _vm.pushTags.apply(null, arguments)
+        },
         input: function ($event) {
           if ($event.target.composing) {
             return
@@ -24209,6 +24227,15 @@ var render = function () {
         },
       },
     }),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "tags__container" },
+      _vm._l(_vm.thisAdv.tags, function (tag) {
+        return _c("p", { staticClass: "tag" }, [_vm._v(_vm._s(tag))])
+      }),
+      0
+    ),
   ])
 }
 var staticRenderFns = []
