@@ -23,8 +23,8 @@ class AdvPrevResourse extends JsonResource
                 'location' => $this->resource->location,
                 'price' => $this->resource->price,
                 'status' => $this->resource->status,
-                'category' => '',
-                'tags' => []
+                'category' => $this->resource->category_id,
+                'tags' => TagResource::make($this->resource)
             ];
 
         } else {
