@@ -13,7 +13,7 @@ class CreateAdvertisementsTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('advertisements_tags', function (Blueprint $table) {
+        Schema::create('advertisement_tag', function (Blueprint $table) {
             $table->unsignedBigInteger('advertisement_id');
             $table->unsignedBigInteger('tag_id');
 
@@ -29,6 +29,6 @@ class CreateAdvertisementsTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('advertisements_tags');
+        Schema::dropIfExists('advertisement_tag');
     }
 }

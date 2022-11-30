@@ -60,7 +60,8 @@ export default {
                 price: parseInt(this.inputs_info_data.price),
                 images_ids: this.images_data.map(({id}) => (id)),
                 category: parseInt(this.thisAdv.category),
-                status: status
+                status: status,
+                tags: this.thisAdv.tags
             }
 
             return advertisement

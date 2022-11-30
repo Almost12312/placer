@@ -2271,7 +2271,8 @@ __webpack_require__.r(__webpack_exports__);
           return id;
         }),
         category: parseInt(this.thisAdv.category),
-        status: status
+        status: status,
+        tags: this.thisAdv.tags
       };
       return advertisement;
     },
@@ -2747,7 +2748,8 @@ __webpack_require__.r(__webpack_exports__);
           title: "",
           content: "",
           location: "",
-          price: ""
+          price: "",
+          tags: []
         };
       }
     },
@@ -2794,7 +2796,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Preview_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Preview.vue */ "./resources/js/components/Preview.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -3169,7 +3172,8 @@ __webpack_require__.r(__webpack_exports__);
           content: "",
           location: "",
           price: "",
-          category: ''
+          category: '',
+          tags: []
         };
       }
     }
@@ -24229,12 +24233,7 @@ var render = function () {
         },
       ],
       staticClass: "tags",
-      attrs: {
-        name: "tags",
-        id: "",
-        placeholder: "Теги",
-        disabled: _vm.validation,
-      },
+      attrs: { name: "tags", placeholder: "Теги", disabled: _vm.validation },
       domProps: { value: _vm.inputs_info_data.tags },
       on: {
         keyup: function ($event) {
@@ -24244,7 +24243,7 @@ var render = function () {
           ) {
             return null
           }
-          return _vm.pushTags.apply(null, arguments)
+          return _vm.pushTags()
         },
         input: function ($event) {
           if ($event.target.composing) {

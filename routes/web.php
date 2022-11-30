@@ -5,6 +5,7 @@ use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\CabinetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdvResourceController;
+use App\Http\Controllers\TagController;
 use App\Http\Middleware\Authorization;
 use App\Http\Middleware\CreateMDW;
 use App\Http\Middleware\Redaction;
@@ -63,8 +64,6 @@ Route::post('/file/upload', [FileController::class, 'file'])
     ->name('fileUpload');
 
 Route::post('/advertisement/delete', [AdvertisementController::class, 'delAdvert']);
-
-
 
 
 

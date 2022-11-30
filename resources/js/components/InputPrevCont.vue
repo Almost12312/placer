@@ -59,7 +59,8 @@ export default {
                     title: "",
                     content: "",
                     location: "",
-                    price: ""
+                    price: "",
+                    tags: []
                 }
             }
         },

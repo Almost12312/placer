@@ -7,6 +7,7 @@ use App\Http\Resources\AdvFileResourse;
 use App\Http\Resources\AdvPrevResourse;
 use App\Models\Advertisement;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,7 @@ class AdvertisementController extends Controller
 
     public function addAdvert(Request $request)
     {
-
+        //1. Get Request
         $id = $request->get('id');
         $title = $request->get('title');
         $content = $request->get('content');
@@ -25,8 +26,10 @@ class AdvertisementController extends Controller
         $imageIds = $request->get('images_ids');
         $status = $request->get('status');
 
+            //1.2. Get for sync
         $getCategory = (int)$request->get('category');
 
+        //2. Create advertisement
         $advertisement = Advertisement::updateOrCreate(
             [
                 'id' => $id
@@ -46,13 +49,29 @@ class AdvertisementController extends Controller
             $advertisement->files()->sync($imageIds);
         }
 
+        //3. Category
         $category = Category::find($getCategory);
-
-
         $category->advertisements()->save($advertisement);
+
+        //4. Tags
+        $getTags = $request->get('tags');
+        $tagsId = [];
+
+        foreach ($getTags as $tagName)
+        {
+            $tag = Tag::firstOrCreate(
+                ['name' => $tagName],
+                ['created_by' => Auth::id()]
+            );
+
+            $tagsId[] = $tag->id;
+        }
+
+        $advertisement->tags()->sync($tagsId);
 
         $advertisement->save();
 
+        //5. Response
         return response()->json([
             "success" => true,
             "redirect" => "/cabinet"

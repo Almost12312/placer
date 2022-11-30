@@ -42,7 +42,8 @@ export default {
                     content: "",
                     location: "",
                     price: "",
-                    category: ''
+                    category: '',
+                    tags: []
                 }
             }
         }

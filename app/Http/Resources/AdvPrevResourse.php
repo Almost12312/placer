@@ -15,7 +15,6 @@ class AdvPrevResourse extends JsonResource
     public function toArray($request)
     {
         if (count($this->resource->files) > 0)
-
         {
             return [
                 'id' => $this->resource->id,
@@ -27,6 +26,7 @@ class AdvPrevResourse extends JsonResource
                 'category' => '',
                 'tags' => []
             ];
+
         } else {
             return [
                 'id' => $this->resource->id,
