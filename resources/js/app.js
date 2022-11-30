@@ -19,6 +19,7 @@ import Drafts from "./components/Drafts";
 import HistoryAdv from "./components/HistoryAdv";
 import Cabinet from "./components/Cabinet";
 import RedContainer from "./components/RedContainer";
+import AdvViewRoot from "./components/AdvViewRoot";
 
 
 Vue.use(VueRouter)
@@ -81,6 +82,16 @@ if (document.querySelector('.cabinet__container')) {
         components: {
             Cabinet
         },
+    })
+}
+
+if (document.querySelector('.view__adv__container'))
+{
+    new Vue ({
+        el: '.view__adv__container',
+        components: {
+            AdvViewRoot
+        }
     })
 }
 

@@ -26,6 +26,7 @@ class AdvertisementResource extends JsonResource
                 'location' => $this->resource->location,
                 'price' => $this->resource->price,
                 'status' => $this->resource->status,
+                'category' => $this->resource->category_id,
                 'images' => $this->resource->files[0]->getUrl()
             ];
         } else {

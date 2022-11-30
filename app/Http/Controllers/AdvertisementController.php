@@ -28,6 +28,7 @@ class AdvertisementController extends Controller
 
             //1.2. Get for sync
         $getCategory = (int)$request->get('category');
+        $getTags = $request->get('tags');
 
         //2. Create advertisement
         $advertisement = Advertisement::updateOrCreate(
@@ -50,24 +51,29 @@ class AdvertisementController extends Controller
         }
 
         //3. Category
-        $category = Category::find($getCategory);
-        $category->advertisements()->save($advertisement);
-
-        //4. Tags
-        $getTags = $request->get('tags');
-        $tagsId = [];
-
-        foreach ($getTags as $tagName)
+        if ($getCategory !== 0)
         {
-            $tag = Tag::firstOrCreate(
-                ['name' => $tagName],
-                ['created_by' => Auth::id()]
-            );
-
-            $tagsId[] = $tag->id;
+            $category = Category::find($getCategory);
+            $category->advertisements()->save($advertisement);
         }
 
-        $advertisement->tags()->sync($tagsId);
+        //4. Tags
+        if ($getTags !== null)
+        {
+            $tagsId = [];
+
+            foreach ($getTags as $tagName)
+            {
+                $tag = Tag::firstOrCreate(
+                    ['name' => $tagName],
+                    ['created_by' => Auth::id()]
+                );
+
+                $tagsId[] = $tag->id;
+            }
+
+            $advertisement->tags()->sync($tagsId);
+        }
 
         $advertisement->save();
 

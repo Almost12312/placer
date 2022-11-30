@@ -18,6 +18,7 @@
 <script>
 import Categories from "./Categories";
 import InputPrevCont from "./InputPrevCont";
+import axios from "axios";
 
 export default {
     name: "RedContainer",
@@ -48,6 +49,26 @@ export default {
             }
         }
     },
+
+    methods: {
+        loadImgs()
+        {
+            let id = {
+                id: this.thisAdv.id
+            }
+
+            axios.post('/preview/get-imgs', id)
+                .then((response) => {
+                    if(response.data.data){
+                        this.images = response.data.data
+                    }
+                })
+        }
+    },
+
+    mounted() {
+        this.loadImgs()
+    }
 }
 </script>
 

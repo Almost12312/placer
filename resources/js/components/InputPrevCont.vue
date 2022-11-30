@@ -74,28 +74,16 @@ export default {
     },
 
     methods: {
-        loadImgs()
-        {
-            let id = {
-                id: this.thisAdv.id
-            }
 
-            axios.post('/preview/get-imgs', id)
-                 .then((response) => {
-                     if(response.data.data){
-                         this.images = response.data.data
-                     }
-                 })
-        }
     },
 
     components: {
         Preview, InputsAdvert, Buttons
     },
 
-    mounted() {
-        this.loadImgs()
-    }
+    // mounted() {
+    //     this.loadImgs()
+    // }
 }
 </script>
 

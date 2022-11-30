@@ -13,7 +13,8 @@ $iconWidth: 42px;
 $iconHeight: 42px;
 
 body {
-    background: #f8f7f7;
+    //background: #f8f7f7;
+    background: #ffffff;
 
     padding: 100px 0;
 
@@ -37,7 +38,7 @@ body {
 
 .header {
     width: 100%;
-    height: 80px;
+    height: 85px;
 
     position: fixed;
     left: 0;
@@ -49,6 +50,7 @@ body {
 
     z-index: 999;
     background: #ffffff;
+    border-bottom: 1px solid #d9d9d9;
 }
 
 .header__container {
@@ -65,6 +67,9 @@ body {
     img {
         width: 160px;
         height: 60px;
+
+        position: relative;
+        top: -10px;
     }
 
 }
@@ -120,8 +125,8 @@ body {
 }
 
 .burger_img {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
 }
 
 .menu {
@@ -180,6 +185,7 @@ body {
     align-self: center;
 
     background: #ffffff;
+    border-top: 1px solid #d9d9d9;
 }
 
 .footer__container {
@@ -1077,7 +1083,7 @@ body {
     font-weight: 400;
     font-size: 14px;
 
-    background: rgba(#000000, 0.25);
+    background: rgba(#000000, 0.1);
     border-radius: 10px;
 
     &:hover {
@@ -1107,6 +1113,8 @@ body {
     padding-bottom: 40px;
 
     background: #ffffff;
+
+    border-radius: $borderRad;
 
     //scrollbar-width: auto;
     //scrollbar-color: #d6d6d6 #ffffff;
@@ -1424,4 +1432,95 @@ body {
 
 .addAdv__btn_container {
     position: relative;
+}
+
+
+
+
+.view__adv {
+    max-width: 1200px;
+
+    display: flex;
+    gap: 50px;
+
+    margin: 0 auto;
+}
+
+.advertContainer {
+    height: 1000px;
+    width: 70%;
+
+    //background: #f8f7f7;
+}
+
+.advertInformation {
+    padding: 40px;
+}
+
+.advInfoModel {
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+        font-family: $ffManrope;
+        font-size: 24px;
+        font-weight: 700;
+
+        margin-bottom: 10px;
+    }
+
+    h4 {
+        font-family: $ffPoppins;
+        font-size: 16px;
+        font-weight: 100;
+    }
+}
+
+.description {
+    margin-top: 60px;
+}
+
+.advTags {
+    margin-top: 40px;
+
+    h3 {
+        font-family: $ffManrope;
+        font-size: 20px;
+    }
+}
+
+.contact__ads {
+    width: 30%;
+    height: 1000px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.contact {
+    width: 100%;
+    height: 300px;
+
+    //background: #f8f7f7;
+    -webkit-box-shadow: 1px 1px 47px -8px rgba(34, 60, 80, 0.16);
+    -moz-box-shadow: 1px 1px 47px -8px rgba(34, 60, 80, 0.16);
+    box-shadow: 1px 1px 47px -8px rgba(34, 60, 80, 0.16);
+}
+
+.ads {
+    width: 100%;
+    height: 500px;
+
+    -webkit-box-shadow: 1px 1px 47px -8px rgba(34, 60, 80, 0.09);
+    -moz-box-shadow: 1px 1px 47px -8px rgba(34, 60, 80, 0.09);
+    box-shadow: 1px 1px 47px -8px rgba(34, 60, 80, 0.09)
+}
+
+.advert__images {
+    width: 100%;
+    height: 500px;
+    background: #ffffff;
+
+    border: 1px solid #000000;
 }

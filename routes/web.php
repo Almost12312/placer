@@ -19,35 +19,51 @@ use \App\Http\Controllers\AuthorizationController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\AdController;
 
+/* 1. Home */
+
 Route::get('/', [HomeController::class, 'home'])
     ->name('home');
+
+/* ------------------------------------------------------------------------ */
+
+
+/* 2. Authorization and registration */
 
 Route::view('/authorization', 'authorization')
     ->name('authorization');
 
+Route::view('/registration', 'registration')
+    ->name('registration');
+
+
 Route::post('/login', [AuthorizationController::class, 'login']);
 Route::post('/logout', [AuthorizationController::class, 'logout']);
 
-Route::view('/registration', 'registration')
-    ->name('registration');
-// Resource
+    //2.2 Resources
 Route::post('/reg-or-update', [AuthorizationController::class, 'reg']);
 
+
+/* ------------------------------------------------------------------------ */
+
+
+/* 3. Cabinet */
 
 Route::get('/cabinet', [CabinetController::class, 'cabinet'])
     ->name('cabinet')
     ->middleware(Authorization::class);
-//Resource
-Route::post('/profile', [CabinetController::class, 'profile']);
+
 Route::post('/file/upload-avatar', [CabinetController::class, 'changeAvatar'])
     ->name('avatar');
+    //3.2 Resources
+Route::post('/profile', [CabinetController::class, 'profile']);
 
 
-Route::post('/advertisement/create', [AdvertisementController::class, 'addAdvert'])
-    ->name('createPostAdvert');
+/* ------------------------------------------------------------------------ */
 
-Route::post('/advertisement/change-status', [AdvertisementController::class, 'changeStatus'])
-    ->name('draftAdvert');
+
+/* 4. Advertisement */
+
+Route::view('/advertisement/view', 'advView');
 
 Route::view('/advertisement/create', 'redAdvert')
     ->name('createBladeAdvert')
@@ -56,6 +72,21 @@ Route::view('/advertisement/create', 'redAdvert')
 Route::get('/advertisement/{id?}/redaction', [AdvertisementController::class, 'view'])
     ->name('addAdvert')
     ->middleware(Redaction::class);
+    //Resource
+
+Route::post('/advertisement/create', [AdvertisementController::class, 'addAdvert'])
+    ->name('createPostAdvert');
+
+Route::post('/advertisement/change-status', [AdvertisementController::class, 'changeStatus'])
+    ->name('draftAdvert');
+
+Route::post('/advertisement/delete', [AdvertisementController::class, 'delAdvert']);
+
+
+/* ------------------------------------------------------------------------ */
+
+
+/* 5. API */
 
 Route::post('/preview/get-imgs', [FileController::class, 'getCurrentFile'])
     ->name('getCurrentImgs');
@@ -63,10 +94,11 @@ Route::post('/preview/get-imgs', [FileController::class, 'getCurrentFile'])
 Route::post('/file/upload', [FileController::class, 'file'])
     ->name('fileUpload');
 
-Route::post('/advertisement/delete', [AdvertisementController::class, 'delAdvert']);
+
+/* ------------------------------------------------------------------------ */
 
 
-
+/* 6. Test */
 
 Route::get('/test', [TestController::class, 'test']);
 

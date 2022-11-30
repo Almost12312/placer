@@ -5,13 +5,17 @@
             <img class="noPhoto" src="/images/noPhoto.svg" alt="">
         </div>
         <div class="advertisement__description">
-            <h3 class="ad__title">{{ advInfo.title }}</h3>
-            <h4 class="ad__content">{{ advInfo.content }}</h4>
+            <h3 v-if="advInfo.title" class="ad__title">{{ advInfo.title }}</h3>
+            <h3 v-else class="ad__title">Не указано</h3>
+            <h4 v-if="advInfo.content" class="ad__content">{{ advInfo.content }}</h4>
+            <h4 v-else class="ad__content">Не указано</h4>
             <div class="location_price">
-                <h5 class="ad__location">{{ advInfo.location }}</h5>
+                <h5 v-if="advInfo.location" class="ad__location">{{ advInfo.location }}</h5>
+                <h5 v-else class="ad__location">Город не указан</h5>
                 <h6 class="ad__price">
                     <span v-if="advInfo.price === 0" class="no__price">Бесплатно</span>
                     <span v-if="advInfo.price > 0" class="num__price">{{advInfo.price}}</span>
+                    <span v-else class="no__price">Цена отсутствует</span>
                 </h6>
             </div>
         </div>
