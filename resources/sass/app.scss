@@ -1060,13 +1060,14 @@ body {
     margin-top: 15px;
 
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
 .tag {
     min-width: 50px;
 
-    padding: 5px;
+    padding: 8px;
 
     display: flex;
     align-items: center;
@@ -1077,7 +1078,11 @@ body {
     font-size: 14px;
 
     background: rgba(#000000, 0.25);
-    border-radius: 5px;
+    border-radius: 10px;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .redaction__adv {

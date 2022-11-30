@@ -804,12 +804,13 @@ body {
   width: 300px;
   margin-top: 15px;
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
 .tag {
   min-width: 50px;
-  padding: 5px;
+  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -817,7 +818,10 @@ body {
   font-weight: 400;
   font-size: 14px;
   background: rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
+  border-radius: 10px;
+}
+.tag:hover {
+  cursor: pointer;
 }
 
 .redaction__adv {

@@ -2472,7 +2472,7 @@ __webpack_require__.r(__webpack_exports__);
       var advStatus = {
         status: 2
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/resource', advStatus).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/load-adv', advStatus).then(function (response) {
         _this.allAdv = response.data.data;
       });
     },
@@ -2598,7 +2598,7 @@ __webpack_require__.r(__webpack_exports__);
       var advStatus = {
         status: 3
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/resource', advStatus).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/load-adv', advStatus).then(function (response) {
         _this.allAdv = response.data.data;
       });
     },
@@ -2813,7 +2813,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "InputsAdvert",
   data: function data() {
-    return {};
+    return {
+      validation: false,
+      tags: this.thisAdv.tags
+    };
   },
   props: {
     inputs_info_data: {
@@ -2824,9 +2827,27 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    pushTags: function pushTags(e) {
-      this.thisAdv.tags.push(this.inputs_info_data.tags);
-      this.inputs_info_data.tags = null;
+    pushTags: function pushTags() {
+      if (this.inputs_info_data.tags === null || this.inputs_info_data.tags === '') {
+        return;
+      } else {
+        if (!(this.tags.length === 10)) {
+          this.tags.push(this.inputs_info_data.tags);
+          this.inputs_info_data.tags = null;
+        } else {
+          alert('Максимальное количество тегов 10');
+          this.inputs_info_data.tags = null;
+          this.validation = true;
+        }
+      }
+    },
+    delTags: function delTags(id) {
+      this.thisAdv.tags.splice(id, 1);
+    }
+  },
+  watch: {
+    tags: function tags() {
+      console.log(this.tags.length);
     }
   }
 
@@ -24198,7 +24219,7 @@ var render = function () {
       },
     }),
     _vm._v(" "),
-    _c("textarea", {
+    _c("input", {
       directives: [
         {
           name: "model",
@@ -24208,7 +24229,12 @@ var render = function () {
         },
       ],
       staticClass: "tags",
-      attrs: { name: "tags", id: "", placeholder: "Теги" },
+      attrs: {
+        name: "tags",
+        id: "",
+        placeholder: "Теги",
+        disabled: _vm.validation,
+      },
       domProps: { value: _vm.inputs_info_data.tags },
       on: {
         keyup: function ($event) {
@@ -24232,8 +24258,19 @@ var render = function () {
     _c(
       "div",
       { staticClass: "tags__container" },
-      _vm._l(_vm.thisAdv.tags, function (tag) {
-        return _c("p", { staticClass: "tag" }, [_vm._v(_vm._s(tag))])
+      _vm._l(_vm.tags, function (tag, id) {
+        return _c(
+          "p",
+          {
+            staticClass: "tag",
+            on: {
+              click: function ($event) {
+                return _vm.delTags(id)
+              },
+            },
+          },
+          [_vm._v(_vm._s(tag))]
+        )
       }),
       0
     ),
