@@ -2,10 +2,11 @@
 
 @section('content')
     <div class="redaction__adv">
-        @isset($thisAdvContent)
-{{--            {{ dd($thisAdvContent) }}--}}
+{{--        {{ dd($files) }}--}}
+    @isset($thisAdvContent)
             <red-container
                 v-bind:this-adv='@json($thisAdvContent)'
+                v-bind:images-prop='@json($files)'
             ></red-container>
         @else
             <red-container></red-container>

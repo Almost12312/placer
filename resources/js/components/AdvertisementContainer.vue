@@ -42,9 +42,17 @@ export default {
 
             if (target.closest('.redBtn'))
             {
-                let id = target.closest('.redBtn').closest('.advertisement').dataset.id
+                let id = target.closest('.advertisement').dataset.id
 
                 location.href = `/advertisement/` + id + `/redaction`
+
+            }
+
+            if (target.closest('.openAdv'))
+            {
+                let id = target.closest('.advertisement').dataset.id
+
+                location.href = `/advertisement/` + id + `/view`
 
             }   else
             {

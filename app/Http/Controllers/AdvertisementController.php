@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\AdvFileResourse;
 use App\Http\Resources\AdvPrevResourse;
+use App\Http\Resources\UserResourse;
 use App\Models\Advertisement;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -130,22 +132,42 @@ class AdvertisementController extends Controller
         $delAdvert->save();
     }
 
-    public function view(Request $request, int $id)
+    public function redAdv(Request $request, int $id)
     {
         $thisAdv = Advertisement::find($id);
 
         $thisAdvInfo = new AdvPrevResourse($thisAdv);
 
-
         $files = new AdvFileResourse($thisAdv);
-
-//        $thisAdvFiles = [];
-//
-//        foreach ($thisAdv->files as $file) {
-//            $thisAdvFiles [] = ["id" => $file["id"], "url" => $file->getUrl()];
-//        }
 
         return view('redAdvert', ['thisAdvContent' => $thisAdvInfo, 'files' => $files]);
 
+    }
+
+    public function viewAdv(int $id)
+    {
+        $thisAdv = Advertisement::find($id);
+
+//        $thisAdvInfo = new AdvPrevResourse($thisAdv);
+
+        $files = new AdvFileResourse($thisAdv);
+//        dd($files);
+
+//        $filesAdv = $thisAdv->files;
+//        $files = [];
+//
+//        foreach ($filesAdv as $file)
+//        {
+//            $files[] = [
+//                "id" => $file->id,
+//                "url" => $file->getUrl()
+//            ];
+//        }
+//
+//        dd($files);
+        $owner = User::find($thisAdv->author_id);
+        $user = new UserResourse($owner);
+
+        return view('viewAdv', ['thisAdv' => $thisAdv, 'user' => $owner, 'files' => $files]);
     }
 }

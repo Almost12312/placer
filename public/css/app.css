@@ -12,7 +12,7 @@ body {
 
 .container {
   width: 90%;
-  max-width: 1920px;
+  max-width: 1440px;
   height: 100%;
   margin: 0 auto;
   position: relative;
@@ -209,15 +209,30 @@ body {
 }
 
 .advertisement {
-  width: 320px;
+  width: 280px;
   position: relative;
   display: flex;
   flex-direction: column;
 }
 
+.img__open {
+  position: relative;
+}
+
+.openAdv {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 998;
+}
+
+.openAdv:hover {
+  cursor: pointer;
+}
+
 .adv_img {
-  width: 320px;
-  height: 240px;
+  width: 100%;
+  height: 220px;
   display: block;
   border-radius: 10px;
   overflow: hidden;
@@ -225,8 +240,8 @@ body {
 }
 
 .noPhotoCont {
-  width: 320px;
-  height: 240px;
+  width: 100%;
+  height: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -246,7 +261,7 @@ body {
   font-weight: 700;
 }
 .advertisement__description h3 {
-  font-size: 24px;
+  font-size: 22px;
 }
 .advertisement__description h4, .advertisement__description h5, .advertisement__description h6 {
   font-size: 16px;
@@ -302,6 +317,7 @@ body {
 .no__price {
   width: 100%;
   text-align: right;
+  white-space: nowrap;
 }
 
 .num__price:after {
@@ -358,6 +374,7 @@ body {
   justify-content: center;
   background: #ffffff;
   border-bottom-left-radius: 10px;
+  z-index: 999;
 }
 .setting__container img {
   width: 25px;
@@ -619,24 +636,24 @@ body {
   margin-top: 10px;
   font-family: "Manrope", sans-serif;
   font-weight: 800;
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .avatar {
-  width: 140px;
-  height: 140px;
+  width: 110px;
+  height: 110px;
   position: relative;
   border-radius: 50%;
   overflow: hidden;
 }
 .avatar img {
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
 }
 
 .withoutRegPhoto__bg {
-  width: 140px;
-  height: 140px;
+  width: 110px;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -687,7 +704,7 @@ body {
   color: #9f9f9f;
   font-family: "Manrope", sans-serif;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .countAdvert {
@@ -713,7 +730,7 @@ body {
 .adv__con__title {
   width: 100%;
   margin-top: 150px;
-  font-size: 30px;
+  font-size: 22px;
   font-weight: 600;
   font-family: "Poppins", sans-serif;
   color: #000000;
@@ -805,7 +822,6 @@ body {
 }
 
 .tags__container {
-  width: 300px;
   margin-top: 15px;
   display: flex;
   flex-wrap: wrap;
@@ -1080,7 +1096,7 @@ body {
 }
 
 .advertInformation {
-  padding: 40px;
+  padding: 40px 0;
 }
 
 .advInfoModel {
@@ -1094,13 +1110,13 @@ body {
   margin-bottom: 10px;
 }
 .advInfoModel h4 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
-  font-weight: 100;
+  font-weight: 300;
 }
 
 .description {
-  margin-top: 60px;
+  margin-top: 40px;
 }
 
 .advTags {
@@ -1119,15 +1135,70 @@ body {
   gap: 50px;
 }
 
-.contact {
+.sellerCard {
   width: 100%;
   height: 300px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
   box-shadow: 1px 1px 47px -8px rgba(34, 60, 80, 0.16);
+}
+
+.sellerInfo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sellerInfo .avatar {
+  width: 60px;
+  height: 60px;
+}
+.sellerInfo img {
+  width: 70px;
+  height: 70px;
+}
+
+.avatar__description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sellerInfoText {
+  display: flex;
+  flex-direction: column;
+}
+.sellerInfoText .name {
+  margin: 0;
+}
+
+.contact__seller {
+  display: flex;
+  justify-content: space-between;
+}
+
+.number {
+  text-align: center;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.ping {
+  text-align: center;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 .ads {
   width: 100%;
   height: 500px;
+  border-radius: 10px;
   box-shadow: 1px 1px 47px -8px rgba(34, 60, 80, 0.09);
 }
 
@@ -1135,5 +1206,10 @@ body {
   width: 100%;
   height: 500px;
   background: #ffffff;
-  border: 1px solid #000000;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.advert__images img {
+  width: 100%;
+  height: 100%;
 }

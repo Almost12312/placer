@@ -1,7 +1,16 @@
 <template>
     <section class="view__adv">
         <div class="advertContainer">
-            <div class="advert__images">IMAGES</div>
+            <div class="advert__images">
+<!--                <Splide :options="{ rewind: false, type: 'fade'}">-->
+<!--                    <SplideSlide>-->
+                        <img src="/images/advertisement.jpg" alt="Sample 1">
+<!--                    </SplideSlide>-->
+<!--                    <SplideSlide>-->
+<!--                        <img src="/images/advertisement.jpg" alt="Sample 1">-->
+<!--                    </SplideSlide>-->
+<!--                </Splide>-->
+            </div>
             <div class="advertInformation">
 
                 <div class="advInfoModel address">
@@ -25,7 +34,10 @@
         </div>
 
         <div class="contact__ads">
-            <div class="contact">
+            <div class="sellerCard">
+                <Profile
+                    :userinfo="userinfo"
+                ></Profile>
             </div>
 
             <div class="ads">
@@ -36,8 +48,42 @@
 </template>
 
 <script>
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import '@splidejs/splide/dist/css/splide.min.css';
+import '@splidejs/splide/dist/css/themes/splide-skyblue.min.css';
+import Profile from "./Profile";
+import axios from "axios";
+
 export default {
-    name: "AdvViewRoot"
+    name: "AdvViewRoot",
+
+    data() {
+        return {
+            userinfo: {
+                type: Object,
+                default() {
+                    return {}
+                }
+            }
+        }
+    },
+
+    methods: {
+        getUser() {
+            axios.post('/profile')
+                .then(response => {
+                    this.userinfo = response.data
+                })
+        },
+    },
+
+    components: {
+        Profile, Splide, SplideSlide
+    },
+
+    mounted() {
+        this.getUser()
+    },
 }
 </script>
 

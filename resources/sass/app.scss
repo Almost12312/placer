@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+
 $ffManrope: 'Manrope', sans-serif;
 $ffPoppins: 'Poppins', sans-serif;
 $clrDisable: #9f9f9f;
@@ -26,7 +27,7 @@ body {
 
 .container {
     width: 90%;
-    max-width: 1920px;
+    max-width: 1440px;
     height: 100%;
 
     margin: 0 auto;
@@ -276,7 +277,7 @@ body {
 }
 
 .advertisement {
-    width: 320px;
+    width: 280px;
 
     position: relative;
 
@@ -284,9 +285,25 @@ body {
     flex-direction: column;
 }
 
+.img__open {
+    position: relative;
+}
+
+.openAdv {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    z-index: 998;
+}
+
+.openAdv:hover {
+    cursor: pointer;
+}
+
 .adv_img {
-    width: 320px;
-    height: 240px;
+    width: 100%;
+    height: 220px;
 
     display: block;
 
@@ -298,8 +315,8 @@ body {
 }
 
 .noPhotoCont {
-    width: 320px;
-    height: 240px;
+    width: 100%;
+    height: 220px;
 
     display: flex;
     align-items: center;
@@ -322,7 +339,7 @@ body {
     }
 
     h3 {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     h4, h5, h6 {
@@ -389,6 +406,9 @@ body {
     width: 100%;
 
     text-align: right;
+
+    white-space: nowrap
+
 }
 
 .num__price:after {
@@ -453,6 +473,8 @@ body {
 
     background: #ffffff;
     border-bottom-left-radius: $borderRad;
+
+    z-index: 999;
 
     img {
         width: 25px;
@@ -816,12 +838,12 @@ body {
 
     font-family: $ffManrope;
     font-weight: 800;
-    font-size: 28px;
+    font-size: 24px;
 }
 
 .avatar {
-    width: 140px;
-    height: 140px;
+    width: 110px;
+    height: 110px;
 
     position: relative;
 
@@ -829,16 +851,16 @@ body {
     overflow: hidden;
 
     img {
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
     }
 
 
 }
 
 .withoutRegPhoto__bg {
-    width: 140px;
-    height: 140px;
+    width: 110px;
+    height: 110px;
 
     display: flex;
     align-items: center;
@@ -906,7 +928,7 @@ body {
     color: $clrDisable;
     font-family: $ffManrope;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .countAdvert {
@@ -938,7 +960,7 @@ body {
 
     margin-top: 150px;
 
-    font-size: 30px;
+    font-size: 22px;
     font-weight: 600;
     font-family: $ffPoppins;
     color: #000000;
@@ -1061,7 +1083,6 @@ body {
 }
 
 .tags__container {
-    width: 300px;
 
     margin-top: 15px;
 
@@ -1454,7 +1475,7 @@ body {
 }
 
 .advertInformation {
-    padding: 40px;
+    padding: 40px 0;
 }
 
 .advInfoModel {
@@ -1470,14 +1491,14 @@ body {
     }
 
     h4 {
-        font-family: $ffPoppins;
+        font-family: $ffManrope;
         font-size: 16px;
-        font-weight: 100;
+        font-weight: 300;
     }
 }
 
 .description {
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
 .advTags {
@@ -1498,20 +1519,87 @@ body {
     gap: 50px;
 }
 
-.contact {
+.sellerCard {
     width: 100%;
     height: 300px;
 
+    padding: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     //background: #f8f7f7;
+    border-radius: $borderRad;
     -webkit-box-shadow: 1px 1px 47px -8px rgba(34, 60, 80, 0.16);
     -moz-box-shadow: 1px 1px 47px -8px rgba(34, 60, 80, 0.16);
     box-shadow: 1px 1px 47px -8px rgba(34, 60, 80, 0.16);
+}
+
+.sellerInfo {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    img {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+.avatar__description {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sellerInfoText {
+    display: flex;
+    flex-direction: column;
+
+
+    .name {
+        margin: 0;
+    }
+}
+
+.contact__seller {
+    display: flex;
+
+    justify-content: space-between;
+}
+
+.number {
+    text-align: center;
+
+    padding: 10px;
+
+    background: rgba(#000000, 0.1);
+    border-radius: $borderRad;
+}
+
+.ping {
+    text-align: center;
+
+    padding: 10px;
+
+    background: rgba(#000000, 0.1);
+    border-radius: $borderRad;
 }
 
 .ads {
     width: 100%;
     height: 500px;
 
+    border-radius: $borderRad;
     -webkit-box-shadow: 1px 1px 47px -8px rgba(34, 60, 80, 0.09);
     -moz-box-shadow: 1px 1px 47px -8px rgba(34, 60, 80, 0.09);
     box-shadow: 1px 1px 47px -8px rgba(34, 60, 80, 0.09)
@@ -1522,5 +1610,11 @@ body {
     height: 500px;
     background: #ffffff;
 
-    border: 1px solid #000000;
+    border-radius: $borderRad;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
 }

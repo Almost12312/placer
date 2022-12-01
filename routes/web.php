@@ -63,13 +63,14 @@ Route::post('/profile', [CabinetController::class, 'profile']);
 
 /* 4. Advertisement */
 
-Route::view('/advertisement/view', 'advView');
+Route::view('/advertisement/view', 'viewAdv');
+Route::get('/advertisement/{id?}/view', [AdvertisementController::class, 'viewAdv']);
 
 Route::view('/advertisement/create', 'redAdvert')
     ->name('createBladeAdvert')
     ->middleware(CreateMDW::class);
 
-Route::get('/advertisement/{id?}/redaction', [AdvertisementController::class, 'view'])
+Route::get('/advertisement/{id?}/redaction', [AdvertisementController::class, 'redAdv'])
     ->name('addAdvert')
     ->middleware(Redaction::class);
     //Resource

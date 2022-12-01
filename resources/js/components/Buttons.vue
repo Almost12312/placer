@@ -91,18 +91,20 @@ export default {
         cancel() {
             if (this.thisAdv.status !== 1)
             {
-                if (this.thisAdv.title !== null || this.thisAdv.content !== null || this.thisAdv.price !== null || this.thisAdv.location !== null) {
+                if (this.inputs_info_data.title === '' && this.inputs_info_data.content === '' && this.inputs_info_data.price === '' && this.inputs_info_data.location === '') {
+                    location.href = '/cabinet'
+
+                } else
+                {
                     axios.post('/advertisement/create', this.getAdv(2))
                         .then((response) => {
-                            if (response.data.success === true)
-                            {
+                            if (response.data.success === true) {
                                 this.isSave = true
                                 location.href = '/cabinet'
                             }
                         })
                 }
-            } else
-            {
+            }   else {
                 location.href = '/cabinet'
             }
         },

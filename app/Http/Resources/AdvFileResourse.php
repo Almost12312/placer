@@ -25,8 +25,6 @@ class AdvFileResourse extends JsonResource
             ];
         }
 
-        return [
-                'data' => $advFile
-            ];
+        return $advFile;
         }
     }

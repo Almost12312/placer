@@ -1,8 +1,11 @@
 <template>
     <div class="advertisement" :data-id="advInfo.id">
-        <img v-if="advInfo.images" class="adv_img" :src="advInfo.images" alt="">
-        <div v-else class="noPhotoCont">
-            <img class="noPhoto" src="/images/noPhoto.svg" alt="">
+        <div class="img__open">
+            <div class="openAdv"></div>
+            <img v-if="advInfo.images" class="adv_img" :src="advInfo.images" alt="">
+            <div v-else class="noPhotoCont">
+                <img class="noPhoto" src="/images/noPhoto.svg" alt="">
+            </div>
         </div>
         <div class="advertisement__description">
             <h3 v-if="advInfo.title" class="ad__title">{{ advInfo.title }}</h3>

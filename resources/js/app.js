@@ -11,20 +11,28 @@ import InputsAdvert from "./components/InputsAdvert";
 import Buttons from "./components/Buttons";
 import Registration from "./components/registration";
 import Categories from "./components/Categories";
-import Profile from "./components/Profile";
+import ProfileContainer from "./components/ProfileContainer";
 import AdvertisementContainer from "./components/AdvertisementContainer";
 import Router from "./components/router";
 import Foo from "./components/Foo";
 import Drafts from "./components/Drafts";
 import HistoryAdv from "./components/HistoryAdv";
-import Cabinet from "./components/Cabinet";
+import CabinetRoot from "./components/CabinetRoot";
 import RedContainer from "./components/RedContainer";
 import AdvViewRoot from "./components/AdvViewRoot";
+import Profile from "./components/Profile";
+import Splide from '@splidejs/splide/dist/js/splide.min.js'
+import '@splidejs/splide/css';
 
+if (document.querySelector('.splide'))
+{
+    new Splide('.splide').mount()
+}
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
+    // mode: 'history',
     routes: [
         {
             path: '/foo',
@@ -80,20 +88,33 @@ if (document.querySelector('.cabinet__container')) {
         el: '.cabinet__container',
         router,
         components: {
-            Cabinet
+            CabinetRoot
         },
     })
 }
 
-if (document.querySelector('.view__adv__container'))
-{
-    new Vue ({
-        el: '.view__adv__container',
-        components: {
-            AdvViewRoot
-        }
-    })
-}
+// Vue.use(VueSplide)
+//
+// if (document.querySelector('.advert__images'))
+// {
+//     new Vue ({
+//         el: '.advert__images',
+//         components: {
+//             viewAdvSlider
+//         },
+//     })
+// }
+
+// if (document.querySelector('.view__adv__container'))
+// {
+//     new Vue ({
+//         el: '.view__adv__container',
+//         components: {
+//             Profile,
+//             // AdvViewRoot //delete
+//         }
+//     })
+// }
 
 
 let loginBtn = document.getElementById('auth__submit');

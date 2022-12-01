@@ -29,7 +29,7 @@ export default {
 
     data() {
         return {
-            images: [],
+            images: this.imagesProp
         }
     },
 
@@ -47,27 +47,34 @@ export default {
                     tags: []
                 }
             }
+        },
+
+        imagesProp: {
+            type: Array,
+            default() {
+                return [];
+            }
         }
     },
 
     methods: {
-        loadImgs()
-        {
-            let id = {
-                id: this.thisAdv.id
-            }
-
-            axios.post('/preview/get-imgs', id)
-                .then((response) => {
-                    if(response.data.data){
-                        this.images = response.data.data
-                    }
-                })
-        }
+        // loadImgs()
+        // {
+        //     let id = {
+        //         id: this.thisAdv.id
+        //     }
+        //
+        //     axios.post('/preview/get-imgs', id)
+        //         .then((response) => {
+        //             if(response.data.data){
+        //                 this.images = response.data.data
+        //             }
+        //         })
+        // }
     },
 
     mounted() {
-        this.loadImgs()
+        // this.loadImgs()
     }
 }
 </script>
