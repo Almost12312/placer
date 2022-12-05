@@ -131,7 +131,14 @@ if (document.querySelector('#homeAdvCont'))
 
 if (document.querySelector('.withoutRegPhoto__bg'))
 {
-    document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#'+Math.random().toString(16).substring(2, 6)
+    let clr = Math.random().toString(16).substring(2, 8).match(/.{1,2}/g)
+    let rgba = [
+        parseInt(clr[0], 16),
+        parseInt(clr[1], 16),
+        parseInt(clr[2], 16),
+    ]
+
+    document.querySelector('.withoutRegPhoto__bg').style.background = "rgba(" + rgba[0] + "," + rgba[1] + ", " + rgba[2] + ", 1)"
 }
 
 // Vue.use(VueSplide)

@@ -25,6 +25,7 @@ body {
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,6 +131,7 @@ body {
   position: fixed;
   bottom: 0;
   right: 0;
+  z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -861,13 +863,23 @@ body {
 }
 
 .inputs_container {
+  width: 300px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
 .tags__container {
+  width: 100%;
   margin-top: 15px;
+  height: 120px;
+  overflow-x: scroll;
+}
+.tags__container::-webkit-scrollbar {
+  width: 0;
+}
+
+.tags__list {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -1172,9 +1184,15 @@ body {
   font-size: 20px;
 }
 
+.sidebar {
+  width: 350px;
+  position: relative;
+}
+
 .contact__ads {
-  width: 300px;
+  width: 100%;
   height: 1000px;
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 50px;

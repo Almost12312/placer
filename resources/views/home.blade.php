@@ -44,7 +44,7 @@
                     <div class="img__open">
                         <div class="openAdv"></div>
 {{--                        {{ dd($adv->images) }}--}}
-                        @if($adv->files[0] !== null)
+                        @if(count($adv->files) > 0)
                             <img class="adv_img" src="{{ $adv->files[0]->getUrl() }}" alt="">
                         @else
                         <div class="noPhotoCont">
@@ -55,7 +55,7 @@
                             @for($i = 0; $i < count($adv->tags); $i++)
                                 <p class="tag">{{ $adv->tags[$i]->name }}</p>
 
-                                @break($i === 1)
+                                @break($i === 2)
                             @endfor
                         </div>
                     </div>

@@ -6,7 +6,9 @@
         <input type="number" v-model="inputs_info_data.price" class="red__input price__red" id="price__red" placeholder="Цена">
         <input @keyup.enter="pushTags()" class="tags" v-model="inputs_info_data.tags" name="tags" placeholder="Теги" :disabled="validation">
         <div class="tags__container">
-            <p @click="delTags(id)" class="tag" v-for="(tag, id) in tags">{{tag}}</p>
+            <div class="tags__list">
+                <p @click="delTags(id)" class="tag" v-for="(tag, id) in tags">{{tag}}</p>
+            </div>
         </div>
     </div>
 </template>

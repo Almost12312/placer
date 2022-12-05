@@ -128,7 +128,5 @@ export default {
 </script>
 
 <style>
-    .buttons__prev {
-        margin-top: 100px;
-    }
+
 </style>
