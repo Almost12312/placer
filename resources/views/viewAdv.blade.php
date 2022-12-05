@@ -5,7 +5,7 @@
         <section class="view__adv">
             <div class="advertContainer">
                 <div class="advert__images">
-                    <section class="splide" aria-label="Splide Basic HTML Example">
+                    <section class="splide fade" aria-label="Splide Basic HTML Example">
                         <div class="splide__track">
                             <ul class="splide__list">
                                 @foreach($thisAdv->files as $file)
@@ -25,7 +25,6 @@
 {{--                    @endforeach--}}
 {{--                                        </SplideSlide>--}}
 {{--                                        <SplideSlide>--}}
-                                            <img src="/images/advertisement.jpg" alt="Sample 1">
 {{--                                      </SplideSlide>--}}
 {{--                                    </Splide>--}}
                 </div>
@@ -59,11 +58,15 @@
                         <div class="avatar__description">
                             <div class="avatar">
 
-                                {{--                            @if()--}}
-                                <img src="{{ $user->files[0]->getUrl() }}" alt="аватарка">
-                                <div class="withoutRegPhoto__bg">
-                                    <div class="withoutRegPhoto"></div>
-                                </div>
+                                @if(count($user->files) > 0)
+                                    <img src="{{ $user->files[0]->getUrl() }}" alt="аватарка">
+                                @else
+                                    <div class="withoutRegPhoto__bg">
+                                        <div class="withoutRegPhoto">
+                                            {{ strtoupper(mb_strimwidth($user->name, 0, 1)) }}
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                             <div class="sellerInfoDescription">
                                 <p class="name">

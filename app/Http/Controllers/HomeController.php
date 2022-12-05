@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FileRequest;
+use App\Http\Resources\AdvertisementCollection;
+use App\Http\Resources\AdvertisementResource;
+use App\Models\Advertisement;
 use App\Models\File;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,8 +16,13 @@ class HomeController extends Controller
 {
     public function home() {
 
-        $users = User::all();
+        $advs = Advertisement::all()->where('status', '=', 1);
 
-        return view('home', ['users' => $users]);
+//        dd($links);
+//        $advs = new AdvertisementCollection($getAdvs);
+
+//        dd($advs[0]->files);
+
+        return view('home', ['advs' => $advs]);
     }
 }

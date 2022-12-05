@@ -16,8 +16,8 @@ class AdvertisementResource extends JsonResource
     public function toArray($request)
     {
 
+//        dd($this->resource->files);
         if (count($this->resource->files) > 0)
-
         {
             return [
                 'id' => $this->resource->id,
@@ -27,6 +27,7 @@ class AdvertisementResource extends JsonResource
                 'price' => $this->resource->price,
                 'status' => $this->resource->status,
                 'category' => $this->resource->category_id,
+//                'images' => $this->resource->id,
                 'images' => $this->resource->files[0]->getUrl()
             ];
         } else {

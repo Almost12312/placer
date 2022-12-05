@@ -85,17 +85,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'moto'
         ]);
 
-        $product = Advertisement::create([
-            'author_id' => 1,
-            'title' => 'Great cars',
-            'content' => 'Lorem ipsum',
-            'location' => 'Moscow',
-            'delete_at' => null,
-            'price' => 10241,
-            'category_id' => 1,
-            'status' => 1
-        ]);
-
 //        $category = Tag::find([2,3]);
 //        $product->tag()->attach($category);
 

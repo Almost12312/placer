@@ -23,10 +23,25 @@ import AdvViewRoot from "./components/AdvViewRoot";
 import Profile from "./components/Profile";
 import Splide from '@splidejs/splide/dist/js/splide.min.js'
 import '@splidejs/splide/css';
+import * as events from "events";
 
-if (document.querySelector('.splide'))
+if (document.querySelector('.fade'))
 {
-    new Splide('.splide').mount()
+    new Splide('.fade', {
+        type: 'fade',
+        arrows: false,
+    }).mount()
+}
+
+if (document.querySelector('.homeSlider'))
+{
+    new Splide('.homeSlider', {
+        type   : 'loop',
+        arrows: false,
+        pagination: false,
+        perPage: 2,
+        autoplay: true
+    }).mount()
 }
 
 Vue.use(VueRouter)
@@ -91,6 +106,32 @@ if (document.querySelector('.cabinet__container')) {
             CabinetRoot
         },
     })
+}
+
+if (document.querySelector('#homeAdvCont'))
+{
+    let cont = document.querySelector('#homeAdvCont')
+
+    cont.addEventListener('click', event => {
+        let target = event.target
+
+        if (target.closest('.openAdv'))
+        {
+            console.log("Привет")
+            let id = target.closest('.advertisement').dataset.id
+
+            location.href = `/advertisement/` + id + `/view`
+
+        }   else
+        {
+            return
+        }
+    })
+}
+
+if (document.querySelector('.withoutRegPhoto__bg'))
+{
+    document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#'+Math.random().toString(16).substring(2, 6)
 }
 
 // Vue.use(VueSplide)

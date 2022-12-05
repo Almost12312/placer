@@ -11,7 +11,7 @@
                 </label>
 
                 <img v-if="userinfo.url !== null" :src="userinfo.url" alt="аватарка">
-                <div v-else class="withoutRegPhoto__bg">
+                <div v-show="userinfo.url === null" class="withoutRegPhoto__bg">
                     <div v-if="userinfo.name" class="withoutRegPhoto">{{ userinfo.name.substring(0, 1).toUpperCase() }}</div>
                 </div>
             </div>

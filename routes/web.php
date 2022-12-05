@@ -95,6 +95,7 @@ Route::post('/preview/get-imgs', [FileController::class, 'getCurrentFile'])
 Route::post('/file/upload', [FileController::class, 'file'])
     ->name('fileUpload');
 
+Route::post('/load-adv', [AdvResourceController::class, 'res']);
 
 /* ------------------------------------------------------------------------ */
 
@@ -103,4 +104,3 @@ Route::post('/file/upload', [FileController::class, 'file'])
 
 Route::get('/test', [TestController::class, 'test']);
 
-Route::post('/load-adv', [AdvResourceController::class, 'res']);
