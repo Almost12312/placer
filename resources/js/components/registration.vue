@@ -84,17 +84,17 @@ export default {
                 })
         },
 
-        randomBg() {
-            // console.log('xer')
-            console.log('#'+Math.random().toString(16).substr(2,6))
-            document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#'+Math.random().toString(16).substr(2,6)
-        },
+        // randomBg() {
+        //     // console.log('xer')
+        //     console.log('#'+Math.random().toString(16).substr(2,6))
+        //     document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#'+Math.random().toString(16).substr(2,6)
+        // },
 
 
     },
 
     mounted() {
-        this.randomBg()
+        // this.randomBg()
     }
 }
 </script>

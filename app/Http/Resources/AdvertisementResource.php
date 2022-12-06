@@ -15,6 +15,20 @@ class AdvertisementResource extends JsonResource
 
     public function toArray($request)
     {
+        $tags = [];
+
+        if (count($this->resource->tags) > 0)
+        {
+            foreach ($this->resource->tags as $tag)
+            {
+                $tags [] = [
+                    'id' => $tag->id,
+                    'name' => $tag->name
+                ];
+            }
+        }
+
+        //Create Tag Resource
 
 //        dd($this->resource->files);
         if (count($this->resource->files) > 0)
@@ -27,8 +41,8 @@ class AdvertisementResource extends JsonResource
                 'price' => $this->resource->price,
                 'status' => $this->resource->status,
                 'category' => $this->resource->category_id,
-//                'images' => $this->resource->id,
-                'images' => $this->resource->files[0]->getUrl()
+                'images' => $this->resource->files[0]->getUrl(),
+                'tags' => $tags
             ];
         } else {
             return [
@@ -38,6 +52,7 @@ class AdvertisementResource extends JsonResource
                 'location' => $this->resource->location,
                 'price' => $this->resource->price,
                 'status' => $this->resource->status,
+                'category' => null,
                 'images' => null
             ];
         }

@@ -33,7 +33,7 @@ class CabinetController extends Controller
         ]);
     }
 
-    public function profile(Request $request)
+    public function profile()
     {
         $user = User::find(Auth::user()->id);
 

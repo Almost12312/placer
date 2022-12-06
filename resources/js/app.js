@@ -23,7 +23,7 @@ import AdvViewRoot from "./components/AdvViewRoot";
 import Profile from "./components/Profile";
 import Splide from '@splidejs/splide/dist/js/splide.min.js'
 import '@splidejs/splide/css';
-import * as events from "events";
+import HeadLayout from "./components/HeadLayout";
 
 if (document.querySelector('.fade'))
 {
@@ -108,9 +108,32 @@ if (document.querySelector('.cabinet__container')) {
     })
 }
 
+if (document.querySelector('.header__container')) {
+    new Vue ({
+        el: '.header__container',
+        components: {
+            HeadLayout
+        }
+    })
+}
+
+if (document.querySelector('.posts')) {
+    new Vue ({
+        el: '.posts',
+        components: {
+
+        }
+    })
+}
+
+
+
+
+
+
 if (document.querySelector('#homeAdvCont'))
 {
-    let cont = document.querySelector('#homeAdvCont')
+    let cont = document.querySelector('#homeAdvCont');
 
     cont.addEventListener('click', event => {
         let target = event.target
@@ -126,11 +149,12 @@ if (document.querySelector('#homeAdvCont'))
         {
             return
         }
-    })
+    });
 }
 
 if (document.querySelector('.withoutRegPhoto__bg'))
 {
+    console.log("Вы изменили цвет для бг")
     let clr = Math.random().toString(16).substring(2, 8).match(/.{1,2}/g)
     let rgba = [
         parseInt(clr[0], 16),

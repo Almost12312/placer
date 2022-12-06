@@ -55,7 +55,7 @@ Route::get('/cabinet', [CabinetController::class, 'cabinet'])
 Route::post('/file/upload-avatar', [CabinetController::class, 'changeAvatar'])
     ->name('avatar');
     //3.2 Resources
-Route::post('/profile', [CabinetController::class, 'profile']);
+Route::get('/profile', [CabinetController::class, 'profile']);
 
 
 /* ------------------------------------------------------------------------ */

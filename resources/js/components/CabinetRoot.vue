@@ -41,7 +41,7 @@ export default {
         },
 
         getUser() {
-            axios.post('/profile')
+            axios.get('/profile')
                 .then(response => {
                     this.userinfo = response.data
                 })

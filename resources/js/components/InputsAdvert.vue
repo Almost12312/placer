@@ -48,8 +48,15 @@ export default {
             {
                 if (!(this.tags.length === 10))
                 {
-                    this.tags.push(this.inputs_info_data.tags)
-                    this.inputs_info_data.tags = null
+                    if (!(this.inputs_info_data.tags.length >= 10))
+                    {
+                        this.tags.push(this.inputs_info_data.tags);
+                        this.inputs_info_data.tags = null
+
+                    }   else
+                    {
+                        alert('Максимальный размер тега 10 символов')
+                    }
 
                 }   else
                 {

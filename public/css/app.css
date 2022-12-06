@@ -41,6 +41,14 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+.header__container .avatar {
+  width: 55px;
+  height: 55px;
+}
+.header__container .avatar img {
+  height: 60px;
+  width: 60px;
+}
 
 .logo img {
   width: 140px;
@@ -70,8 +78,14 @@ body {
 
 .user_menu {
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 30px;
   border: none;
   background: #ffffff;
+}
+.user_menu .favorites__container {
+  position: static;
 }
 
 .user_menu_container {
@@ -96,6 +110,7 @@ body {
 
 .menu {
   position: absolute;
+  top: 100%;
   right: 0;
   display: none;
   flex-direction: column;
@@ -106,14 +121,14 @@ body {
   transition: 0.3s;
   z-index: 23;
 }
-.menu p {
+.menu div {
   padding: 10px 40px 10px 40px;
   font-size: 16px;
   font-family: "Manrope", sans-serif;
   font-weight: 500;
   background: #ffffff;
 }
-.menu p a {
+.menu div a {
   white-space: nowrap;
   text-decoration: none;
   text-align: center;
@@ -233,19 +248,23 @@ body {
 .intro h1 {
   position: relative;
   top: -15px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 40px;
   letter-spacing: 3px;
 }
 
 .advertisement {
-  width: 280px;
+  width: 260px;
   position: relative;
   display: flex;
   flex-direction: column;
 }
 .advertisement .tags__container {
+  bottom: 7px;
+  right: 7px;
+}
+.advertisement .tags__list {
   position: absolute;
   bottom: 7px;
   right: 7px;
@@ -273,7 +292,7 @@ body {
 
 .adv_img {
   width: 100%;
-  height: 220px;
+  height: 180px;
   display: block;
   border-radius: 10px;
   overflow: hidden;
@@ -291,6 +310,26 @@ body {
 .noPhoto {
   width: 200px;
   height: 150px;
+}
+
+.favorites__container {
+  padding: 6px;
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  z-index: 99999;
+  display: flex;
+  background: #ffffff;
+  border-radius: 50%;
+}
+.favorites__container svg {
+  width: 25px;
+  height: 25px;
+}
+
+.favorites__container:hover svg {
+  transition: 0.3s;
+  fill: red;
 }
 
 .advertisement__description {
@@ -324,7 +363,7 @@ body {
 }
 
 .ad__title, .ad__price {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .ad__price {
@@ -478,7 +517,7 @@ body {
   top: -80%;
   visibility: hidden;
   opacity: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 12px;
   letter-spacing: 1px;
@@ -608,7 +647,7 @@ body {
   margin-top: 50px;
   margin-bottom: 40px;
   text-align: center;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 28px;
 }
@@ -779,7 +818,7 @@ body {
   margin-top: 150px;
   font-size: 22px;
   font-weight: 600;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: #000000;
 }
 
@@ -792,8 +831,8 @@ body {
 }
 
 .adv__status {
-  font-family: "Poppins", sans-serif;
-  font-weight: 300;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
   font-size: 18px;
   color: #9f9f9f;
   text-decoration: none;
@@ -1019,7 +1058,7 @@ body {
 .upload__img + label {
   display: inline-block;
   font-size: 15px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   color: #000000;
 }
@@ -1101,6 +1140,10 @@ body {
   font-size: 16px;
 }
 
+.category__active {
+  background: #efefef;
+}
+
 .category__container:hover, .category__container label:hover, .category__container img:hover {
   cursor: pointer;
   background: #efefef;
@@ -1130,7 +1173,7 @@ body {
   border-radius: 10px;
   background: #429800;
   color: #ffffff;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 20px;
   cursor: pointer;

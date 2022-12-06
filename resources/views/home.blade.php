@@ -47,17 +47,29 @@
                         @if(count($adv->files) > 0)
                             <img class="adv_img" src="{{ $adv->files[0]->getUrl() }}" alt="">
                         @else
-                        <div class="noPhotoCont">
-                            <img class="noPhoto" src="/images/noPhoto.svg" alt="">
-                        </div>
+                            <div class="noPhotoCont">
+                                <img class="noPhoto" src="/images/noPhoto.svg" alt="">
+                            </div>
                         @endif
-                        <div class="tags__container">
-                            @for($i = 0; $i < count($adv->tags); $i++)
-                                <p class="tag">{{ $adv->tags[$i]->name }}</p>
-
-                                @break($i === 2)
-                            @endfor
+                        <div class="favorites__container">
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                 viewBox="0 0 485.3 485.3" xml:space="preserve" stroke="red" stroke-width="30" fill="none">
+                                <g>
+                                    <path d="M446.9,181.3c0.1-26.1-10.1-50.6-28.5-69c-18.4-18.4-42.9-28.6-68.9-28.6c-26,0-50.6,10.2-69,28.6l-21.9,21.9
+                                        c-6.2,6.1-17.2,6.1-23.3,0l-22-22c-18.5-18.5-43-28.7-69.1-28.7c-25.9,0-50.4,10.2-68.8,28.5c-18.4,18.4-28.5,42.9-28.5,68.9
+                                        c0.1,26.1,10.3,50.6,28.7,69l171.5,171.5l171.1-171.2C436.8,231.8,446.9,207.3,446.9,181.3z"/>
+                                </g>
+                            </svg>
                         </div>
+{{--                        <div class="tags__container">--}}
+                            <div class="tags__list">
+                                @for($i = 0; $i < count($adv->tags); $i++)
+                                    <p class="tag">{{ $adv->tags[$i]->name }}</p>
+
+                                    @break($i === 1)
+                                @endfor
+                            </div>
+{{--                        </div>--}}
                     </div>
                     <div class="advertisement__description">
                         <h3 class="ad__title">{{ $adv->title }}</h3>

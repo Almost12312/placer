@@ -75,6 +75,15 @@ export default {
 
     mounted() {
         // this.loadImgs()
+    },
+
+    beforeRouteLeave(to, from, next)
+    {
+        for (let i = 0; i < 10; i++)
+        {
+            console.log('Srabotalo')
+        }
+        next()
     }
 }
 </script>

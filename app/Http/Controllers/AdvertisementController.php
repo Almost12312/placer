@@ -148,26 +148,8 @@ class AdvertisementController extends Controller
     {
         $thisAdv = Advertisement::find($id);
 
-//        $thisAdvInfo = new AdvPrevResourse($thisAdv);
+        $user = User::find($thisAdv->author_id);
 
-        $files = new AdvFileResourse($thisAdv);
-//        dd($files);
-
-//        $filesAdv = $thisAdv->files;
-//        $files = [];
-//
-//        foreach ($filesAdv as $file)
-//        {
-//            $files[] = [
-//                "id" => $file->id,
-//                "url" => $file->getUrl()
-//            ];
-//        }
-//
-//        dd($files);
-        $owner = User::find($thisAdv->author_id);
-        $user = new UserResourse($owner);
-
-        return view('viewAdv', ['thisAdv' => $thisAdv, 'user' => $owner, 'files' => $files]);
+        return view('viewAdv', ['thisAdv' => $thisAdv, 'user' => $user]);
     }
 }
