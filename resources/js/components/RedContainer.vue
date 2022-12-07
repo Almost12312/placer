@@ -1,9 +1,7 @@
 <template>
     <div class="redContainer">
 
-        <categories
-            :this-adv="thisAdv"
-        ></categories>
+        <categories v-model="thisAdv.category" />
 
         <div class="redForm">
             <input-prev-cont
@@ -43,7 +41,7 @@ export default {
                     content: "",
                     location: "",
                     price: "",
-                    category: '',
+                    category: null,
                     tags: []
                 }
             }

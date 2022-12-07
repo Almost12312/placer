@@ -2,7 +2,8 @@
 <header class="header">
     <div class="header__container">
         <a href="{{ route('home') }}" class="logo">
-            <img src="/images/logo-10.png" alt="logo">
+            <img class="logo__img__before" src="images/book.svg" alt="">
+            <img class="logo__img" src="/images/new-logo.svg" alt="logo">
         </a>
         <nav class="search">
             <input type="text" placeholder="Найти">

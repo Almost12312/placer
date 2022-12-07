@@ -1,32 +1,12 @@
 <template>
     <div class="categories">
         <header class="categories__title">Выберите категорию</header>
-        <div class="categories__container" @click="target">
-            <input v-model="thisAdv.category" id="cars" type="radio" name="cars" value="1">
-            <label for="cars" class="category__container"
-            >
-                <img src="/images/car.svg" alt="moto">
-                <div>Машины</div>
-            </label>
-            <p></p>
-            <input v-model="thisAdv.category" id="phones" type="radio" name="phones" value="2">
-            <label for="phones" class="category__container "
-            >
-                <img src="/images/phone.svg" alt="moto">
-                <div>Телефоны</div>
-            </label>
-            <input v-model="thisAdv.category" id="moto" type="radio" name="moto" value="3">
-            <label class="category__container" for="moto"
+        <div class="categories__container">
 
-            >
-                <img src="/images/bike.svg" alt="moto">
-                <div>Мотоциклы</div>
-            </label>
-            <input class="categories" v-model="thisAdv.category" id="appliances" type="radio" name="appliances" value="4">
-            <label for="appliances" class="category__container"
-            >
-                <img src="/images/appliances.svg" alt="moto">
-                <div>Бытовая техника</div>
+            <label v-for="category in categoryList" class="category__container" :class="classes(category.id)">
+                <img :src="category.image" alt="">
+                <span>{{ category.name }}</span>
+                <input v-model="categoryIdSelected" type="radio" name="category" :value="category.id">
             </label>
 
         </div>
@@ -34,35 +14,61 @@
 </template>
 
 <script>
+
+const categories = [
+    {
+        id: 1,
+        name: "Машины",
+        image: "/images/car.svg"
+    },
+    {
+        id: 2,
+        name: "Телефоны",
+        image: "/images/phone.svg"
+    },
+    {
+        id: 3,
+        name: "Мотоциклы",
+        image: "/images/bike.svg"
+    },
+    {
+        id: 4,
+        name: "Бытовая техника",
+        image: "/images/appliances.svg"
+    },
+
+];
+
 export default {
     name: "Categories",
 
     data() {
         return {
-            // active: this.thisAdv.category
+            categoryList: categories,
+
+            categoryIdSelected: this.value
+        }
+    },
+
+    watch: {
+
+        categorySelected(nVal) {
+
+            this.$emit('input', nVal);
         }
     },
 
     methods: {
-        // target(event) {
-        //     let target = event.target;
-        //
-        //     if (target.closest('.category__container'))
-        //     {
-        //         console.log(this.thisAdv.category)
-        //         // this.active = this.thisAdv.category
-        //         // console.log(typeof this.active)
-        //         // console.log(this.active)
-        //     }
-        // },
+
+        classes(catId) {
+
+            return [{active: this.categoryIdSelected === catId}];
+        }
     },
 
     props: {
-        thisAdv: {
-            type: Object,
-            default() {
-                return {}
-            }
+        value: {
+            type: [Number, null],
         }
     }
 

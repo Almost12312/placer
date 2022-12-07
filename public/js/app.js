@@ -5328,53 +5328,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
+var categories = [{
+  id: 1,
+  name: "Машины",
+  image: "/images/car.svg"
+}, {
+  id: 2,
+  name: "Телефоны",
+  image: "/images/phone.svg"
+}, {
+  id: 3,
+  name: "Мотоциклы",
+  image: "/images/bike.svg"
+}, {
+  id: 4,
+  name: "Бытовая техника",
+  image: "/images/appliances.svg"
+}];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Categories",
   data: function data() {
     return {
-      // active: this.thisAdv.category
+      categoryList: categories,
+      categoryIdSelected: this.value
     };
   },
+  watch: {
+    categorySelected: function categorySelected(nVal) {
+      this.$emit('input', nVal);
+    }
+  },
   methods: {
-    // target(event) {
-    //     let target = event.target;
-    //
-    //     if (target.closest('.category__container'))
-    //     {
-    //         console.log(this.thisAdv.category)
-    //         // this.active = this.thisAdv.category
-    //         // console.log(typeof this.active)
-    //         // console.log(this.active)
-    //     }
-    // },
+    classes: function classes(catId) {
+      return [{
+        active: this.categoryIdSelected === catId
+      }];
+    }
   },
   props: {
-    thisAdv: {
-      type: Object,
-      "default": function _default() {
-        return {};
-      }
+    value: {
+      type: [Number, null]
     }
   }
 });
@@ -6193,8 +6187,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -6220,7 +6212,7 @@ __webpack_require__.r(__webpack_exports__);
           content: "",
           location: "",
           price: "",
-          category: '',
+          category: null,
           tags: []
         };
       }
@@ -7485,7 +7477,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.categories__container input{\r\n    width: 0;\r\n    height: 0;\r\n    opacity: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.categories__container input{\n    width: 0;\n    height: 0;\n    opacity: 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -27299,157 +27291,47 @@ var render = function () {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "categories__container", on: { click: _vm.target } },
-      [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.thisAdv.category,
-              expression: "thisAdv.category",
-            },
-          ],
-          attrs: { id: "cars", type: "radio", name: "cars", value: "1" },
-          domProps: { checked: _vm._q(_vm.thisAdv.category, "1") },
-          on: {
-            change: function ($event) {
-              return _vm.$set(_vm.thisAdv, "category", "1")
-            },
+      { staticClass: "categories__container" },
+      _vm._l(_vm.categoryList, function (category) {
+        return _c(
+          "label",
+          {
+            staticClass: "category__container",
+            class: _vm.classes(category.id),
           },
-        }),
-        _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
-        _c("p"),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.thisAdv.category,
-              expression: "thisAdv.category",
-            },
-          ],
-          attrs: { id: "phones", type: "radio", name: "phones", value: "2" },
-          domProps: { checked: _vm._q(_vm.thisAdv.category, "2") },
-          on: {
-            change: function ($event) {
-              return _vm.$set(_vm.thisAdv, "category", "2")
-            },
-          },
-        }),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.thisAdv.category,
-              expression: "thisAdv.category",
-            },
-          ],
-          attrs: { id: "moto", type: "radio", name: "moto", value: "3" },
-          domProps: { checked: _vm._q(_vm.thisAdv.category, "3") },
-          on: {
-            change: function ($event) {
-              return _vm.$set(_vm.thisAdv, "category", "3")
-            },
-          },
-        }),
-        _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.thisAdv.category,
-              expression: "thisAdv.category",
-            },
-          ],
-          staticClass: "categories",
-          attrs: {
-            id: "appliances",
-            type: "radio",
-            name: "appliances",
-            value: "4",
-          },
-          domProps: { checked: _vm._q(_vm.thisAdv.category, "4") },
-          on: {
-            change: function ($event) {
-              return _vm.$set(_vm.thisAdv, "category", "4")
-            },
-          },
-        }),
-        _vm._v(" "),
-        _vm._m(3),
-      ]
+          [
+            _c("img", { attrs: { src: category.image, alt: "" } }),
+            _vm._v(" "),
+            _c("span", [_vm._v(_vm._s(category.name))]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.categoryIdSelected,
+                  expression: "categoryIdSelected",
+                },
+              ],
+              attrs: { type: "radio", name: "category" },
+              domProps: {
+                value: category.id,
+                checked: _vm._q(_vm.categoryIdSelected, category.id),
+              },
+              on: {
+                change: function ($event) {
+                  _vm.categoryIdSelected = category.id
+                },
+              },
+            }),
+          ]
+        )
+      }),
+      0
     ),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "category__container", attrs: { for: "cars" } },
-      [
-        _c("img", { attrs: { src: "/images/car.svg", alt: "moto" } }),
-        _vm._v(" "),
-        _c("div", [_vm._v("Машины")]),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "category__container", attrs: { for: "phones" } },
-      [
-        _c("img", { attrs: { src: "/images/phone.svg", alt: "moto" } }),
-        _vm._v(" "),
-        _c("div", [_vm._v("Телефоны")]),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "category__container", attrs: { for: "moto" } },
-      [
-        _c("img", { attrs: { src: "/images/bike.svg", alt: "moto" } }),
-        _vm._v(" "),
-        _c("div", [_vm._v("Мотоциклы")]),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "category__container", attrs: { for: "appliances" } },
-      [
-        _c("img", { attrs: { src: "/images/appliances.svg", alt: "moto" } }),
-        _vm._v(" "),
-        _c("div", [_vm._v("Бытовая техника")]),
-      ]
-    )
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -28280,7 +28162,15 @@ var render = function () {
     "div",
     { staticClass: "redContainer" },
     [
-      _c("categories", { attrs: { "this-adv": _vm.thisAdv } }),
+      _c("categories", {
+        model: {
+          value: _vm.thisAdv.category,
+          callback: function ($$v) {
+            _vm.$set(_vm.thisAdv, "category", $$v)
+          },
+          expression: "thisAdv.category",
+        },
+      }),
       _vm._v(" "),
       _c(
         "div",
