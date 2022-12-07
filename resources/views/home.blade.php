@@ -7,13 +7,13 @@
                 <ul class="splide__list">
                     <li class="splide__slide">
 {{--                        <img src='images/milo2.png' alt="Sample 1">--}}
-                        <img src='images/vectorizate.svg' alt="Sample 1">
+                        <img src='images/infographics5-1.svg' alt="infographics 1">
                     </li>
                     <li class="splide__slide">
-                        <img src='images/infograf3-1.svg' alt="Sample 1">
+                        <img src='images/infographics3-2.svg' alt="infographics 2">
                     </li>
                     <li class="splide__slide">
-                        <img src='images/infograf4.svg' alt="">
+                        <img src='images/infographics4.svg' alt="infographics 3">
                     </li>
                 </ul>
             </div>

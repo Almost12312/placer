@@ -242,6 +242,10 @@ body {
   height: 300px;
   width: 700px;
 }
+.home__slider .splide__slide {
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+}
 
 .intro {
   margin-top: 100px;
