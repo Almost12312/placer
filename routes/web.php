@@ -24,6 +24,9 @@ use App\Http\Controllers\AdController;
 Route::get('/', [HomeController::class, 'home'])
     ->name('home');
 
+//Get Pagenation
+Route::post('/getAdv', [AdvertisementController::class, 'page']);
+
 /* ------------------------------------------------------------------------ */
 
 

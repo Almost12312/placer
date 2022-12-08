@@ -16,13 +16,13 @@ class HomeController extends Controller
 {
     public function home() {
 
-        $advs = Advertisement::all()->where('status', '=', 1);
+//        $advs = Advertisement::all()->where('status', '=', 1);
 
 //        dd($links);
 //        $advs = new AdvertisementCollection($getAdvs);
 
 //        dd($advs[0]->files);
 
-        return view('home', ['advs' => $advs]);
+        return view('home');
     }
 }

@@ -352,13 +352,6 @@ body {
     display: flex;
     flex-direction: column;
 
-    .tags__container {
-
-        bottom: 7px;
-        right: 7px;
-
-    }
-
     .tags__list {
         position: absolute;
 
@@ -1152,6 +1145,39 @@ body {
     gap: 30px;
 
     background: #ffffff;
+}
+
+.loadSvg {
+    width: 100px;
+    height: 100px;
+
+    animation: rotate 1.5s linear infinite;
+
+    circle {
+        animation: dash 1.5s linear infinite;
+    }
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1 200;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 90 200;
+        stroke-dashoffset: -35px;
+    }
+
+    100% {
+        stroke-dashoffset: -125px;
+    }
 }
 
 .adv__preview__container {

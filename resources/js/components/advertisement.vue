@@ -2,19 +2,27 @@
     <div class="advertisement" :data-id="advInfo.id">
         <div class="img__open">
             <div class="openAdv"></div>
+
             <img v-if="advInfo.images" class="adv_img" :src="advInfo.images" alt="">
             <div v-else class="noPhotoCont">
                 <img class="noPhoto" src="/images/noPhoto.svg" alt="">
+            </div>
+
+            <div class="tags__list">
+                <p v-for="tag in twoTags" v-bind:key="tag.id" class="tag">{{ tag.name }}</p>
             </div>
         </div>
         <div class="advertisement__description">
             <h3 v-if="advInfo.title" class="ad__title">{{ advInfo.title }}</h3>
             <h3 v-else class="ad__title">Не указано</h3>
+
             <h4 v-if="advInfo.content" class="ad__content">{{ advInfo.content }}</h4>
             <h4 v-else class="ad__content">Не указано</h4>
+
             <div class="location_price">
                 <h5 v-if="advInfo.location" class="ad__location">{{ advInfo.location }}</h5>
                 <h5 v-else class="ad__location">Город не указан</h5>
+
                 <h6 class="ad__price">
                     <span v-if="advInfo.price === 0" class="no__price">Бесплатно</span>
                     <span v-if="advInfo.price > 0" class="num__price">{{advInfo.price}}</span>
@@ -22,7 +30,7 @@
                 </h6>
             </div>
         </div>
-        <div v-if="advInfo.status !== 3" class="setting__container">
+        <div v-if="advInfo.status !== 3 && isHome === false" class="setting__container">
             <img src="/images/threeDots.svg" alt="dots">
             <div v-if="advInfo.status === 1" class="settingBtns">
                 <a class="compBtn" @click="complete">
@@ -174,6 +182,13 @@ export default {
             default() {
                 return {}
             }
+        },
+
+        isHome: {
+            type: Boolean,
+            default() {
+                return false;
+            }
         }
     },
 
@@ -188,6 +203,19 @@ export default {
 
         complete() {
             this.$emit('complete', this.advInfo)
+        }
+    },
+
+    computed: {
+        twoTags() {
+            // if (this.advInfo.tags.length >= 3)
+            // {
+            //     return [this.advInfo.tags[0], this.advInfo.tags[1]]
+            //
+            // }   else
+            // {
+                return this.advInfo.tags
+            // }
         }
     }
 }

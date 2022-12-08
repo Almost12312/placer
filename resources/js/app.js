@@ -24,6 +24,7 @@ import Profile from "./components/Profile";
 import Splide from '@splidejs/splide/dist/js/splide.min.js'
 import '@splidejs/splide/css';
 import HeadLayout from "./components/HeadLayout";
+import HomeAdvCont from "./components/HomeAdvCont";
 
 if (document.querySelector('.fade'))
 {
@@ -117,14 +118,14 @@ if (document.querySelector('.header__container')) {
     })
 }
 
-if (document.querySelector('.posts')) {
-    new Vue ({
-        el: '.posts',
-        components: {
-
-        }
-    })
-}
+// if (document.querySelector('.posts')) {
+//     new Vue ({
+//         el: '.posts',
+//         components: {
+//
+//         }
+//     })
+// }
 
 
 
@@ -133,23 +134,29 @@ if (document.querySelector('.posts')) {
 
 if (document.querySelector('#homeAdvCont'))
 {
-    let cont = document.querySelector('#homeAdvCont');
-
-    cont.addEventListener('click', event => {
-        let target = event.target
-
-        if (target.closest('.openAdv'))
-        {
-            console.log("Привет")
-            let id = target.closest('.advertisement').dataset.id
-
-            location.href = `/advertisement/` + id + `/view`
-
-        }   else
-        {
-            return
+    new Vue ({
+        el: '#homeAdvCont',
+        components: {
+            HomeAdvCont
         }
-    });
+    })
+    // let cont = document.querySelector('#homeAdvCont');
+    //
+    // cont.addEventListener('click', event => {
+    //     let target = event.target
+    //
+    //     if (target.closest('.openAdv'))
+    //     {
+    //         console.log("Привет")
+    //         let id = target.closest('.advertisement').dataset.id
+    //
+    //         location.href = `/advertisement/` + id + `/view`
+    //
+    //     }   else
+    //     {
+    //         return
+    //     }
+    // })
 }
 
 if (document.querySelector('.withoutRegPhoto__bg'))

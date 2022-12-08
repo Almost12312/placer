@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Resources\AdvertisementCollection;
 use App\Http\Resources\AdvFileResourse;
 use App\Http\Resources\AdvPrevResourse;
 use App\Http\Resources\UserResourse;
@@ -151,5 +152,20 @@ class AdvertisementController extends Controller
         $user = User::find($thisAdv->author_id);
 
         return view('viewAdv', ['thisAdv' => $thisAdv, 'user' => $user]);
+    }
+
+    public function page(Request $request) {
+        $start = $request->get('start');
+        $end = $request->get('end');
+        $perPage = $request->get('perPage');
+
+        $advsGet = Advertisement::where('status', '=', 1)->skip($start)->take($perPage)->get();
+
+        $advsPost = new AdvertisementCollection($advsGet);
+
+        return $advsPost;
+//        dd($advsPost);
+//        return Advertisement::where('status', '=', 1)->paginate(1);
+//        return Advertisement::
     }
 }
