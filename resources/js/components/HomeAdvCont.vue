@@ -7,7 +7,7 @@
                       :is-home="isHome"
             ></advertisement>
         </div>
-        <div class="loadMore">
+        <div class="loadMore" v-if="more === true">
             <svg class="loadSvg">
                 <circle cx="50" cy="50" r="40" fill="none" stroke="#000" stroke-width="5" stroke-dashoffset="0"
                 ></circle>
@@ -95,7 +95,7 @@
                                                 }   else
                                                 {
                                                     this.more = false;
-                                                    alert("Объявления закончились");
+                                                    // alert("Объявления закончились");
                                                 }
                                             })
                 } catch (e) {
@@ -110,7 +110,7 @@
                             if (this.more === true) {
                                 setTimeout(() => {
                                     this.getMore();
-                                }, 1000)
+                                }, 500)
                             }
 
                         }

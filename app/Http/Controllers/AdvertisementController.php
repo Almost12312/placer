@@ -161,6 +161,7 @@ class AdvertisementController extends Controller
 
 //        $advsGet = Advertisement::where('status', '=', 1)->skip($start)->take($perPage)->get();
         $advsGet = Advertisement::where('status', '=', 1)->skip($start)->take($perPage)->get();
+//        $more = Advertisement::where('status', '=', 1)->skip($start+$perPage)->take(1)->get();
 //        dd(count($advsGet));
         if (count($advsGet) === 0)
         {

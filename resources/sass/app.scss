@@ -325,19 +325,125 @@ body {
     align-items: center;
 
     h2 {
+        margin-left: 10px;
+
         font-family: $ffManrope;
-        font-size: 16px;
-        font-weight: 400;
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: 2px;
+    }
+}
+
+.hello {
+    display: flex;
+    align-items: flex-end;
+
+    font-family: $ffPoppins;
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.subtitle__filters {
+    margin-top: 80px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.home__subtitle, .filters h3{
+
+    font-family: $ffPoppins;
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+.filters {
+    position: relative;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+
+    &:hover {
+        cursor: pointer;
+
+        .filters__options {
+            opacity: 1;
+            transition: .3s;
+        }
+
+        #more__list {
+            rotate: 0deg;
+            transition: .2s;
+        }
+    }
+}
+
+.filters svg {
+    width: 16px;
+    height: 16px;
+}
+
+#more__list {
+    rotate: 90deg;
+
+    .st0{fill:#FEFEFE;}
+    .st1{fill:#020202;}
+}
+
+#arrow__down {
+    rotate: 180deg;
+}
+
+#new {
+    width: 40px;
+    height: 30px;
+}
+
+
+
+.filters__options {
+
+    padding: 11px 15px;
+
+    position: absolute;
+    right: 0;
+    top: 100%;
+    display: flex;
+    flex-direction: column;
+
+    opacity: 0;
+    background: #ffffff;
+    border-radius: $borderRad;
+    border: 1px solid #e3e3e3;
+    box-sizing: content-box;
+}
+
+.filter__option {
+    padding: 10px 0;
+
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: space-between;
+
+    font-family: $ffManrope;
+    font-size: 16px;
+    font-weight: 400;
+    white-space: nowrap;
+
+    border-top: 1px solid #e1e1e1;
+    box-sizing: content-box;
+
+    &:first-child {
+        padding-top: 0;
+        border-top: none;
     }
 
-    h1 {
-        position: relative;
-        top: -15px;
-
-        font-family: $ffPoppins;
-        font-weight: 700;
-        font-size: 40px;
-        letter-spacing: 3px;
+    &:last-child {
+        padding-bottom: 0;
     }
 }
 
@@ -1145,6 +1251,10 @@ body {
     gap: 30px;
 
     background: #ffffff;
+}
+
+.loadMore {
+    margin: 0 auto;
 }
 
 .loadSvg {

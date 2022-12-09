@@ -6,12 +6,8 @@ import VueRouter from 'vue-router'
 import Test from './components/Test'
 import AddAd from './components/AddAd'
 import InputPrevCont from "./components/InputPrevCont";
-import Preview from "./components/Preview";
-import InputsAdvert from "./components/InputsAdvert";
-import Buttons from "./components/Buttons";
 import Registration from "./components/registration";
 import Categories from "./components/Categories";
-import ProfileContainer from "./components/ProfileContainer";
 import AdvertisementContainer from "./components/AdvertisementContainer";
 import Router from "./components/router";
 import Foo from "./components/Foo";
@@ -19,12 +15,10 @@ import Drafts from "./components/Drafts";
 import HistoryAdv from "./components/HistoryAdv";
 import CabinetRoot from "./components/CabinetRoot";
 import RedContainer from "./components/RedContainer";
-import AdvViewRoot from "./components/AdvViewRoot";
-import Profile from "./components/Profile";
 import Splide from '@splidejs/splide/dist/js/splide.min.js'
 import '@splidejs/splide/css';
 import HeadLayout from "./components/HeadLayout";
-import HomeAdvCont from "./components/HomeAdvCont";
+import HomeRoot from "./components/HomeRoot";
 
 if (document.querySelector('.fade'))
 {
@@ -132,12 +126,12 @@ if (document.querySelector('.header__container')) {
 
 
 
-if (document.querySelector('#homeAdvCont'))
+if (document.querySelector('.infinity__advs'))
 {
     new Vue ({
-        el: '#homeAdvCont',
+        el: '.infinity__advs',
         components: {
-            HomeAdvCont
+            HomeRoot
         }
     })
     // let cont = document.querySelector('#homeAdvCont');
