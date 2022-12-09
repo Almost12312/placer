@@ -62,13 +62,17 @@ export default {
 
         classes(catId) {
 
-            return [{active: this.categoryIdSelected === catId}];
+            return [{category__active: this.categoryIdSelected === catId}];
         }
     },
 
+    // mounted() {
+    //     this.classes()
+    // },
+
     props: {
         value: {
-            type: [Number, null],
+            type: Number,
         }
     }
 

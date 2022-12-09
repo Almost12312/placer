@@ -159,11 +159,22 @@ class AdvertisementController extends Controller
         $end = $request->get('end');
         $perPage = $request->get('perPage');
 
+//        $advsGet = Advertisement::where('status', '=', 1)->skip($start)->take($perPage)->get();
         $advsGet = Advertisement::where('status', '=', 1)->skip($start)->take($perPage)->get();
+//        dd(count($advsGet));
+        if (count($advsGet) === 0)
+        {
+            return response()->json([
+                'end' => true
+            ]);
 
-        $advsPost = new AdvertisementCollection($advsGet);
+        }   else
+        {
+            return new AdvertisementCollection($advsGet);
+        }
 
-        return $advsPost;
+//        $advsPost = new AdvertisementCollection($advsGet);
+
 //        dd($advsPost);
 //        return Advertisement::where('status', '=', 1)->paginate(1);
 //        return Advertisement::

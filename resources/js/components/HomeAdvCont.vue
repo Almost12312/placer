@@ -20,16 +20,19 @@
     // @remove="remove"
     import axios from "axios";
     import Advertisement from "./advertisement";
+    import {forEach} from "lodash";
+
 
     export default {
-        name: "AdvertisementContainer",
+        name: "HomeAdvCont",
 
         data() {
             return {
                 allAdv: [],
                 isHome: true,
                 start: 0,
-                perPage: 2
+                perPage: 6,
+                more: true
             }
         },
 
@@ -72,13 +75,31 @@
                 try {
                     const data = await axios.post('/getAdv', load)
                                             .then(response => {
-                                                this.allAdv.push(response.data.data)
-                                                console.log(response.data.data)
+                                                this.start += this.perPage;
 
-                                                this.start += this.perPage
+                                                if (!(response.data.end))
+                                                {
+                                                    Array.prototype.push.apply(this.allAdv, response.data.data);
+                                                    this.allAdv.push();
+
+
+                                                    // for (let i = 0; i <= response.data.data.length; i++) {
+                                                    //     this.allAdv.push(response.data.data[i])
+                                                    // }
+                                                    // this.allAdv.push(response.data.data)
+                                                    // console.log(response.data.data[0])
+                                                    // console.log(response)
+
+                                                    // console.log(this.allAdv)
+
+                                                }   else
+                                                {
+                                                    this.more = false;
+                                                    alert("Объявления закончились");
+                                                }
                                             })
                 } catch (e) {
-                    alert(e)
+                    // alert(e)
                 }
             },
 
@@ -86,10 +107,12 @@
                 const loadObserver = new IntersectionObserver(enteries => {
                     enteries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            setTimeout(() => {
-                                    this.getMore()
-                                    this.page++
+                            if (this.more === true) {
+                                setTimeout(() => {
+                                    this.getMore();
                                 }, 1000)
+                            }
+
                         }
                     })
                 })

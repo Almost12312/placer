@@ -208,19 +208,19 @@ export default {
 
     computed: {
         twoTags() {
-            // if (this.advInfo.tags.length >= 3)
-            // {
-            //     return [this.advInfo.tags[0], this.advInfo.tags[1]]
-            //
-            // }   else
-            // {
+            if (this.advInfo.tags.length >= 3)
+            {
+                return [this.advInfo.tags[0], this.advInfo.tags[1]]
+
+            }   else
+            {
                 return this.advInfo.tags
-            // }
+            }
         }
     }
 }
 </script>
 
-<style >
+<style>
 
 </style>
