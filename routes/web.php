@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\CabinetController;
+use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdvResourceController;
 use App\Http\Controllers\TagController;
@@ -19,16 +20,18 @@ use \App\Http\Controllers\AuthorizationController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\AdController;
 
-/* 1. Home */
+/* 1. Pages */
 
+    //1.1 Home
 Route::get('/', [HomeController::class, 'home'])
     ->name('home');
 
-//Get Pagenation
+        //Get Pagination
 Route::post('/getAdv', [AdvertisementController::class, 'page']);
 
+    //1.2 Favorites
+Route::get('favorites', [FavoritesController::class, 'view']);
 /* ------------------------------------------------------------------------ */
-
 
 /* 2. Authorization and registration */
 
@@ -67,11 +70,12 @@ Route::get('/profile', [CabinetController::class, 'profile']);
 /* 4. Advertisement */
 
 Route::view('/advertisement/view', 'viewAdv');
-Route::get('/advertisement/{id?}/view', [AdvertisementController::class, 'viewAdv']);
 
 Route::view('/advertisement/create', 'redAdvert')
     ->name('createBladeAdvert')
     ->middleware(CreateMDW::class);
+
+Route::get('/advertisement/{id?}/view', [AdvertisementController::class, 'viewAdv']);
 
 Route::get('/advertisement/{id?}/redaction', [AdvertisementController::class, 'redAdv'])
     ->name('addAdvert')
@@ -85,6 +89,9 @@ Route::post('/advertisement/change-status', [AdvertisementController::class, 'ch
     ->name('draftAdvert');
 
 Route::post('/advertisement/delete', [AdvertisementController::class, 'delAdvert']);
+
+Route::post('/advertisement/add-favorite', [AdvertisementController::class, 'favorite']);
+
 
 
 /* ------------------------------------------------------------------------ */

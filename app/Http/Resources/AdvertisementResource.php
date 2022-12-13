@@ -35,6 +35,7 @@ class AdvertisementResource extends JsonResource
         {
             return [
                 'id' => $this->resource->id,
+                'date' => strtotime($this->resource->created_at),
                 'title' => $this->resource->title,
                 'content' => $this->resource->content,
                 'location' => $this->resource->location,
@@ -47,6 +48,7 @@ class AdvertisementResource extends JsonResource
         } else {
             return [
                 'id' => $this->resource->id,
+                'date' => strtotime($this->resource->created_at),
                 'title' => $this->resource->title,
                 'content' => $this->resource->content,
                 'location' => $this->resource->location,

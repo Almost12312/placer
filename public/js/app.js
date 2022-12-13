@@ -2827,6 +2827,68 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 // @remove="remove"
 
@@ -2840,9 +2902,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       isHome: true,
       start: 0,
       perPage: 6,
-      more: true
+      more: true,
+      sort: 1
     };
   },
+  // props: {
+  //     sortProp: {
+  //         type: Number,
+  //         default(){
+  //             return 1
+  //         }
+  //     }
+  // },
+
   methods: {
     loadAdv: function loadAdv() {
       var _this = this;
@@ -2925,10 +2997,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         });
       });
       loadObserver.observe(document.querySelector('.loadSvg'));
+    },
+    sorting: function sorting() {
+      console.log("switched");
+      switch (this.sort) {
+        case 1:
+          this.allAdv.sort(function (a, b) {
+            return a.date - b.date;
+          });
+          break;
+        case 2:
+          this.allAdv.sort(function (a, b) {
+            return a.price - b.price;
+          });
+          break;
+        case 3:
+          this.allAdv.sort(function (a, b) {
+            return b.price - a.price;
+          });
+      }
     }
   },
+  watch: {
+    sort: function sort() {
+      this.sorting();
+    }
+  },
+  computed: {
+    // filter__active(value) {
+    //     if (this.sort === value)
+    //     {
+    //         return
+    //     }
+    // },
+  },
   mounted: function mounted() {
-    // this.loadAdv()
     this.getMore();
     this.setLoadingObserver();
   },
@@ -2966,12 +3069,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       userinfo: {
-        name: '',
-        "default": function _default() {
-          return {
-            name: ''
-          };
-        }
+        name: ''
       }
     };
   },
@@ -3019,64 +3117,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "HomeRoot",
+  // data() {
+  //     return {
+  //         sort: 1
+  //     }
+  // },
+
   components: {
     HomeHello: _HomeHello__WEBPACK_IMPORTED_MODULE_0__["default"],
     HomeAdvCont: _HomeAdvCont__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -3860,6 +3911,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4035,8 +4100,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "advertisement",
+  data: function data() {
+    return {
+      favorite: false
+    };
+  },
   props: {
     advInfo: {
       type: Object,
@@ -4060,6 +4131,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     complete: function complete() {
       this.$emit('complete', this.advInfo);
+    },
+    favorites: function favorites() {
+      var _this = this;
+      var adv = {
+        id: this.advInfo.id
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/add-favorite', adv).then(function (response) {
+        if (response.data.success) {
+          _this.favorite = true;
+        }
+      });
     }
   },
   computed: {
@@ -4919,6 +5001,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.adv__preview {\n    margin-left: 250px;\n    margin-top: 70px;\n}\n.adv__preview {\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/advertisement.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/advertisement.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.advert-enter-active, .advert-leave-active {\n    transition: opacity .5s;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22510,6 +22616,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/advertisement.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/advertisement.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_advertisement_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./advertisement.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/advertisement.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_advertisement_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_advertisement_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -23664,15 +23800,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _advertisement_vue_vue_type_template_id_1779234a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./advertisement.vue?vue&type=template&id=1779234a& */ "./resources/js/components/advertisement.vue?vue&type=template&id=1779234a&");
 /* harmony import */ var _advertisement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./advertisement.vue?vue&type=script&lang=js& */ "./resources/js/components/advertisement.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _advertisement_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./advertisement.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/advertisement.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _advertisement_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _advertisement_vue_vue_type_template_id_1779234a___WEBPACK_IMPORTED_MODULE_0__.render,
   _advertisement_vue_vue_type_template_id_1779234a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -24135,6 +24273,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Preview_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Preview.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Preview.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/advertisement.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/advertisement.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_advertisement_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./advertisement.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/advertisement.vue?vue&type=style&index=0&lang=css&");
 
 
 /***/ }),
@@ -24960,6 +25111,238 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("header", { staticClass: "subtitle__filters" }, [
+      _c("h3", { staticClass: "home__subtitle" }, [_vm._v("Объявления")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "filters" }, [
+        _vm.sort === 1 ? _c("h3", [_vm._v("Самые новые")]) : _vm._e(),
+        _vm._v(" "),
+        _vm.sort === 2 ? _c("h3", [_vm._v("По возрастанию")]) : _vm._e(),
+        _vm._v(" "),
+        _vm.sort === 3 ? _c("h3", [_vm._v("По убыванию")]) : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "svg",
+          {
+            attrs: {
+              version: "1.1",
+              id: "more__list",
+              xmlns: "http://www.w3.org/2000/svg",
+              x: "0px",
+              y: "0px",
+              viewBox: "0 0 129 78",
+              "xml:space": "preserve",
+            },
+          },
+          [
+            _c("g", [
+              _c("g", [
+                _c("path", {
+                  staticClass: "st0",
+                  attrs: {
+                    d: "M157-71c0,81.2,0,162.3,0,243.6c-62,0-123.9,0-186,0c0-81.1,0-162.3,0-243.6C32.9-71,95-71,157-71z M64.5,52\n                                C49,36,34,20.6,19.2,5C13.1-1.5,9.3-1.8,3.3,5C-1,9.9-1.2,13.3,3.4,18.1c18.1,18.7,36.3,37.5,54.4,56.2c4.7,4.9,8.1,4.9,12.8,0\n                                c17.6-18.2,35.1-36.5,52.9-54.5c6.1-6.2,6.8-9.9-0.1-16.4c-4.7-4.4-8-4.6-12.5,0C96.1,18.7,81.2,34.1,66.3,49.5\n                                C65.7,50.2,65.2,51,64.5,52z",
+                  },
+                }),
+                _vm._v(" "),
+                _c("path", {
+                  staticClass: "st1",
+                  attrs: {
+                    d: "M64.5,52c0.7-1,1.2-1.8,1.8-2.5C81.2,34.1,96.1,18.7,111,3.3c4.5-4.6,7.8-4.4,12.5,0\n                                c6.9,6.5,6.1,10.3,0.1,16.4c-17.8,18-35.3,36.3-52.9,54.5c-4.7,4.9-8.1,4.9-12.8,0C39.7,55.5,21.6,36.8,3.4,18.1\n                                C-1.2,13.3-1,9.9,3.3,5c6-6.8,9.8-6.5,15.9,0C34,20.6,49,36,64.5,52z",
+                  },
+                }),
+              ]),
+            ]),
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "filters__options" }, [
+          _c(
+            "label",
+            {
+              staticClass: "filter__option",
+              class: { filter__active: _vm.sort === 1 },
+            },
+            [
+              _c("p", [_vm._v("Самые новые")]),
+              _vm._v(" "),
+              _c(
+                "svg",
+                {
+                  attrs: {
+                    id: "new",
+                    viewBox: "0 0 36 36",
+                    version: "1.1",
+                    preserveAspectRatio: "xMidYMid meet",
+                    xmlns: "http://www.w3.org/2000/svg",
+                    "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                  },
+                },
+                [
+                  _c("title", [_vm._v("new-line")]),
+                  _vm._v(" "),
+                  _c("path", {
+                    staticClass: "clr-i-outline clr-i-outline-path-1",
+                    attrs: {
+                      d: "M34.59,23l-4.08-5,4-4.9a1.82,1.82,0,0,0,.23-1.94A1.93,1.93,0,0,0,32.94,10h-31A1.91,1.91,0,0,0,0,11.88V24.13A1.91,1.91,0,0,0,1.94,26H33.05a1.93,1.93,0,0,0,1.77-1.09A1.82,1.82,0,0,0,34.59,23ZM2,24V12H32.78l-4.84,5.93L32.85,24Z",
+                    },
+                  }),
+                  _c("polygon", {
+                    staticClass: "clr-i-outline clr-i-outline-path-2",
+                    attrs: {
+                      points:
+                        "9.39 19.35 6.13 15 5 15 5 21.18 6.13 21.18 6.13 16.84 9.39 21.18 10.51 21.18 10.51 15 9.39 15 9.39 19.35",
+                    },
+                  }),
+                  _c("polygon", {
+                    staticClass: "clr-i-outline clr-i-outline-path-3",
+                    attrs: {
+                      points:
+                        "12.18 21.18 16.84 21.18 16.84 20.16 13.31 20.16 13.31 18.55 16.5 18.55 16.5 17.52 13.31 17.52 13.31 16.03 16.84 16.03 16.84 15 12.18 15 12.18 21.18",
+                    },
+                  }),
+                  _c("polygon", {
+                    staticClass: "clr-i-outline clr-i-outline-path-4",
+                    attrs: {
+                      points:
+                        "24.52 19.43 23.06 15 21.84 15 20.37 19.43 19.05 15 17.82 15 19.78 21.18 20.89 21.18 22.45 16.59 24 21.18 25.13 21.18 27.08 15 25.85 15 24.52 19.43",
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("rect", {
+                    attrs: { x: "0", y: "0", "fill-opacity": "0" },
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.sort,
+                    expression: "sort",
+                  },
+                ],
+                attrs: { type: "radio", hidden: "" },
+                domProps: { value: 1, checked: _vm._q(_vm.sort, 1) },
+                on: {
+                  change: function ($event) {
+                    _vm.sort = 1
+                  },
+                },
+              }),
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "filter__option",
+              class: { filter__active: _vm.sort === 2 },
+            },
+            [
+              _c("p", [_vm._v("По возрастанию цены")]),
+              _vm._v(" "),
+              _c(
+                "svg",
+                {
+                  attrs: {
+                    version: "1.1",
+                    id: "arrow__up",
+                    xmlns: "http://www.w3.org/2000/svg",
+                    "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                    x: "0px",
+                    y: "0px",
+                    viewBox: "0 0 330 330",
+                    "xml:space": "preserve",
+                  },
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      id: "XMLID_29_",
+                      d: "M100.606,100.606L150,51.212V315c0,8.284,6.716,15,15,15c8.284,0,15-6.716,15-15V51.212l49.394,49.394\n                                C232.322,103.535,236.161,105,240,105c3.839,0,7.678-1.465,10.606-4.394c5.858-5.857,5.858-15.355,0-21.213l-75-75\n                                c-5.857-5.858-15.355-5.858-21.213,0l-75,75c-5.858,5.857-5.858,15.355,0,21.213C85.251,106.463,94.749,106.463,100.606,100.606z",
+                    },
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.sort,
+                    expression: "sort",
+                  },
+                ],
+                attrs: { type: "radio", hidden: "" },
+                domProps: { value: 2, checked: _vm._q(_vm.sort, 2) },
+                on: {
+                  change: function ($event) {
+                    _vm.sort = 2
+                  },
+                },
+              }),
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "filter__option",
+              class: { filter__active: _vm.sort === 3 },
+            },
+            [
+              _c("p", [_vm._v("По убыванию цены")]),
+              _vm._v(" "),
+              _c(
+                "svg",
+                {
+                  attrs: {
+                    version: "1.1",
+                    id: "arrow__down",
+                    xmlns: "http://www.w3.org/2000/svg",
+                    "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                    x: "0px",
+                    y: "0px",
+                    viewBox: "0 0 330 330",
+                    "xml:space": "preserve",
+                  },
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      id: "XMLID_29_",
+                      d: "M100.606,100.606L150,51.212V315c0,8.284,6.716,15,15,15c8.284,0,15-6.716,15-15V51.212l49.394,49.394\n                                C232.322,103.535,236.161,105,240,105c3.839,0,7.678-1.465,10.606-4.394c5.858-5.857,5.858-15.355,0-21.213l-75-75\n                                c-5.857-5.858-15.355-5.858-21.213,0l-75,75c-5.858,5.857-5.858,15.355,0,21.213C85.251,106.463,94.749,106.463,100.606,100.606z",
+                    },
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.sort,
+                    expression: "sort",
+                  },
+                ],
+                attrs: { type: "radio", hidden: "" },
+                domProps: { value: 3, checked: _vm._q(_vm.sort, 3) },
+                on: {
+                  change: function ($event) {
+                    _vm.sort = 3
+                  },
+                },
+              }),
+            ]
+          ),
+        ]),
+      ]),
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       {
@@ -25018,12 +25401,12 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "intro" }, [
-    _vm.userinfo.name !== null
+    _vm.userinfo.name !== undefined
       ? _c("div", { staticClass: "hello" }, [
           _vm._v("Добропожаловать, "),
           _c("h2", [_vm._v(_vm._s(_vm.userinfo.name + "!"))]),
         ])
-      : _c("h2", [_vm._v("Добропожаловать!")]),
+      : _c("div", { staticClass: "hello" }, [_vm._v("Добропожаловать!")]),
   ])
 }
 var staticRenderFns = []
@@ -25055,160 +25438,6 @@ var render = function () {
       _c("home-hello"),
       _vm._v(" "),
       _c("div", { staticClass: "posts" }, [
-        _c("header", { staticClass: "subtitle__filters" }, [
-          _c("h3", { staticClass: "home__subtitle" }, [_vm._v("Объявления")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "filters" }, [
-            _c("h3", [_vm._v("По умолчанию")]),
-            _vm._v(" "),
-            _c(
-              "svg",
-              {
-                attrs: {
-                  version: "1.1",
-                  id: "more__list",
-                  xmlns: "http://www.w3.org/2000/svg",
-                  "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                  x: "0px",
-                  y: "0px",
-                  viewBox: "0 0 129 78",
-                  "xml:space": "preserve",
-                },
-              },
-              [
-                _c("g", [
-                  _c("g", [
-                    _c("path", {
-                      staticClass: "st0",
-                      attrs: {
-                        d: "M157-71c0,81.2,0,162.3,0,243.6c-62,0-123.9,0-186,0c0-81.1,0-162.3,0-243.6C32.9-71,95-71,157-71z M64.5,52\n                                    C49,36,34,20.6,19.2,5C13.1-1.5,9.3-1.8,3.3,5C-1,9.9-1.2,13.3,3.4,18.1c18.1,18.7,36.3,37.5,54.4,56.2c4.7,4.9,8.1,4.9,12.8,0\n                                    c17.6-18.2,35.1-36.5,52.9-54.5c6.1-6.2,6.8-9.9-0.1-16.4c-4.7-4.4-8-4.6-12.5,0C96.1,18.7,81.2,34.1,66.3,49.5\n                                    C65.7,50.2,65.2,51,64.5,52z",
-                      },
-                    }),
-                    _vm._v(" "),
-                    _c("path", {
-                      staticClass: "st1",
-                      attrs: {
-                        d: "M64.5,52c0.7-1,1.2-1.8,1.8-2.5C81.2,34.1,96.1,18.7,111,3.3c4.5-4.6,7.8-4.4,12.5,0\n                                    c6.9,6.5,6.1,10.3,0.1,16.4c-17.8,18-35.3,36.3-52.9,54.5c-4.7,4.9-8.1,4.9-12.8,0C39.7,55.5,21.6,36.8,3.4,18.1\n                                    C-1.2,13.3-1,9.9,3.3,5c6-6.8,9.8-6.5,15.9,0C34,20.6,49,36,64.5,52z",
-                      },
-                    }),
-                  ]),
-                ]),
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "filters__options" }, [
-              _c("div", { staticClass: "filter__option" }, [
-                _c("p", [_vm._v("Самые новые")]),
-                _vm._v(" "),
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      id: "new",
-                      viewBox: "0 0 36 36",
-                      version: "1.1",
-                      preserveAspectRatio: "xMidYMid meet",
-                      xmlns: "http://www.w3.org/2000/svg",
-                      "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                    },
-                  },
-                  [
-                    _c("title", [_vm._v("new-line")]),
-                    _vm._v(" "),
-                    _c("path", {
-                      staticClass: "clr-i-outline clr-i-outline-path-1",
-                      attrs: {
-                        d: "M34.59,23l-4.08-5,4-4.9a1.82,1.82,0,0,0,.23-1.94A1.93,1.93,0,0,0,32.94,10h-31A1.91,1.91,0,0,0,0,11.88V24.13A1.91,1.91,0,0,0,1.94,26H33.05a1.93,1.93,0,0,0,1.77-1.09A1.82,1.82,0,0,0,34.59,23ZM2,24V12H32.78l-4.84,5.93L32.85,24Z",
-                      },
-                    }),
-                    _c("polygon", {
-                      staticClass: "clr-i-outline clr-i-outline-path-2",
-                      attrs: {
-                        points:
-                          "9.39 19.35 6.13 15 5 15 5 21.18 6.13 21.18 6.13 16.84 9.39 21.18 10.51 21.18 10.51 15 9.39 15 9.39 19.35",
-                      },
-                    }),
-                    _c("polygon", {
-                      staticClass: "clr-i-outline clr-i-outline-path-3",
-                      attrs: {
-                        points:
-                          "12.18 21.18 16.84 21.18 16.84 20.16 13.31 20.16 13.31 18.55 16.5 18.55 16.5 17.52 13.31 17.52 13.31 16.03 16.84 16.03 16.84 15 12.18 15 12.18 21.18",
-                      },
-                    }),
-                    _c("polygon", {
-                      staticClass: "clr-i-outline clr-i-outline-path-4",
-                      attrs: {
-                        points:
-                          "24.52 19.43 23.06 15 21.84 15 20.37 19.43 19.05 15 17.82 15 19.78 21.18 20.89 21.18 22.45 16.59 24 21.18 25.13 21.18 27.08 15 25.85 15 24.52 19.43",
-                      },
-                    }),
-                    _vm._v(" "),
-                    _c("rect", {
-                      attrs: { x: "0", y: "0", "fill-opacity": "0" },
-                    }),
-                  ]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "filter__option" }, [
-                _c("p", [_vm._v("По возрастанию цены")]),
-                _vm._v(" "),
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      version: "1.1",
-                      id: "arrow__up",
-                      xmlns: "http://www.w3.org/2000/svg",
-                      "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                      x: "0px",
-                      y: "0px",
-                      viewBox: "0 0 330 330",
-                      "xml:space": "preserve",
-                    },
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        id: "XMLID_29_",
-                        d: "M100.606,100.606L150,51.212V315c0,8.284,6.716,15,15,15c8.284,0,15-6.716,15-15V51.212l49.394,49.394\n                                    C232.322,103.535,236.161,105,240,105c3.839,0,7.678-1.465,10.606-4.394c5.858-5.857,5.858-15.355,0-21.213l-75-75\n                                    c-5.857-5.858-15.355-5.858-21.213,0l-75,75c-5.858,5.857-5.858,15.355,0,21.213C85.251,106.463,94.749,106.463,100.606,100.606z",
-                      },
-                    }),
-                  ]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "filter__option" }, [
-                _c("p", [_vm._v("По убыванию цены")]),
-                _vm._v(" "),
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      version: "1.1",
-                      id: "arrow__down",
-                      xmlns: "http://www.w3.org/2000/svg",
-                      "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                      x: "0px",
-                      y: "0px",
-                      viewBox: "0 0 330 330",
-                      "xml:space": "preserve",
-                    },
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        id: "XMLID_29_",
-                        d: "M100.606,100.606L150,51.212V315c0,8.284,6.716,15,15,15c8.284,0,15-6.716,15-15V51.212l49.394,49.394\n                                    C232.322,103.535,236.161,105,240,105c3.839,0,7.678-1.465,10.606-4.394c5.858-5.857,5.858-15.355,0-21.213l-75-75\n                                    c-5.857-5.858-15.355-5.858-21.213,0l-75,75c-5.858,5.857-5.858,15.355,0,21.213C85.251,106.463,94.749,106.463,100.606,100.606z",
-                      },
-                    }),
-                  ]
-                ),
-              ]),
-            ]),
-          ]),
-        ]),
-        _vm._v(" "),
         _c(
           "div",
           {
@@ -26073,243 +26302,129 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "advertisement", attrs: { "data-id": _vm.advInfo.id } },
-    [
-      _c("div", { staticClass: "img__open" }, [
-        _c("div", { staticClass: "openAdv" }),
-        _vm._v(" "),
-        _vm.advInfo.images
-          ? _c("img", {
-              staticClass: "adv_img",
-              attrs: { src: _vm.advInfo.images, alt: "" },
-            })
-          : _c("div", { staticClass: "noPhotoCont" }, [
-              _c("img", {
-                staticClass: "noPhoto",
-                attrs: { src: "/images/noPhoto.svg", alt: "" },
-              }),
-            ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "tags__list" },
-          _vm._l(_vm.twoTags, function (tag) {
-            return _c("p", { key: tag.id, staticClass: "tag" }, [
-              _vm._v(_vm._s(tag.name)),
-            ])
-          }),
-          0
-        ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "advertisement__description" }, [
-        _vm.advInfo.title
-          ? _c("h3", { staticClass: "ad__title" }, [
-              _vm._v(_vm._s(_vm.advInfo.title)),
-            ])
-          : _c("h3", { staticClass: "ad__title" }, [_vm._v("Не указано")]),
-        _vm._v(" "),
-        _vm.advInfo.content
-          ? _c("h4", { staticClass: "ad__content" }, [
-              _vm._v(_vm._s(_vm.advInfo.content)),
-            ])
-          : _c("h4", { staticClass: "ad__content" }, [_vm._v("Не указано")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "location_price" }, [
-          _vm.advInfo.location
-            ? _c("h5", { staticClass: "ad__location" }, [
-                _vm._v(_vm._s(_vm.advInfo.location)),
-              ])
-            : _c("h5", { staticClass: "ad__location" }, [
-                _vm._v("Город не указан"),
+  return _c("transition", { attrs: { name: "advert", mode: "out-in" } }, [
+    _c(
+      "div",
+      { staticClass: "advertisement", attrs: { "data-id": _vm.advInfo.id } },
+      [
+        _c("div", { staticClass: "img__open" }, [
+          _c("div", { staticClass: "openAdv" }),
+          _vm._v(" "),
+          _vm.advInfo.images
+            ? _c("img", {
+                staticClass: "adv_img",
+                attrs: { src: _vm.advInfo.images, alt: "" },
+              })
+            : _c("div", { staticClass: "noPhotoCont" }, [
+                _c("img", {
+                  staticClass: "noPhoto",
+                  attrs: { src: "/images/noPhoto.svg", alt: "" },
+                }),
               ]),
           _vm._v(" "),
-          _c("h6", { staticClass: "ad__price" }, [
-            _vm.advInfo.price === 0
-              ? _c("span", { staticClass: "no__price" }, [_vm._v("Бесплатно")])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.advInfo.price > 0
-              ? _c("span", { staticClass: "num__price" }, [
-                  _vm._v(_vm._s(_vm.advInfo.price)),
+          _c(
+            "div",
+            { staticClass: "tags__list" },
+            _vm._l(_vm.twoTags, function (tag) {
+              return _c("p", { key: tag.id, staticClass: "tag" }, [
+                _vm._v(_vm._s(tag.name)),
+              ])
+            }),
+            0
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "advertisement__description" }, [
+          _vm.advInfo.title
+            ? _c("h3", { staticClass: "ad__title" }, [
+                _vm._v(_vm._s(_vm.advInfo.title)),
+              ])
+            : _c("h3", { staticClass: "ad__title" }, [_vm._v("Не указано")]),
+          _vm._v(" "),
+          _vm.advInfo.content
+            ? _c("h4", { staticClass: "ad__content" }, [
+                _vm._v(_vm._s(_vm.advInfo.content)),
+              ])
+            : _c("h4", { staticClass: "ad__content" }, [_vm._v("Не указано")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "location_price" }, [
+            _vm.advInfo.location
+              ? _c("h5", { staticClass: "ad__location" }, [
+                  _vm._v(_vm._s(_vm.advInfo.location)),
                 ])
-              : _c("span", { staticClass: "no__price" }, [
-                  _vm._v("Цена отсутствует"),
+              : _c("h5", { staticClass: "ad__location" }, [
+                  _vm._v("Город не указан"),
                 ]),
+            _vm._v(" "),
+            _c("h6", { staticClass: "ad__price" }, [
+              _vm.advInfo.price === 0
+                ? _c("span", { staticClass: "no__price" }, [
+                    _vm._v("Бесплатно"),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.advInfo.price > 0
+                ? _c("span", { staticClass: "num__price" }, [
+                    _vm._v(_vm._s(_vm.advInfo.price)),
+                  ])
+                : _c("span", { staticClass: "no__price" }, [
+                    _vm._v("Цена отсутствует"),
+                  ]),
+            ]),
           ]),
         ]),
-      ]),
-      _vm._v(" "),
-      _vm.advInfo.status !== 3 && _vm.isHome === false
-        ? _c("div", { staticClass: "setting__container" }, [
-            _c("img", { attrs: { src: "/images/threeDots.svg", alt: "dots" } }),
-            _vm._v(" "),
-            _vm.advInfo.status === 1
-              ? _c("div", { staticClass: "settingBtns" }, [
-                  _c(
-                    "a",
-                    { staticClass: "compBtn", on: { click: _vm.complete } },
-                    [
-                      _c(
-                        "svg",
-                        {
-                          attrs: {
-                            version: "1.1",
-                            id: "Capa_1",
-                            xmlns: "http://www.w3.org/2000/svg",
-                            "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                            x: "0px",
-                            y: "0px",
-                            viewBox: "0 0 17.837 17.837",
-                            "xml:space": "preserve",
+        _vm._v(" "),
+        _vm.advInfo.status !== 3 && _vm.isHome === false
+          ? _c("div", { staticClass: "setting__container" }, [
+              _c("img", {
+                attrs: { src: "/images/threeDots.svg", alt: "dots" },
+              }),
+              _vm._v(" "),
+              _vm.advInfo.status === 1
+                ? _c("div", { staticClass: "settingBtns" }, [
+                    _c(
+                      "a",
+                      { staticClass: "compBtn", on: { click: _vm.complete } },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              version: "1.1",
+                              id: "Capa_1",
+                              xmlns: "http://www.w3.org/2000/svg",
+                              "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                              x: "0px",
+                              y: "0px",
+                              viewBox: "0 0 17.837 17.837",
+                              "xml:space": "preserve",
+                            },
                           },
-                        },
-                        [
-                          _c("g", [
-                            _c("path", {
-                              attrs: {
-                                d: "M16.145,2.571c-0.272-0.273-0.718-0.273-0.99,0L6.92,10.804l-4.241-4.27\n                            c-0.272-0.274-0.715-0.274-0.989,0L0.204,8.019c-0.272,0.271-0.272,0.717,0,0.99l6.217,6.258c0.272,0.271,0.715,0.271,0.99,0\n                            L17.63,5.047c0.276-0.273,0.276-0.72,0-0.994L16.145,2.571z",
-                              },
-                            }),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "afterSettng" }, [
-                        _vm._v(
-                          "\n                    Завершить\n                "
+                          [
+                            _c("g", [
+                              _c("path", {
+                                attrs: {
+                                  d: "M16.145,2.571c-0.272-0.273-0.718-0.273-0.99,0L6.92,10.804l-4.241-4.27\n                                c-0.272-0.274-0.715-0.274-0.989,0L0.204,8.019c-0.272,0.271-0.272,0.717,0,0.99l6.217,6.258c0.272,0.271,0.715,0.271,0.99,0\n                                L17.63,5.047c0.276-0.273,0.276-0.72,0-0.994L16.145,2.571z",
+                                },
+                              }),
+                            ]),
+                          ]
                         ),
-                      ]),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "redBtn" }, [
-                    _c(
-                      "svg",
-                      {
-                        staticStyle: {
-                          "enable-background": "new 0 0 495.339 495.339",
-                        },
-                        attrs: {
-                          version: "1.1",
-                          id: "Capa_1",
-                          xmlns: "http://www.w3.org/2000/svg",
-                          "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                          x: "0px",
-                          y: "0px",
-                          viewBox: "0 0 495.339 495.339",
-                          "xml:space": "preserve",
-                        },
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            d: "M196.299,405.261l277.148-277.124c6.738-6.742,6.738-17.668,0-24.408L374.805,5.056C371.563,1.824,367.176,0,362.598,0\n                                        c-4.584,0-8.951,1.824-12.193,5.056L73.256,282.211c-1.871,1.863-3.271,4.121-4.129,6.62L17.76,438.832\n                                        c-2.129,6.233-0.498,13.136,4.145,17.789c3.258,3.273,7.649,5.023,12.129,5.04c0.549,1.041,1.369,2.016,2.58,2.856\n                                        c8.873,6.191,18.16,10.989,27.627,15.192c44.113,19.555,93.689,18.91,141.607,8.209c36.273-8.121,70.656-22.531,106.008-33.773\n                                        c48.125-15.313,100.545-22.667,150.541-28.538c11.065-1.306,9.227-18.468-1.84-17.169c-68.012,8-134.779,21.635-199.277,44.717\n                                        c-54.258,19.394-116.512,34.867-172.09,18.005c-11.867-3.588-23.416-8.716-34.514-15.538l135.025-46.232\n                                        C192.17,408.527,194.461,407.123,196.299,405.261z M187.508,365.255l-18.32-18.307L418.559,97.656l18.262,18.274L187.508,365.255z\n                                         M362.598,41.676l18.303,18.304l-249.34,249.35l-18.307-18.314L362.598,41.676z M91.723,406.445l-19.66-19.652l22.498-65.674\n                                        l62.82,62.836L91.723,406.445z",
-                          },
-                        }),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "afterSettng" }, [
-                      _vm._v(
-                        "\n                    Редактировать\n                "
-                      ),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "canBtn" }, [
-                    _c(
-                      "svg",
-                      {
-                        staticStyle: { "enable-background": "new 0 0 512 512" },
-                        attrs: {
-                          version: "1.1",
-                          id: "Layer_1",
-                          xmlns: "http://www.w3.org/2000/svg",
-                          "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                          x: "0px",
-                          y: "0px",
-                          viewBox: "0 0 512 512",
-                          "xml:space": "preserve",
-                        },
-                        on: {
-                          click: function ($event) {
-                            return _vm.remove()
-                          },
-                        },
-                      },
-                      [
-                        _c("g", [
-                          _c("g", [
-                            _c("path", {
-                              attrs: {
-                                d: "M380.54,83.027h-48.432v-6.919C332.108,34.142,297.966,0,256,0s-76.108,34.142-76.108,76.108v6.919h-48.432\n                                                c-57.226,0-103.784,46.557-103.784,103.784v20.757h29.477L84.829,512h342.343l27.676-304.432h29.477v-20.757\n                                                C484.324,129.584,437.767,83.027,380.54,83.027z M221.405,76.108c0-19.075,15.519-34.595,34.595-34.595\n                                                c19.075,0,34.595,15.519,34.595,34.595v6.919h-69.189V76.108z M389.261,470.487H122.739L98.837,207.568h314.325L389.261,470.487z\n                                                 M72.746,166.054c8.567-24.162,31.653-41.514,58.714-41.514h48.432h152.216h48.432c27.061,0,50.147,17.351,58.714,41.514H72.746z",
-                              },
-                            }),
-                          ]),
-                        ]),
                         _vm._v(" "),
-                        _c("g", [
-                          _c("g", [
-                            _c("rect", {
-                              attrs: {
-                                x: "235.243",
-                                y: "249.081",
-                                width: "41.514",
-                                height: "179.892",
-                              },
-                            }),
-                          ]),
-                        ]),
-                        _vm._v(" "),
-                        _c("g", [
-                          _c("g", [
-                            _c("rect", {
-                              attrs: {
-                                x: "152.216",
-                                y: "249.081",
-                                width: "41.513",
-                                height: "179.892",
-                              },
-                            }),
-                          ]),
-                        ]),
-                        _vm._v(" "),
-                        _c("g", [
-                          _c("g", [
-                            _c("rect", {
-                              attrs: {
-                                x: "318.27",
-                                y: "249.081",
-                                width: "41.514",
-                                height: "179.892",
-                              },
-                            }),
-                          ]),
+                        _c("div", { staticClass: "afterSettng" }, [
+                          _vm._v(
+                            "\n                        Завершить\n                    "
+                          ),
                         ]),
                       ]
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "afterSettng" }, [
-                      _vm._v("\n                    Удалить\n                "),
-                    ]),
-                  ]),
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.advInfo.status === 2
-              ? _c("div", { staticClass: "settingBtns" }, [
-                  _c(
-                    "a",
-                    { staticClass: "pubBtn", on: { click: _vm.publish } },
-                    [
+                    _c("a", { staticClass: "redBtn" }, [
                       _c(
                         "svg",
                         {
                           staticStyle: {
-                            "enable-background": "new 0 0 268.476 268.476",
+                            "enable-background": "new 0 0 495.339 495.339",
                           },
                           attrs: {
                             version: "1.1",
@@ -26318,71 +26433,27 @@ var render = function () {
                             "xmlns:xlink": "http://www.w3.org/1999/xlink",
                             x: "0px",
                             y: "0px",
-                            viewBox: "0 0 268.476 268.476",
+                            viewBox: "0 0 495.339 495.339",
                             "xml:space": "preserve",
                           },
                         },
                         [
-                          _c("g", [
-                            _c("path", {
-                              staticStyle: {
-                                "fill-rule": "evenodd",
-                                "clip-rule": "evenodd",
-                              },
-                              attrs: {
-                                d: "M254.958,245.159c-0.5-11.909-10.124-21.429-22.015-21.429H35.533\n                            c-12.21,0-22.109,10.017-22.109,22.373c0,12.356,9.899,22.373,22.109,22.373h197.41c11.888,0,21.509-9.515,22.014-21.419\n                            c0.014-0.323,0.096-0.627,0.096-0.954C255.053,245.78,254.971,245.479,254.958,245.159z M79.261,109.806l32.711-32.756v106.41\n                            c0,12.356,10.032,22.373,22.407,22.373c12.375,0,22.406-10.017,22.406-22.373V77.05l32.71,32.756c8.874,8.876,23.26,8.876,32.134,0\n                            c8.874-8.876,8.874-23.266,0-32.143L150.76,6.696c-4.047-4.048-9.248-6.155-14.542-6.511C135.601,0.134,135.008,0,134.378,0\n                            c-0.628,0-1.218,0.134-1.832,0.184c-5.298,0.354-10.502,2.462-14.551,6.512L47.127,77.663c-8.874,8.877-8.874,23.267,0,32.143\n                            C56,118.681,70.388,118.681,79.261,109.806z",
-                              },
-                            }),
-                          ]),
+                          _c("path", {
+                            attrs: {
+                              d: "M196.299,405.261l277.148-277.124c6.738-6.742,6.738-17.668,0-24.408L374.805,5.056C371.563,1.824,367.176,0,362.598,0\n                                            c-4.584,0-8.951,1.824-12.193,5.056L73.256,282.211c-1.871,1.863-3.271,4.121-4.129,6.62L17.76,438.832\n                                            c-2.129,6.233-0.498,13.136,4.145,17.789c3.258,3.273,7.649,5.023,12.129,5.04c0.549,1.041,1.369,2.016,2.58,2.856\n                                            c8.873,6.191,18.16,10.989,27.627,15.192c44.113,19.555,93.689,18.91,141.607,8.209c36.273-8.121,70.656-22.531,106.008-33.773\n                                            c48.125-15.313,100.545-22.667,150.541-28.538c11.065-1.306,9.227-18.468-1.84-17.169c-68.012,8-134.779,21.635-199.277,44.717\n                                            c-54.258,19.394-116.512,34.867-172.09,18.005c-11.867-3.588-23.416-8.716-34.514-15.538l135.025-46.232\n                                            C192.17,408.527,194.461,407.123,196.299,405.261z M187.508,365.255l-18.32-18.307L418.559,97.656l18.262,18.274L187.508,365.255z\n                                             M362.598,41.676l18.303,18.304l-249.34,249.35l-18.307-18.314L362.598,41.676z M91.723,406.445l-19.66-19.652l22.498-65.674\n                                            l62.82,62.836L91.723,406.445z",
+                            },
+                          }),
                         ]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "afterSettng" }, [
                         _vm._v(
-                          "\n                    Опубликовать\n                "
+                          "\n                        Редактировать\n                    "
                         ),
                       ]),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "redBtn" }, [
-                    _c(
-                      "svg",
-                      {
-                        staticStyle: {
-                          "enable-background": "new 0 0 495.339 495.339",
-                        },
-                        attrs: {
-                          version: "1.1",
-                          id: "Capa_1",
-                          xmlns: "http://www.w3.org/2000/svg",
-                          "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                          x: "0px",
-                          y: "0px",
-                          viewBox: "0 0 495.339 495.339",
-                          "xml:space": "preserve",
-                        },
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            d: "M196.299,405.261l277.148-277.124c6.738-6.742,6.738-17.668,0-24.408L374.805,5.056C371.563,1.824,367.176,0,362.598,0\n                        c-4.584,0-8.951,1.824-12.193,5.056L73.256,282.211c-1.871,1.863-3.271,4.121-4.129,6.62L17.76,438.832\n                        c-2.129,6.233-0.498,13.136,4.145,17.789c3.258,3.273,7.649,5.023,12.129,5.04c0.549,1.041,1.369,2.016,2.58,2.856\n                        c8.873,6.191,18.16,10.989,27.627,15.192c44.113,19.555,93.689,18.91,141.607,8.209c36.273-8.121,70.656-22.531,106.008-33.773\n                        c48.125-15.313,100.545-22.667,150.541-28.538c11.065-1.306,9.227-18.468-1.84-17.169c-68.012,8-134.779,21.635-199.277,44.717\n                        c-54.258,19.394-116.512,34.867-172.09,18.005c-11.867-3.588-23.416-8.716-34.514-15.538l135.025-46.232\n                        C192.17,408.527,194.461,407.123,196.299,405.261z M187.508,365.255l-18.32-18.307L418.559,97.656l18.262,18.274L187.508,365.255z\n                         M362.598,41.676l18.303,18.304l-249.34,249.35l-18.307-18.314L362.598,41.676z M91.723,406.445l-19.66-19.652l22.498-65.674\n                        l62.82,62.836L91.723,406.445z",
-                          },
-                        }),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "afterSettng" }, [
-                      _vm._v(
-                        "\n                    Редактировать\n                "
-                      ),
                     ]),
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    { staticClass: "canBtn", on: { click: _vm.remove } },
-                    [
+                    _vm._v(" "),
+                    _c("a", { staticClass: "canBtn" }, [
                       _c(
                         "svg",
                         {
@@ -26399,13 +26470,18 @@ var render = function () {
                             viewBox: "0 0 512 512",
                             "xml:space": "preserve",
                           },
+                          on: {
+                            click: function ($event) {
+                              return _vm.remove()
+                            },
+                          },
                         },
                         [
                           _c("g", [
                             _c("g", [
                               _c("path", {
                                 attrs: {
-                                  d: "M380.54,83.027h-48.432v-6.919C332.108,34.142,297.966,0,256,0s-76.108,34.142-76.108,76.108v6.919h-48.432\n                                c-57.226,0-103.784,46.557-103.784,103.784v20.757h29.477L84.829,512h342.343l27.676-304.432h29.477v-20.757\n                                C484.324,129.584,437.767,83.027,380.54,83.027z M221.405,76.108c0-19.075,15.519-34.595,34.595-34.595\n                                c19.075,0,34.595,15.519,34.595,34.595v6.919h-69.189V76.108z M389.261,470.487H122.739L98.837,207.568h314.325L389.261,470.487z\n                                 M72.746,166.054c8.567-24.162,31.653-41.514,58.714-41.514h48.432h152.216h48.432c27.061,0,50.147,17.351,58.714,41.514H72.746z",
+                                  d: "M380.54,83.027h-48.432v-6.919C332.108,34.142,297.966,0,256,0s-76.108,34.142-76.108,76.108v6.919h-48.432\n                                                    c-57.226,0-103.784,46.557-103.784,103.784v20.757h29.477L84.829,512h342.343l27.676-304.432h29.477v-20.757\n                                                    C484.324,129.584,437.767,83.027,380.54,83.027z M221.405,76.108c0-19.075,15.519-34.595,34.595-34.595\n                                                    c19.075,0,34.595,15.519,34.595,34.595v6.919h-69.189V76.108z M389.261,470.487H122.739L98.837,207.568h314.325L389.261,470.487z\n                                                     M72.746,166.054c8.567-24.162,31.653-41.514,58.714-41.514h48.432h152.216h48.432c27.061,0,50.147,17.351,58.714,41.514H72.746z",
                                 },
                               }),
                             ]),
@@ -26454,17 +26530,216 @@ var render = function () {
                       _vm._v(" "),
                       _c("div", { staticClass: "afterSettng" }, [
                         _vm._v(
-                          "\n                    Удалить\n                "
+                          "\n                        Удалить\n                    "
                         ),
                       ]),
-                    ]
-                  ),
-                ])
-              : _vm._e(),
-          ])
-        : _vm._e(),
-    ]
-  )
+                    ]),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.advInfo.status === 2
+                ? _c("div", { staticClass: "settingBtns" }, [
+                    _c(
+                      "a",
+                      { staticClass: "pubBtn", on: { click: _vm.publish } },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticStyle: {
+                              "enable-background": "new 0 0 268.476 268.476",
+                            },
+                            attrs: {
+                              version: "1.1",
+                              id: "Capa_1",
+                              xmlns: "http://www.w3.org/2000/svg",
+                              "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                              x: "0px",
+                              y: "0px",
+                              viewBox: "0 0 268.476 268.476",
+                              "xml:space": "preserve",
+                            },
+                          },
+                          [
+                            _c("g", [
+                              _c("path", {
+                                staticStyle: {
+                                  "fill-rule": "evenodd",
+                                  "clip-rule": "evenodd",
+                                },
+                                attrs: {
+                                  d: "M254.958,245.159c-0.5-11.909-10.124-21.429-22.015-21.429H35.533\n                                c-12.21,0-22.109,10.017-22.109,22.373c0,12.356,9.899,22.373,22.109,22.373h197.41c11.888,0,21.509-9.515,22.014-21.419\n                                c0.014-0.323,0.096-0.627,0.096-0.954C255.053,245.78,254.971,245.479,254.958,245.159z M79.261,109.806l32.711-32.756v106.41\n                                c0,12.356,10.032,22.373,22.407,22.373c12.375,0,22.406-10.017,22.406-22.373V77.05l32.71,32.756c8.874,8.876,23.26,8.876,32.134,0\n                                c8.874-8.876,8.874-23.266,0-32.143L150.76,6.696c-4.047-4.048-9.248-6.155-14.542-6.511C135.601,0.134,135.008,0,134.378,0\n                                c-0.628,0-1.218,0.134-1.832,0.184c-5.298,0.354-10.502,2.462-14.551,6.512L47.127,77.663c-8.874,8.877-8.874,23.267,0,32.143\n                                C56,118.681,70.388,118.681,79.261,109.806z",
+                                },
+                              }),
+                            ]),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "afterSettng" }, [
+                          _vm._v(
+                            "\n                        Опубликовать\n                    "
+                          ),
+                        ]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("a", { staticClass: "redBtn" }, [
+                      _c(
+                        "svg",
+                        {
+                          staticStyle: {
+                            "enable-background": "new 0 0 495.339 495.339",
+                          },
+                          attrs: {
+                            version: "1.1",
+                            id: "Capa_1",
+                            xmlns: "http://www.w3.org/2000/svg",
+                            "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                            x: "0px",
+                            y: "0px",
+                            viewBox: "0 0 495.339 495.339",
+                            "xml:space": "preserve",
+                          },
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d: "M196.299,405.261l277.148-277.124c6.738-6.742,6.738-17.668,0-24.408L374.805,5.056C371.563,1.824,367.176,0,362.598,0\n                            c-4.584,0-8.951,1.824-12.193,5.056L73.256,282.211c-1.871,1.863-3.271,4.121-4.129,6.62L17.76,438.832\n                            c-2.129,6.233-0.498,13.136,4.145,17.789c3.258,3.273,7.649,5.023,12.129,5.04c0.549,1.041,1.369,2.016,2.58,2.856\n                            c8.873,6.191,18.16,10.989,27.627,15.192c44.113,19.555,93.689,18.91,141.607,8.209c36.273-8.121,70.656-22.531,106.008-33.773\n                            c48.125-15.313,100.545-22.667,150.541-28.538c11.065-1.306,9.227-18.468-1.84-17.169c-68.012,8-134.779,21.635-199.277,44.717\n                            c-54.258,19.394-116.512,34.867-172.09,18.005c-11.867-3.588-23.416-8.716-34.514-15.538l135.025-46.232\n                            C192.17,408.527,194.461,407.123,196.299,405.261z M187.508,365.255l-18.32-18.307L418.559,97.656l18.262,18.274L187.508,365.255z\n                             M362.598,41.676l18.303,18.304l-249.34,249.35l-18.307-18.314L362.598,41.676z M91.723,406.445l-19.66-19.652l22.498-65.674\n                            l62.82,62.836L91.723,406.445z",
+                            },
+                          }),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "afterSettng" }, [
+                        _vm._v(
+                          "\n                        Редактировать\n                    "
+                        ),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      { staticClass: "canBtn", on: { click: _vm.remove } },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticStyle: {
+                              "enable-background": "new 0 0 512 512",
+                            },
+                            attrs: {
+                              version: "1.1",
+                              id: "Layer_1",
+                              xmlns: "http://www.w3.org/2000/svg",
+                              "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                              x: "0px",
+                              y: "0px",
+                              viewBox: "0 0 512 512",
+                              "xml:space": "preserve",
+                            },
+                          },
+                          [
+                            _c("g", [
+                              _c("g", [
+                                _c("path", {
+                                  attrs: {
+                                    d: "M380.54,83.027h-48.432v-6.919C332.108,34.142,297.966,0,256,0s-76.108,34.142-76.108,76.108v6.919h-48.432\n                                    c-57.226,0-103.784,46.557-103.784,103.784v20.757h29.477L84.829,512h342.343l27.676-304.432h29.477v-20.757\n                                    C484.324,129.584,437.767,83.027,380.54,83.027z M221.405,76.108c0-19.075,15.519-34.595,34.595-34.595\n                                    c19.075,0,34.595,15.519,34.595,34.595v6.919h-69.189V76.108z M389.261,470.487H122.739L98.837,207.568h314.325L389.261,470.487z\n                                     M72.746,166.054c8.567-24.162,31.653-41.514,58.714-41.514h48.432h152.216h48.432c27.061,0,50.147,17.351,58.714,41.514H72.746z",
+                                  },
+                                }),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("g", [
+                              _c("g", [
+                                _c("rect", {
+                                  attrs: {
+                                    x: "235.243",
+                                    y: "249.081",
+                                    width: "41.514",
+                                    height: "179.892",
+                                  },
+                                }),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("g", [
+                              _c("g", [
+                                _c("rect", {
+                                  attrs: {
+                                    x: "152.216",
+                                    y: "249.081",
+                                    width: "41.513",
+                                    height: "179.892",
+                                  },
+                                }),
+                              ]),
+                            ]),
+                            _vm._v(" "),
+                            _c("g", [
+                              _c("g", [
+                                _c("rect", {
+                                  attrs: {
+                                    x: "318.27",
+                                    y: "249.081",
+                                    width: "41.514",
+                                    height: "179.892",
+                                  },
+                                }),
+                              ]),
+                            ]),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "afterSettng" }, [
+                          _vm._v(
+                            "\n                        Удалить\n                    "
+                          ),
+                        ]),
+                      ]
+                    ),
+                  ])
+                : _vm._e(),
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.isHome === true
+          ? _c(
+              "div",
+              {
+                staticClass: "favorites__container",
+                on: { click: _vm.favorites },
+              },
+              [
+                _c(
+                  "svg",
+                  {
+                    attrs: {
+                      version: "1.1",
+                      id: "Capa_1",
+                      xmlns: "http://www.w3.org/2000/svg",
+                      "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                      x: "0px",
+                      y: "0px",
+                      viewBox: "0 0 485.3 485.3",
+                      "xml:space": "preserve",
+                    },
+                  },
+                  [
+                    _c("g", [
+                      _c("path", {
+                        attrs: {
+                          d: "M446.9,181.3c0.1-26.1-10.1-50.6-28.5-69c-18.4-18.4-42.9-28.6-68.9-28.6c-26,0-50.6,10.2-69,28.6l-21.9,21.9\n                        c-6.2,6.1-17.2,6.1-23.3,0l-22-22c-18.5-18.5-43-28.7-69.1-28.7c-25.9,0-50.4,10.2-68.8,28.5c-18.4,18.4-28.5,42.9-28.5,68.9\n                        c0.1,26.1,10.3,50.6,28.7,69l171.5,171.5l171.1-171.2C436.8,231.8,446.9,207.3,446.9,181.3z",
+                        },
+                      }),
+                    ]),
+                  ]
+                ),
+              ]
+            )
+          : _vm._e(),
+      ]
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

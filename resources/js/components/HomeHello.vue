@@ -1,7 +1,7 @@
 <template>
     <div class="intro">
-        <div class="hello" v-if="userinfo.name !== null">Добропожаловать, <h2>{{ userinfo.name + '!'}}</h2></div>
-        <h2 v-else>Добропожаловать!</h2>
+        <div class="hello" v-if="userinfo.name !== undefined">Добропожаловать, <h2>{{ userinfo.name + '!'}}</h2></div>
+        <div class="hello" v-else>Добропожаловать!</div>
     </div>
 </template>
 
@@ -16,12 +16,6 @@ export default {
         return {
         userinfo: {
             name: '',
-
-            default() {
-                return {
-                    name: ''
-                }
-            }
         }
     }
     },

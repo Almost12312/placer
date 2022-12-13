@@ -35,8 +35,15 @@ class CabinetController extends Controller
 
     public function profile()
     {
-        $user = User::find(Auth::user()->id);
+        if (Auth::check())
+        {
+            $user = User::find(Auth::user()->id);
+            return new UserResourse($user);
 
-        return new UserResourse($user);
+        }   else
+        {
+            return false;
+        }
+
     }
 }

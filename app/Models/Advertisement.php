@@ -9,8 +9,6 @@ class Advertisement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['author_id', 'title', 'content', 'location', 'delete_at', 'price', 'category_id' , 'status'];
-
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -36,6 +34,23 @@ class Advertisement extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function favorite()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    protected $fillable = [
+        'author_id',
+        'title',
+        'content',
+        'location',
+        'delete_at',
+        'price',
+        'category_id' ,
+        'status'
+    ];
+
 //
 //    public function file()
 //    {

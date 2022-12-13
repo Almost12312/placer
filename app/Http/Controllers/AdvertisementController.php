@@ -159,10 +159,8 @@ class AdvertisementController extends Controller
         $end = $request->get('end');
         $perPage = $request->get('perPage');
 
-//        $advsGet = Advertisement::where('status', '=', 1)->skip($start)->take($perPage)->get();
         $advsGet = Advertisement::where('status', '=', 1)->skip($start)->take($perPage)->get();
-//        $more = Advertisement::where('status', '=', 1)->skip($start+$perPage)->take(1)->get();
-//        dd(count($advsGet));
+
         if (count($advsGet) === 0)
         {
             return response()->json([
@@ -179,5 +177,14 @@ class AdvertisementController extends Controller
 //        dd($advsPost);
 //        return Advertisement::where('status', '=', 1)->paginate(1);
 //        return Advertisement::
+    }
+
+    public function favorite(Request $request)
+    {
+        $id = $request->get('id');
+
+        $adv = Advertisement::find($id);
+
+        $user = Auth::user();
     }
 }

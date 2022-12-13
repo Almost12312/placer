@@ -370,6 +370,7 @@ body {
         cursor: pointer;
 
         .filters__options {
+            display: flex;
             opacity: 1;
             transition: .3s;
         }
@@ -405,13 +406,14 @@ body {
 
 
 .filters__options {
+    width: 270px;
 
     padding: 11px 15px;
 
     position: absolute;
     right: 0;
     top: 100%;
-    display: flex;
+    display: none;
     flex-direction: column;
 
     opacity: 0;
@@ -444,6 +446,35 @@ body {
 
     &:last-child {
         padding-bottom: 0;
+    }
+
+    &:hover {
+        cursor: pointer;
+
+        p {
+            color: #e30202;
+            transition: .2s;
+        }
+
+        svg {
+            fill: #e30202;
+            transition: .2s;
+
+        }
+    }
+}
+
+.filter__active {
+    p {
+        font-weight: 700;
+        color: #000000;
+        transition: .2s;
+    }
+
+    svg {
+        fill: #b20101;
+        transition: .2s;
+
     }
 }
 
@@ -515,6 +546,23 @@ body {
     height: 150px;
 }
 
+.cart__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        width: 25px;
+        height: 25px;
+    }
+
+    &:hover {
+        svg {
+            fill: red;
+        }
+    }
+}
+
 .favorites__container {
     padding: 6px;
 
@@ -530,13 +578,18 @@ body {
     svg {
         width: 25px;
         height: 25px;
+        fill: none;
+        stroke: black;
+        stroke-width: 30;
     }
-}
 
-.favorites__container:hover {
-    svg {
-        transition: .3s;
-        fill: red;
+    &:hover {
+        cursor: pointer;
+        svg {
+            fill: red;
+            stroke: red;
+            stroke-width: 30;
+        }
     }
 }
 
@@ -1197,7 +1250,7 @@ body {
 
 .adv__status {
     font-family: $ffPoppins;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 18px;
     color: $clrDisable;
     text-decoration: none;
@@ -1215,6 +1268,7 @@ body {
     margin-bottom: 3px;
 
     color: #000000;
+    font-weight: 500;
 
     .status__after {
         position: relative;

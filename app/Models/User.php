@@ -21,6 +21,11 @@ class User extends Authenticatable
         return $this->belongsToMany(File::class, 'files_users');
     }
 
+    public function favorite()
+    {
+        return $this->hasMany(Advertisement::class, 'author_id', 'id');
+    }
+
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
