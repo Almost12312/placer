@@ -67,6 +67,8 @@
                 v-for="adv in allAdv"
                 v-bind:adv-info="adv"
                       :is-home="isHome"
+                      :favorite="findFavorite(adv.id)"
+
             ></advertisement>
         </div>
         <div class="loadMore" v-if="more === true">
@@ -99,14 +101,14 @@
             }
         },
 
-        // props: {
-        //     sortProp: {
-        //         type: Number,
-        //         default(){
-        //             return 1
-        //         }
-        //     }
-        // },
+        props: {
+            userinfo: {
+                type: Object,
+                default(){
+                    return {}
+                }
+            }
+        },
 
         methods: {
             loadAdv()
@@ -146,24 +148,14 @@
 
                 try {
                     const data = await axios.post('/getAdv', load)
-                                            .then(response => {
+                                            .then((response) => {
+
                                                 this.start += this.perPage;
 
                                                 if (!(response.data.end))
                                                 {
                                                     Array.prototype.push.apply(this.allAdv, response.data.data);
                                                     this.allAdv.push();
-
-
-                                                    // for (let i = 0; i <= response.data.data.length; i++) {
-                                                    //     this.allAdv.push(response.data.data[i])
-                                                    // }
-                                                    // this.allAdv.push(response.data.data)
-                                                    // console.log(response.data.data[0])
-                                                    // console.log(response)
-
-                                                    // console.log(this.allAdv)
-
                                                 }   else
                                                 {
                                                     this.more = false;
@@ -215,6 +207,15 @@
                 }
             },
 
+            findFavorite(id) {
+                // setTimeout(() => {
+
+                    // console.log("Сейчас я проверяю "+ this.userinfo.favorites.includes(id) + " " + id)
+                    console.log("Сейчас я проверяю "+ typeof this.userinfo.favorites)
+                    // return this.userinfo.favorites.includes(id);
+                // })
+            },
+
         },
 
         watch: {
@@ -224,12 +225,7 @@
         },
 
         computed: {
-            // filter__active(value) {
-            //     if (this.sort === value)
-            //     {
-            //         return
-            //     }
-            // },
+
         },
 
         mounted() {

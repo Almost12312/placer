@@ -2889,6 +2889,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 // @remove="remove"
 
@@ -2906,15 +2908,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       sort: 1
     };
   },
-  // props: {
-  //     sortProp: {
-  //         type: Number,
-  //         default(){
-  //             return 1
-  //         }
-  //     }
-  // },
-
+  props: {
+    userinfo: {
+      type: Object,
+      "default": function _default() {
+        return {};
+      }
+    }
+  },
   methods: {
     loadAdv: function loadAdv() {
       var _this = this;
@@ -2954,15 +2955,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   if (!response.data.end) {
                     Array.prototype.push.apply(_this2.allAdv, response.data.data);
                     _this2.allAdv.push();
-
-                    // for (let i = 0; i <= response.data.data.length; i++) {
-                    //     this.allAdv.push(response.data.data[i])
-                    // }
-                    // this.allAdv.push(response.data.data)
-                    // console.log(response.data.data[0])
-                    // console.log(response)
-
-                    // console.log(this.allAdv)
                   } else {
                     _this2.more = false;
                     // alert("Объявления закончились");
@@ -3016,21 +3008,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             return b.price - a.price;
           });
       }
+    },
+    findFavorite: function findFavorite(id) {
+      // setTimeout(() => {
+
+      // console.log("Сейчас я проверяю "+ this.userinfo.favorites.includes(id) + " " + id)
+      console.log("Сейчас я проверяю " + _typeof(this.userinfo.favorites));
+      // return this.userinfo.favorites.includes(id);
+      // })
     }
   },
+
   watch: {
     sort: function sort() {
       this.sorting();
     }
   },
-  computed: {
-    // filter__active(value) {
-    //     if (this.sort === value)
-    //     {
-    //         return
-    //     }
-    // },
-  },
+  computed: {},
   mounted: function mounted() {
     this.getMore();
     this.setLoadingObserver();
@@ -3066,23 +3060,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "HomeHello",
-  data: function data() {
-    return {
-      userinfo: {
-        name: ''
+  props: {
+    username: {
+      type: String,
+      "default": function _default() {
+        return undefined;
       }
-    };
-  },
-  methods: {
-    getUser: function getUser() {
-      var _this = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('profile').then(function (response) {
-        _this.userinfo.name = response.data.name;
-      });
     }
-  },
-  mounted: function mounted() {
-    this.getUser();
   }
 });
 
@@ -3101,6 +3085,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _HomeHello__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HomeHello */ "./resources/js/components/HomeHello.vue");
 /* harmony import */ var _HomeAdvCont__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HomeAdvCont */ "./resources/js/components/HomeAdvCont.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -3117,17 +3103,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "HomeRoot",
-  // data() {
-  //     return {
-  //         sort: 1
-  //     }
-  // },
-
+  data: function data() {
+    return {
+      userinfo: {}
+    };
+  },
+  methods: {
+    getUser: function getUser() {
+      var _this = this;
+      axios__WEBPACK_IMPORTED_MODULE_2___default().get('profile').then(function (response) {
+        _this.userinfo.name = response.data.name;
+        _this.userinfo.favorites = response.data.favorites;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getUser();
+  },
   components: {
     HomeHello: _HomeHello__WEBPACK_IMPORTED_MODULE_0__["default"],
     HomeAdvCont: _HomeAdvCont__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -4103,14 +4106,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "advertisement",
   data: function data() {
-    return {
-      favorite: false
-    };
+    return {};
   },
   props: {
     advInfo: {
@@ -4120,6 +4122,12 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     isHome: {
+      type: Boolean,
+      "default": function _default() {
+        return false;
+      }
+    },
+    favorite: {
       type: Boolean,
       "default": function _default() {
         return false;
@@ -4143,14 +4151,12 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/add-favorite', adv).then(function (response) {
         if (response.data.success) {
-          _this.favorite = true;
-          _this.activeSvg(_this.advInfo.id);
+          _this.favorite = !_this.favorite;
         }
       });
-    },
-    activeSvg: function activeSvg(id) {
-      var svg = document.querySelector("[data-id=".concat(CSS.escape(id), "]")).classList.toggle('favorites__container__active');
-    }
+    } // activeSvg(id) {
+    //     let svg = document.querySelector(`[data-id=${CSS.escape(id)}]`).classList.toggle('favorites__container__active')
+    // },
   },
   computed: {
     twoTags: function twoTags() {
@@ -4408,25 +4414,7 @@ if (document.querySelector('.infinity__advs')) {
       HomeRoot: _components_HomeRoot__WEBPACK_IMPORTED_MODULE_16__["default"]
     }
   });
-  // let cont = document.querySelector('#homeAdvCont');
-  //
-  // cont.addEventListener('click', event => {
-  //     let target = event.target
-  //
-  //     if (target.closest('.openAdv'))
-  //     {
-  //         console.log("Привет")
-  //         let id = target.closest('.advertisement').dataset.id
-  //
-  //         location.href = `/advertisement/` + id + `/view`
-  //
-  //     }   else
-  //     {
-  //         return
-  //     }
-  // })
 }
-
 if (document.querySelector('.withoutRegPhoto__bg')) {
   console.log("Вы изменили цвет для бг");
   var clr = Math.random().toString(16).substring(2, 8).match(/.{1,2}/g);
@@ -25360,7 +25348,11 @@ var render = function () {
       },
       _vm._l(_vm.allAdv, function (adv) {
         return _c("advertisement", {
-          attrs: { "adv-info": adv, "is-home": _vm.isHome },
+          attrs: {
+            "adv-info": adv,
+            "is-home": _vm.isHome,
+            favorite: _vm.findFavorite(adv.id),
+          },
         })
       }),
       1
@@ -25409,10 +25401,10 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "intro" }, [
-    _vm.userinfo.name !== undefined
+    _vm.username !== undefined
       ? _c("div", { staticClass: "hello" }, [
           _vm._v("Добропожаловать, "),
-          _c("h2", [_vm._v(_vm._s(_vm.userinfo.name + "!"))]),
+          _c("h2", [_vm._v(_vm._s(_vm.username + "!"))]),
         ])
       : _c("div", { staticClass: "hello" }, [_vm._v("Добропожаловать!")]),
   ])
@@ -25443,7 +25435,7 @@ var render = function () {
   return _c(
     "div",
     [
-      _c("home-hello"),
+      _c("home-hello", { attrs: { username: _vm.userinfo.name } }),
       _vm._v(" "),
       _c("div", { staticClass: "posts" }, [
         _c(
@@ -25452,7 +25444,7 @@ var render = function () {
             staticClass: "advertisement__homeContainer",
             attrs: { id: "homeAdvCont" },
           },
-          [_c("home-adv-cont")],
+          [_c("home-adv-cont", { attrs: { userinfo: _vm.userinfo } })],
           1
         ),
       ]),
@@ -26715,6 +26707,7 @@ var render = function () {
               "div",
               {
                 staticClass: "favorites__container",
+                class: { favorites__container__active: _vm.favorite },
                 on: { click: _vm.favorites },
               },
               [

@@ -174,6 +174,7 @@
                 v-if="isHome === true"
                 @click="favorites"
                 class="favorites__container"
+                :class="{favorites__container__active: favorite}"
             >
                 <svg version="1.1" id="favorite" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                      viewBox="0 0 485.3 485.3" xml:space="preserve">
@@ -197,7 +198,7 @@ export default {
 
     data() {
         return {
-            favorite: false
+
         }
     },
 
@@ -213,6 +214,13 @@ export default {
             type: Boolean,
             default() {
                 return false;
+            }
+        },
+
+        favorite: {
+            type: Boolean,
+            default() {
+                return false
             }
         }
     },
@@ -238,15 +246,14 @@ export default {
             axios.post('/advertisement/add-favorite', adv)
                  .then(response => {
                      if (response.data.success) {
-                         this.favorite = true
-                         this.activeSvg(this.advInfo.id)
+                         this.favorite = !this.favorite
                      }
                  })
         },
 
-        activeSvg(id) {
-            let svg = document.querySelector(`[data-id=${CSS.escape(id)}]`).classList.toggle('favorites__container__active')
-        },
+        // activeSvg(id) {
+        //     let svg = document.querySelector(`[data-id=${CSS.escape(id)}]`).classList.toggle('favorites__container__active')
+        // },
     },
 
     computed: {

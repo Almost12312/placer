@@ -134,23 +134,6 @@ if (document.querySelector('.infinity__advs'))
             HomeRoot
         }
     })
-    // let cont = document.querySelector('#homeAdvCont');
-    //
-    // cont.addEventListener('click', event => {
-    //     let target = event.target
-    //
-    //     if (target.closest('.openAdv'))
-    //     {
-    //         console.log("Привет")
-    //         let id = target.closest('.advertisement').dataset.id
-    //
-    //         location.href = `/advertisement/` + id + `/view`
-    //
-    //     }   else
-    //     {
-    //         return
-    //     }
-    // })
 }
 
 if (document.querySelector('.withoutRegPhoto__bg'))

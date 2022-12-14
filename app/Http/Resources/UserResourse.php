@@ -24,6 +24,7 @@ class UserResourse extends JsonResource
                 'city' => $this->resource->city,
                 'created_at' => date($this->resource->created_at->format('d m Y')),
                 'url' => $this->resource->files[0]->getUrl(),
+                'favorites' => $this->resource->favorites(),
                 'advPublish' => $this->resource->advertisements->where('status', '=', 1)->count(),
                 'advDrafts' => $this->resource->advertisements->where('status', '=', 2)->count(),
 //                'advHistory' => $this->resource->advertisements->where('status', '=', 3)->count()
@@ -36,6 +37,7 @@ class UserResourse extends JsonResource
                 'city' => $this->resource->city,
                 'created_at' => date($this->resource->created_at->format('d m Y')),
                 'url' => null,
+                'favorites' => FavoriteResource::make($this->resource),
                 'advPublish' => $this->resource->advertisements->where('status', '=', 1)->count(),
                 'advDrafts' => $this->resource->advertisements->where('status', '=', 2)->count(),
 //                'advHistory' => $this->resource->advertisements->where('status', '=', 3)->count()

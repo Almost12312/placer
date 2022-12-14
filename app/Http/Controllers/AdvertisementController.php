@@ -196,7 +196,7 @@ class AdvertisementController extends Controller
             ]);
         }   else
         {
-            $user->favorites()->sync($adv);
+            $user->favorites()->attach($adv);
 
             return response()->json([
                 'success' => true,
