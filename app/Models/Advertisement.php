@@ -35,9 +35,9 @@ class Advertisement extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function favorite()
+    public function favorites()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class, 'favorites')->using(Favorites::class);
     }
 
     protected $fillable = [

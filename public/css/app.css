@@ -476,6 +476,12 @@ body {
   stroke-width: 30;
 }
 
+.favorites__container__active svg {
+  fill: red;
+  stroke: red;
+  stroke-width: 30;
+}
+
 .advertisement__description {
   display: flex;
   flex-direction: column;

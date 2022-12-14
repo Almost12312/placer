@@ -186,5 +186,23 @@ class AdvertisementController extends Controller
         $adv = Advertisement::find($id);
 
         $user = Auth::user();
+
+        if ($user->favorites()->find($adv))
+        {
+            $user->favorites()->detach($adv);
+
+            return response()->json([
+                'success' => true,
+            ]);
+        }   else
+        {
+            $user->favorites()->sync($adv);
+
+            return response()->json([
+                'success' => true,
+            ]);
+        }
+
+
     }
 }

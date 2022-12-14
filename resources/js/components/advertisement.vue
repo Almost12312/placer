@@ -170,8 +170,12 @@
 
                 </div>
             </div>
-            <div v-if="isHome === true" class="favorites__container" @click="favorites">
-                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            <div
+                v-if="isHome === true"
+                @click="favorites"
+                class="favorites__container"
+            >
+                <svg version="1.1" id="favorite" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                      viewBox="0 0 485.3 485.3" xml:space="preserve">
                     <g>
                         <path d="M446.9,181.3c0.1-26.1-10.1-50.6-28.5-69c-18.4-18.4-42.9-28.6-68.9-28.6c-26,0-50.6,10.2-69,28.6l-21.9,21.9
@@ -230,13 +234,19 @@ export default {
             let adv = {
                 id: this.advInfo.id
             }
+
             axios.post('/advertisement/add-favorite', adv)
                  .then(response => {
                      if (response.data.success) {
                          this.favorite = true
+                         this.activeSvg(this.advInfo.id)
                      }
                  })
-        }
+        },
+
+        activeSvg(id) {
+            let svg = document.querySelector(`[data-id=${CSS.escape(id)}]`).classList.toggle('favorites__container__active')
+        },
     },
 
     computed: {
@@ -249,7 +259,7 @@ export default {
             {
                 return this.advInfo.tags
             }
-        }
+        },
     }
 }
 </script>

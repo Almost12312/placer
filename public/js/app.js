@@ -4099,6 +4099,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4140,8 +4144,12 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/add-favorite', adv).then(function (response) {
         if (response.data.success) {
           _this.favorite = true;
+          _this.activeSvg(_this.advInfo.id);
         }
       });
+    },
+    activeSvg: function activeSvg(id) {
+      var svg = document.querySelector("[data-id=".concat(CSS.escape(id), "]")).classList.toggle('favorites__container__active');
     }
   },
   computed: {
@@ -26715,7 +26723,7 @@ var render = function () {
                   {
                     attrs: {
                       version: "1.1",
-                      id: "Capa_1",
+                      id: "favorite",
                       xmlns: "http://www.w3.org/2000/svg",
                       "xmlns:xlink": "http://www.w3.org/1999/xlink",
                       x: "0px",
