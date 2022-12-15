@@ -21,7 +21,11 @@
         </section>
     </div>
     <div class="infinity__advs">
-        <home-root />
+        <home-root
+            :url='@json($url)'
+        >
+
+        </home-root>
     </div>
     {{--    <div class="intro">--}}
 {{--        <home-hello />--}}

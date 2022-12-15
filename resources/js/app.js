@@ -19,6 +19,7 @@ import Splide from '@splidejs/splide/dist/js/splide.min.js'
 import '@splidejs/splide/css';
 import HeadLayout from "./components/HeadLayout";
 import HomeRoot from "./components/HomeRoot";
+import HomeAdvCont from "./components/HomeAdvCont";
 
 if (document.querySelector('.fade'))
 {
@@ -136,17 +137,25 @@ if (document.querySelector('.infinity__advs'))
     })
 }
 
+if (document.querySelector('.favoritesRoot__container')) {
+    new Vue ({
+        el: '.favoritesRoot__container',
+        components: {
+            HomeAdvCont
+        }
+    })
+}
+
 if (document.querySelector('.withoutRegPhoto__bg'))
 {
-    console.log("Вы изменили цвет для бг")
-    let clr = Math.random().toString(16).substring(2, 8).match(/.{1,2}/g)
+    let clr = Math.random().toString(16).substring(2, 8).match(/.{1,2}/g);
     let rgba = [
         parseInt(clr[0], 16),
         parseInt(clr[1], 16),
         parseInt(clr[2], 16),
-    ]
+    ];
 
-    document.querySelector('.withoutRegPhoto__bg').style.background = "rgba(" + rgba[0] + "," + rgba[1] + ", " + rgba[2] + ", 1)"
+    document.querySelector('.withoutRegPhoto__bg').style.background = "rgba(" + rgba[0] + "," + rgba[1] + ", " + rgba[2] + ", 1)";
 }
 
 // Vue.use(VueSplide)

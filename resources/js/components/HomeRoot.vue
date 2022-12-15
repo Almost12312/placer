@@ -34,12 +34,20 @@ export default {
         }
     },
 
+    props: {
+        url: {
+            type: String,
+            default() {
+                return '/getAdv';
+            }
+        }
+    },
+
     methods: {
         getUser() {
             axios.get('profile')
                 .then(response => {
                     this.userinfo.name = response.data.name
-                    this.userinfo.favorites = response.data.favorites
                 })
         }
     },

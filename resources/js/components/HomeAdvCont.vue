@@ -1,12 +1,14 @@
 <template>
     <div>
         <header class="subtitle__filters">
-            <h3 class="home__subtitle">Объявления</h3>
+            <h3 v-if="isFav === false" class="home__subtitle">Объявления</h3>
+            <h3 v-if="isFav === true" class="home__subtitle">Избранное</h3>
             <div class="filters">
 
                 <h3 v-if="sort === 1">Самые новые</h3>
                 <h3 v-if="sort === 2">По возрастанию</h3>
                 <h3 v-if="sort === 3">По убыванию</h3>
+
                 <svg version="1.1" id="more__list" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                      viewBox="0 0 129 78" xml:space="preserve">
 
@@ -68,7 +70,7 @@
                 v-bind:adv-info="adv"
                       :is-home="isHome"
                       :favorite="findFavorite(adv.id)"
-
+                      :is-fav="isFav"
             ></advertisement>
         </div>
         <div class="loadMore" v-if="more === true">
@@ -93,6 +95,7 @@
         data() {
             return {
                 allAdv: [],
+                favorites: [],
                 isHome: true,
                 start: 0,
                 perPage: 6,
@@ -107,21 +110,24 @@
                 default(){
                     return {}
                 }
-            }
+            },
+
+            url: {
+                type: String,
+                default() {
+                    return '/getAdv';
+                }
+            },
+
+            isFav: {
+                type: Boolean,
+                default() {
+                    return false
+                }
+            },
         },
 
         methods: {
-            loadAdv()
-            {
-                let advStatus = {
-                    status: 1
-                }
-
-                axios.post('/load-adv', advStatus)
-                    .then((response) => {
-                        this.allAdv = response.data.data
-                    })
-            },
 
             target(event)
             {
@@ -147,15 +153,19 @@
                 }
 
                 try {
-                    const data = await axios.post('/getAdv', load)
+                    const data = await axios.post(this.url, load)
                                             .then((response) => {
 
                                                 this.start += this.perPage;
 
                                                 if (!(response.data.end))
                                                 {
-                                                    Array.prototype.push.apply(this.allAdv, response.data.data);
-                                                    this.allAdv.push();
+                                                    if (response.data.favorites) {
+                                                        this.pushing(this.favorites, response.data.favorites);
+                                                    }
+
+                                                    this.pushing(this.allAdv, response.data.advs.data)
+
                                                 }   else
                                                 {
                                                     this.more = false;
@@ -207,13 +217,15 @@
                 }
             },
 
-            findFavorite(id) {
-                // setTimeout(() => {
+            pushing(arr, res)
+            {
+                for (let item of Object.keys(res)) {
+                    arr.push(res[item])
+                }
+            },
 
-                    // console.log("Сейчас я проверяю "+ this.userinfo.favorites.includes(id) + " " + id)
-                    console.log("Сейчас я проверяю "+ typeof this.userinfo.favorites)
-                    // return this.userinfo.favorites.includes(id);
-                // })
+            findFavorite(id) {
+                return this.favorites.includes(id);
             },
 
         },

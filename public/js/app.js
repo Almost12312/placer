@@ -2891,6 +2891,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 // @remove="remove"
 
@@ -2901,6 +2903,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       allAdv: [],
+      favorites: [],
       isHome: true,
       start: 0,
       perPage: 6,
@@ -2914,18 +2917,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       "default": function _default() {
         return {};
       }
+    },
+    url: {
+      type: String,
+      "default": function _default() {
+        return '/getAdv';
+      }
+    },
+    isFav: {
+      type: Boolean,
+      "default": function _default() {
+        return false;
+      }
     }
   },
   methods: {
-    loadAdv: function loadAdv() {
-      var _this = this;
-      var advStatus = {
-        status: 1
-      };
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/load-adv', advStatus).then(function (response) {
-        _this.allAdv = response.data.data;
-      });
-    },
     target: function target(event) {
       var target = event.target;
       if (target.closest('.openAdv')) {
@@ -2936,7 +2942,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     getMore: function getMore() {
-      var _this2 = this;
+      var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var load, data;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -2944,19 +2950,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 load = {
-                  start: _this2.start,
-                  end: _this2.end,
-                  perPage: _this2.perPage
+                  start: _this.start,
+                  end: _this.end,
+                  perPage: _this.perPage
                 };
                 _context.prev = 1;
                 _context.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/getAdv', load).then(function (response) {
-                  _this2.start += _this2.perPage;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().post(_this.url, load).then(function (response) {
+                  _this.start += _this.perPage;
                   if (!response.data.end) {
-                    Array.prototype.push.apply(_this2.allAdv, response.data.data);
-                    _this2.allAdv.push();
+                    if (response.data.favorites) {
+                      _this.pushing(_this.favorites, response.data.favorites);
+                    }
+                    _this.pushing(_this.allAdv, response.data.advs.data);
                   } else {
-                    _this2.more = false;
+                    _this.more = false;
                     // alert("Объявления закончились");
                   }
                 });
@@ -2976,13 +2984,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     setLoadingObserver: function setLoadingObserver() {
-      var _this3 = this;
+      var _this2 = this;
       var loadObserver = new IntersectionObserver(function (enteries) {
         enteries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            if (_this3.more === true) {
+            if (_this2.more === true) {
               setTimeout(function () {
-                _this3.getMore();
+                _this2.getMore();
               }, 500);
             }
           }
@@ -3009,16 +3017,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           });
       }
     },
+    pushing: function pushing(arr, res) {
+      for (var _i = 0, _Object$keys = Object.keys(res); _i < _Object$keys.length; _i++) {
+        var item = _Object$keys[_i];
+        arr.push(res[item]);
+      }
+    },
     findFavorite: function findFavorite(id) {
-      // setTimeout(() => {
-
-      // console.log("Сейчас я проверяю "+ this.userinfo.favorites.includes(id) + " " + id)
-      console.log("Сейчас я проверяю " + _typeof(this.userinfo.favorites));
-      // return this.userinfo.favorites.includes(id);
-      // })
+      return this.favorites.includes(id);
     }
   },
-
   watch: {
     sort: function sort() {
       this.sorting();
@@ -3119,12 +3127,19 @@ __webpack_require__.r(__webpack_exports__);
       userinfo: {}
     };
   },
+  props: {
+    url: {
+      type: String,
+      "default": function _default() {
+        return '/getAdv';
+      }
+    }
+  },
   methods: {
     getUser: function getUser() {
       var _this = this;
       axios__WEBPACK_IMPORTED_MODULE_2___default().get('profile').then(function (response) {
         _this.userinfo.name = response.data.name;
-        _this.userinfo.favorites = response.data.favorites;
       });
     }
   },
@@ -3511,13 +3526,24 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     randomBg: function randomBg() {
-      if (this.userinfo.url === null || this.userinfo.url === '') {
-        document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#' + Math.random().toString(16).substring(2, 6);
+      if (this.userinfo.url === undefined) {
+        console.log('Privet');
+        var clr = Math.random().toString(16).substring(2, 8).match(/.{1,2}/g);
+        console.log(clr + "цвет");
+        var rgba = [parseInt(clr[0], 16), parseInt(clr[1], 16), parseInt(clr[2], 16)];
+        document.querySelector('#profile').style.backgroundColor = "rgba(" + rgba[0] + "," + rgba[1] + ", " + rgba[2] + ", 1)";
+      }
+    },
+    bg: function bg() {
+      console.log(this.userinfo.url);
+      if (this.userinfo.url !== null) {
+        console.log("privet");
       }
     }
   },
   mounted: function mounted() {
     this.randomBg();
+    this.bg();
   }
 });
 
@@ -4132,6 +4158,12 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return false;
       }
+    },
+    isFav: {
+      type: Boolean,
+      "default": function _default() {
+        return false;
+      }
     }
   },
   methods: {
@@ -4282,8 +4314,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _components_Test__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Test */ "./resources/js/components/Test.vue");
 /* harmony import */ var _components_AddAd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/AddAd */ "./resources/js/components/AddAd.vue");
 /* harmony import */ var _components_InputPrevCont__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/InputPrevCont */ "./resources/js/components/InputPrevCont.vue");
@@ -4301,6 +4333,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _splidejs_splide_css__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @splidejs/splide/css */ "./node_modules/@splidejs/splide/dist/css/splide.min.css");
 /* harmony import */ var _components_HeadLayout__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/HeadLayout */ "./resources/js/components/HeadLayout.vue");
 /* harmony import */ var _components_HomeRoot__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/HomeRoot */ "./resources/js/components/HomeRoot.vue");
+/* harmony import */ var _components_HomeAdvCont__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/HomeAdvCont */ "./resources/js/components/HomeAdvCont.vue");
+
 
 
 
@@ -4335,8 +4369,8 @@ if (document.querySelector('.homeSlider')) {
     autoplay: true
   }).mount();
 }
-vue__WEBPACK_IMPORTED_MODULE_17__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_18__["default"]);
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_18__["default"]({
+vue__WEBPACK_IMPORTED_MODULE_18__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_19__["default"]);
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_19__["default"]({
   // mode: 'history',
   routes: [{
     path: '/foo',
@@ -4354,7 +4388,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_18__["default"]({
   }]
 });
 if (document.getElementById('vue-app')) {
-  new vue__WEBPACK_IMPORTED_MODULE_17__["default"]({
+  new vue__WEBPACK_IMPORTED_MODULE_18__["default"]({
     el: '#vue-app',
     components: {
       Test: _components_Test__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -4363,7 +4397,7 @@ if (document.getElementById('vue-app')) {
   });
 }
 if (document.querySelector('.redaction__adv')) {
-  new vue__WEBPACK_IMPORTED_MODULE_17__["default"]({
+  new vue__WEBPACK_IMPORTED_MODULE_18__["default"]({
     el: '.redaction__adv',
     components: {
       RedContainer: _components_RedContainer__WEBPACK_IMPORTED_MODULE_12__["default"],
@@ -4373,7 +4407,7 @@ if (document.querySelector('.redaction__adv')) {
   });
 }
 if (document.querySelector('.registrationCont')) {
-  new vue__WEBPACK_IMPORTED_MODULE_17__["default"]({
+  new vue__WEBPACK_IMPORTED_MODULE_18__["default"]({
     el: '.registrationCont',
     components: {
       Registration: _components_registration__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -4381,7 +4415,7 @@ if (document.querySelector('.registrationCont')) {
   });
 }
 if (document.querySelector('.cabinet__container')) {
-  new vue__WEBPACK_IMPORTED_MODULE_17__["default"]({
+  new vue__WEBPACK_IMPORTED_MODULE_18__["default"]({
     el: '.cabinet__container',
     router: router,
     components: {
@@ -4390,7 +4424,7 @@ if (document.querySelector('.cabinet__container')) {
   });
 }
 if (document.querySelector('.header__container')) {
-  new vue__WEBPACK_IMPORTED_MODULE_17__["default"]({
+  new vue__WEBPACK_IMPORTED_MODULE_18__["default"]({
     el: '.header__container',
     components: {
       HeadLayout: _components_HeadLayout__WEBPACK_IMPORTED_MODULE_15__["default"]
@@ -4408,15 +4442,22 @@ if (document.querySelector('.header__container')) {
 // }
 
 if (document.querySelector('.infinity__advs')) {
-  new vue__WEBPACK_IMPORTED_MODULE_17__["default"]({
+  new vue__WEBPACK_IMPORTED_MODULE_18__["default"]({
     el: '.infinity__advs',
     components: {
       HomeRoot: _components_HomeRoot__WEBPACK_IMPORTED_MODULE_16__["default"]
     }
   });
 }
+if (document.querySelector('.favoritesRoot__container')) {
+  new vue__WEBPACK_IMPORTED_MODULE_18__["default"]({
+    el: '.favoritesRoot__container',
+    components: {
+      HomeAdvCont: _components_HomeAdvCont__WEBPACK_IMPORTED_MODULE_17__["default"]
+    }
+  });
+}
 if (document.querySelector('.withoutRegPhoto__bg')) {
-  console.log("Вы изменили цвет для бг");
   var clr = Math.random().toString(16).substring(2, 8).match(/.{1,2}/g);
   var rgba = [parseInt(clr[0], 16), parseInt(clr[1], 16), parseInt(clr[2], 16)];
   document.querySelector('.withoutRegPhoto__bg').style.background = "rgba(" + rgba[0] + "," + rgba[1] + ", " + rgba[2] + ", 1)";
@@ -25108,7 +25149,13 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("header", { staticClass: "subtitle__filters" }, [
-      _c("h3", { staticClass: "home__subtitle" }, [_vm._v("Объявления")]),
+      _vm.isFav === false
+        ? _c("h3", { staticClass: "home__subtitle" }, [_vm._v("Объявления")])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.isFav === true
+        ? _c("h3", { staticClass: "home__subtitle" }, [_vm._v("Избранное")])
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "filters" }, [
         _vm.sort === 1 ? _c("h3", [_vm._v("Самые новые")]) : _vm._e(),
@@ -25352,6 +25399,7 @@ var render = function () {
             "adv-info": adv,
             "is-home": _vm.isHome,
             favorite: _vm.findFavorite(adv.id),
+            "is-fav": _vm.isFav,
           },
         })
       }),
@@ -25931,6 +25979,7 @@ var render = function () {
               },
             ],
             staticClass: "withoutRegPhoto__bg",
+            attrs: { id: "profile" },
           },
           [
             _vm.userinfo.name
@@ -26707,7 +26756,10 @@ var render = function () {
               "div",
               {
                 staticClass: "favorites__container",
-                class: { favorites__container__active: _vm.favorite },
+                class: {
+                  favorites__container__active:
+                    _vm.favorite || _vm.isFav === true,
+                },
                 on: { click: _vm.favorites },
               },
               [

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class FavoriteResource extends JsonResource
 {
@@ -14,12 +15,21 @@ class FavoriteResource extends JsonResource
      */
     public function toArray($request)
     {
-        $favorites = [];
+        if (Auth::check())
+        {
+            $user = Auth::user();
+            $advs = $this->resource;
+            $favorites = [];
 
-        foreach ($this->resource->favorites as $favorite) {
-            $favorites[] = $favorite->id;
+            foreach ($advs as $adv) {
+                if ($user->favorites->find($adv))
+                {
+                    $favorites[] = $adv->id;
+                }
+            }
+
+            return $favorites;
         }
 
-        return $favorites;
     }
 }

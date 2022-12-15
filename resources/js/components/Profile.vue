@@ -11,7 +11,7 @@
                 </label>
 
                 <img v-if="userinfo.url !== null" :src="userinfo.url" alt="аватарка">
-                <div v-show="userinfo.url === null" class="withoutRegPhoto__bg">
+                <div v-show="userinfo.url === null" class="withoutRegPhoto__bg" id="profile">
                     <div v-if="userinfo.name" class="withoutRegPhoto">{{ userinfo.name.substring(0, 1).toUpperCase() }}</div>
                 </div>
             </div>
@@ -65,9 +65,26 @@ export default {
         },
 
         randomBg() {
-            if (this.userinfo.url === null || this.userinfo.url === '')
+            if (this.userinfo.url === undefined)
             {
-                document.querySelector('.withoutRegPhoto__bg').style.backgroundColor = '#'+Math.random().toString(16).substring(2, 6)
+                console.log('Privet')
+                let clr = Math.random().toString(16).substring(2, 8).match(/.{1,2}/g);
+                console.log(clr + "цвет")
+                let rgba = [
+                    parseInt(clr[0], 16),
+                    parseInt(clr[1], 16),
+                    parseInt(clr[2], 16),
+                ];
+
+                document.querySelector('#profile').style.backgroundColor = "rgba(" + rgba[0] + "," + rgba[1] + ", " + rgba[2] + ", 1)";
+            }
+
+        },
+
+        bg() {
+            console.log(this.userinfo.url)
+            if (this.userinfo.url !== null) {
+                console.log("privet")
             }
 
         },
@@ -75,6 +92,7 @@ export default {
 
     mounted() {
         this.randomBg()
+        this.bg()
     }
 }
 </script>

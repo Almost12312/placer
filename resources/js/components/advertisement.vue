@@ -174,7 +174,7 @@
                 v-if="isHome === true"
                 @click="favorites"
                 class="favorites__container"
-                :class="{favorites__container__active: favorite}"
+                :class="{favorites__container__active: favorite || isFav === true}"
             >
                 <svg version="1.1" id="favorite" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                      viewBox="0 0 485.3 485.3" xml:space="preserve">
@@ -218,6 +218,13 @@ export default {
         },
 
         favorite: {
+            type: Boolean,
+            default() {
+                return false
+            }
+        },
+
+        isFav: {
             type: Boolean,
             default() {
                 return false

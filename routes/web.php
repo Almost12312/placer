@@ -30,7 +30,8 @@ Route::get('/', [HomeController::class, 'home'])
 Route::post('/getAdv', [AdvertisementController::class, 'page']);
 
     //1.2 Favorites
-Route::get('favorites', [FavoritesController::class, 'view']);
+Route::get('favorites', [FavoritesController::class, 'view'])
+    ->name('favorites');
 /* ------------------------------------------------------------------------ */
 
 /* 2. Authorization and registration */
@@ -90,9 +91,9 @@ Route::post('/advertisement/change-status', [AdvertisementController::class, 'ch
 
 Route::post('/advertisement/delete', [AdvertisementController::class, 'delAdvert']);
 
-Route::post('/advertisement/add-favorite', [AdvertisementController::class, 'favorite']);
+Route::post('/advertisement/add-favorite', [AdvertisementController::class, 'addFavorite']);
 
-
+Route::post('/advertisement/favorites', [AdvertisementController::class, 'onlyFav']);
 
 /* ------------------------------------------------------------------------ */
 

@@ -1,8 +1,12 @@
 @extends('layouts.layout')
 
 @section('content')
-    <h2 class="title">Избранное</h2>
-    <div class="advertisement__container">
-{{--        @foreach()--}}
+    <div class="favoritesRoot__container">
+        <home-adv-cont
+            :is-fav='@json($isFav)'
+            :url='@json($url)'
+        >
+
+        </home-adv-cont>
     </div>
 @endsection

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\AdvertisementCollection;
 use App\Http\Resources\AdvFileResourse;
 use App\Http\Resources\AdvPrevResourse;
+use App\Http\Resources\FavoriteResource;
 use App\Http\Resources\UserResourse;
 use App\Models\Advertisement;
 use App\Models\Category;
@@ -169,17 +170,14 @@ class AdvertisementController extends Controller
 
         }   else
         {
-            return new AdvertisementCollection($advsGet);
+            return [
+                'advs' => new AdvertisementCollection($advsGet),
+                'favorites' => new FavoriteResource($advsGet)
+            ];
         }
-
-//        $advsPost = new AdvertisementCollection($advsGet);
-
-//        dd($advsPost);
-//        return Advertisement::where('status', '=', 1)->paginate(1);
-//        return Advertisement::
     }
 
-    public function favorite(Request $request)
+    public function addFavorite(Request $request)
     {
         $id = $request->get('id');
 
@@ -202,7 +200,28 @@ class AdvertisementController extends Controller
                 'success' => true,
             ]);
         }
+    }
 
+    public function onlyFav(Request $request)
+    {
+        $start = $request->get('start');
+        $end = $request->get('end');
+        $perPage = $request->get('perPage');
 
+        $user = Auth::user();
+        $favorites = new AdvertisementCollection($user->favorites->skip($start)->take($perPage));
+
+        if (count($favorites) === 0)
+        {
+            return response()->json([
+                'end' => true
+            ]);
+
+        }   else
+        {
+            return [
+                'advs' => $favorites,
+            ];
+        }
     }
 }

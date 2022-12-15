@@ -16,13 +16,8 @@ class HomeController extends Controller
 {
     public function home() {
 
-//        $advs = Advertisement::all()->where('status', '=', 1);
+        $url = '/getAdv';
 
-//        dd($links);
-//        $advs = new AdvertisementCollection($getAdvs);
-
-//        dd($advs[0]->files);
-
-        return view('home');
+        return view('home', ['url' => $url]);
     }
 }
