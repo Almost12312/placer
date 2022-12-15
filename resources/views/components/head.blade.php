@@ -35,7 +35,7 @@
                     </div>
                 @endif
                 <div class="menu">
-                    <div><a id="logout">Выйти</a></div>
+                    <div class="menu__option"><a id="logout">Выйти</a></div>
                 </div>
             </button>
         @else
@@ -46,7 +46,9 @@
                 <div class="menu">
                     {{--                    <p><a id="logout">Выйти</a></p>--}}
                     {{--                    <p><a href="{{ route('cabinet') }}">Личный кабинет</a></p>--}}
-                    <div><a href="{{ route('authorization') }}">Авторизация</a></div>
+                    <div class="menu__option">
+                        <a href="{{ route('authorization') }}">Авторизация</a>
+                    </div>
                     <div><a href="{{ route('registration') }}">Регистрация</a></div>
                 </div>
             </button>

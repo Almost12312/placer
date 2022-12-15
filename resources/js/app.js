@@ -19,7 +19,8 @@ import Splide from '@splidejs/splide/dist/js/splide.min.js'
 import '@splidejs/splide/css';
 import HeadLayout from "./components/HeadLayout";
 import HomeRoot from "./components/HomeRoot";
-import HomeAdvCont from "./components/HomeAdvCont";
+
+import {f} from "vue-slick-carousel/dist/vue-slick-carousel.common";
 
 if (document.querySelector('.fade'))
 {
@@ -52,7 +53,10 @@ const router = new VueRouter({
         {
             path: '/',
             component: AdvertisementContainer,
-            props: true
+            props: {
+                isHome: false
+            }
+
         },
         {
             path: '/draft',
@@ -141,13 +145,13 @@ if (document.querySelector('.favoritesRoot__container')) {
     new Vue ({
         el: '.favoritesRoot__container',
         components: {
-            HomeAdvCont
+            AdvertisementContainer
         }
     })
 }
 
-if (document.querySelector('.withoutRegPhoto__bg'))
-{
+
+function changeBg(el) {
     let clr = Math.random().toString(16).substring(2, 8).match(/.{1,2}/g);
     let rgba = [
         parseInt(clr[0], 16),
@@ -155,7 +159,24 @@ if (document.querySelector('.withoutRegPhoto__bg'))
         parseInt(clr[2], 16),
     ];
 
-    document.querySelector('.withoutRegPhoto__bg').style.background = "rgba(" + rgba[0] + "," + rgba[1] + ", " + rgba[2] + ", 1)";
+    el.style.backgroundColor = "rgba(" + rgba[0] + "," + rgba[1] + ", " + rgba[2] + ", 1)";
+}
+
+if (document.querySelector('#head__avatar'))
+{
+    if (document.querySelector('#head__avatar').style.display !== 'none') {
+        let el = document.querySelector('#head__avatar');
+
+        changeBg(el)
+    }
+}
+
+if (document.querySelector('#advView__avatar'))
+{
+    if (document.querySelector('#advView__avatar').style.display !== 'none') {
+        let el = document.querySelector('#advView__avatar');
+        changeBg(el)
+    }
 }
 
 // Vue.use(VueSplide)

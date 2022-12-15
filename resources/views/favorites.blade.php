@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="favoritesRoot__container">
-        <home-adv-cont
+        <advertisement-container
             :is-fav='@json($isFav)'
             :url='@json($url)'
         >
 
-        </home-adv-cont>
+        </advertisement-container>
     </div>
 @endsection

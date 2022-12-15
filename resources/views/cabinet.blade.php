@@ -2,7 +2,9 @@
 @extends('layouts.layout')
 @section('content')
     <section class="cabinet__container">
-        <cabinet-root></cabinet-root>
+        <cabinet-root
+
+        ></cabinet-root>
         {{--        <profile></profile>--}}
 {{--        <article class="advertisements__container">--}}
 {{--            <p class="adv__con__title">Мои объявления</p>--}}

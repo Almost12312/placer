@@ -1080,6 +1080,7 @@ body {
 /* Личный кабинет */
 
 .cabinet__container {
+    width: 100%;
     min-height: 100%;
     display: flex;
 
@@ -1318,9 +1319,14 @@ body {
 
 .loadMore {
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .loadSvg {
+    margin-top: 50px;
+
     width: 100px;
     height: 100px;
 

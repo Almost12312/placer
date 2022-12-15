@@ -65,7 +65,7 @@
                                         @if(count($user->files) > 0)
                                             <img src="{{ $user->files[0]->getUrl() }}" alt="аватарка">
                                         @else
-                                            <div class="withoutRegPhoto__bg">
+                                            <div class="withoutRegPhoto__bg" id="advView__avatar">
                                                 <div class="withoutRegPhoto">
                                                     {{ strtoupper(mb_strimwidth($user->name, 0, 1)) }}
                                                 </div>
@@ -97,7 +97,6 @@
                         <div class="ads"></div>
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 @endsection

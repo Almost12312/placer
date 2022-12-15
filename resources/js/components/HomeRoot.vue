@@ -8,11 +8,12 @@
 
         <div class="posts">
             <div class="advertisement__homeContainer" id="homeAdvCont">
-                <home-adv-cont
+                <advertisement-container
                     :userinfo="userinfo"
+                    :is-home="isHome"
                 >
 
-                </home-adv-cont>
+                </advertisement-container>
             </div>
         </div>
     </div>
@@ -22,7 +23,7 @@
 <script>
 
 import HomeHello from "./HomeHello";
-import HomeAdvCont from "./HomeAdvCont";
+import AdvertisementContainer from "./AdvertisementContainer";
 import axios from "axios";
 
 export default {
@@ -30,7 +31,8 @@ export default {
 
     data() {
         return {
-            userinfo: {}
+            userinfo: {},
+            isHome: true
         }
     },
 
@@ -58,7 +60,7 @@ export default {
 
     components: {
         HomeHello,
-        HomeAdvCont
+        AdvertisementContainer
     }
 }
 </script>

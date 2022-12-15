@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-pdo": "*",
+        "ext-http": "*",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
@@ -15,8 +17,7 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "league/flysystem-cached-adapter": "~1.0",
         "league/flysystem-sftp": "~1.0",
-      "ext-http": "*",
-      "ext-pdo": "*"
+        "league/glide-laravel": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
