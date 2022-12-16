@@ -2,6 +2,7 @@ import axios from 'axios'
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VuexEsm from "vuex";
 
 import Test from './components/Test'
 import AddAd from './components/AddAd'
@@ -42,6 +43,7 @@ if (document.querySelector('.homeSlider'))
 }
 
 Vue.use(VueRouter)
+Vue.use(VuexEsm)
 
 const router = new VueRouter({
     // mode: 'history',
@@ -69,6 +71,35 @@ const router = new VueRouter({
 
     ]
 })
+
+const store = new VuexEsm.Store({
+    state: {
+        userinfo: {}
+    },
+
+    getters: {
+        USERINFO: state => {
+            return state.userinfo
+        },
+    },
+
+    mutations: {
+        SET_USERINFO: (state, response) => {
+            state.userinfo = response.data
+            console.log(state.userinfo)
+        },
+    },
+
+    actions: {
+        GET_USERINFO: async (context) => {
+            let res = await axios.get('/profile').then(console.log('hi'))
+            console.log(res)
+            context.commit('SET_USERINFO', res)
+        },
+
+    }
+});
+
 
 if (document.getElementById('vue-app')) {
 
@@ -101,6 +132,7 @@ if (document.querySelector('.registrationCont')) {
 if (document.querySelector('.cabinet__container')) {
     new Vue ({
         el: '.cabinet__container',
+        store: store,
         router,
         components: {
             CabinetRoot
@@ -152,6 +184,7 @@ if (document.querySelector('.favoritesRoot__container')) {
 
 
 function changeBg(el) {
+    console.log(el)
     let clr = Math.random().toString(16).substring(2, 8).match(/.{1,2}/g);
     let rgba = [
         parseInt(clr[0], 16),
@@ -164,7 +197,7 @@ function changeBg(el) {
 
 if (document.querySelector('#head__avatar'))
 {
-    if (document.querySelector('#head__avatar').style.display !== 'none') {
+    if (document.querySelector('#head__avatar').style.display !== false) {
         let el = document.querySelector('#head__avatar');
 
         changeBg(el)
@@ -173,7 +206,7 @@ if (document.querySelector('#head__avatar'))
 
 if (document.querySelector('#advView__avatar'))
 {
-    if (document.querySelector('#advView__avatar').style.display !== 'none') {
+    if (document.querySelector('#advView__avatar').style.display !== false) {
         let el = document.querySelector('#advView__avatar');
         changeBg(el)
     }

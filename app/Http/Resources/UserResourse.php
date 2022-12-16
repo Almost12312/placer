@@ -18,6 +18,7 @@ class UserResourse extends JsonResource
         if (count($this->resource->files) > 0)
         {
             return [
+                'id' => $this->resource->id,
                 'name' => $this->resource->name,
                 'lastname' => $this->resource->lastname,
                 'middlename' => $this->resource->middlename,
@@ -31,6 +32,7 @@ class UserResourse extends JsonResource
             ];
         } else {
             return [
+                'id' => $this->resource->id,
                 'name' => $this->resource->name,
                 'lastname' => $this->resource->lastname,
                 'middlename' => $this->resource->middlename,

@@ -14,10 +14,18 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class HomeController extends Controller
 {
-    public function home() {
-
+    public function home()
+    {
         $url = '/getAdv';
 
         return view('home', ['url' => $url]);
     }
+
+    public function index()
+    {
+        $advs = Advertisement::where('status', '=', 1)->cursorPaginate(2);
+
+        return view('index', ['advs' => $advs]);
+    }
+
 }

@@ -71,6 +71,8 @@
                 :is-home="isHome"
                 :favorite="findFavorite(adv.id)"
                 :is-fav="isFav"
+                :user-id="userinfo.id"
+
                 @remove="remove"
                 @complete="complete"
             ></advertisement>
@@ -92,7 +94,7 @@ import {forEach} from "lodash";
 
 
 export default {
-    name: "HomeAdvCont",
+    name: "AdvertisementContainer",
 
     data() {
         return {
@@ -161,7 +163,6 @@ export default {
         async getMore() {
             let load = {
                 start: this.start,
-                end: this.end,
                 perPage: this.perPage
             }
 
@@ -186,7 +187,7 @@ export default {
                         }
                     })
             } catch (e) {
-                // alert(e)
+                alert(e)
             }
         },
 
@@ -281,6 +282,14 @@ export default {
                         alert("Что-то пошло не так")
                     }
                 })
+        },
+
+        getUser() {
+            axios.get('profile')
+                .then(response => {
+                    this.userinfo.name = response.data.name
+                    this.userinfo.id = response.data.id
+                })
         }
 
     },
@@ -296,6 +305,7 @@ export default {
     },
 
     mounted() {
+        this.getUser()
         this.getMore()
         this.setLoadingObserver()
     },

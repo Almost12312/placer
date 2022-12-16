@@ -10,6 +10,7 @@ use App\Models\Advertisement;
 use App\Models\File;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 
 class CabinetController extends Controller
@@ -17,7 +18,9 @@ class CabinetController extends Controller
 
     public function cabinet(Request $request)
     {
-        return view('cabinet');
+        $url = $request->url();
+
+        return view('cabinet', ['url' => $url]);
     }
 
     public function changeAvatar(Request $request)

@@ -157,7 +157,6 @@ class AdvertisementController extends Controller
 
     public function page(Request $request) {
         $start = $request->get('start');
-        $end = $request->get('end');
         $perPage = $request->get('perPage');
 
         $advsGet = Advertisement::where('status', '=', 1)->skip($start)->take($perPage)->get();
@@ -209,7 +208,9 @@ class AdvertisementController extends Controller
         $perPage = $request->get('perPage');
 
         $user = Auth::user();
-        $favorites = new AdvertisementCollection($user->favorites->skip($start)->take($perPage));
+        $favorites = new AdvertisementCollection($user->favorites
+            ->skip($start)
+            ->take($perPage));
 
         if (count($favorites) === 0)
         {

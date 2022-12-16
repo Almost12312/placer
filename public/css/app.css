@@ -143,6 +143,9 @@ body {
   text-align: center;
   color: #000;
 }
+.menu div:hover {
+  cursor: pointer;
+}
 
 .user_menu:hover .menu {
   display: flex;

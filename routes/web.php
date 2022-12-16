@@ -26,6 +26,8 @@ use App\Http\Controllers\AdController;
 Route::get('/', [HomeController::class, 'home'])
     ->name('home');
 
+Route::get('/index', [HomeController::class, 'index']);
+
         //Get Pagination
 Route::post('/getAdv', [AdvertisementController::class, 'page']);
 

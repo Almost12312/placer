@@ -3,7 +3,7 @@
 @section('content')
     <section class="cabinet__container">
         <cabinet-root
-
+            :url='@json($url)'
         ></cabinet-root>
         {{--        <profile></profile>--}}
 {{--        <article class="advertisements__container">--}}

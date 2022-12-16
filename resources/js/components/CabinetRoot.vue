@@ -32,12 +32,22 @@ export default {
                     return {}
                 }
             },
+
+            try: {}
+        }
+    },
+
+    props: {
+        url: {
+            type: String,
+            default() {
+                return '';
+            }
         }
     },
 
     methods: {
         remove(advInfo) {
-          console.log("САМЫЙЦ ВЕРХНИЙ КОМПОНЕНТ ", advInfo.id)
         },
 
         getUser() {
@@ -46,10 +56,23 @@ export default {
                     this.userinfo = response.data
                 })
         },
+
+        getUser1() {
+            this.$store.dispatch('GET_USERINFO')
+
+        },
+
+    },
+
+    computed: {
+        gets() {
+            this.try = this.$store.getters.USERINFO
+        },
     },
 
     mounted() {
         this.getUser()
+        this.getUser1()
     },
 
     components: {

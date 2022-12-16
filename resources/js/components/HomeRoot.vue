@@ -10,7 +10,7 @@
             <div class="advertisement__homeContainer" id="homeAdvCont">
                 <advertisement-container
                     :userinfo="userinfo"
-                    :is-home="isHome"
+
                 >
 
                 </advertisement-container>
@@ -46,16 +46,10 @@ export default {
     },
 
     methods: {
-        getUser() {
-            axios.get('profile')
-                .then(response => {
-                    this.userinfo.name = response.data.name
-                })
-        }
+
     },
 
     mounted() {
-        this.getUser()
     },
 
     components: {
