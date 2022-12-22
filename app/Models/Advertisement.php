@@ -47,8 +47,9 @@ class Advertisement extends Model
         'location',
         'delete_at',
         'price',
-        'category_id' ,
-        'status'
+        'category_id',
+        'status',
+        'views'
     ];
 
 //

@@ -98,6 +98,7 @@
 <!--                        </div>-->
 <!--                    </a>-->
 <!--                </div>-->
+<!--            </div>-->
 <!--&lt;!&ndash;                <div v-if="advInfo.status === 2" class="settingBtns">&ndash;&gt;-->
 <!--&lt;!&ndash;                    <a @click="publish" class="pubBtn">&ndash;&gt;-->
 <!--&lt;!&ndash;                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"&ndash;&gt;-->

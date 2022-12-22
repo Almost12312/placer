@@ -23,11 +23,14 @@ export default {
 
     methods: {
         getUser() {
-            axios.get('/profile')
-                 .then(response => {
-                     this.userinfo = response.data
-                 })
+            this.$store.dispatch('GET_USERINFO')
         }
+    },
+
+    computed: {
+        setUser() {
+            this.userinfo = this.$store.getters.USERINFO
+        },
     },
 
     mounted() {

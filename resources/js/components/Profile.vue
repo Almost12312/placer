@@ -81,18 +81,18 @@ export default {
 
         },
 
-        bg() {
-            console.log(this.userinfo.url)
-            if (this.userinfo.url !== null) {
-                console.log("privet")
-            }
-
-        },
+        // bg() {
+        //     console.log(this.userinfo.url)
+        //     if (this.userinfo.url !== null) {
+        //         console.log("privet")
+        //     }
+        //
+        // },
     },
 
     mounted() {
         this.randomBg()
-        this.bg()
+        // this.bg()
     }
 }
 </script>

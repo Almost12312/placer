@@ -46,7 +46,7 @@ class AdvertisementController extends Controller
                 'content' => $content,
                 'location' => $location,
                 'price' => $price,
-                'status' => $status
+                'status' => $status,
             ]);
 
         if ($imageIds !== null)
@@ -149,17 +149,28 @@ class AdvertisementController extends Controller
     public function viewAdv(int $id)
     {
         $thisAdv = Advertisement::find($id);
+        $thisAdv->views++;
+        $thisAdv->save();
 
         $user = User::find($thisAdv->author_id);
 
         return view('viewAdv', ['thisAdv' => $thisAdv, 'user' => $user]);
     }
 
-    public function page(Request $request) {
+    public function pagination(Request $request)
+    {
+        $page = $request->get('page');
         $start = $request->get('start');
         $perPage = $request->get('perPage');
 
-        $advsGet = Advertisement::where('status', '=', 1)->skip($start)->take($perPage)->get();
+        if ($page === "http://plater.local/favorites#/")
+        {
+            $advsGet = Auth::user()->favorites
+                        ->skip($start)
+                        ->take($perPage);
+        }   else {
+            $advsGet = Advertisement::where('status', '=', 1)->skip($start)->take($perPage)->get();
+        }
 
         if (count($advsGet) === 0)
         {
@@ -198,31 +209,6 @@ class AdvertisementController extends Controller
             return response()->json([
                 'success' => true,
             ]);
-        }
-    }
-
-    public function onlyFav(Request $request)
-    {
-        $start = $request->get('start');
-        $end = $request->get('end');
-        $perPage = $request->get('perPage');
-
-        $user = Auth::user();
-        $favorites = new AdvertisementCollection($user->favorites
-            ->skip($start)
-            ->take($perPage));
-
-        if (count($favorites) === 0)
-        {
-            return response()->json([
-                'end' => true
-            ]);
-
-        }   else
-        {
-            return [
-                'advs' => $favorites,
-            ];
         }
     }
 }

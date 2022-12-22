@@ -14,9 +14,6 @@ class FavoritesController extends Controller
 {
     public function view()
     {
-        $isFav = true;
-        $url = '/advertisement/favorites';
-
-        return view('favorites', ['isFav' => $isFav, 'url' => $url]);
+        return view('favorites');
     }
 }

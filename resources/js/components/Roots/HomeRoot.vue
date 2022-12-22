@@ -22,8 +22,8 @@
 
 <script>
 
-import HomeHello from "./HomeHello";
-import AdvertisementContainer from "./AdvertisementContainer";
+import HomeHello from "../HomeHello";
+import AdvertisementContainer from "../AdvertisementContainer";
 import axios from "axios";
 
 export default {

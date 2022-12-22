@@ -18,8 +18,8 @@
 
 <script>
 
-import ProfileContainer from "./ProfileContainer";
-import AdvertisementContainer from "./AdvertisementContainer";
+import ProfileContainer from "../ProfileContainer";
+import AdvertisementContainer from "../AdvertisementContainer";
 import axios from "axios";
 
 export default {
@@ -32,8 +32,6 @@ export default {
                     return {}
                 }
             },
-
-            try: {}
         }
     },
 
@@ -48,31 +46,22 @@ export default {
 
     methods: {
         remove(advInfo) {
+            console.log("самый верзний уровень" + advInfo)
         },
 
         getUser() {
-            axios.get('/profile')
-                .then(response => {
-                    this.userinfo = response.data
-                })
-        },
-
-        getUser1() {
             this.$store.dispatch('GET_USERINFO')
-
         },
-
     },
 
     computed: {
         gets() {
-            this.try = this.$store.getters.USERINFO
+            this.userinfo = this.$store.getters.USERINFO
         },
     },
 
     mounted() {
         this.getUser()
-        this.getUser1()
     },
 
     components: {

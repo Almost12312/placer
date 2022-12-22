@@ -1,8 +1,7 @@
 <template>
     <div>
         <header class="subtitle__filters">
-            <h3 v-if="isFav === false" class="home__subtitle">Объявления</h3>
-            <h3 v-if="isFav === true" class="home__subtitle">Избранное</h3>
+            <h3 class="home__subtitle">Объявления</h3>
             <div class="filters">
 
                 <h3 v-if="sort === 1">Самые новые</h3>
@@ -64,13 +63,24 @@
                 </div>
             </div>
         </header>
-        <div class="advertisement__container" id="js_advert" @click="target">
+        <div v-if="$route && $route.path === '/active'" class="advertisement__container" id="js_advert" @click="target">
+            <cabinet-advert
+                v-for="adv in allAdv"
+                v-bind:adv-info="adv"
+                :is-home="isHome"
+                :favorite="findFavorite(adv.id)"
+                :user-id="userinfo.id"
+
+                @remove="remove"
+                @complete="complete"
+            ></cabinet-advert>
+        </div>
+        <div v-else class="advertisement__container" id="js_advert" @click="target">
             <advertisement
                 v-for="adv in allAdv"
                 v-bind:adv-info="adv"
                 :is-home="isHome"
                 :favorite="findFavorite(adv.id)"
-                :is-fav="isFav"
                 :user-id="userinfo.id"
 
                 @remove="remove"
@@ -90,6 +100,7 @@
 // @remove="remove"
 import axios from "axios";
 import Advertisement from "./advertisement";
+import cabinetAdvert from "./cabinetAdvert";
 import {forEach} from "lodash";
 
 
@@ -98,23 +109,18 @@ export default {
 
     data() {
         return {
+            userinfo: {},
             allAdv: [],
             favorites: [],
             start: 0,
             perPage: 6,
             more: true,
-            sort: 1
+            sort: 1,
+            page: window.location.href
         }
     },
 
     props: {
-        userinfo: {
-            type: Object,
-            default(){
-                return {}
-            }
-        },
-
         url: {
             type: String,
             default() {
@@ -122,12 +128,18 @@ export default {
             }
         },
 
-        isFav: {
-            type: Boolean,
-            default() {
-                return false
-            }
-        },
+        // page: {
+        //     type: String,
+        //     default() {
+        //         return "/cabinet";
+        //     }
+        // }
+        // isFav: {
+        //     type: Boolean,
+        //     default() {
+        //         return false
+        //     }
+        // },
 
         isHome: {
             type: Boolean,
@@ -163,11 +175,12 @@ export default {
         async getMore() {
             let load = {
                 start: this.start,
-                perPage: this.perPage
+                perPage: this.perPage,
+                page: window.location.href
             }
 
             try {
-                const data = await axios.post(this.url, load)
+                const data = await axios.post('/getAdv', load)
                     .then((response) => {
 
                         this.start += this.perPage;
@@ -285,11 +298,7 @@ export default {
         },
 
         getUser() {
-            axios.get('profile')
-                .then(response => {
-                    this.userinfo.name = response.data.name
-                    this.userinfo.id = response.data.id
-                })
+            this.$store.dispatch('GET_USERINFO')
         }
 
     },
@@ -301,6 +310,9 @@ export default {
     },
 
     computed: {
+        setUser() {
+            this.userinfo = this.$store.getters.USERINFO
+        },
 
     },
 
@@ -311,7 +323,7 @@ export default {
     },
 
     components: {
-        Advertisement
+        Advertisement, cabinetAdvert
     }
 }
 </script>

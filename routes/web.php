@@ -29,7 +29,7 @@ Route::get('/', [HomeController::class, 'home'])
 Route::get('/index', [HomeController::class, 'index']);
 
         //Get Pagination
-Route::post('/getAdv', [AdvertisementController::class, 'page']);
+Route::post('/getAdv', [AdvertisementController::class, 'pagination']);
 
     //1.2 Favorites
 Route::get('favorites', [FavoritesController::class, 'view'])
@@ -57,7 +57,8 @@ Route::post('/reg-or-update', [AuthorizationController::class, 'reg']);
 
 /* 3. Cabinet */
 
-Route::get('/cabinet', [CabinetController::class, 'cabinet'])
+Route::get('/cabinet/{catch?}', [CabinetController::class, 'cabinet'])
+    ->where('catch', '.*')
     ->name('cabinet')
     ->middleware(Authorization::class);
 
@@ -95,7 +96,7 @@ Route::post('/advertisement/delete', [AdvertisementController::class, 'delAdvert
 
 Route::post('/advertisement/add-favorite', [AdvertisementController::class, 'addFavorite']);
 
-Route::post('/advertisement/favorites', [AdvertisementController::class, 'onlyFav']);
+//Route::post('/advertisement/favorites', [AdvertisementController::class, 'onlyFav']);
 
 /* ------------------------------------------------------------------------ */
 

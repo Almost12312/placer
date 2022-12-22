@@ -51,7 +51,7 @@
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import '@splidejs/splide/dist/css/splide.min.css';
 import '@splidejs/splide/dist/css/themes/splide-skyblue.min.css';
-import Profile from "./Profile";
+import Profile from "../Profile";
 import axios from "axios";
 
 export default {

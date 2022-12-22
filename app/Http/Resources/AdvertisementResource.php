@@ -15,8 +15,18 @@ class AdvertisementResource extends JsonResource
 
     public function toArray($request)
     {
-        $tags = [];
 
+        $tags = [];
+        $images = null;
+
+        //Check advs files
+        if (count($this->resource->files) > 0)
+        {
+            $images = $this->resource->files[0]->getUrl();
+
+        }
+
+        // Check advs tags
         if (count($this->resource->tags) > 0)
         {
             foreach ($this->resource->tags as $tag)
@@ -28,36 +38,22 @@ class AdvertisementResource extends JsonResource
             }
         }
 
-        //Create Tag Resource
+        $adv = [
+            'id' => $this->resource->id,
+            'date' => strtotime($this->resource->created_at),
+            'title' => $this->resource->title,
+            'content' => $this->resource->content,
+            'location' => $this->resource->location,
+            'price' => $this->resource->price,
+            'status' => $this->resource->status,
+            'category' => $this->resource->category_id,
+            'views' => $this->resource->views,
+            'favorites' => count($this->resource->favorites),
+            'images' => $images,
+            'tags' => $tags
+        ];
 
-//        dd($this->resource->files);
-        if (count($this->resource->files) > 0)
-        {
-            return [
-                'id' => $this->resource->id,
-                'date' => strtotime($this->resource->created_at),
-                'title' => $this->resource->title,
-                'content' => $this->resource->content,
-                'location' => $this->resource->location,
-                'price' => $this->resource->price,
-                'status' => $this->resource->status,
-                'category' => $this->resource->category_id,
-                'images' => $this->resource->files[0]->getUrl(),
-                'tags' => $tags
-            ];
-        } else {
-            return [
-                'id' => $this->resource->id,
-                'date' => strtotime($this->resource->created_at),
-                'title' => $this->resource->title,
-                'content' => $this->resource->content,
-                'location' => $this->resource->location,
-                'price' => $this->resource->price,
-                'status' => $this->resource->status,
-                'category' => null,
-                'images' => null
-            ];
-        }
+        return $adv;
 
     }
 }

@@ -14,12 +14,12 @@ import Router from "./components/router";
 import Foo from "./components/Foo";
 import Drafts from "./components/Drafts";
 import HistoryAdv from "./components/HistoryAdv";
-import CabinetRoot from "./components/CabinetRoot";
+import CabinetRoot from "./components/Roots/CabinetRoot";
 import RedContainer from "./components/RedContainer";
 import Splide from '@splidejs/splide/dist/js/splide.min.js'
 import '@splidejs/splide/css';
 import HeadLayout from "./components/HeadLayout";
-import HomeRoot from "./components/HomeRoot";
+import HomeRoot from "./components/Roots/HomeRoot";
 
 import {f} from "vue-slick-carousel/dist/vue-slick-carousel.common";
 
@@ -53,12 +53,8 @@ const router = new VueRouter({
             component: Foo
         },
         {
-            path: '/',
+            path: '/active',
             component: AdvertisementContainer,
-            props: {
-                isHome: false
-            }
-
         },
         {
             path: '/draft',
@@ -143,6 +139,7 @@ if (document.querySelector('.cabinet__container')) {
 if (document.querySelector('.header__container')) {
     new Vue ({
         el: '.header__container',
+        store: store,
         components: {
             HeadLayout
         }
@@ -167,6 +164,7 @@ if (document.querySelector('.infinity__advs'))
 {
     new Vue ({
         el: '.infinity__advs',
+        store,
         components: {
             HomeRoot
         }
@@ -176,6 +174,7 @@ if (document.querySelector('.infinity__advs'))
 if (document.querySelector('.favoritesRoot__container')) {
     new Vue ({
         el: '.favoritesRoot__container',
+        store,
         components: {
             AdvertisementContainer
         }

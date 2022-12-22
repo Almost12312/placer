@@ -551,6 +551,44 @@ body {
   white-space: nowrap;
 }
 
+.cabinet__advs {
+  width: 100%;
+}
+
+.cabinet_adv {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cab_img_container {
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.cab_img_container img {
+  width: 80px;
+  height: 80px;
+}
+
+.cab_adv_title {
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.counters {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.counters img {
+  width: 20px;
+  height: 20px;
+}
+
 .num__price:after {
   content: " ₽";
 }
@@ -595,11 +633,8 @@ body {
 }
 
 .setting__container {
-  width: 42px;
-  height: 42px;
-  position: absolute;
-  right: 0;
-  top: 0;
+  width: 20px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -619,6 +654,9 @@ body {
   cursor: pointer;
 }
 .setting__container:hover .settingBtns {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
   visibility: visible;
   opacity: 1;
   transition: 0.2s;
@@ -679,19 +717,20 @@ body {
 
 .settingBtns {
   position: absolute;
-  top: 0;
-  right: 40px;
+  top: 55px;
+  right: 0;
   visibility: hidden;
   opacity: 0;
   display: flex;
+  gap: 10px;
   flex-direction: row;
   background: #ffffff;
+  border: 1px solid #dedede;
   border-radius: 10px;
-  border-top-right-radius: 0;
 }
 .settingBtns a {
-  width: 42px;
-  height: 42px;
+  width: 20px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
