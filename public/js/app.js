@@ -4419,6 +4419,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "cabinetAdvert",
@@ -26958,9 +26959,13 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("td", { staticClass: "cadAdv__container" }, [
-            _c("span", { staticClass: "cab_adv_price" }, [
-              _vm._v(_vm._s(_vm.cut(_vm.advInfo.price)) + "₽"),
-            ]),
+            _vm.advInfo.price === 0
+              ? _c("span", { staticClass: "cab_adv_price" }, [
+                  _vm._v("Бесплатно"),
+                ])
+              : _c("span", { staticClass: "cab_adv_price" }, [
+                  _vm._v(_vm._s(_vm.cut(_vm.advInfo.price)) + "₽"),
+                ]),
           ]),
           _vm._v(" "),
           _c("td", { staticClass: "cadAdv__container counters" }, [

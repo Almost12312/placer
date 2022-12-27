@@ -10,7 +10,8 @@
                     <p class=" cab_adv_title">{{cut(advInfo.title)}}</p>
                 </td>
                 <td class="cadAdv__container">
-                    <span class="cab_adv_price">{{cut(advInfo.price)}}₽</span>
+                    <span v-if="advInfo.price === 0" class="cab_adv_price">Бесплатно</span>
+                    <span v-else class="cab_adv_price">{{cut(advInfo.price)}}₽</span>
                 </td>
                 <td class="cadAdv__container counters">
                     <img src="/images/heart3.svg" alt="">
