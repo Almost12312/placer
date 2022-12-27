@@ -71,6 +71,8 @@ export default {
                 id: advInfo.id
             }
 
+            this.$store.commit('delDraft')
+
             axios.post('/advertisement/delete', delAdvert)
         },
 

@@ -166,6 +166,7 @@ class AdvertisementController extends Controller
         if ($page === "http://plater.local/favorites#/")
         {
             $advsGet = Auth::user()->favorites
+                        ->where('status', '=', 1)
                         ->skip($start)
                         ->take($perPage);
         }   else {

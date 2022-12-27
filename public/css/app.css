@@ -919,6 +919,9 @@ body {
   padding: 40px;
   background: #ffffff;
 }
+.cabinet__container .subtitle__filters {
+  margin: 50px 0 0 0;
+}
 
 .cabinet {
   display: flex;
@@ -1082,6 +1085,16 @@ body {
   left: 0;
   content: "";
   border-bottom: 2px solid red;
+}
+
+.buyer__infographics {
+  width: 100%;
+  height: 240px;
+  display: flex;
+}
+.buyer__infographics img {
+  width: 50%;
+  height: 100%;
 }
 
 .addAdvert {

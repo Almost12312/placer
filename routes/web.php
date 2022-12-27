@@ -28,9 +28,6 @@ Route::get('/', [HomeController::class, 'home'])
 
 Route::get('/index', [HomeController::class, 'index']);
 
-        //Get Pagination
-Route::post('/getAdv', [AdvertisementController::class, 'pagination']);
-
     //1.2 Favorites
 Route::get('favorites', [FavoritesController::class, 'view'])
     ->name('favorites');
@@ -102,6 +99,7 @@ Route::post('/advertisement/add-favorite', [AdvertisementController::class, 'add
 
 
 /* 5. API */
+Route::post('/getAdv', [AdvertisementController::class, 'pagination']);
 
 Route::post('/preview/get-imgs', [FileController::class, 'getCurrentFile'])
     ->name('getCurrentImgs');

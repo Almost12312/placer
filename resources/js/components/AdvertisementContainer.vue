@@ -287,7 +287,7 @@ export default {
                 id: advInfo.id
             }
 
-            this.$emit('remove', advInfo)
+            this.$store.commit('delPub')
 
             axios.post('/advertisement/delete', delAdvert)
         },
@@ -302,6 +302,8 @@ export default {
                 id: advInfo.id,
                 status: 1
             }
+
+            this.$store.commit('delPub')
 
             axios.post('/advertisement/change-status', info)
                 .then((response) => {

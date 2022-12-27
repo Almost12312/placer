@@ -2413,7 +2413,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var delAdvert = {
         id: advInfo.id
       };
-      this.$emit('remove', advInfo);
+      this.$store.commit('delPub');
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/delete', delAdvert);
     },
     complete: function complete(advInfo) {
@@ -2423,6 +2423,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         id: advInfo.id,
         status: 1
       };
+      this.$store.commit('delPub');
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/change-status', info).then(function (response) {
         if (response.data.success === true) {
           alert('Завершено');
@@ -2726,6 +2727,7 @@ __webpack_require__.r(__webpack_exports__);
       var delAdvert = {
         id: advInfo.id
       };
+      this.$store.commit('delDraft');
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/advertisement/delete', delAdvert);
     },
     publish: function publish(advInfo) {
@@ -3589,6 +3591,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3616,7 +3635,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     remove: function remove(advInfo) {
-      console.log("самый верxний уровень" + advInfo);
+      console.log("самый верxний уровень");
     },
     getUser: function getUser() {
       this.$store.dispatch('GET_USERINFO');
@@ -4640,6 +4659,12 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_21__["default"].Store({
     SET_USERINFO: function SET_USERINFO(state, response) {
       state.userinfo = response.data;
       console.log(state.userinfo);
+    },
+    delPub: function delPub(state) {
+      state.userinfo.advPublish--;
+    },
+    delDraft: function delDraft(state) {
+      state.userinfo.advDrafts--;
     }
   },
   actions: {
@@ -26473,14 +26498,35 @@ var render = function () {
       _c(
         "article",
         { staticClass: "advertisements__container" },
-        [_c("router-view", { on: { remove: _vm.remove } })],
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("router-view", {
+            on: { remove: _vm.remove, compe: function ($event) {} },
+          }),
+        ],
         1
       ),
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "buyer__infographics" }, [
+      _c("img", {
+        attrs: { src: "images/infographics4.svg", alt: "infographics 3" },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        attrs: { src: "images/infographics3-2.svg", alt: "infographics 2" },
+      }),
+    ])
+  },
+]
 render._withStripped = true
 
 

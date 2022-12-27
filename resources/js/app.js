@@ -85,6 +85,14 @@ const store = new VuexEsm.Store({
             state.userinfo = response.data
             console.log(state.userinfo)
         },
+
+        delPub: (state) => {
+            state.userinfo.advPublish--
+        },
+
+        delDraft: state => {
+            state.userinfo.advDrafts--
+        }
     },
 
     actions: {
