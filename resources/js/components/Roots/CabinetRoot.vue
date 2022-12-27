@@ -5,7 +5,7 @@
         >
         </profile-container>
         <article class="advertisements__container">
-
+            
             <router-view
                 @remove="remove"
             >

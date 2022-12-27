@@ -2244,6 +2244,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 // @remove="remove"
 
@@ -2309,7 +2312,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
         location.href = "/advertisement/" + id + "/view";
       } else if (target.closest('.redBtn')) {
-        var _id = target.closest('.advertisement').dataset.id;
+        var _id = target.closest('.redBtn').closest('.cabinet_adv').dataset.id;
+        // console.log(id)
         location.href = "/advertisement/" + _id + "/redaction";
       } else {
         return;
@@ -2680,6 +2684,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 // @remove="remove"
 
@@ -2802,6 +2808,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _advertisement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./advertisement */ "./resources/js/components/advertisement.vue");
+//
+//
 //
 //
 //
@@ -3133,6 +3141,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _splidejs_splide_dist_js_splide_min_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @splidejs/splide/dist/js/splide.min.js */ "./node_modules/@splidejs/splide/dist/js/splide.min.js");
+/* harmony import */ var _splidejs_splide_dist_js_splide_min_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_splidejs_splide_dist_js_splide_min_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _splidejs_splide_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @splidejs/splide/css */ "./node_modules/@splidejs/splide/dist/css/splide.min.css");
 //
 //
 //
@@ -3182,6 +3193,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3229,14 +3247,20 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteImage: function deleteImage(id) {
       this.images.splice(id, 1);
-    } //
-    // deleteAll() {
-    //
-    //     this.images = [];
-    // },
-    //
-    // greet() {
-    //
+    },
+    newSplide: function newSplide() {
+      console.log('HI');
+      if (document.querySelector('.previewSlider')) {
+        new (_splidejs_splide_dist_js_splide_min_js__WEBPACK_IMPORTED_MODULE_1___default())('.previewSlider', {
+          type: 'fade',
+          arrows: true,
+          rewind: true
+        }).mount();
+      }
+    }
+  },
+  mounted: function mounted() {
+    this.newSplide();
   },
   components: {}
 });
@@ -4373,6 +4397,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "cabinetAdvert",
@@ -4393,6 +4420,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     complete: function complete() {
       this.$emit('complete', this.advInfo);
+    },
+    cut: function cut(el) {
+      if (el.length > 7) {
+        return el.substring(0, 7) + '...';
+      } else {
+        return el;
+      }
+      ;
     }
   }
 });
@@ -4662,9 +4697,9 @@ if (document.querySelector('.registrationCont')) {
     }
   });
 }
-if (document.querySelector('.cabinet__container')) {
+if (document.querySelector('.cabinet__root')) {
   new vue__WEBPACK_IMPORTED_MODULE_19__["default"]({
-    el: '.cabinet__container',
+    el: '.cabinet__root',
     store: store,
     router: router,
     components: {
@@ -25379,6 +25414,7 @@ var render = function () {
           },
           _vm._l(_vm.allAdv, function (adv) {
             return _c("cabinet-advert", {
+              key: adv.id,
               attrs: {
                 "adv-info": adv,
                 "is-home": _vm.isHome,
@@ -25399,6 +25435,7 @@ var render = function () {
           },
           _vm._l(_vm.allAdv, function (adv) {
             return _c("advertisement", {
+              key: adv.id,
               attrs: {
                 "adv-info": adv,
                 "is-home": _vm.isHome,
@@ -25585,6 +25622,7 @@ var render = function () {
     },
     _vm._l(_vm.allAdv, function (adv) {
       return _c("advertisement", {
+        key: adv.id,
         attrs: { "adv-info": adv },
         on: { remove: _vm.remove, publish: _vm.publish },
       })
@@ -25648,7 +25686,7 @@ var render = function () {
       on: { click: _vm.target },
     },
     _vm._l(_vm.allAdv, function (adv) {
-      return _c("advertisement", { attrs: { "adv-info": adv } })
+      return _c("advertisement", { key: adv.id, attrs: { "adv-info": adv } })
     }),
     1
   )
@@ -25940,56 +25978,71 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "advertisement adv__preview" }, [
     _c("div", { staticClass: "files__download__container" }, [
-      _c("div", { staticClass: "files__download" }, [
-        _c(
-          "div",
-          { staticClass: "images__preview" },
-          [
-            _c("div", { staticClass: "files__download__button" }, [
-              _c("input", {
-                staticClass: "upload__img",
-                attrs: {
-                  type: "file",
-                  name: "file",
-                  id: "image",
-                  placeholder: "Выберите файл",
-                  multiple: "",
-                },
-                on: { change: _vm.upload },
-              }),
-              _vm._v(" "),
-              _vm._m(0),
-            ]),
-            _vm._v(" "),
-            _vm._l(this.images, function (image, id) {
-              return _c("div", { staticClass: "preview__container" }, [
-                _c("img", {
-                  staticClass: "adv_img",
-                  attrs: {
-                    src: image.url,
-                    alt: "preview",
-                    "data-id": image.id,
-                  },
-                }),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "cancelX__container",
-                    on: {
-                      click: function ($event) {
-                        return _vm.deleteImage(id)
+      _c(
+        "section",
+        {
+          staticClass: "splide previewSlider",
+          attrs: { "aria-label": "Splide Basic HTML Example" },
+        },
+        [
+          _c("div", { staticClass: "splide__track" }, [
+            _c(
+              "ul",
+              { staticClass: "splide__list" },
+              [
+                _c("li", { staticClass: "splide__slide" }, [
+                  _c("div", { staticClass: "files__download__button" }, [
+                    _c("input", {
+                      staticClass: "upload__img",
+                      attrs: {
+                        type: "file",
+                        name: "file",
+                        id: "image",
+                        placeholder: "Выберите файл",
+                        multiple: "",
                       },
-                    },
-                  },
-                  [_c("div", { staticClass: "cancelX" })]
-                ),
-              ])
-            }),
-          ],
-          2
-        ),
-      ]),
+                      on: { change: _vm.upload },
+                    }),
+                    _vm._v(" "),
+                    _vm._m(0),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _vm._l(this.images, function (image, id) {
+                  return _c(
+                    "li",
+                    { staticClass: "splide__slide preview__container" },
+                    [
+                      _c("img", {
+                        staticClass: "adv_img",
+                        attrs: {
+                          src: image.url,
+                          alt: "preview",
+                          "data-id": image.id,
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "cancelX__container",
+                          on: {
+                            click: function ($event) {
+                              return _vm.deleteImage(id)
+                            },
+                          },
+                        },
+                        [_c("div", { staticClass: "cancelX" })]
+                      ),
+                    ]
+                  )
+                }),
+              ],
+              2
+            ),
+          ]),
+        ]
+      ),
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "advertisement__description" }, [
@@ -26854,7 +26907,13 @@ var render = function () {
           _vm._v(" "),
           _c("td", { staticClass: "cadAdv__container" }, [
             _c("p", { staticClass: "cab_adv_title" }, [
-              _vm._v(_vm._s(_vm.advInfo.title)),
+              _vm._v(_vm._s(_vm.cut(_vm.advInfo.title))),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("td", { staticClass: "cadAdv__container" }, [
+            _c("span", { staticClass: "cab_adv_price" }, [
+              _vm._v(_vm._s(_vm.cut(_vm.advInfo.price)) + "₽"),
             ]),
           ]),
           _vm._v(" "),

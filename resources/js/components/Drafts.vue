@@ -3,6 +3,8 @@
         <advertisement
             v-for="adv in allAdv"
             v-bind:adv-info="adv"
+            :key="adv.id"
+
             @remove="remove"
             @publish="publish"
         ></advertisement>

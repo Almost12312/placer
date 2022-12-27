@@ -67,6 +67,8 @@
             <cabinet-advert
                 v-for="adv in allAdv"
                 v-bind:adv-info="adv"
+                :key="adv.id"
+
                 :is-home="isHome"
                 :favorite="findFavorite(adv.id)"
                 :user-id="userinfo.id"
@@ -79,6 +81,7 @@
             <advertisement
                 v-for="adv in allAdv"
                 v-bind:adv-info="adv"
+                :key="adv.id"
                 :is-home="isHome"
                 :favorite="findFavorite(adv.id)"
                 :user-id="userinfo.id"
@@ -179,8 +182,8 @@ export default {
 
             }   else if (target.closest('.redBtn'))
             {
-                let id = target.closest('.advertisement').dataset.id
-
+                let id = target.closest('.redBtn').closest('.cabinet_adv').dataset.id
+                // console.log(id)
                 location.href = `/advertisement/` + id + `/redaction`
 
             } else {

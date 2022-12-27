@@ -738,7 +738,29 @@ body {
 .cab_adv_title {
     font-family: $ffManrope;
     font-weight: 600;
-    font-size: 28px;
+    font-size: 20px;
+    color: #000000;
+}
+
+.cab_adv_price {
+    display: flex;
+    position: relative;
+
+    font-family: $ffManrope;
+    font-weight: 800;
+    font-size: 18px;
+    color: #020202;
+
+    &:after {
+        width: 100%;
+        height: 2px;
+
+        content: '';
+        position: absolute;
+
+        bottom: -1px;
+        background: red;
+    }
 }
 
 .counters {
@@ -829,10 +851,7 @@ body {
     cursor: pointer;
 
     .settingBtns {
-        padding: 10px;
-
         display: flex;
-        flex-direction: column;
 
         visibility: visible;
         opacity: 1;
@@ -921,13 +940,12 @@ body {
 
 .settingBtns {
     position: absolute;
-    top: 55px;
-    right: 0;
+    top: 18px;
+    right: 20px;
 
     visibility: hidden;
     opacity: 0;
     display: flex;
-    gap: 10px;
     flex-direction: row;
 
     background: #ffffff;
@@ -936,8 +954,8 @@ body {
 
 
     a  {
-        width: $iconWidth;
-        height: $iconHeight;
+        width: 40px;
+        height: 40px;
 
         display: flex;
         align-items: center;
@@ -1632,8 +1650,8 @@ body {
 }
 
 .files__download__button {
-    height: 240px;
-    width: 300px;
+    height: 180px;
+    width: 260px;
 
     padding: 15px;
 
@@ -1644,8 +1662,6 @@ body {
     align-items: center;
     justify-content: center;
 
-    outline: 3px dashed #000000;
-    outline-offset: 0px;
     cursor: pointer;
 
     //background: repeating-linear-gradient(
@@ -1700,7 +1716,13 @@ body {
 
 
 .preview__container {
+    width: 260px;
+
     position: relative;
+
+    img {
+        width: 260px;
+    }
 }
 
 .cancelX__container {

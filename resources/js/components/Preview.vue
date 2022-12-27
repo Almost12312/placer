@@ -1,23 +1,28 @@
 <template>
     <div class="advertisement adv__preview">
         <div class="files__download__container">
-            <div class="files__download">
-                <div class="images__preview">
-                    <div class="files__download__button">
-                        <input @change="upload" type="file" name="file" id="image" class="upload__img" placeholder="Выберите файл" multiple>
-                        <label class="file__label" for="file"><img class="plus" src="/images/plus.svg" alt=""></label>
-                    </div>
-                    <div v-for="(image, id) in this.images" class="preview__container">
-
-                        <img :src="image.url" alt="preview" class="adv_img" :data-id="image.id">
-                        <div @click="deleteImage(id)" class="cancelX__container">
-                            <div  class="cancelX">
-
+            <section class="splide previewSlider" aria-label="Splide Basic HTML Example">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <div class="files__download__button">
+                                <input @change="upload" type="file" name="file" id="image" class="upload__img" placeholder="Выберите файл" multiple>
+                                <label class="file__label" for="file"><img class="plus" src="/images/plus.svg" alt=""></label>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                        <li v-for="(image, id) in this.images" class="splide__slide preview__container">
+
+                            <img :src="image.url" alt="preview" class="adv_img" :data-id="image.id">
+                            <div @click="deleteImage(id)" class="cancelX__container">
+                                <div  class="cancelX">
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-            </div>
+            </section>
+
         </div>
         <div class="advertisement__description">
 <!--            <h3 class="ad__title">{{inputs_info_data.title ? inputs_info_data.title : "Заголовок"}}</h3>-->
@@ -50,6 +55,8 @@
 <script>
 
 import axios from 'axios'
+import Splide from '@splidejs/splide/dist/js/splide.min.js'
+import '@splidejs/splide/css';
 
 export default {
 
@@ -109,15 +116,21 @@ export default {
 
             this.images.splice(id, 1);
         },
-        //
-        // deleteAll() {
-        //
-        //     this.images = [];
-        // },
-        //
-        // greet() {
-        //
 
+        newSplide() {
+            console.log('HI')
+            if (document.querySelector('.previewSlider')) {
+                new Splide('.previewSlider', {
+                    type: 'fade',
+                    arrows: true,
+                    rewind: true,
+                }).mount()
+            }
+        },
+    },
+
+    mounted() {
+        this.newSplide()
     },
 
     components: {}

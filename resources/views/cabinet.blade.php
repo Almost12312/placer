@@ -1,7 +1,7 @@
 
 @extends('layouts.layout')
 @section('content')
-    <section class="cabinet__container">
+    <section class="cabinet__root">
         <cabinet-root
         ></cabinet-root>
     </section>

@@ -7,7 +7,10 @@
                     <img :src="advInfo.images" alt="">
                 </td>
                 <td class="cadAdv__container">
-                    <p class=" cab_adv_title">{{advInfo.title}}</p>
+                    <p class=" cab_adv_title">{{cut(advInfo.title)}}</p>
+                </td>
+                <td class="cadAdv__container">
+                    <span class="cab_adv_price">{{cut(advInfo.price)}}₽</span>
                 </td>
                 <td class="cadAdv__container counters">
                     <img src="/images/heart3.svg" alt="">
@@ -116,6 +119,14 @@ export default {
         complete() {
             this.$emit('complete', this.advInfo)
         },
+
+        cut(el) {
+            if (el.length > 7) {
+                return el.substring(0, 7) + '...';
+            } else {
+                return el
+            };
+        }
     },
 
 }

@@ -43,7 +43,7 @@ if (document.querySelector('.homeSlider'))
     }).mount()
 }
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 Vue.use(VuexEsm)
 
 const router = new VueRouter({
@@ -126,9 +126,9 @@ if (document.querySelector('.registrationCont')) {
     })
 }
 
-if (document.querySelector('.cabinet__container')) {
+if (document.querySelector('.cabinet__root')) {
     new Vue ({
-        el: '.cabinet__container',
+        el: '.cabinet__root',
         store: store,
         router,
         components: {
