@@ -63,7 +63,7 @@
                 </div>
             </div>
         </header>
-        <div v-if="$route && $route.path === '/active'" class="advertisement__container" id="js_advert" @click="target">
+        <div v-if="$route && $route.path === '/'" class="advertisement__container" id="js_advert" @click="target">
             <cabinet-advert
                 v-for="adv in allAdv"
                 v-bind:adv-info="adv"
@@ -109,7 +109,6 @@ export default {
 
     data() {
         return {
-            userinfo: {},
             allAdv: [],
             favorites: [],
             start: 0,
@@ -126,6 +125,13 @@ export default {
             default() {
                 return '/getAdv';
             }
+        },
+
+        userinfo: {
+            type: Object,
+            default() {
+                return {}
+            },
         },
 
         // page: {
@@ -154,10 +160,20 @@ export default {
         target(event)
         {
             let target = event.target;
+            let id = null;
 
             if (target.closest('.openAdv'))
             {
-                let id = target.closest('.advertisement').dataset.id
+                let open = target.closest('.openAdv')
+
+                if (open.closest('.img__open'))
+                {
+                    id = open.closest('.img__open').parentNode.dataset.id
+
+                }   else
+                {
+                    id = target.closest('.openAdv').parentNode.dataset.id
+                }
 
                 location.href = `/advertisement/` + id + `/view`
 
@@ -297,9 +313,11 @@ export default {
                 })
         },
 
-        getUser() {
-            this.$store.dispatch('GET_USERINFO')
-        }
+        // getUser() {
+        //     if (!this.$store.state.userinfo.id) {
+        //         this.$store.dispatch('GET_USERINFO');
+        //     }
+        // }
 
     },
 
@@ -309,15 +327,15 @@ export default {
         },
     },
 
-    computed: {
-        setUser() {
-            this.userinfo = this.$store.getters.USERINFO
-        },
-
-    },
+    // computed: {
+    //     setUser() {
+    //         this.userinfo = this.$store.getters.USERINFO
+    //     },
+    //
+    // },
 
     mounted() {
-        this.getUser()
+        // this.getUser()
         this.getMore()
         this.setLoadingObserver()
     },

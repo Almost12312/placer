@@ -2,9 +2,6 @@
 
 @section('content')
     <div class="favoritesRoot__container">
-        <advertisement-container
-        >
-
-        </advertisement-container>
+        <favorites-root/>
     </div>
 @endsection

@@ -18,8 +18,9 @@ import CabinetRoot from "./components/Roots/CabinetRoot";
 import RedContainer from "./components/RedContainer";
 import Splide from '@splidejs/splide/dist/js/splide.min.js'
 import '@splidejs/splide/css';
-import HeadLayout from "./components/HeadLayout";
+import HeadLayout from "./components/Roots/HeadLayout.vue";
 import HomeRoot from "./components/Roots/HomeRoot";
+import FavoritesRoot from "./components/Roots/FavoritesRoot.vue";
 
 import {f} from "vue-slick-carousel/dist/vue-slick-carousel.common";
 
@@ -53,7 +54,7 @@ const router = new VueRouter({
             component: Foo
         },
         {
-            path: '/active',
+            path: '/',
             component: AdvertisementContainer,
         },
         {
@@ -176,7 +177,7 @@ if (document.querySelector('.favoritesRoot__container')) {
         el: '.favoritesRoot__container',
         store,
         components: {
-            AdvertisementContainer
+            FavoritesRoot
         }
     })
 }

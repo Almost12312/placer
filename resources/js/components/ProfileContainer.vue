@@ -7,7 +7,7 @@
             ></profile>
 
             <div class="advertisement__status__container" @click="target">
-                <router-link to="/active" class="adv__status" href="">
+                <router-link to="/" class="adv__status" href="">
                     <div class="adv__status__noActive adv__status__active">
                         <p class="status__after">Активные объявления ({{userinfo.advPublish ? userinfo.advPublish : 0}})</p>
                     </div>

@@ -5,7 +5,6 @@
         >
         </profile-container>
         <article class="advertisements__container">
-            <p class="adv__con__title">Мои объявления</p>
 
             <router-view
                 @remove="remove"
@@ -20,20 +19,21 @@
 
 import ProfileContainer from "../ProfileContainer";
 import AdvertisementContainer from "../AdvertisementContainer";
+import {mapState} from "vuex";
 import axios from "axios";
 
 export default {
     name: "CabinetRoot",
 
-    data() {
-        return {
-            userinfo: {
-                default() {
-                    return {}
-                }
-            },
-        }
-    },
+    // data() {
+    //     return {
+    //         userinfo: {
+    //             default() {
+    //                 return {}
+    //             }
+    //         },
+    //     }
+    // },
 
     props: {
         url: {
@@ -46,7 +46,7 @@ export default {
 
     methods: {
         remove(advInfo) {
-            console.log("самый верзний уровень" + advInfo)
+            console.log("самый верxний уровень" + advInfo)
         },
 
         getUser() {
@@ -55,9 +55,9 @@ export default {
     },
 
     computed: {
-        gets() {
-            this.userinfo = this.$store.getters.USERINFO
-        },
+        ...mapState({
+            userinfo: state => state.userinfo
+        })
     },
 
     mounted() {

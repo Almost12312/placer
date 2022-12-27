@@ -1,22 +1,24 @@
 <template>
     <table class="cabinet__advs">
         <tbody>
-            <tr class="cabinet_adv">
-                <td class="cab_img_container">
+            <tr class="cabinet_adv" :data-id="advInfo.id">
+                <td class="openAdv"></td>
+                <td class="cadAdv__container cab_img_container">
                     <img :src="advInfo.images" alt="">
                 </td>
-                <td>
-                    <p class="cab_adv_title">{{advInfo.title}}</p>
+                <td class="cadAdv__container">
+                    <p class=" cab_adv_title">{{advInfo.title}}</p>
                 </td>
-                <td class="counters">
+                <td class="cadAdv__container counters">
                     <img src="/images/heart3.svg" alt="">
                     <p>{{advInfo.favorites}}</p>
                 </td>
-                <td class="counters">
+                <td class="cadAdv__container counters">
                     <img src="/images/eye.svg" alt="">
-                    <p>{{advInfo.views}}</p>
+                    <p v-if="advInfo.views === null">Нет просмотров</p>
+                    <p v-else>{{advInfo.views}}</p>
                 </td>
-                <td v-if="advInfo.status !== 3" class="setting__container">
+                <td v-if="advInfo.status !== 3" class="cadAdv__container setting__container">
                     <img src="/images/threeDots.svg" alt="dots">
                     <div v-if="advInfo.status === 1" class="settingBtns">
                         <a class="compBtn" @click="complete">

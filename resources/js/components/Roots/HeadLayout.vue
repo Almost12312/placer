@@ -11,26 +11,29 @@
 
 <script>
 import axios from "axios";
+import {mapState} from "vuex";
 
 export default {
     name: "HeadLayout",
 
-    data() {
-        return {
-            userinfo: {}
-        }
-    },
+    // data() {
+    //     return {
+    //         userinfo: {}
+    //     }
+    // },
 
     methods: {
         getUser() {
-            this.$store.dispatch('GET_USERINFO')
+            if (!this.$store.state.userinfo.id) {
+                this.$store.dispatch('GET_USERINFO');
+            }
         }
     },
 
     computed: {
-        setUser() {
-            this.userinfo = this.$store.getters.USERINFO
-        },
+        ...mapState({
+            userinfo: state => state.userinfo
+        }),
     },
 
     mounted() {
