@@ -1,20 +1,35 @@
 <template>
-    <div class="advertisement__container" id="js_advert" v-on:click="target">
-        <advertisement
-            v-for="adv in allAdv"
-            v-bind:adv-info="adv"
-            :key="adv.id"
+    <AdvertisementContainer
 
-            @remove="remove"
-            @publish="publish"
-        ></advertisement>
-    </div>
+    ></AdvertisementContainer>
+<!--    <div class="advertisement__container" id="js_advert" v-on:click="target">-->
+<!--        <cabinet-advert-->
+<!--            v-for="adv in allAdv"-->
+<!--            :adv-info="adv"-->
+<!--            :key="adv.id"-->
+
+<!--            @remove="remove"-->
+<!--            @publish="publish"-->
+<!--        >-->
+
+<!--        </cabinet-advert>-->
+<!--    </div>-->
+<!--    <advertisement-->
+<!--        v-for="adv in allAdv"-->
+<!--        v-bind:adv-info="adv"-->
+<!--        :key="adv.id"-->
+
+<!--        @remove="remove"-->
+<!--        @publish="publish"-->
+<!--    ></advertisement>-->
 </template>
 
 <script>
 // @remove="remove"
 import axios from "axios";
-import Advertisement from "./advertisement";
+import cabinetAdvert from "./cabinetAdvert.vue";
+import AdvertisementContainer from "./AdvertisementContainer.vue";
+
 
 export default {
     name: "AdvertisementContainer",
@@ -133,7 +148,7 @@ export default {
     },
 
     components: {
-        Advertisement
+        cabinetAdvert, AdvertisementContainer
     }
 }
 </script>

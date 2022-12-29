@@ -63,7 +63,7 @@
                 </div>
             </div>
         </header>
-        <div v-if="$route && $route.path === '/'" class="advertisement__container" id="js_advert" @click="target">
+        <div v-if="$route" class="advertisement__container" id="js_advert" @click="target">
             <cabinet-advert
                 v-for="adv in allAdv"
                 v-bind:adv-info="adv"
@@ -228,8 +228,8 @@ export default {
                 enteries.forEach(entry => {
                     if (entry.isIntersecting) {
                         if (this.more === true) {
-                            setTimeout(() => {
-                                this.getMore();
+                            setTimeout(async () => {
+                                await this.getMore();
                             }, 500)
                         }
 

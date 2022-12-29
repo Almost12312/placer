@@ -2368,9 +2368,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         enteries.forEach(function (entry) {
           if (entry.isIntersecting) {
             if (_this2.more === true) {
-              setTimeout(function () {
-                _this2.getMore();
-              }, 500);
+              setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+                return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+                  while (1) {
+                    switch (_context2.prev = _context2.next) {
+                      case 0:
+                        _context2.next = 2;
+                        return _this2.getMore();
+                      case 2:
+                      case "end":
+                        return _context2.stop();
+                    }
+                  }
+                }, _callee2);
+              })), 500);
             }
           }
         });
@@ -2673,7 +2684,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _advertisement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./advertisement */ "./resources/js/components/advertisement.vue");
+/* harmony import */ var _cabinetAdvert_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cabinetAdvert.vue */ "./resources/js/components/cabinetAdvert.vue");
+/* harmony import */ var _AdvertisementContainer_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AdvertisementContainer.vue */ "./resources/js/components/AdvertisementContainer.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2689,6 +2714,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 // @remove="remove"
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2768,7 +2794,8 @@ __webpack_require__.r(__webpack_exports__);
     this.loadAdv();
   },
   components: {
-    Advertisement: _advertisement__WEBPACK_IMPORTED_MODULE_1__["default"]
+    cabinetAdvert: _cabinetAdvert_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    AdvertisementContainer: _AdvertisementContainer_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 
@@ -3412,20 +3439,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 // import Router from "./router";
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ProfileContainer",
-  // data() {
-  //     return {
-  //         userinfo: {
-  //             url: null
-  //         }
-  //     }
-  // },
-
+  data: function data() {
+    return {
+      activeClass: null
+    };
+  },
   props: {
     userinfo: {
       type: Object,
@@ -3447,15 +3479,25 @@ __webpack_require__.r(__webpack_exports__);
           target.closest('.adv__status__noActive').classList.add('adv__status__active');
         }
       }
+    },
+    activeClases: function activeClases() {
+      var routePath = this.$route.path;
+      switch (routePath) {
+        case '/':
+          return this.activeClass = 1;
+        case '/draft':
+          return this.activeClass = 2;
+        case '/history':
+          return this.activeClass = 3;
+      }
     }
   },
   components: {
     Profile: _Profile__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  //
-  // created() {
-  // },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    this.activeClases();
+  }
 });
 
 /***/ }),
@@ -4233,7 +4275,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4677,12 +4718,11 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_21__["default"].Store({
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/profile').then(console.log('hi'));
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/profile');
               case 2:
                 res = _context.sent;
-                console.log(res);
                 context.commit('SET_USERINFO', res);
-              case 5:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -25430,7 +25470,7 @@ var render = function () {
       ]),
     ]),
     _vm._v(" "),
-    _vm.$route && _vm.$route.path === "/"
+    _vm.$route
       ? _c(
           "div",
           {
@@ -25639,22 +25679,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "advertisement__container",
-      attrs: { id: "js_advert" },
-      on: { click: _vm.target },
-    },
-    _vm._l(_vm.allAdv, function (adv) {
-      return _c("advertisement", {
-        key: adv.id,
-        attrs: { "adv-info": adv },
-        on: { remove: _vm.remove, publish: _vm.publish },
-      })
-    }),
-    1
-  )
+  return _c("AdvertisementContainer")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -26342,11 +26367,14 @@ var render = function () {
           [
             _c(
               "router-link",
-              { staticClass: "adv__status", attrs: { to: "/", href: "" } },
+              { staticClass: "adv__status", attrs: { to: "/" } },
               [
                 _c(
                   "div",
-                  { staticClass: "adv__status__noActive adv__status__active" },
+                  {
+                    staticClass: "adv__status__noActive",
+                    class: { adv__status__active: _vm.activeClass === 1 },
+                  },
                   [
                     _c("p", { staticClass: "status__after" }, [
                       _vm._v(
@@ -26368,17 +26396,24 @@ var render = function () {
               "router-link",
               { staticClass: "adv__status", attrs: { to: "/draft" } },
               [
-                _c("div", { staticClass: "adv__status__noActive" }, [
-                  _c("p", { staticClass: "status__after" }, [
-                    _vm._v(
-                      "Черновики (" +
-                        _vm._s(
-                          _vm.userinfo.advDrafts ? _vm.userinfo.advDrafts : 0
-                        ) +
-                        ")"
-                    ),
-                  ]),
-                ]),
+                _c(
+                  "div",
+                  {
+                    staticClass: "adv__status__noActive",
+                    class: { adv__status__active: _vm.activeClass === 2 },
+                  },
+                  [
+                    _c("p", { staticClass: "status__after" }, [
+                      _vm._v(
+                        "Черновики (" +
+                          _vm._s(
+                            _vm.userinfo.advDrafts ? _vm.userinfo.advDrafts : 0
+                          ) +
+                          ")"
+                      ),
+                    ]),
+                  ]
+                ),
               ]
             ),
             _vm._v(" "),
@@ -26386,11 +26421,18 @@ var render = function () {
               "router-link",
               { staticClass: "adv__status", attrs: { to: "/history" } },
               [
-                _c("div", { staticClass: "adv__status__noActive" }, [
-                  _c("p", { staticClass: "status__after" }, [
-                    _vm._v("История объявлений"),
-                  ]),
-                ]),
+                _c(
+                  "div",
+                  {
+                    staticClass: "adv__status__noActive",
+                    class: { adv__status__active: _vm.activeClass === 3 },
+                  },
+                  [
+                    _c("p", { staticClass: "status__after" }, [
+                      _vm._v("История объявлений"),
+                    ]),
+                  ]
+                ),
               ]
             ),
             _vm._v(" "),
@@ -26870,9 +26912,7 @@ var render = function () {
                 ? _c("span", { staticClass: "num__price" }, [
                     _vm._v(_vm._s(_vm.advInfo.price)),
                   ])
-                : _c("span", { staticClass: "no__price" }, [
-                    _vm._v("Цена отсутствует"),
-                  ]),
+                : _vm._e(),
             ]),
           ]),
         ]),

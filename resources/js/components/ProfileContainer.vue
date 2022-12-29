@@ -7,19 +7,27 @@
             ></profile>
 
             <div class="advertisement__status__container" @click="target">
-                <router-link to="/" class="adv__status" href="">
-                    <div class="adv__status__noActive adv__status__active">
+                <router-link to="/" class="adv__status">
+                    <div
+                        class="adv__status__noActive"
+                        :class="{ adv__status__active: activeClass === 1 }"
+                    >
                         <p class="status__after">Активные объявления ({{userinfo.advPublish ? userinfo.advPublish : 0}})</p>
                     </div>
                 </router-link>
-<!--                <a class="adv__status"><div><p>Черновики</p></div></a>-->
                 <router-link to="/draft" class="adv__status">
-                    <div class="adv__status__noActive">
+                    <div
+                        class="adv__status__noActive"
+                        :class="{ adv__status__active: activeClass === 2 }"
+                    >
                         <p class="status__after">Черновики ({{userinfo.advDrafts ? userinfo.advDrafts : 0}})</p>
                     </div>
                 </router-link>
                 <router-link to="/history" class="adv__status">
-                    <div class="adv__status__noActive">
+                    <div
+                        class="adv__status__noActive"
+                        :class="{ adv__status__active: activeClass === 3 }"
+                    >
                         <p class="status__after">История объявлений</p>
                     </div>
                 </router-link>
@@ -42,13 +50,11 @@ import Profile from "./Profile";
 export default {
     name: "ProfileContainer",
 
-    // data() {
-    //     return {
-    //         userinfo: {
-    //             url: null
-    //         }
-    //     }
-    // },
+    data() {
+        return {
+            activeClass: null
+        }
+    },
 
     props: {
         userinfo: {
@@ -78,19 +84,30 @@ export default {
                     target.closest('.adv__status__noActive').classList.add('adv__status__active')
                 }
             }
-        }
+        },
+
+        activeClases() {
+            let routePath = this.$route.path
+
+            switch (routePath) {
+                case '/':
+                    return this.activeClass = 1
+                case '/draft':
+                    return this.activeClass = 2
+                case '/history':
+                    return this.activeClass = 3
+
+            }
+        },
     },
 
     components: {
         Profile
     },
-    //
-    // created() {
-    // },
 
     mounted() {
-
-    },
+        this.activeClases()
+    }
 }
 </script>
 

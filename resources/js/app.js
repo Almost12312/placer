@@ -97,8 +97,7 @@ const store = new VuexEsm.Store({
 
     actions: {
         GET_USERINFO: async (context) => {
-            let res = await axios.get('/profile').then(console.log('hi'))
-            console.log(res)
+            let res = await axios.get('/profile')
             context.commit('SET_USERINFO', res)
         },
 

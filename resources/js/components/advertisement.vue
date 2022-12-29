@@ -27,7 +27,6 @@
                     <h6 class="ad__price">
                         <span v-if="advInfo.price === 0" class="no__price">Бесплатно</span>
                         <span v-if="advInfo.price > 0" class="num__price">{{advInfo.price}}</span>
-                        <span v-else class="no__price">Цена отсутствует</span>
                     </h6>
                 </div>
             </div>

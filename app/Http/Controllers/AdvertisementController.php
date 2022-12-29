@@ -163,14 +163,37 @@ class AdvertisementController extends Controller
         $start = $request->get('start');
         $perPage = $request->get('perPage');
 
-        if ($page === "http://plater.local/favorites#/")
+        switch ($page)
         {
-            $advsGet = Auth::user()->favorites
-                        ->where('status', '=', 1)
-                        ->skip($start)
-                        ->take($perPage);
-        }   else {
-            $advsGet = Advertisement::where('status', '=', 1)->skip($start)->take($perPage)->get();
+            case "http://plater.local/favorites#/":
+                $advsGet = Auth::user()->favorites
+                    ->where('status', '=', 1)
+                    ->skip($start)
+                    ->take($perPage);
+
+                break;
+
+            case "http://plater.local/cabinet#/draft":
+                $advsGet = Auth::user()
+                    ->advertisement
+                    ->where('status', '=', 2)
+                    ->skip($start)
+                    ->take($perPage);
+                break;
+
+            case "http://plater.local/#/":
+                $advsGet = Advertisement
+                    ::where('status', '=', 1)
+                    ->skip($start)
+                    ->take($perPage)
+                    ->get();
+                break;
+
+            case "http://plater.local/cabinet#/":
+                $advsGet = Auth::user()
+                    ->advertisements
+                    ->where('status', '=', 1)
+                    ->
         }
 
         if (count($advsGet) === 0)
