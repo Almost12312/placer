@@ -4135,146 +4135,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4336,9 +4196,18 @@ __webpack_require__.r(__webpack_exports__);
           _this.favorite = !_this.favorite;
         }
       });
-    } // activeSvg(id) {
-    //     let svg = document.querySelector(`[data-id=${CSS.escape(id)}]`).classList.toggle('favorites__container__active')
-    // },
+    },
+    calcPrice: function calcPrice() {
+      var toCalc = "".concat(this.advInfo.price).split('').reverse();
+      var count = 0;
+      while (count < toCalc.length) {
+        if (count % 3 === 0 && count !== 0) {
+          toCalc[count - 1] = ' ' + toCalc[count - 1];
+        }
+        count++;
+      }
+      return toCalc.reverse().join('').trim();
+    }
   },
   computed: {
     twoTags: function twoTags() {
@@ -4482,13 +4351,23 @@ __webpack_require__.r(__webpack_exports__);
     complete: function complete() {
       this.$emit('complete', this.advInfo);
     },
+    calcPrice: function calcPrice() {
+      var toCalc = "".concat(this.advInfo.price).split('').reverse();
+      var count = 0;
+      while (count < toCalc.length) {
+        if (count % 3 === 0 && count !== 0) {
+          toCalc[count - 1] = ' ' + toCalc[count - 1];
+        }
+        count++;
+      }
+      return toCalc.reverse().join('').trim();
+    },
     cut: function cut(el) {
       if (el.length > 7) {
         return el.substring(0, 7) + '...';
       } else {
         return el;
       }
-      ;
     }
   }
 });
@@ -26910,7 +26789,7 @@ var render = function () {
               _vm._v(" "),
               _vm.advInfo.price > 0
                 ? _c("span", { staticClass: "num__price" }, [
-                    _vm._v(_vm._s(_vm.advInfo.price)),
+                    _vm._v(_vm._s(_vm.calcPrice())),
                   ])
                 : _vm._e(),
             ]),
@@ -26944,7 +26823,7 @@ var render = function () {
                     _c("g", [
                       _c("path", {
                         attrs: {
-                          d: "M446.9,181.3c0.1-26.1-10.1-50.6-28.5-69c-18.4-18.4-42.9-28.6-68.9-28.6c-26,0-50.6,10.2-69,28.6l-21.9,21.9\n                            c-6.2,6.1-17.2,6.1-23.3,0l-22-22c-18.5-18.5-43-28.7-69.1-28.7c-25.9,0-50.4,10.2-68.8,28.5c-18.4,18.4-28.5,42.9-28.5,68.9\n                            c0.1,26.1,10.3,50.6,28.7,69l171.5,171.5l171.1-171.2C436.8,231.8,446.9,207.3,446.9,181.3z",
+                          d: "M446.9,181.3c0.1-26.1-10.1-50.6-28.5-69c-18.4-18.4-42.9-28.6-68.9-28.6c-26,0-50.6,10.2-69,28.6l-21.9,21.9\n                        c-6.2,6.1-17.2,6.1-23.3,0l-22-22c-18.5-18.5-43-28.7-69.1-28.7c-25.9,0-50.4,10.2-68.8,28.5c-18.4,18.4-28.5,42.9-28.5,68.9\n                        c0.1,26.1,10.3,50.6,28.7,69l171.5,171.5l171.1-171.2C436.8,231.8,446.9,207.3,446.9,181.3z",
                         },
                       }),
                     ]),
@@ -27004,7 +26883,7 @@ var render = function () {
                   _vm._v("Бесплатно"),
                 ])
               : _c("span", { staticClass: "cab_adv_price" }, [
-                  _vm._v(_vm._s(_vm.cut(_vm.advInfo.price)) + "₽"),
+                  _vm._v(_vm._s(_vm.calcPrice()) + "₽"),
                 ]),
           ]),
           _vm._v(" "),

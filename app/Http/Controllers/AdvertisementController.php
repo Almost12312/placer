@@ -193,7 +193,8 @@ class AdvertisementController extends Controller
                 $advsGet = Auth::user()
                     ->advertisements
                     ->where('status', '=', 1)
-                    ->
+                    ->skip($start)
+                    ->take($perPage);
         }
 
         if (count($advsGet) === 0)

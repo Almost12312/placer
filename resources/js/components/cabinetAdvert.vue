@@ -11,7 +11,7 @@
                 </td>
                 <td class="cadAdv__container">
                     <span v-if="advInfo.price === 0" class="cab_adv_price">Бесплатно</span>
-                    <span v-else class="cab_adv_price">{{cut(advInfo.price)}}₽</span>
+                    <span v-else class="cab_adv_price">{{calcPrice()}}₽</span>
                 </td>
                 <td class="cadAdv__container counters">
                     <img src="/images/heart3.svg" alt="">
@@ -121,12 +121,27 @@ export default {
             this.$emit('complete', this.advInfo)
         },
 
+        calcPrice() {
+            let toCalc = `${this.advInfo.price}`.split('').reverse()
+            let count = 0
+
+            while (count < toCalc.length) {
+                if (count % 3 === 0 && count !== 0) {
+                    toCalc[count-1] = ' ' + toCalc[count-1]
+                }
+
+                count++;
+            }
+
+            return toCalc.reverse().join('').trim()
+        },
+
         cut(el) {
             if (el.length > 7) {
                 return el.substring(0, 7) + '...';
             } else {
                 return el
-            };
+            }
         }
     },
 
