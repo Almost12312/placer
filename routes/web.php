@@ -109,6 +109,7 @@ Route::post('/file/upload', [FileController::class, 'file'])
 
 Route::post('/load-adv', [AdvResourceController::class, 'res']);
 
+Route::post('/search/tags', [TagController::class]);
 /* ------------------------------------------------------------------------ */
 
 

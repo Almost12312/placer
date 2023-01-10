@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import Categories from "./Categories";
-import InputPrevCont from "./InputPrevCont";
+import Categories from "../Categories.vue";
+import InputPrevCont from "../InputPrevCont.vue";
 import axios from "axios";
 
 export default {

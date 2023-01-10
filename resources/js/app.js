@@ -15,7 +15,7 @@ import Foo from "./components/Foo";
 import Drafts from "./components/Drafts";
 import HistoryAdv from "./components/HistoryAdv";
 import CabinetRoot from "./components/Roots/CabinetRoot";
-import RedContainer from "./components/RedContainer";
+import RedContainer from "./components/Roots/RedContainer.vue";
 import Splide from '@splidejs/splide/dist/js/splide.min.js'
 import '@splidejs/splide/css';
 import HeadLayout from "./components/Roots/HeadLayout.vue";

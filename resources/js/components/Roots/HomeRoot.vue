@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="homeRoot">
         <home-hello
             :username="userinfo.name"
         >

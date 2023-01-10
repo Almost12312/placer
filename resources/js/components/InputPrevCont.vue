@@ -45,7 +45,7 @@ export default {
                 content: this.thisAdv.content,
                 location: this.thisAdv.location,
                 price:  this.thisAdv.price,
-                tags: ""
+                tags: this.thisAdv.tags
             },
         }
     },

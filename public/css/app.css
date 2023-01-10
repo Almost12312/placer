@@ -237,6 +237,10 @@ body {
   fill: red;
 }
 
+.homeRoot {
+  position: relative;
+}
+
 .home__slider {
   width: 100%;
   margin-top: 50px;
@@ -330,18 +334,69 @@ body {
 }
 
 .filters__options {
-  width: 270px;
   padding: 11px 15px;
   position: absolute;
   right: 0;
   top: 100%;
   display: none;
-  flex-direction: column;
   opacity: 0;
   background: #ffffff;
   border-radius: 10px;
   border: 1px solid #e3e3e3;
   box-sizing: content-box;
+}
+
+.priceRange {
+  width: 150px;
+  display: flex;
+}
+.priceRange input {
+  width: 50%;
+  padding: 8px;
+  position: relative;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+}
+.priceRange input:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+}
+.priceRange input:first-child:before {
+  content: "от";
+}
+.priceRange input:last-child:before {
+  content: "до";
+}
+
+.homeTags {
+  width: 200px;
+}
+.homeTags .tagsOption {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.homeTags .tags__container {
+  margin-top: 0;
+}
+.homeTags input {
+  margin-top: 0;
+}
+
+.send {
+  padding: 10px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  border: 3px solid red;
+  border-radius: 15px;
+}
+.send:hover {
+  cursor: pointer;
 }
 
 .filter__option {
@@ -658,7 +713,7 @@ body {
 }
 
 .tags {
-  width: 300px;
+  width: 100%;
   min-height: 35px;
   margin-top: 20px;
   padding-left: 10px;
@@ -1181,10 +1236,14 @@ body {
   align-items: flex-start;
 }
 
+.tagsOption {
+  width: 100%;
+}
+
 .tags__container {
   width: 100%;
   margin-top: 15px;
-  height: 120px;
+  height: 80px;
   overflow-x: scroll;
 }
 .tags__container::-webkit-scrollbar {
@@ -1234,7 +1293,7 @@ body {
 }
 
 .red__input {
-  width: 300px;
+  width: 100%;
   min-height: 45px;
   margin-top: 25px;
   padding-left: 10px;

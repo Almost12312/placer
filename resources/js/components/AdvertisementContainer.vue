@@ -25,41 +25,62 @@
                     </svg>
 
                 <div class="filters__options">
-                    <label class="filter__option"
-                           :class="{filter__active: sort === 1}"
-                    >
-                        <p>Самые новые</p>
-                        <svg id="new" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>new-line</title>
-                            <path class="clr-i-outline clr-i-outline-path-1" d="M34.59,23l-4.08-5,4-4.9a1.82,1.82,0,0,0,.23-1.94A1.93,1.93,0,0,0,32.94,10h-31A1.91,1.91,0,0,0,0,11.88V24.13A1.91,1.91,0,0,0,1.94,26H33.05a1.93,1.93,0,0,0,1.77-1.09A1.82,1.82,0,0,0,34.59,23ZM2,24V12H32.78l-4.84,5.93L32.85,24Z"></path><polygon class="clr-i-outline clr-i-outline-path-2" points="9.39 19.35 6.13 15 5 15 5 21.18 6.13 21.18 6.13 16.84 9.39 21.18 10.51 21.18 10.51 15 9.39 15 9.39 19.35"></polygon><polygon class="clr-i-outline clr-i-outline-path-3" points="12.18 21.18 16.84 21.18 16.84 20.16 13.31 20.16 13.31 18.55 16.5 18.55 16.5 17.52 13.31 17.52 13.31 16.03 16.84 16.03 16.84 15 12.18 15 12.18 21.18"></polygon><polygon class="clr-i-outline clr-i-outline-path-4" points="24.52 19.43 23.06 15 21.84 15 20.37 19.43 19.05 15 17.82 15 19.78 21.18 20.89 21.18 22.45 16.59 24 21.18 25.13 21.18 27.08 15 25.85 15 24.52 19.43"></polygon>
-                            <rect x="0" y="0" fill-opacity="0"/>
-                        </svg>
-                        <input v-model="sort" type="radio" :value="1" hidden>
-                    </label>
-                    <label class="filter__option"
-                           :class="{filter__active: sort === 2}"
-                    >
-                        <p>По возрастанию цены</p>
-                        <svg version="1.1" id="arrow__up" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                             viewBox="0 0 330 330" xml:space="preserve">
+                    <div class="simple__sorting">
+                        <label class="filter__option"
+                               :class="{filter__active: sort === 1}"
+                        >
+                            <p>Самые новые</p>
+                            <svg id="new" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <title>new-line</title>
+                                <path class="clr-i-outline clr-i-outline-path-1" d="M34.59,23l-4.08-5,4-4.9a1.82,1.82,0,0,0,.23-1.94A1.93,1.93,0,0,0,32.94,10h-31A1.91,1.91,0,0,0,0,11.88V24.13A1.91,1.91,0,0,0,1.94,26H33.05a1.93,1.93,0,0,0,1.77-1.09A1.82,1.82,0,0,0,34.59,23ZM2,24V12H32.78l-4.84,5.93L32.85,24Z"></path><polygon class="clr-i-outline clr-i-outline-path-2" points="9.39 19.35 6.13 15 5 15 5 21.18 6.13 21.18 6.13 16.84 9.39 21.18 10.51 21.18 10.51 15 9.39 15 9.39 19.35"></polygon><polygon class="clr-i-outline clr-i-outline-path-3" points="12.18 21.18 16.84 21.18 16.84 20.16 13.31 20.16 13.31 18.55 16.5 18.55 16.5 17.52 13.31 17.52 13.31 16.03 16.84 16.03 16.84 15 12.18 15 12.18 21.18"></polygon><polygon class="clr-i-outline clr-i-outline-path-4" points="24.52 19.43 23.06 15 21.84 15 20.37 19.43 19.05 15 17.82 15 19.78 21.18 20.89 21.18 22.45 16.59 24 21.18 25.13 21.18 27.08 15 25.85 15 24.52 19.43"></polygon>
+                                <rect x="0" y="0" fill-opacity="0"/>
+                            </svg>
+                            <input v-model="sort" type="radio" :value="1" hidden>
+                        </label>
+                        <label class="filter__option"
+                               :class="{filter__active: sort === 2}"
+                        >
+                            <p>По возрастанию цены</p>
+                            <svg version="1.1" id="arrow__up" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                 viewBox="0 0 330 330" xml:space="preserve">
                                 <path id="XMLID_29_" d="M100.606,100.606L150,51.212V315c0,8.284,6.716,15,15,15c8.284,0,15-6.716,15-15V51.212l49.394,49.394
                                     C232.322,103.535,236.161,105,240,105c3.839,0,7.678-1.465,10.606-4.394c5.858-5.857,5.858-15.355,0-21.213l-75-75
                                     c-5.857-5.858-15.355-5.858-21.213,0l-75,75c-5.858,5.857-5.858,15.355,0,21.213C85.251,106.463,94.749,106.463,100.606,100.606z"/>
                             </svg>
-                        <input v-model="sort" type="radio" :value="2" hidden>
-                    </label>
-                    <label class="filter__option"
-                           :class="{filter__active: sort === 3}"
-                    >
-                        <p>По убыванию цены</p>
-                        <svg version="1.1" id="arrow__down" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                             viewBox="0 0 330 330" xml:space="preserve">
+                            <input v-model="sort" type="radio" :value="2" hidden>
+                        </label>
+                        <label class="filter__option"
+                               :class="{filter__active: sort === 3}"
+                        >
+                            <p>По убыванию цены</p>
+                            <svg version="1.1" id="arrow__down" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                 viewBox="0 0 330 330" xml:space="preserve">
                                 <path id="XMLID_29_" d="M100.606,100.606L150,51.212V315c0,8.284,6.716,15,15,15c8.284,0,15-6.716,15-15V51.212l49.394,49.394
                                     C232.322,103.535,236.161,105,240,105c3.839,0,7.678-1.465,10.606-4.394c5.858-5.857,5.858-15.355,0-21.213l-75-75
                                     c-5.857-5.858-15.355-5.858-21.213,0l-75,75c-5.858,5.857-5.858,15.355,0,21.213C85.251,106.463,94.749,106.463,100.606,100.606z"/>
                             </svg>
-                        <input v-model="sort" type="radio" :value="3" hidden>
-                    </label>
+                            <input v-model="sort" type="radio" :value="3" hidden>
+                        </label>
+                    </div>
+                    <div class="hard__sorting">
+                        <h4>Сортировать по стоимости</h4>
+
+                        <div class="priceRange">
+                            <input type="number">
+                            <input type="number">
+                        </div>
+<!--                        <h4>Применить фильтры</h4>-->
+<!--                        <div class="homeTags">-->
+<!--                            <tags-->
+<!--                                :prop-tags="tags"-->
+<!--                                :stop="3"-->
+<!--                            >-->
+<!--                            </tags>-->
+<!--                        </div>-->
+
+<!--                        <label @click="filterAdvs()" class="send" for="extendFilters">Отправить</label>-->
+<!--                        <input name="extendFilters" type="submit" hidden>-->
+                    </div>
                 </div>
             </div>
         </header>
@@ -104,7 +125,7 @@
 import axios from "axios";
 import Advertisement from "./advertisement";
 import cabinetAdvert from "./cabinetAdvert";
-import {forEach} from "lodash";
+import Tags from "./Tags.vue";
 
 
 export default {
@@ -113,12 +134,14 @@ export default {
     data() {
         return {
             allAdv: [],
+            tags: [],
             favorites: [],
             start: 0,
             perPage: 6,
             more: true,
             sort: 1,
-            page: window.location.href
+            page: window.location.href,
+            options: {}
         }
     },
 
@@ -195,7 +218,8 @@ export default {
             let load = {
                 start: this.start,
                 perPage: this.perPage,
-                page: window.location.href
+                page: window.location.href,
+                options: this.options
             }
 
             try {
@@ -318,11 +342,15 @@ export default {
                 })
         },
 
-        // getUser() {
-        //     if (!this.$store.state.userinfo.id) {
-        //         this.$store.dispatch('GET_USERINFO');
-        //     }
-        // }
+        filterAdvs() {
+            let toSearch = {
+                // options: {
+                    tags: this.tags
+                // }
+            }
+
+            axios.post('/search/tags', toSearch)
+        },
 
     },
 
@@ -346,7 +374,7 @@ export default {
     },
 
     components: {
-        Advertisement, cabinetAdvert
+        Advertisement, cabinetAdvert, Tags
     }
 }
 </script>

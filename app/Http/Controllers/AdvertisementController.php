@@ -163,6 +163,10 @@ class AdvertisementController extends Controller
         $start = $request->get('start');
         $perPage = $request->get('perPage');
 
+//        $options = $request->get('tags');
+//
+//        dd($options);
+
         switch ($page)
         {
             case "http://plater.local/favorites#/":
