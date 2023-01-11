@@ -6,7 +6,7 @@
             <label v-for="category in categoryList" class="category__container" :class="classes(category.id)">
                 <img :src="category.image" alt="">
                 <span>{{ category.name }}</span>
-                <input v-model="categoryIdSelected" type="radio" name="category" :value="category.id">
+                <input @click="emmiting(category.id)" v-model.number="categoryIdSelected" type="radio" name="category" :value="category.id">
             </label>
 
         </div>
@@ -42,6 +42,16 @@ const categories = [
 export default {
     name: "Categories",
 
+    model: {
+        props: {
+            value: {
+                type: Number,
+            }
+        },
+
+        event: 'input'
+    },
+
     data() {
         return {
             categoryList: categories,
@@ -53,15 +63,19 @@ export default {
     watch: {
 
         categorySelected(nVal) {
+            console.log(nVal)
 
-            this.$emit('input', nVal);
+            this.$emit('change', nVal);
         }
     },
 
     methods: {
 
-        classes(catId) {
+        emmiting(id) {
+            this.$emit('input', id)
+        },
 
+        classes(catId) {
             return [{category__active: this.categoryIdSelected === catId}];
         }
     },
@@ -70,11 +84,7 @@ export default {
     //     this.classes()
     // },
 
-    props: {
-        value: {
-            type: Number,
-        }
-    }
+
 
 }
 </script>

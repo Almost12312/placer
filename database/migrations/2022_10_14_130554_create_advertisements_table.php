@@ -19,12 +19,12 @@ class CreateAdvertisementsTable extends Migration
             $table->string('title')->nullable();
             $table->text('content')->nullable();
             $table->string('location')->nullable();
-            $table->dateTime('delete_at')->nullable();
             $table->integer('price')->nullable();
             $table->integer('views')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
+            $table->dateTime('delete_at')->nullable();
 
 
             $table->foreign('author_id')->references('id')->on('users');

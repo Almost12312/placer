@@ -442,6 +442,8 @@ body {
 
 .priceRange {
     width: 300px;
+
+    margin-top: 20px;
     display: flex;
 
     input {
@@ -477,13 +479,15 @@ body {
         font-size: 14px;
     }
 
-    &:first-child{
+    &:first-child {
+        
         &:before {
             content: 'от'
         }
     }
 
-    &:last-child{
+    &:last-child {
+
         &:before {
             content: 'до'
         }

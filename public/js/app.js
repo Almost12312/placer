@@ -2676,6 +2676,14 @@ var categories = [{
 }];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Categories",
+  model: {
+    props: {
+      value: {
+        type: Number
+      }
+    },
+    event: 'input'
+  },
   data: function data() {
     return {
       categoryList: categories,
@@ -2684,25 +2692,24 @@ var categories = [{
   },
   watch: {
     categorySelected: function categorySelected(nVal) {
-      this.$emit('input', nVal);
+      console.log(nVal);
+      this.$emit('change', nVal);
     }
   },
   methods: {
+    emmiting: function emmiting(id) {
+      this.$emit('input', id);
+    },
     classes: function classes(catId) {
       return [{
         category__active: this.categoryIdSelected === catId
       }];
     }
-  },
+  }
+
   // mounted() {
   //     this.classes()
   // },
-
-  props: {
-    value: {
-      type: Number
-    }
-  }
 });
 
 /***/ }),
@@ -3902,24 +3909,6 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  methods: {
-    // loadImgs()
-    // {
-    //     let id = {
-    //         id: this.thisAdv.id
-    //     }
-    //
-    //     axios.post('/preview/get-imgs', id)
-    //         .then((response) => {
-    //             if(response.data.data){
-    //                 this.images = response.data.data
-    //             }
-    //         })
-    // }
-  },
-  mounted: function mounted() {
-    // this.loadImgs()
-  },
   beforeRouteLeave: function beforeRouteLeave(to, from, next) {
     for (var i = 0; i < 10; i++) {
       console.log('Srabotalo');
@@ -4701,7 +4690,6 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_21__["default"].Store({
   mutations: {
     SET_USERINFO: function SET_USERINFO(state, response) {
       state.userinfo = response.data;
-      console.log(state.userinfo);
     },
     delPub: function delPub(state) {
       state.userinfo.advPublish--;
@@ -5389,7 +5377,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.categories__container input{\r\n    width: 0;\r\n    height: 0;\r\n    opacity: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.categories__container input{\n    width: 0;\n    height: 0;\n    opacity: 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -25782,19 +25770,23 @@ var render = function () {
               directives: [
                 {
                   name: "model",
-                  rawName: "v-model",
+                  rawName: "v-model.number",
                   value: _vm.categoryIdSelected,
                   expression: "categoryIdSelected",
+                  modifiers: { number: true },
                 },
               ],
               attrs: { type: "radio", name: "category" },
               domProps: {
                 value: category.id,
-                checked: _vm._q(_vm.categoryIdSelected, category.id),
+                checked: _vm._q(_vm.categoryIdSelected, _vm._n(category.id)),
               },
               on: {
+                click: function ($event) {
+                  return _vm.emmiting(category.id)
+                },
                 change: function ($event) {
-                  _vm.categoryIdSelected = category.id
+                  _vm.categoryIdSelected = _vm._n(category.id)
                 },
               },
             }),

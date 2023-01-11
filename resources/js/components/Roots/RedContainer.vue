@@ -1,7 +1,7 @@
 <template>
     <div class="redContainer">
 
-        <categories v-model="thisAdv.category" />
+        <categories v-model="thisAdv.category"></categories>
 
         <div class="redForm">
             <input-prev-cont
@@ -53,26 +53,6 @@ export default {
                 return [];
             }
         }
-    },
-
-    methods: {
-        // loadImgs()
-        // {
-        //     let id = {
-        //         id: this.thisAdv.id
-        //     }
-        //
-        //     axios.post('/preview/get-imgs', id)
-        //         .then((response) => {
-        //             if(response.data.data){
-        //                 this.images = response.data.data
-        //             }
-        //         })
-        // }
-    },
-
-    mounted() {
-        // this.loadImgs()
     },
 
     beforeRouteLeave(to, from, next)

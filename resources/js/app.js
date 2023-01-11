@@ -83,7 +83,6 @@ const store = new VuexEsm.Store({
     mutations: {
         SET_USERINFO: (state, response) => {
             state.userinfo = response.data
-            console.log(state.userinfo)
         },
 
         delPub: (state) => {

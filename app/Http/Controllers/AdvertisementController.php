@@ -47,6 +47,7 @@ class AdvertisementController extends Controller
                 'location' => $location,
                 'price' => $price,
                 'status' => $status,
+                'category_id' => $getCategory,
             ]);
 
         if ($imageIds !== null)
@@ -55,11 +56,11 @@ class AdvertisementController extends Controller
         }
 
         //3. Category
-        if ($getCategory !== 0)
-        {
-            $category = Category::find($getCategory);
-            $category->advertisements()->save($advertisement);
-        }
+//        if ($getCategory !== 0)
+//        {
+//            $category = Category::find($getCategory);
+//            $category->advertisements()->save($advertisement);
+//        }
 
         //4. Tags
         if ($getTags !== null)
