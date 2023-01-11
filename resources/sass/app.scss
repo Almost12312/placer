@@ -433,45 +433,61 @@ body {
 
 }
 
+.sortNumberRange__title {
+    font-family: $ffManrope;
+    font-weight: 600;
+    font-size: 18px;
+    color: #4a5568;
+}
+
 .priceRange {
-    width: 150px;
+    width: 300px;
     display: flex;
 
     input {
-        width: 50%;
+        width: 100%;
 
         padding: 8px;
+        padding-left: 35px;
 
         position: relative;
 
         font-family: $ffManrope;
         font-weight: 800;
         font-size: 14px;
+    }
+}
 
+.inputContainer {
+    width: 50%;
+
+    position: relative;
+
+    &:before {
+        content: 'от';
+
+
+        position: absolute;
+        top: 25%;
+        left: 10px;
+        z-index: 99999;
+
+        font-family: $ffPoppins;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    &:first-child{
         &:before {
-            position: absolute;
-            top: 0;
-            left: 0;
-
-            font-family: $ffPoppins;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        &:first-child{
-            &:before {
-                content: 'от'
-            }
-        }
-
-        &:last-child{
-            &:before {
-                content: 'до'
-            }
+            content: 'от'
         }
     }
 
-
+    &:last-child{
+        &:before {
+            content: 'до'
+        }
+    }
 }
 
 .homeTags {

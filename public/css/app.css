@@ -346,30 +346,45 @@ body {
   box-sizing: content-box;
 }
 
+.sortNumberRange__title {
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #4a5568;
+}
+
 .priceRange {
-  width: 150px;
+  width: 300px;
   display: flex;
 }
 .priceRange input {
-  width: 50%;
+  width: 100%;
   padding: 8px;
+  padding-left: 35px;
   position: relative;
   font-family: "Manrope", sans-serif;
   font-weight: 800;
   font-size: 14px;
 }
-.priceRange input:before {
+
+.inputContainer {
+  width: 50%;
+  position: relative;
+}
+.inputContainer:before {
+  content: "от";
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 25%;
+  left: 10px;
+  z-index: 99999;
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 14px;
 }
-.priceRange input:first-child:before {
+.inputContainer:first-child:before {
   content: "от";
 }
-.priceRange input:last-child:before {
+.inputContainer:last-child:before {
   content: "до";
 }
 

@@ -154,6 +154,16 @@ if (document.querySelector('.header__container')) {
     })
 }
 
+if (document.querySelector('.searchResultsRoot')) {
+    new Vue({
+        el: '.searchResultsRoot',
+        store,
+        components: {
+            AdvertisementContainer
+        }
+    })
+}
+
 // if (document.querySelector('.posts')) {
 //     new Vue ({
 //         el: '.posts',
@@ -176,7 +186,7 @@ if (document.querySelector('.infinity__advs'))
         components: {
             HomeRoot
         }
-    })
+    });
 }
 
 if (document.querySelector('.favoritesRoot__container')) {

@@ -163,42 +163,49 @@ class AdvertisementController extends Controller
         $start = $request->get('start');
         $perPage = $request->get('perPage');
 
-//        $options = $request->get('tags');
-//
-//        dd($options);
+        // Options for search categories
+        $options = $request->get('options');
 
-        switch ($page)
+        if ($options !== null) {
+            $advsGet = Advertisement::all()
+                ->where('category_id', '=', $options)
+                ->where('status', '=', 1)
+                ->skip($start)
+                ->take($perPage);
+        } else
         {
-            case "http://plater.local/favorites#/":
-                $advsGet = Auth::user()->favorites
-                    ->where('status', '=', 1)
-                    ->skip($start)
-                    ->take($perPage);
+            switch ($page) {
+                case "http://plater.local/favorites#/":
+                    $advsGet = Auth::user()->favorites
+                        ->where('status', '=', 1)
+                        ->skip($start)
+                        ->take($perPage);
 
-                break;
+                    break;
 
-            case "http://plater.local/cabinet#/draft":
-                $advsGet = Auth::user()
-                    ->advertisement
-                    ->where('status', '=', 2)
-                    ->skip($start)
-                    ->take($perPage);
-                break;
+                case "http://plater.local/cabinet#/draft":
+                    $advsGet = Auth::user()
+                        ->advertisement
+                        ->where('status', '=', 2)
+                        ->skip($start)
+                        ->take($perPage);
+                    break;
 
-            case "http://plater.local/#/":
-                $advsGet = Advertisement
-                    ::where('status', '=', 1)
-                    ->skip($start)
-                    ->take($perPage)
-                    ->get();
-                break;
+                case "http://plater.local/#/":
+                    $advsGet = Advertisement
+                        ::where('status', '=', 1)
+                        ->skip($start)
+                        ->take($perPage)
+                        ->get();
+                    break;
 
-            case "http://plater.local/cabinet#/":
-                $advsGet = Auth::user()
-                    ->advertisements
-                    ->where('status', '=', 1)
-                    ->skip($start)
-                    ->take($perPage);
+                case "http://plater.local/cabinet#/":
+                    $advsGet = Auth::user()
+                        ->advertisements
+                        ->where('status', '=', 1)
+                        ->skip($start)
+                        ->take($perPage);
+            }
         }
 
         if (count($advsGet) === 0)

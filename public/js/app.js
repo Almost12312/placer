@@ -2267,6 +2267,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 // @remove="remove"
 
@@ -2278,6 +2282,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       allAdv: [],
+      filterAdvs: [],
       tags: [],
       favorites: [],
       start: 0,
@@ -2285,7 +2290,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       more: true,
       sort: 1,
       page: window.location.href,
-      options: {}
+      rangeMin: null,
+      rangeMax: null
     };
   },
   props: {
@@ -2301,19 +2307,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return {};
       }
     },
-    // page: {
-    //     type: String,
-    //     default() {
-    //         return "/cabinet";
-    //     }
-    // }
-    // isFav: {
-    //     type: Boolean,
-    //     default() {
-    //         return false
-    //     }
-    // },
-
+    options: {
+      type: Number,
+      "default": function _default() {
+        return null;
+      }
+    },
     isHome: {
       type: Boolean,
       "default": function _default() {
@@ -2364,6 +2363,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       _this.pushing(_this.favorites, response.data.favorites);
                     }
                     _this.pushing(_this.allAdv, response.data.advs.data);
+                    _this.sortingRange();
                   } else {
                     _this.more = false;
                     // alert("Объявления закончились");
@@ -2412,7 +2412,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       loadObserver.observe(document.querySelector('.loadMore'));
     },
     sorting: function sorting() {
-      console.log("switched");
       switch (this.sort) {
         case 1:
           this.allAdv.sort(function (a, b) {
@@ -2428,6 +2427,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           this.allAdv.sort(function (a, b) {
             return b.price - a.price;
           });
+      }
+    },
+    sortingRange: function sortingRange() {
+      var _this3 = this;
+      if (this.rangeMin === null && this.rangeMax === null) {
+        return this.filterAdvs = this.allAdv;
+      }
+      if (this.rangeMin === null) {
+        return this.filterAdvs = this.allAdv.filter(function (item) {
+          return item.price >= 0 && item.price < _this3.rangeMax;
+        });
+      }
+      if (this.rangeMax === null) {
+        return this.filterAdvs = this.allAdv.filter(function (item) {
+          return item.price >= _this3.rangeMin && item.price <= 1000000000;
+        });
       }
     },
     pushing: function pushing(arr, res) {
@@ -2465,28 +2480,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           alert("Что-то пошло не так");
         }
       });
-    },
-    filterAdvs: function filterAdvs() {
-      var toSearch = {
-        // options: {
-        tags: this.tags
-        // }
-      };
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/search/tags', toSearch);
     }
   },
   watch: {
     sort: function sort() {
       this.sorting();
-    }
+    } //
+    // rangeMin() {
+    //     console.log(this.allAdv)
+    // },
+    //
+    // rangeMax() {
+    //     return this.filterAdvs = this.allAdv.filter(item => item.price < this.rangeMax)
+    // },
   },
-  // computed: {
-  //     setUser() {
-  //         this.userinfo = this.$store.getters.USERINFO
-  //     },
-  //
-  // },
   mounted: function mounted() {
     // this.getUser()
     this.getMore();
@@ -4773,6 +4780,15 @@ if (document.querySelector('.header__container')) {
     store: store,
     components: {
       HeadLayout: _components_Roots_HeadLayout_vue__WEBPACK_IMPORTED_MODULE_15__["default"]
+    }
+  });
+}
+if (document.querySelector('.searchResultsRoot')) {
+  new vue__WEBPACK_IMPORTED_MODULE_19__["default"]({
+    el: '.searchResultsRoot',
+    store: store,
+    components: {
+      AdvertisementContainer: _components_AdvertisementContainer__WEBPACK_IMPORTED_MODULE_6__["default"]
     }
   });
 }
@@ -25318,7 +25334,6 @@ var render = function () {
           "svg",
           {
             attrs: {
-              version: "1.1",
               id: "more__list",
               xmlns: "http://www.w3.org/2000/svg",
               x: "0px",
@@ -25357,7 +25372,7 @@ var render = function () {
                 class: { filter__active: _vm.sort === 1 },
               },
               [
-                _c("p", [_vm._v("Самые новые")]),
+                _c("span", [_vm._v("Самые новые")]),
                 _vm._v(" "),
                 _c(
                   "svg",
@@ -25365,7 +25380,6 @@ var render = function () {
                     attrs: {
                       id: "new",
                       viewBox: "0 0 36 36",
-                      version: "1.1",
                       preserveAspectRatio: "xMidYMid meet",
                       xmlns: "http://www.w3.org/2000/svg",
                       "xmlns:xlink": "http://www.w3.org/1999/xlink",
@@ -25435,7 +25449,7 @@ var render = function () {
                 class: { filter__active: _vm.sort === 2 },
               },
               [
-                _c("p", [_vm._v("По возрастанию цены")]),
+                _c("span", [_vm._v("По возрастанию цены")]),
                 _vm._v(" "),
                 _c(
                   "svg",
@@ -25488,13 +25502,12 @@ var render = function () {
                 class: { filter__active: _vm.sort === 3 },
               },
               [
-                _c("p", [_vm._v("По убыванию цены")]),
+                _c("span", [_vm._v("По убыванию цены")]),
                 _vm._v(" "),
                 _c(
                   "svg",
                   {
                     attrs: {
-                      version: "1.1",
                       id: "arrow__down",
                       xmlns: "http://www.w3.org/2000/svg",
                       "xmlns:xlink": "http://www.w3.org/1999/xlink",
@@ -25535,7 +25548,73 @@ var render = function () {
             ),
           ]),
           _vm._v(" "),
-          _vm._m(0),
+          _c("div", { staticClass: "hard__sorting" }, [
+            _c("h4", { staticClass: "sortNumberRange__title" }, [
+              _vm._v("Цена (₽)"),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "priceRange" }, [
+              _c("div", { staticClass: "inputContainer" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.number",
+                      value: _vm.rangeMin,
+                      expression: "rangeMin",
+                      modifiers: { number: true },
+                    },
+                  ],
+                  attrs: { type: "number", placeholder: "Min" },
+                  domProps: { value: _vm.rangeMin },
+                  on: {
+                    change: function ($event) {
+                      return _vm.sortingRange()
+                    },
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.rangeMin = _vm._n($event.target.value)
+                    },
+                    blur: function ($event) {
+                      return _vm.$forceUpdate()
+                    },
+                  },
+                }),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "inputContainer" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.number",
+                      value: _vm.rangeMax,
+                      expression: "rangeMax",
+                      modifiers: { number: true },
+                    },
+                  ],
+                  attrs: { type: "number", placeholder: "Max" },
+                  domProps: { value: _vm.rangeMax },
+                  on: {
+                    change: function ($event) {
+                      return _vm.sortingRange()
+                    },
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.rangeMax = _vm._n($event.target.value)
+                    },
+                    blur: function ($event) {
+                      return _vm.$forceUpdate()
+                    },
+                  },
+                }),
+              ]),
+            ]),
+          ]),
         ]),
       ]),
     ]),
@@ -25548,7 +25627,7 @@ var render = function () {
             attrs: { id: "js_advert" },
             on: { click: _vm.target },
           },
-          _vm._l(_vm.allAdv, function (adv) {
+          _vm._l(_vm.filterAdvs, function (adv) {
             return _c("cabinet-advert", {
               key: adv.id,
               attrs: {
@@ -25569,7 +25648,7 @@ var render = function () {
             attrs: { id: "js_advert" },
             on: { click: _vm.target },
           },
-          _vm._l(_vm.allAdv, function (adv) {
+          _vm._l(_vm.filterAdvs, function (adv) {
             return _c("advertisement", {
               key: adv.id,
               attrs: {
@@ -25615,22 +25694,7 @@ var render = function () {
     ),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "hard__sorting" }, [
-      _c("h4", [_vm._v("Сортировать по стоимости")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "priceRange" }, [
-        _c("input", { attrs: { type: "number" } }),
-        _vm._v(" "),
-        _c("input", { attrs: { type: "number" } }),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

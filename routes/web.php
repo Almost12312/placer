@@ -6,6 +6,7 @@ use App\Http\Controllers\CabinetController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdvResourceController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TagController;
 use App\Http\Middleware\Authorization;
 use App\Http\Middleware\CreateMDW;
@@ -29,8 +30,12 @@ Route::get('/', [HomeController::class, 'home'])
 Route::get('/index', [HomeController::class, 'index']);
 
     //1.2 Favorites
-Route::get('favorites', [FavoritesController::class, 'view'])
+Route::get('/favorites', [FavoritesController::class, 'view'])
     ->name('favorites');
+
+    //1.3 SearchResults
+Route::get('/search/{id?}',[SearchController::class, 'view'])
+    ->name('search');
 /* ------------------------------------------------------------------------ */
 
 /* 2. Authorization and registration */
