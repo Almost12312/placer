@@ -2414,17 +2414,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     sorting: function sorting() {
       switch (this.sort) {
         case 1:
-          this.allAdv.sort(function (a, b) {
+          this.filterAdvs.sort(function (a, b) {
             return a.date - b.date;
           });
           break;
         case 2:
-          this.allAdv.sort(function (a, b) {
+          this.filterAdvs.sort(function (a, b) {
             return a.price - b.price;
           });
           break;
         case 3:
-          this.allAdv.sort(function (a, b) {
+          this.filterAdvs.sort(function (a, b) {
             return b.price - a.price;
           });
       }

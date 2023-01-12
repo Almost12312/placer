@@ -21,7 +21,7 @@ class AdvertisementController extends Controller
 
     public function addAdvert(Request $request)
     {
-        //1. Get Request
+        // 1. Get Request
         $id = $request->get('id');
         $title = $request->get('title');
         $content = $request->get('content');
@@ -30,11 +30,11 @@ class AdvertisementController extends Controller
         $imageIds = $request->get('images_ids');
         $status = $request->get('status');
 
-            //1.2. Get for sync
+            // 1.2. Get for sync
         $getCategory = (int)$request->get('category');
         $getTags = $request->get('tags');
 
-        //2. Create advertisement
+        // 2. Create advertisement
         $advertisement = Advertisement::updateOrCreate(
             [
                 'id' => $id
@@ -50,19 +50,13 @@ class AdvertisementController extends Controller
                 'category_id' => $getCategory,
             ]);
 
+        // 3. Files
         if ($imageIds !== null)
         {
             $advertisement->files()->sync($imageIds);
         }
 
-        //3. Category
-//        if ($getCategory !== 0)
-//        {
-//            $category = Category::find($getCategory);
-//            $category->advertisements()->save($advertisement);
-//        }
-
-        //4. Tags
+        // 4. Tags
         if ($getTags !== null)
         {
             $tagsId = [];
@@ -82,7 +76,7 @@ class AdvertisementController extends Controller
 
         $advertisement->save();
 
-        //5. Response
+        // 5. Response
         return response()->json([
             "success" => true,
             "redirect" => "/cabinet"

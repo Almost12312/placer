@@ -13,6 +13,9 @@ $borderRad: 10px;
 $iconWidth: 20px;
 $iconHeight: 20px;
 
+$iconWidth2: 30px;
+$iconHeight2: 30px;
+
 body {
     //background: #f8f7f7;
     background: #ffffff;
@@ -88,6 +91,56 @@ body {
 .logo__img__before {
     width: 50px;
     height: 50px;
+}
+
+.search__container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.categories__btn {
+    position: relative;
+
+    padding: 10px;
+    padding-left: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    text-align: center;
+    font-family: $ffPoppins;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+
+    background: #ad52e3;
+    border-radius: $borderRad;
+
+    svg {
+        width: $iconWidth2;
+        height: $iconHeight2;
+    }
+}
+
+.svg__wrapper {
+    width: $iconWidth2 + 14px;
+    height: $iconWidth2 + 12px;
+
+    position: absolute;
+    left: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+    border-radius: 50%;
+    border: 5px solid #ad52e3;
+
+    box-sizing: content-box;
 }
 
 .search {
@@ -381,6 +434,9 @@ body {
             display: flex;
             opacity: 1;
             transition: .3s;
+
+            cursor: default;
+
         }
 
         #more__list {
@@ -421,6 +477,7 @@ body {
     right: 0;
     top: 100%;
     display: none;
+    flex-direction: column;
 
     opacity: 0;
     background: #ffffff;
@@ -430,14 +487,22 @@ body {
 }
 
 .hard__sorting {
+    margin-top: 30px;
 
+    padding-bottom: 10px;
+
+    cursor: default;
+}
+
+.simple__sorting {
+    cursor: default;
 }
 
 .sortNumberRange__title {
     font-family: $ffManrope;
     font-weight: 600;
     font-size: 18px;
-    color: #4a5568;
+    color: #000000;
 }
 
 .priceRange {
@@ -480,7 +545,7 @@ body {
     }
 
     &:first-child {
-        
+
         &:before {
             content: 'от'
         }
@@ -568,7 +633,7 @@ body {
 }
 
 .filter__active {
-    p {
+    span {
         font-weight: 700;
         color: #000000;
         transition: .2s;
@@ -1913,7 +1978,6 @@ body {
 .categories__container {
     display: flex;
     flex-direction: column;
-
 }
 
 .categories__title {

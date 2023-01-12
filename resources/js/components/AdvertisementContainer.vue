@@ -268,19 +268,19 @@ export default {
         {
             switch (this.sort) {
                 case 1:
-                    this.allAdv.sort((a, b) => {
+                    this.filterAdvs.sort((a, b) => {
                         return a.date - b.date
                     })
                     break
 
                 case 2:
-                    this.allAdv.sort((a, b) => {
+                    this.filterAdvs.sort((a, b) => {
                         return a.price - b.price
                     });
                     break
 
                 case 3:
-                    this.allAdv.sort((a, b) => {
+                    this.filterAdvs.sort((a, b) => {
                         return b.price - a.price
                     })
             }
