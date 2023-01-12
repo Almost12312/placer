@@ -5,9 +5,11 @@ namespace Database\Seeders;
 use App\Models\Advertisement;
 use App\Models\Category;
 use App\Models\File;
+use App\Models\Search;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -85,13 +87,24 @@ class DatabaseSeeder extends Seeder
             'name' => 'moto'
         ]);
 
-//        $category = Tag::find([2,3]);
-//        $product->tag()->attach($category);
+        Search::create([
+            'suggestion' => 'машина mercedes'
+        ]);
 
+        Search::create([
+            'suggestion' => 'машина бу'
+        ]);
 
-//        Advertisement::factory(10)->create();
-//        Tag::factory(20)->create();
+        Search::create([
+            'suggestion' => 'машина продам дорого'
+        ]);
 
+        Search::create([
+            'suggestion' => 'машина продам очень дорого'
+        ]);
 
+        Search::create([
+            'suggestion' => 'машина спортивная быстрая очень'
+        ]);
     }
 }

@@ -87,12 +87,28 @@ body {
   background: #ad52e3;
   border-radius: 10px;
 }
+.categories__btn .categories__container {
+  position: absolute;
+  top: 39px;
+  left: 0;
+  display: none;
+  background: #ad52e3;
+  border-radius: 10px;
+  border-top-left-radius: 0;
+  opacity: 0;
+}
 .categories__btn svg {
   width: 30px;
   height: 30px;
 }
+.categories__btn:hover {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  transition: 0.3s;
+}
 .categories__btn:hover .categories__container {
   opacity: 1;
+  display: flex;
   transition: 0.3s;
 }
 
@@ -1519,11 +1535,6 @@ body {
 .categories__container {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 39px;
-  background: #ad52e3;
-  border-radius: 10px;
-  opacity: 0;
 }
 
 .home__category__container {

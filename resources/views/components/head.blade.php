@@ -43,10 +43,7 @@
                     </label>
                 </div>
             </div>
-            <div class="search">
-                <input type="text" placeholder="Найти">
-                <img src="/images/search.svg" alt="search">
-            </div>
+            <search></search>
         </nav>
         @if(Auth::check())
             <button class="user_menu">

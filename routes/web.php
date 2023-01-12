@@ -34,7 +34,7 @@ Route::get('/favorites', [FavoritesController::class, 'view'])
     ->name('favorites');
 
     //1.3 SearchResults
-Route::get('/search/{id?}',[SearchController::class, 'view'])
+Route::get('/search/{id?}',[SearchController::class, 'category'])
     ->name('search');
 /* ------------------------------------------------------------------------ */
 
@@ -102,6 +102,11 @@ Route::post('/advertisement/add-favorite', [AdvertisementController::class, 'add
 
 /* ------------------------------------------------------------------------ */
 
+/* 5. Search words result */
+
+Route::post('/search', [SearchController::class, 'words']);
+
+/* ------------------------------------------------------------------------ */
 
 /* 5. API */
 Route::post('/getAdv', [AdvertisementController::class, 'pagination']);

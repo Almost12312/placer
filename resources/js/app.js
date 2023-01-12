@@ -21,6 +21,7 @@ import '@splidejs/splide/css';
 import HeadLayout from "./components/Roots/HeadLayout.vue";
 import HomeRoot from "./components/Roots/HomeRoot";
 import FavoritesRoot from "./components/Roots/FavoritesRoot.vue";
+import Search from "./components/Search.vue";
 
 import {f} from "vue-slick-carousel/dist/vue-slick-carousel.common";
 
@@ -148,7 +149,7 @@ if (document.querySelector('.header__container')) {
         el: '.header__container',
         store: store,
         components: {
-            HeadLayout
+            HeadLayout, Search
         }
     })
 }
