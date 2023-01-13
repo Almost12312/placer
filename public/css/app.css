@@ -126,6 +126,35 @@ body {
   box-sizing: content-box;
 }
 
+.inputSearch__container {
+  position: relative;
+}
+
+.suggestions__container {
+  width: 100%;
+  position: absolute;
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.suggestions__container a {
+  width: 100%;
+  text-decoration: none;
+  color: #000000;
+  padding: 7px 15px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  background: #ffffff;
+}
+.suggestions__container a:hover {
+  background: #c9c9c9;
+  cursor: pointer;
+}
+
 .search {
   position: relative;
 }

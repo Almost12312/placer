@@ -16,53 +16,91 @@ class SearchController extends Controller
         return view('searchResults', ['id' => $id]);
     }
 
-    public function words(Request $request)
+    public function findWords($arr)
     {
-        $searchArr = explode(' ', $request->get('str'));
+        $arrSeparate = explode(' ', $arr);
 
-        $words = [];
-        foreach ($searchArr as $item)
+        if ($arrSeparate[0] !== '')
         {
-            $words[] = Search::
+            $words = [];
+            foreach ($arrSeparate as $item)
+            {
+                $words[] = Search::
                 where('suggestion', 'LIKE', "%$item%")
-                ->get(['suggestion', 'id'])
-                ->toArray()
+                    ->limit(20)
+                    ->get(['id', 'suggestion'])
+                    ->toArray()
                 ;
-        }
+            }
 
-        dd(array_intersect($words[0], $words[1]));
-        for ($i = 0; $i < count($words); $i++)
+            $ids = [];
+            if (count($arrSeparate) >= 2)
+            {
+                for ($i = 0; $i < count($words); $i++)
+                {
+                    for ($count = 0; $count < count($words[$i]); $count++)
+                    {
+                        if (!(in_array($words[$i][$count], $ids)))
+                        {
+                            $ids[] = $words[$i][$count];
+                        }   else {
+                            $res = $words[$i][$count];
+                        }
+                    }
+                }
+            } else if (count($arrSeparate) === 1) {
+                $res = $words[0];
+            }   else {
+                $res = [];
+            }
+//            return response()->json([
+//                'data' => $res
+//            ]);
+            return $res;
+        } else {
+//            return response()->json([
+//                'end' => true
+//            ]);
+            return null;
+        }
+    }
+
+    public function suggestions(Request $request)
+    {
+        $searchArr = $request->get('str');
+
+        if ($request->get('id'))
         {
-            if ($i > 0)
-            $res = array_intersect($words[$i-1], $words[$i]);
+            //TODO: realize unsearching if isset id
         }
-//
-//        for ($i = 0; $i < count($words), $i++)
-//        {
-//            dump($words[$i]);
-//        }
+        $res = $this->findWords($searchArr);
 
-        dd($res);
+        if ($res !== null)
+        {
+            return response()->json([
+                'data' => $res
+            ]);
+        }   else {
+            return response()->json([
+                'end' => true
+            ]);
+        }
+    }
 
-//        $res = array_filter($words, $words->intersection());
+    public function wordsRequest(Request $request)
+    {
+        $searchArr = $request->get('str');
 
-//        for ($i = 0; $i < count($words); $i++) {
-//
-//            if (!($i === 0)) {
-//                $res = $words[0]->intersect($words[0]);
-//            }
-//        }
+        $res = $this->findWords($searchArr);
 
-        return response()->json([
-            'data' => $res
-        ]);
+        $options = [
+            'wordsReq' => []
+        ];
 
-//        $findWords = DB::table('searches')
-//            ->where('suggestion', 'LIKE', "%$find%")
-//            ->get('suggestion');
+        for ($i = 0; $i < count($res); $i++) {
+            $options[]['wordsReq'] = $res[$i]['suggestion'];
+        }
 
-//        return response()->json([
-//            'data' => $res
-//        ]);
+        return redirect()->route('searchResults', ['options' => [$options]]);
     }
 }

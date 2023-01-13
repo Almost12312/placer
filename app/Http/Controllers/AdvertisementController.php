@@ -162,6 +162,16 @@ class AdvertisementController extends Controller
         $options = $request->get('options');
 
         if ($options !== null) {
+//            if ($options['wordsReq'])
+//            {
+//                for ($i = 0; $i < count($options['wordsReq']); $i++)
+//                {
+//                    $advsGet = Advertisement::where([
+//                        'title', 'like', $options[$i],
+//                        'status', '=', 1
+//                    ]);
+//                }
+//            }
             $advsGet = Advertisement::all()
                 ->where('category_id', '=', $options)
                 ->where('status', '=', 1)

@@ -3939,28 +3939,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Search",
   data: function data() {
     return {
-      searchInput: ''
+      searchInput: '',
+      suggestions: []
     };
   },
   methods: {
     getSearch: function getSearch() {
-      // if (this.searchInput !== '') {
-      var search = {
-        str: this.searchInput
+      var _this = this;
+      if (this.searchInput !== '') {
+        var search = {
+          str: this.searchInput
+        };
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post('/search', search).then(function (res) {
+          if (!res.data.end) {
+            _this.suggestions = res.data.data;
+          } else {
+            _this.suggestions = {};
+          }
+        });
+      }
+    },
+    wordsSearch: function wordsSearch(sug) {
+      var suggestion = {
+        str: sug.suggestion,
+        id: sug.id
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/search', search).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/search/advertisement', suggestion).then(function (res) {
         console.log(res);
       });
-      // }
     }
   },
-
   watch: {
     searchInput: function searchInput() {
       this.getSearch();
@@ -26948,29 +26969,50 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "search" }, [
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.searchInput,
-          expression: "searchInput",
+  return _c("div", { staticClass: "inputSearch__container" }, [
+    _c("div", { staticClass: "search" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.searchInput,
+            expression: "searchInput",
+          },
+        ],
+        attrs: { type: "text", placeholder: "Найти" },
+        domProps: { value: _vm.searchInput },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.searchInput = $event.target.value
+          },
         },
-      ],
-      attrs: { type: "text", placeholder: "Найти" },
-      domProps: { value: _vm.searchInput },
-      on: {
-        input: function ($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.searchInput = $event.target.value
-        },
-      },
-    }),
+      }),
+      _vm._v(" "),
+      _c("img", { attrs: { src: "/images/search.svg", alt: "search" } }),
+    ]),
     _vm._v(" "),
-    _c("img", { attrs: { src: "/images/search.svg", alt: "search" } }),
+    _c(
+      "div",
+      { staticClass: "suggestions__container" },
+      _vm._l(_vm.suggestions, function (item, id) {
+        return _c(
+          "a",
+          {
+            on: {
+              click: function ($event) {
+                return _vm.wordsSearch(item)
+              },
+            },
+          },
+          [_vm._v("\n            " + _vm._s(item.suggestion) + "\n        ")]
+        )
+      }),
+      0
+    ),
   ])
 }
 var staticRenderFns = []

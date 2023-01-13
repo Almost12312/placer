@@ -104,7 +104,9 @@ Route::post('/advertisement/add-favorite', [AdvertisementController::class, 'add
 
 /* 5. Search words result */
 
-Route::post('/search', [SearchController::class, 'words']);
+Route::post('/search', [SearchController::class, 'suggestions']);
+
+Route::post('/search/advertisement', [SearchController::class, 'wordsRequest']);
 
 /* ------------------------------------------------------------------------ */
 
