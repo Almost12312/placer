@@ -167,7 +167,7 @@ export default {
         },
 
         options: {
-            type: Number,
+            type: Object,
             default() {
                 return null
             },

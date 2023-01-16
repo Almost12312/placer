@@ -161,22 +161,36 @@ class AdvertisementController extends Controller
         // Options for search categories
         $options = $request->get('options');
 
+//        $adv = Advertisement::where('title', 'like', ["%" . $options['wordsReq'][0] . "%"])->get();
+//        dd($adv);
+
         if ($options !== null) {
-//            if ($options['wordsReq'])
-//            {
-//                for ($i = 0; $i < count($options['wordsReq']); $i++)
-//                {
-//                    $advsGet = Advertisement::where([
-//                        'title', 'like', $options[$i],
-//                        'status', '=', 1
-//                    ]);
-//                }
-//            }
-            $advsGet = Advertisement::all()
-                ->where('category_id', '=', $options)
-                ->where('status', '=', 1)
-                ->skip($start)
-                ->take($perPage);
+            if ($options['wordsReq'])
+            {
+                for ($i = 0; $i < count($options['wordsReq']); $i++)
+                {
+
+                    $advs = Advertisement::
+                        where('title', 'like', ["%" . $options['wordsReq'][$i] . "%"])
+                        ->where('status', '=', 1)
+                        ->skip($start)
+                        ->take($perPage)
+                        ->get()
+//                        ->whereNotNull('id')
+
+                    ;
+
+                    // Foreach sql like query return null array for each wordsReq
+                    if (count($advs) >= 1) {
+                        // Each wordsReq have collections with model
+                        // this push all models to one array
+                        foreach ($advs as $adv)
+                        {
+                            $advsGet[] = $adv;
+                        }
+                    }
+                }
+            }
         } else
         {
             switch ($page) {
@@ -213,7 +227,8 @@ class AdvertisementController extends Controller
             }
         }
 
-        if (count($advsGet) === 0)
+
+        if (!isset($advsGet) || count($advsGet) === 0)
         {
             return response()->json([
                 'end' => true

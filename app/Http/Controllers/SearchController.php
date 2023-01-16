@@ -16,9 +16,9 @@ class SearchController extends Controller
         return view('searchResults', ['id' => $id]);
     }
 
-    public function findWords($arr)
+    public function findWords($str)
     {
-        $arrSeparate = explode(' ', $arr);
+        $arrSeparate = explode(' ', $str);
 
         if ($arrSeparate[0] !== '')
         {
@@ -26,7 +26,7 @@ class SearchController extends Controller
             foreach ($arrSeparate as $item)
             {
                 $words[] = Search::
-                where('suggestion', 'LIKE', "%$item%")
+                    where('suggestion', 'LIKE', "%$item%")
                     ->limit(20)
                     ->get(['id', 'suggestion'])
                     ->toArray()
@@ -44,7 +44,8 @@ class SearchController extends Controller
                         {
                             $ids[] = $words[$i][$count];
                         }   else {
-                            $res = $words[$i][$count];
+                            $res[] = $words[$i][$count];
+
                         }
                     }
                 }
@@ -53,14 +54,10 @@ class SearchController extends Controller
             }   else {
                 $res = [];
             }
-//            return response()->json([
-//                'data' => $res
-//            ]);
+
             return $res;
         } else {
-//            return response()->json([
-//                'end' => true
-//            ]);
+
             return null;
         }
     }
@@ -69,10 +66,11 @@ class SearchController extends Controller
     {
         $searchArr = $request->get('str');
 
-        if ($request->get('id'))
-        {
-            //TODO: realize unsearching if isset id
-        }
+//        if ($request->get('id'))
+//        {
+//            //TODO: realize unsearching if isset id
+//        }
+
         $res = $this->findWords($searchArr);
 
         if ($res !== null)
@@ -87,20 +85,28 @@ class SearchController extends Controller
         }
     }
 
-    public function wordsRequest(Request $request)
+    public function wordsRequest(string $words)
     {
-        $searchArr = $request->get('str');
+////        $reqArr = explode(' ', $words);
+////
+////        if ($reqArr[0] !== '')
+////        {
+//            $options = Advertisement
+//                ::where('title', 'like', "%" . $words . "%")
+//                ->get()
+//            ;
+////        }
 
-        $res = $this->findWords($searchArr);
+        $res = $this->findWords($words);
 
         $options = [
             'wordsReq' => []
         ];
 
         for ($i = 0; $i < count($res); $i++) {
-            $options[]['wordsReq'] = $res[$i]['suggestion'];
+            $options['wordsReq'][] = $res[$i]['suggestion'];
         }
 
-        return redirect()->route('searchResults', ['options' => [$options]]);
+        return view('searchResults', ['options' => $options]);
     }
 }

@@ -1,11 +1,11 @@
 <template>
     <div class="inputSearch__container">
         <div class="search">
-            <input v-model="searchInput" type="text" placeholder="Найти">
-            <img  src="/images/search.svg" alt="search">
+            <input @keyup.enter="toSearch(searchInput)" v-model="searchInput" type="text" placeholder="Найти">
+            <img @click="toSearch(searchInput)" src="/images/search.svg" alt="search">
         </div>
         <div class="suggestions__container">
-            <a @click="wordsSearch(item)" v-for="(item, id) in suggestions">
+            <a v-for="(item, id) in suggestions" @click="toSearch(item.suggestion)">
                 {{ item.suggestion }}
             </a>
         </div>
@@ -22,7 +22,7 @@ export default {
     data() {
         return {
             searchInput: '',
-            suggestions: []
+            suggestions: [],
         }
     },
 
@@ -33,10 +33,11 @@ export default {
                     str: this.searchInput
                 }
 
-                axios.post('/search', search)
+                axios.post('/suggestions', search)
                     .then((res) => {
                         if (!(res.data.end))
                         {
+                            document.querySelector('.suggestions__container').style.display = 'flex'
                             this.suggestions = res.data.data
                         }   else {
                             this.suggestions = {}
@@ -45,16 +46,9 @@ export default {
             }
         },
 
-        wordsSearch(sug) {
-            let suggestion = {
-                str: sug.suggestion,
-                id: sug.id
-            }
-
-            axios.post('/search/advertisement', suggestion)
-                 .then((res) => {
-                     console.log(res)
-                 })
+        toSearch(link) {
+            // console.log(link)
+            location.href = `/search/` + link
         },
     },
 

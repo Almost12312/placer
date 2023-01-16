@@ -3,7 +3,7 @@
 @section('content')
     <div class="searchResultsRoot">
         <advertisement-container
-            :options='@json($id)'
+            :options='@json($options)'
         ></advertisement-container>
     </div>
 @endsection

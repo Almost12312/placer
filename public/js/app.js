@@ -2308,7 +2308,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     options: {
-      type: Number,
+      type: Object,
       "default": function _default() {
         return null;
       }
@@ -3963,8 +3963,9 @@ __webpack_require__.r(__webpack_exports__);
         var search = {
           str: this.searchInput
         };
-        axios__WEBPACK_IMPORTED_MODULE_0___default().post('/search', search).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post('/suggestions', search).then(function (res) {
           if (!res.data.end) {
+            document.querySelector('.suggestions__container').style.display = 'flex';
             _this.suggestions = res.data.data;
           } else {
             _this.suggestions = {};
@@ -3972,14 +3973,9 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    wordsSearch: function wordsSearch(sug) {
-      var suggestion = {
-        str: sug.suggestion,
-        id: sug.id
-      };
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/search/advertisement', suggestion).then(function (res) {
-        console.log(res);
-      });
+    toSearch: function toSearch(link) {
+      // console.log(link)
+      location.href = "/search/" + link;
     }
   },
   watch: {
@@ -26983,6 +26979,15 @@ var render = function () {
         attrs: { type: "text", placeholder: "Найти" },
         domProps: { value: _vm.searchInput },
         on: {
+          keyup: function ($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.toSearch(_vm.searchInput)
+          },
           input: function ($event) {
             if ($event.target.composing) {
               return
@@ -26992,7 +26997,14 @@ var render = function () {
         },
       }),
       _vm._v(" "),
-      _c("img", { attrs: { src: "/images/search.svg", alt: "search" } }),
+      _c("img", {
+        attrs: { src: "/images/search.svg", alt: "search" },
+        on: {
+          click: function ($event) {
+            return _vm.toSearch(_vm.searchInput)
+          },
+        },
+      }),
     ]),
     _vm._v(" "),
     _c(
@@ -27004,7 +27016,7 @@ var render = function () {
           {
             on: {
               click: function ($event) {
-                return _vm.wordsSearch(item)
+                return _vm.toSearch(item.suggestion)
               },
             },
           },
