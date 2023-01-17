@@ -3946,6 +3946,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3976,7 +3979,24 @@ __webpack_require__.r(__webpack_exports__);
     toSearch: function toSearch(link) {
       // console.log(link)
       location.href = "/search/" + link;
-    }
+    } // linkStyle(str) {
+    //     console.log(str)
+    //
+    //     let inputText = new Set (this.searchInput.split(''))
+    //     let strSepare = str.split('')
+    //     let res = []
+    //
+    //     for (let i = 0; i < strSepare.length; i++) {
+    //         if (inputText.includes(strSepare[i])) {
+    //             res.push(strSepare[i])
+    //         }
+    //     }
+    //
+    //     // let xer = new Set(strSepare.filter(el => input.has(el)))
+    //     // console.log(xer.join(''))
+    //     //
+    //     return res.join('')
+    // },
   },
   watch: {
     searchInput: function searchInput() {

@@ -539,7 +539,7 @@ body {
 .filter__option:hover {
   cursor: pointer;
 }
-.filter__option:hover p {
+.filter__option:hover span {
   color: #e30202;
   transition: 0.2s;
 }

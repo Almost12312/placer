@@ -165,7 +165,7 @@ class AdvertisementController extends Controller
 //        dd($adv);
 
         if ($options !== null) {
-            if ($options['wordsReq'])
+            if (!empty($options['wordsReq']))
             {
                 for ($i = 0; $i < count($options['wordsReq']); $i++)
                 {
@@ -190,6 +190,21 @@ class AdvertisementController extends Controller
                         }
                     }
                 }
+            }
+
+            if (!empty($options['category']))
+            {
+
+               $advsGet = Advertisement
+                   ::where([
+                       ['category_id', '=', $options['category']],
+                       ['status', '=', 1]
+                   ])
+                   ->skip($start)
+                   ->take($perPage)
+                   ->get()
+
+               ;
             }
         } else
         {

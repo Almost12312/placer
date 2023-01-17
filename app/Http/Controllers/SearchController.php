@@ -13,7 +13,11 @@ class SearchController extends Controller
 {
     public function category(int $id)
     {
-        return view('searchResults', ['id' => $id]);
+        $options = [
+            'category' => $id
+        ];
+
+        return view('searchResults', ['options' => $options]);
     }
 
     public function findWords($str)
@@ -25,8 +29,8 @@ class SearchController extends Controller
             $words = [];
             foreach ($arrSeparate as $item)
             {
-                $words[] = Search::
-                    where('suggestion', 'LIKE', "%$item%")
+                $words[] = Search
+                    ::where('suggestion', 'LIKE', "%$item%")
                     ->limit(20)
                     ->get(['id', 'suggestion'])
                     ->toArray()
@@ -87,16 +91,6 @@ class SearchController extends Controller
 
     public function wordsRequest(string $words)
     {
-////        $reqArr = explode(' ', $words);
-////
-////        if ($reqArr[0] !== '')
-////        {
-//            $options = Advertisement
-//                ::where('title', 'like', "%" . $words . "%")
-//                ->get()
-//            ;
-////        }
-
         $res = $this->findWords($words);
 
         $options = [

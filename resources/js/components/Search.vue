@@ -5,7 +5,10 @@
             <img @click="toSearch(searchInput)" src="/images/search.svg" alt="search">
         </div>
         <div class="suggestions__container">
-            <a v-for="(item, id) in suggestions" @click="toSearch(item.suggestion)">
+            <a
+                v-for="(item, id) in suggestions"
+                @click="toSearch(item.suggestion)"
+            >
                 {{ item.suggestion }}
             </a>
         </div>
@@ -50,6 +53,25 @@ export default {
             // console.log(link)
             location.href = `/search/` + link
         },
+
+        // linkStyle(str) {
+        //     console.log(str)
+        //
+        //     let inputText = new Set (this.searchInput.split(''))
+        //     let strSepare = str.split('')
+        //     let res = []
+        //
+        //     for (let i = 0; i < strSepare.length; i++) {
+        //         if (inputText.includes(strSepare[i])) {
+        //             res.push(strSepare[i])
+        //         }
+        //     }
+        //
+        //     // let xer = new Set(strSepare.filter(el => input.has(el)))
+        //     // console.log(xer.join(''))
+        //     //
+        //     return res.join('')
+        // },
     },
 
     watch: {
