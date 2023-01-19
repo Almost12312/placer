@@ -180,7 +180,7 @@ class AdvertisementController extends Controller
 
                     ;
 
-                    // Foreach sql like query return null array for each wordsReq
+                    // Foreach for sql like query return null array for each wordsReq
                     if (count($advs) >= 1) {
                         // Each wordsReq have collections with model
                         // this push all models to one array

@@ -8,6 +8,7 @@ use App\Models\Advertisement;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileController extends Controller
@@ -20,6 +21,7 @@ class FileController extends Controller
         $uploadedFileName = md5($uploadedFile->getClientOriginalName().time())
             . "."
             . $uploadedFile->getClientOriginalExtension();
+        $storage = Storage::disk('public');
 
         $id = 0;
 
@@ -38,8 +40,9 @@ class FileController extends Controller
             'loaded_by' => $id
         ]);
 
+        $storage->putFileAs('/images', $uploadedFile, $uploadedFileName);
 
-        $uploadedFile->move(public_path('uploads'), $uploadedFileName);
+//        $uploadedFile->move(public_path('uploads'), $uploadedFileName);
 
         return response()->json([
             "id" => $newFile->id,

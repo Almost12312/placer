@@ -209,7 +209,8 @@ export default {
                 // console.log(id)
                 location.href = `/advertisement/` + id + `/redaction`
 
-            } else {
+            } else
+            {
                 return
             }
         },

@@ -20,6 +20,7 @@ use \App\Http\Controllers\FileController;
 use \App\Http\Controllers\AuthorizationController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\AdController;
+use League\Glide\Server;
 
 /* 1. Pages */
 
@@ -122,6 +123,11 @@ Route::post('/file/upload', [FileController::class, 'file'])
 Route::post('/load-adv', [AdvResourceController::class, 'res']);
 
 Route::post('/search/tags', [TagController::class]);
+
+Route::get('/image/{path}', function (Server $server, $path) {
+    $server->outputImage($path, $_GET);
+});
+
 /* ------------------------------------------------------------------------ */
 
 
