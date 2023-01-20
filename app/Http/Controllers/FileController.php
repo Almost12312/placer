@@ -37,7 +37,9 @@ class FileController extends Controller
         $newFile = File::create([
             'original_name' => $uploadedFile->getClientOriginalName(),
             'size_bytes' => $uploadedFile->getSize(),
-            'location' => url('/storage/' . $filepath),
+//            'location' => '/uploads',
+            'location' => '/storage/images',
+//            'location' => url('/storage/' . $filepath),
             'new_hash_name' => $uploadedFileName,
             'extension' => $uploadedFile->getClientOriginalExtension(),
             'loaded_by' => $id
@@ -46,7 +48,7 @@ class FileController extends Controller
 
         return response()->json([
             "id" => $newFile->id,
-            "url" => $newFile->location
+            "url" => $newFile->getUrl()
         ]);
     }
 
