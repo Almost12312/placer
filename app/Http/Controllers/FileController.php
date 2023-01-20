@@ -31,22 +31,22 @@ class FileController extends Controller
             $id = null;
         }
 
+
+        $filepath = $storage->putFileAs('/images', $uploadedFile, $uploadedFileName);
+
         $newFile = File::create([
             'original_name' => $uploadedFile->getClientOriginalName(),
             'size_bytes' => $uploadedFile->getSize(),
-            'location' => '/uploads',
+            'location' => url('/storage/' . $filepath),
             'new_hash_name' => $uploadedFileName,
             'extension' => $uploadedFile->getClientOriginalExtension(),
             'loaded_by' => $id
         ]);
-
-        $storage->putFileAs('/images', $uploadedFile, $uploadedFileName);
-
 //        $uploadedFile->move(public_path('uploads'), $uploadedFileName);
 
         return response()->json([
             "id" => $newFile->id,
-            "url" => $newFile->getUrl()
+            "url" => $newFile->location
         ]);
     }
 
