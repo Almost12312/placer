@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Services\Images\Adaptiving;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AdvertisementResource extends JsonResource
@@ -23,6 +24,7 @@ class AdvertisementResource extends JsonResource
         if (count($this->resource->files) > 0)
         {
             $images = $this->resource->files[0]->getUrl();
+//            $images = Adaptiving::create($this->resource->files[0], 260, 180);
 
         }
 

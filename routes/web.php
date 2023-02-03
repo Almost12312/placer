@@ -6,6 +6,7 @@ use App\Http\Controllers\CabinetController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdvResourceController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TagController;
 use App\Http\Middleware\Authorization;
@@ -124,10 +125,9 @@ Route::post('/load-adv', [AdvResourceController::class, 'res']);
 
 Route::post('/search/tags', [TagController::class]);
 
-Route::get('/image/{path}', function (Server $server, $path) {
-    $server->outputImage($path, $_GET);
-});
+Route::get('/image/{path}', [ImageController::class, 'store']);
 
+//Route::group()
 /* ------------------------------------------------------------------------ */
 
 

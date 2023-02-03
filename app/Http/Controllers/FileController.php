@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class FileController extends Controller
 {
 
-    public function file(FileRequest $request)
+    static function file(FileRequest $request)
     {
         /** @var UploadedFile $file */
         $uploadedFile = $request->files->get('file');

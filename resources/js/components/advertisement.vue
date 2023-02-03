@@ -70,13 +70,6 @@ export default {
             }
         },
 
-        // isHome: {
-        //     type: Boolean,
-        //     default() {
-        //         return false;
-        //     }
-        // },
-
         favorite: {
             type: Boolean,
             default() {

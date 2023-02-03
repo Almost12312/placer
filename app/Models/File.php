@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class File extends Model
 {
-    use HasFactory;
 
     protected $fillable = ['original_name', 'size_bytes', 'location', 'new_hash_name', 'extension', 'loaded_by'];
 

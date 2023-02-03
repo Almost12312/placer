@@ -217,15 +217,15 @@ class AdvertisementController extends Controller
 
                     break;
 
-                case "http://plater.local/cabinet#/draft":
+                case "drafts":
                     $advsGet = Auth::user()
-                        ->advertisement
+                        ->advertisements
                         ->where('status', '=', 2)
                         ->skip($start)
                         ->take($perPage);
                     break;
 
-                case "http://plater.local/#/":
+                case "home":
                     $advsGet = Advertisement
                         ::where('status', '=', 1)
                         ->skip($start)
@@ -233,12 +233,21 @@ class AdvertisementController extends Controller
                         ->get();
                     break;
 
-                case "http://plater.local/cabinet#/":
+                case "activeAdv":
                     $advsGet = Auth::user()
                         ->advertisements
                         ->where('status', '=', 1)
                         ->skip($start)
                         ->take($perPage);
+                    break;
+                case 'history':
+                    $advsGet = Auth::user()
+                        ->advertisements
+                        ->where('status', '=', 3)
+                        ->skip($start)
+                        ->take($perPage)
+                    ;
+                    break;
             }
         }
 

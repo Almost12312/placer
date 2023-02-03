@@ -73,17 +73,6 @@
                                 <input v-model.number="rangeMax" @change="sortingRange()" type="number" placeholder="Max">
                             </div>
                         </div>
-<!--                        <h4>Применить фильтры</h4>-->
-<!--                        <div class="homeTags">-->
-<!--                            <tags-->
-<!--                                :prop-tags="tags"-->
-<!--                                :stop="3"-->
-<!--                            >-->
-<!--                            </tags>-->
-<!--                        </div>-->
-
-<!--                        <label @click="filterAdvs()" class="send" for="extendFilters">Отправить</label>-->
-<!--                        <input name="extendFilters" type="submit" hidden>-->
                     </div>
                 </div>
             </div>
@@ -94,7 +83,6 @@
                 v-bind:adv-info="adv"
                 :key="adv.id"
 
-                :is-home="isHome"
                 :favorite="findFavorite(adv.id)"
                 :user-id="userinfo.id"
 
@@ -107,7 +95,6 @@
                 v-for="adv in filterAdvs"
                 v-bind:adv-info="adv"
                 :key="adv.id"
-                :is-home="isHome"
                 :favorite="findFavorite(adv.id)"
                 :user-id="userinfo.id"
 
@@ -145,7 +132,6 @@ export default {
             perPage: 6,
             more: true,
             sort: 1,
-            page: window.location.href,
             rangeMin: null,
             rangeMax: null,
         }
@@ -173,11 +159,11 @@ export default {
             },
         },
 
-        isHome: {
-            type: Boolean,
+        page: {
+            type: String,
             default() {
-                return false
-            }
+                return 'home'
+            },
         }
     },
 
@@ -219,7 +205,7 @@ export default {
             let load = {
                 start: this.start,
                 perPage: this.perPage,
-                page: window.location.href,
+                page: this.page,
                 options: this.options
             }
 
@@ -240,11 +226,11 @@ export default {
                         }   else
                         {
                             this.more = false;
-                            // alert("Объявления закончились");
+                            return alert("Объявления закончились");
                         }
                     })
             } catch (e) {
-                alert(e)
+                return alert(e)
             }
         },
 
@@ -362,14 +348,6 @@ export default {
         sort() {
             this.sorting()
         },
-        //
-        // rangeMin() {
-        //     console.log(this.allAdv)
-        // },
-        //
-        // rangeMax() {
-        //     return this.filterAdvs = this.allAdv.filter(item => item.price < this.rangeMax)
-        // },
     },
 
     mounted() {

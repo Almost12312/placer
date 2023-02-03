@@ -12,8 +12,8 @@ import Categories from "./components/Categories";
 import AdvertisementContainer from "./components/AdvertisementContainer";
 import Router from "./components/router";
 import Foo from "./components/Foo";
-import Drafts from "./components/Drafts";
-import HistoryAdv from "./components/HistoryAdv";
+import Drafts from "./components/Cabinet/Tabs/Drafts.vue";
+import HistoryAdv from "./components/Cabinet/Tabs/HistoryAdv.vue";
 import CabinetRoot from "./components/Roots/CabinetRoot";
 import RedContainer from "./components/Roots/RedContainer.vue";
 import Splide from '@splidejs/splide/dist/js/splide.min.js'
@@ -22,6 +22,7 @@ import HeadLayout from "./components/Roots/HeadLayout.vue";
 import HomeRoot from "./components/Roots/HomeRoot";
 import FavoritesRoot from "./components/Roots/FavoritesRoot.vue";
 import Search from "./components/Search.vue";
+import ActiveAdv from "./components/Cabinet/Tabs/ActiveAdv.vue";
 
 import {f} from "vue-slick-carousel/dist/vue-slick-carousel.common";
 
@@ -56,7 +57,7 @@ const router = new VueRouter({
         },
         {
             path: '/',
-            component: AdvertisementContainer,
+            component: ActiveAdv,
         },
         {
             path: '/draft',

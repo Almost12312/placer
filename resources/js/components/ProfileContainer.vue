@@ -7,30 +7,43 @@
             ></profile>
 
             <div class="advertisement__status__container" @click="target">
-                <router-link to="/" class="adv__status">
+                <router-link
+                    v-for="link in linksList"
+                    :key="link.id"
+
+                    :to="link.href"
+                    class="adv__status">
                     <div
                         class="adv__status__noActive"
-                        :class="{ adv__status__active: activeClass === 1 }"
+                        :class="{ adv__status__active: activeClass === link.id }"
                     >
-                        <p class="status__after">Активные объявления ({{userinfo.advPublish ? userinfo.advPublish : 0}})</p>
+                        <p class="status__after">{{ link.content }}</p>
                     </div>
                 </router-link>
-                <router-link to="/draft" class="adv__status">
-                    <div
-                        class="adv__status__noActive"
-                        :class="{ adv__status__active: activeClass === 2 }"
-                    >
-                        <p class="status__after">Черновики ({{userinfo.advDrafts ? userinfo.advDrafts : 0}})</p>
-                    </div>
-                </router-link>
-                <router-link to="/history" class="adv__status">
-                    <div
-                        class="adv__status__noActive"
-                        :class="{ adv__status__active: activeClass === 3 }"
-                    >
-                        <p class="status__after">История объявлений</p>
-                    </div>
-                </router-link>
+<!--                <router-link to="/" class="adv__status">-->
+<!--                    <div-->
+<!--                        class="adv__status__noActive"-->
+<!--                        :class="{ adv__status__active: activeClass === 1 }"-->
+<!--                    >-->
+<!--                        <p class="status__after">Активные объявления ({{userinfo.advPublish ? userinfo.advPublish : 0}})</p>-->
+<!--                    </div>-->
+<!--                </router-link>-->
+<!--                <router-link to="/draft" class="adv__status">-->
+<!--                    <div-->
+<!--                        class="adv__status__noActive"-->
+<!--                        :class="{ adv__status__active: activeClass === 2 }"-->
+<!--                    >-->
+<!--                        <p class="status__after">Черновики ({{userinfo.advDrafts ? userinfo.advDrafts : 0}})</p>-->
+<!--                    </div>-->
+<!--                </router-link>-->
+<!--                <router-link to="/history" class="adv__status">-->
+<!--                    <div-->
+<!--                        class="adv__status__noActive"-->
+<!--                        :class="{ adv__status__active: activeClass === 3 }"-->
+<!--                    >-->
+<!--                        <p class="status__after">История объявлений</p>-->
+<!--                    </div>-->
+<!--                </router-link>-->
                 <a class="adv__status" @click="createAdv">
                     <div class="adv__status__active">
                         <p>Добавить объявление</p>
@@ -43,8 +56,29 @@
 
 <script>
 
-import axios from "axios";
-// import Router from "./router";
+const links = [
+    {
+        id: 1,
+        content: "Активные объявления",
+        href: "/",
+    },
+    {
+        id: 2,
+        content: "Черновики",
+        href: "/draft",
+    },
+    {
+        id: 3,
+        content: "История объявлений",
+        href: "/history",
+    },
+    {
+        id: 4,
+        content: "Настройки профиля",
+        href: "/edit-user",
+    }
+]
+
 import Profile from "./Profile";
 
 export default {
@@ -52,7 +86,9 @@ export default {
 
     data() {
         return {
-            activeClass: null
+            activeClass: null,
+
+            linksList: links,
         }
     },
 

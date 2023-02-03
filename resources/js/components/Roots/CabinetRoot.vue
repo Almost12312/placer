@@ -24,7 +24,6 @@
             </div>
             <router-view
                 @remove="remove"
-                @compe
             >
             </router-view>
 
