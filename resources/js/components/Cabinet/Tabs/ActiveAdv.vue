@@ -1,6 +1,7 @@
 <template>
     <advertisement-container
         page="activeAdv"
+        :smallPhoto="true"
     ></advertisement-container>
 </template>
 

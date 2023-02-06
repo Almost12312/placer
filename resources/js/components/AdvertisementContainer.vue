@@ -145,6 +145,13 @@ export default {
             }
         },
 
+        smallPhoto: {
+            type: Boolean,
+            default() {
+                return false
+            },
+        },
+
         userinfo: {
             type: Object,
             default() {
@@ -206,7 +213,10 @@ export default {
                 start: this.start,
                 perPage: this.perPage,
                 page: this.page,
-                options: this.options
+                options: this.options,
+                w: this.smallPhoto ? 80 : null,
+                h: this.smallPhoto ? 80 : null
+
             }
 
             try {

@@ -738,6 +738,8 @@ body {
 .cadAdv__container {
   width: 19%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 14px;
@@ -754,6 +756,8 @@ body {
 }
 
 .cab_img_container {
+  width: 80px;
+  height: 80px;
   display: flex;
 }
 .cab_img_container img {

@@ -1,7 +1,7 @@
 <template>
     <div>
         <advertisement-container
-            :userinfo="userinfo"
+            page="favorites"
         >
 
         </advertisement-container>

@@ -4,7 +4,7 @@
             <tr class="cabinet_adv" :data-id="advInfo.id">
                 <td class="openAdv"></td>
                 <td class="cadAdv__container cab_img_container">
-                    <img :src="advInfo.images" alt="">
+                    <img :src="advInfo.images.src" alt="">
                 </td>
                 <td class="cadAdv__container">
                     <p class=" cab_adv_title">{{cut(advInfo.title)}}</p>
@@ -96,6 +96,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     name: "cabinetAdvert",
 
@@ -136,6 +138,17 @@ export default {
             return toCalc.reverse().join('').trim()
         },
 
+        // async sizes() {
+        //     let w = 80
+        //     let h = 80
+        //
+        //     await axios.get('/image/?id=' + this.advInfo.images.id + '&w='+ w + '&h=' + h)
+        //         .then(res => {
+        //             console.log(res.data)
+        //             this.advInfo.images.src = res.data
+        //         })
+        // },
+
         cut(el) {
             if (el.length > 7) {
                 return el.substring(0, 7) + '...';
@@ -144,6 +157,10 @@ export default {
             }
         }
     },
+
+    mounted() {
+        // this.sizes()
+    }
 
 }
 </script>

@@ -4,7 +4,7 @@
             <div class="img__open">
                 <div class="openAdv"></div>
 
-                <img v-if="advInfo.images" class="adv_img" :src="advInfo.images" alt="">
+                <img v-if="advInfo.images" class="adv_img" :src="advInfo.images.src" alt="">
                 <div v-else class="noPhotoCont">
                     <img class="noPhoto" src="/images/noPhoto.svg" alt="">
                 </div>
@@ -56,12 +56,6 @@ import axios from "axios";
 export default {
     name: "advertisement",
 
-    data() {
-        return {
-
-        }
-    },
-
     props: {
         advInfo: {
             type: Object,
@@ -76,13 +70,6 @@ export default {
                 return false
             }
         },
-
-        // isFav: {
-        //     type: Boolean,
-        //     default() {
-        //         return false
-        //     }
-        // },
 
         userId: {
             type: Number,
@@ -118,6 +105,17 @@ export default {
                  })
         },
 
+        // async sizes() {
+        //     let w = 260
+        //     let h = 180
+        //
+        //     await axios.get('/image/?id=' + this.advInfo.images.id + '&w='+ w + '&h=' + h)
+        //         .then(res => {
+        //             console.log(res.data)
+        //             this.advInfo.images.src = res.data
+        //         })
+        // },
+
         calcPrice() {
             let toCalc = `${this.advInfo.price}`.split('').reverse()
             let count = 0
@@ -145,6 +143,10 @@ export default {
                 return this.advInfo.tags
             }
         },
+    },
+
+    mounted() {
+        // this.sizes()
     }
 }
 </script>

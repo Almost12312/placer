@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class FileController extends Controller
 {
 
-    static function file(FileRequest $request)
+    public function file(FileRequest $request)
     {
         /** @var UploadedFile $file */
         $uploadedFile = $request->files->get('file');
@@ -23,14 +23,7 @@ class FileController extends Controller
             . $uploadedFile->getClientOriginalExtension();
         $storage = Storage::disk('public');
 
-        $id = 0;
-
-        if (Auth::check()){
-            $id = Auth::user()->id;
-        } else {
-            $id = null;
-        }
-
+        $id = Auth::check() ? Auth::user()->id : null;
 
         $filepath = $storage->putFileAs('/images', $uploadedFile, $uploadedFileName);
 

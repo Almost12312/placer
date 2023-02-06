@@ -2287,6 +2287,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return '/getAdv';
       }
     },
+    smallPhoto: {
+      type: Boolean,
+      "default": function _default() {
+        return false;
+      }
+    },
     userinfo: {
       type: Object,
       "default": function _default() {
@@ -2338,7 +2344,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   start: _this.start,
                   perPage: _this.perPage,
                   page: _this.page,
-                  options: _this.options
+                  options: _this.options,
+                  w: _this.smallPhoto ? 80 : null,
+                  h: _this.smallPhoto ? 80 : null
                 };
                 _context.prev = 1;
                 _context.next = 4;
@@ -2621,6 +2629,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _AdvertisementContainer_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../AdvertisementContainer.vue */ "./resources/js/components/AdvertisementContainer.vue");
+//
 //
 //
 //
@@ -4283,9 +4292,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "advertisement",
-  data: function data() {
-    return {};
-  },
   props: {
     advInfo: {
       type: Object,
@@ -4299,13 +4305,6 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
     },
-    // isFav: {
-    //     type: Boolean,
-    //     default() {
-    //         return false
-    //     }
-    // },
-
     userId: {
       type: Number,
       "default": function _default() {
@@ -4334,6 +4333,16 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    // async sizes() {
+    //     let w = 260
+    //     let h = 180
+    //
+    //     await axios.get('/image/?id=' + this.advInfo.images.id + '&w='+ w + '&h=' + h)
+    //         .then(res => {
+    //             console.log(res.data)
+    //             this.advInfo.images.src = res.data
+    //         })
+    // },
     calcPrice: function calcPrice() {
       var toCalc = "".concat(this.advInfo.price).split('').reverse();
       var count = 0;
@@ -4354,6 +4363,9 @@ __webpack_require__.r(__webpack_exports__);
         return this.advInfo.tags;
       }
     }
+  },
+  mounted: function mounted() {
+    // this.sizes()
   }
 });
 
@@ -4370,6 +4382,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -4467,6 +4481,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "cabinetAdvert",
@@ -4499,6 +4514,16 @@ __webpack_require__.r(__webpack_exports__);
       }
       return toCalc.reverse().join('').trim();
     },
+    // async sizes() {
+    //     let w = 80
+    //     let h = 80
+    //
+    //     await axios.get('/image/?id=' + this.advInfo.images.id + '&w='+ w + '&h=' + h)
+    //         .then(res => {
+    //             console.log(res.data)
+    //             this.advInfo.images.src = res.data
+    //         })
+    // },
     cut: function cut(el) {
       if (el.length > 7) {
         return el.substring(0, 7) + '...';
@@ -4506,6 +4531,9 @@ __webpack_require__.r(__webpack_exports__);
         return el;
       }
     }
+  },
+  mounted: function mounted() {
+    // this.sizes()
   }
 });
 
@@ -25919,7 +25947,9 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("advertisement-container", { attrs: { page: "activeAdv" } })
+  return _c("advertisement-container", {
+    attrs: { page: "activeAdv", smallPhoto: true },
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -26783,7 +26813,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("advertisement-container", { attrs: { userinfo: _vm.userinfo } })],
+    [_c("advertisement-container", { attrs: { page: "favorites" } })],
     1
   )
 }
@@ -27262,7 +27292,7 @@ var render = function () {
           _vm.advInfo.images
             ? _c("img", {
                 staticClass: "adv_img",
-                attrs: { src: _vm.advInfo.images, alt: "" },
+                attrs: { src: _vm.advInfo.images.src, alt: "" },
               })
             : _c("div", { staticClass: "noPhotoCont" }, [
                 _c("img", {
@@ -27393,7 +27423,7 @@ var render = function () {
           _c("td", { staticClass: "openAdv" }),
           _vm._v(" "),
           _c("td", { staticClass: "cadAdv__container cab_img_container" }, [
-            _c("img", { attrs: { src: _vm.advInfo.images, alt: "" } }),
+            _c("img", { attrs: { src: _vm.advInfo.images.src, alt: "" } }),
           ]),
           _vm._v(" "),
           _c("td", { staticClass: "cadAdv__container" }, [

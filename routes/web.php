@@ -15,6 +15,7 @@ use App\Http\Middleware\Redaction;
 use App\Http\Resources\AdvertisementResource;
 use App\Http\Resources\AdvFileResourse;
 use App\Models\Advertisement;
+use App\Services\Images\Adaptiving;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\FileController;
@@ -125,7 +126,7 @@ Route::post('/load-adv', [AdvResourceController::class, 'res']);
 
 Route::post('/search/tags', [TagController::class]);
 
-Route::get('/image/{path}', [ImageController::class, 'store']);
+Route::get('/image/', [ImageController::class, 'create']);
 
 //Route::group()
 /* ------------------------------------------------------------------------ */

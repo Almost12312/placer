@@ -8,9 +8,9 @@
                     <section class="splide fade" aria-label="Splide Basic HTML Example">
                         <div class="splide__track">
                             <ul class="splide__list">
-                                @foreach($thisAdv->files as $file)
+                                @foreach($links as $link)
                                     <li class="splide__slide">
-                                        <img src='{{ $file->getUrl() }}' alt="Sample 1">
+                                        <img src='{{ $link }}' alt="Sample 1">
                                     </li>
                                 @endforeach
                             </ul>
@@ -29,7 +29,9 @@
 {{--                                    </Splide>--}}
                 </div>
                 <div class="advertInformation">
-
+                    <div class="advInfoModel address">
+                        <h3>{{ $thisAdv->title }}</h3>
+                    </div>
                     <div class="advInfoModel address">
                         <h3>Адрес</h3>
                         <h4>{{ $thisAdv->location }}</h4>

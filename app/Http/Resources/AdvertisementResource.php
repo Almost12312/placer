@@ -23,9 +23,11 @@ class AdvertisementResource extends JsonResource
         //Check advs files
         if (count($this->resource->files) > 0)
         {
-            $images = $this->resource->files[0]->getUrl();
-//            $images = Adaptiving::create($this->resource->files[0], 260, 180);
-
+            $images = [
+                "src" => Adaptiving::create($this->resource->files[0]->id, $request->get('w') ?? 260, $request->get('h') ?? 180),
+                'id' => $this->resource->files[0]->id
+            ];
+//            $images = Adaptiving::create($this->resource->files[0]);
         }
 
         // Check advs tags

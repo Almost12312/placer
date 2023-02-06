@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Advertisement;
+use App\Services\Images\Adaptiving;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use League\Glide\Server;
 
 
 class ImageController extends Controller
 {
-    public function store(Server $server, $path)
+    public function create(Request $request)
     {
-        return $server->outputImage($path, $_GET);
+        $w = $request->get('w') ?? 260;
+        $h = $request->get('h') ?? 180;
+        $imgId = $request->get('id');
+
+        $url = Adaptiving::create($imgId, $w, $h);
+
+        return $url;
     }
 }

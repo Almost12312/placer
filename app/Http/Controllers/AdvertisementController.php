@@ -12,6 +12,7 @@ use App\Models\Advertisement;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\User;
+use App\Services\Images\Adaptiving;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -148,8 +149,13 @@ class AdvertisementController extends Controller
         $thisAdv->save();
 
         $user = User::find($thisAdv->author_id);
+        $links = [];
 
-        return view('viewAdv', ['thisAdv' => $thisAdv, 'user' => $user]);
+        foreach ($thisAdv->files as $image) {
+            $links[] = Adaptiving::create($image->id, 600, 500);
+        }
+
+        return view('viewAdv', ['thisAdv' => $thisAdv, 'user' => $user, 'links' => $links]);
     }
 
     public function pagination(Request $request)
@@ -157,6 +163,8 @@ class AdvertisementController extends Controller
         $page = $request->get('page');
         $start = $request->get('start');
         $perPage = $request->get('perPage');
+        $w = $request->get('w') ?? 260;
+        $h = $request->get('h');
 
         // Options for search categories
         $options = $request->get('options');
@@ -209,7 +217,7 @@ class AdvertisementController extends Controller
         } else
         {
             switch ($page) {
-                case "http://plater.local/favorites#/":
+                case "favorites":
                     $advsGet = Auth::user()->favorites
                         ->where('status', '=', 1)
                         ->skip($start)
@@ -261,7 +269,7 @@ class AdvertisementController extends Controller
         }   else
         {
             return [
-                'advs' => new AdvertisementCollection($advsGet),
+                'advs' => new AdvertisementCollection($advsGet, $w, $h),
                 'favorites' => new FavoriteResource($advsGet)
             ];
         }
