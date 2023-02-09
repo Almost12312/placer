@@ -1,5 +1,4 @@
 <template>
-    <transition name="advert" mode="out-in">
         <div class="advertisement" :data-id="advInfo.id">
             <div class="img__open">
                 <div class="openAdv"></div>
@@ -46,7 +45,6 @@
                 </svg>
             </div>
         </div>
-    </transition>
 </template>
 
 <script>
@@ -104,17 +102,6 @@ export default {
                      }
                  })
         },
-
-        // async sizes() {
-        //     let w = 260
-        //     let h = 180
-        //
-        //     await axios.get('/image/?id=' + this.advInfo.images.id + '&w='+ w + '&h=' + h)
-        //         .then(res => {
-        //             console.log(res.data)
-        //             this.advInfo.images.src = res.data
-        //         })
-        // },
 
         calcPrice() {
             let toCalc = `${this.advInfo.price}`.split('').reverse()

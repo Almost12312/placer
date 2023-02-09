@@ -251,7 +251,7 @@ class AdvertisementController extends Controller
                 case 'history':
                     $advsGet = Auth::user()
                         ->advertisements
-                        ->where('status', '=', 3)
+                        ->where('status', '=', 0)
                         ->skip($start)
                         ->take($perPage)
                     ;

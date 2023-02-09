@@ -88,6 +88,7 @@
 
                 @remove="remove"
                 @complete="complete"
+                @publish="publish"
             ></cabinet-advert>
         </div>
         <div v-else class="advertisement__container" id="js_advert" @click="target">
@@ -233,6 +234,8 @@ export default {
 
                             this.pushing(this.allAdv, response.data.advs.data)
                             this.sortingRange()
+
+                            this.more = true
                         }   else
                         {
                             this.more = false;
@@ -246,16 +249,26 @@ export default {
 
         setLoadingObserver() {
             const loadObserver = new IntersectionObserver(enteries => {
-                enteries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        if (this.more === true) {
-                            setTimeout(async () => {
-                                await this.getMore();
-                            }, 500)
-                        }
-
+                console.log(enteries);
+                if (enteries[0].isIntersecting) {
+                    if (this.more === true) {
+                        setTimeout(async () => {
+                            await this.getMore();
+                        }, 1000)
                     }
-                })
+
+                }
+                // enteries.forEach(entry => {
+                //     if (entry.isIntersecting) {
+                //         console.log(entry);
+                //         if (this.more === true) {
+                //             setTimeout(async () => {
+                //                 await this.getMore();
+                //             }, 500)
+                //         }
+                //
+                //     }
+                // })
             })
 
             loadObserver.observe(document.querySelector('.loadMore'))
@@ -325,6 +338,10 @@ export default {
             this.$store.commit('delPub')
 
             axios.post('/advertisement/delete', delAdvert)
+        },
+
+        publish() {
+
         },
 
         complete(advInfo)
