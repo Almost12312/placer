@@ -103,7 +103,7 @@
                 @complete="complete"
             ></advertisement>
         </div>
-        <div class="loadMore" v-show="more === true">
+        <div class="loadMore" v-show="more">
             <svg class="loadSvg">
                 <circle cx="50" cy="50" r="40" fill="none" stroke="#000" stroke-width="5" stroke-dashoffset="0"
                 ></circle>
@@ -130,7 +130,7 @@ export default {
             tags: [],
             favorites: [],
             start: 0,
-            perPage: 6,
+            perPage: 10,
             more: true,
             sort: 1,
             rangeMin: null,
@@ -176,7 +176,6 @@ export default {
     },
 
     methods: {
-
         target(event)
         {
             let target = event.target;
@@ -210,6 +209,8 @@ export default {
         },
 
         async getMore() {
+            this.more = false
+
             let load = {
                 start: this.start,
                 perPage: this.perPage,
@@ -238,7 +239,6 @@ export default {
                             this.more = true
                         }   else
                         {
-                            this.more = false;
                             return alert("Объявления закончились");
                         }
                     })
@@ -248,16 +248,36 @@ export default {
         },
 
         setLoadingObserver() {
-            const loadObserver = new IntersectionObserver(enteries => {
-                console.log(enteries);
-                if (enteries[0].isIntersecting) {
-                    if (this.more === true) {
-                        setTimeout(async () => {
-                            await this.getMore();
-                        }, 1000)
-                    }
+            let loadSvg = document.querySelector('.loadMore')
 
-                }
+            const loadObserver = new IntersectionObserver( (enteries) => {
+                enteries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (this.more) {
+                            let prom = new Promise((resolve, reject) => {
+                                let check = setTimeout(() => {
+                                    return this.more
+                                }, 500)
+
+                                if (check) {
+                                    return resolve(check)
+                                } else {
+                                    return reject(check)
+                                }
+                            })
+                                prom.then(() => {
+                                    this.getMore()
+                                })
+
+                                prom.catch(e => {
+                                    alert(e)
+                                })
+
+
+
+                        }
+                    }
+                })
                 // enteries.forEach(entry => {
                 //     if (entry.isIntersecting) {
                 //         console.log(entry);
@@ -271,7 +291,7 @@ export default {
                 // })
             })
 
-            loadObserver.observe(document.querySelector('.loadMore'))
+            loadObserver.observe(loadSvg)
         },
 
         sorting()

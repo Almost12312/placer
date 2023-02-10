@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\Database\User\UserChanges;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -102,5 +103,18 @@ class AuthorizationController extends Controller
                 'success' => false
             ]);
         }
+    }
+
+    public function changeInfo(Request $request)
+    {
+
+        $data = [
+            'name' => $request->get('name'),
+            'middlename' => $request->get('middlename'),
+            'lastname' => $request->get('lastname'),
+            'city' => $request->get('city'),
+        ];
+
+        return UserChanges::changeInfo($data);
     }
 }

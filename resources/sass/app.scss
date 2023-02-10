@@ -2181,15 +2181,15 @@ body {
 .sendAdd {
     max-width: 190px;
 
-    padding: 15px;
-    border-radius: $borderRad;
-
-    background: #429800;
+    padding: 7px 10px;
 
     color: #ffffff;
-    font-family: $ffPoppins;
+    font-family: $ffManrope;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 16px;
+
+    border-radius: $borderRad;
+    background: #429800;
 
     cursor: pointer;
 }
@@ -2363,28 +2363,22 @@ body {
     border-radius: $borderRad;
     overflow: hidden;
 
-    //.splide {
-    //    width: 100%;
-    //    height: 100%;
-    //}
-    //
-    //.splide__track {
-    //    height: 100%;
-    //}
-    //
-    //.splide__list {
-    //    height: 100%;
-    //}
-    //.splide__slide {
-    //    display: flex;
-    //    align-items: center;
-    //    justify-content: center;
-    //    width: 100%;
-    //    height: 100%;
-    //}
-
     img {
         width: 100%;
         height: 500px;
+    }
+}
+
+.cabinet__changeProfile {
+    width: 100%;
+    height: 100%;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+    .red__input {
+        width: 400px;
+        margin: 0;
     }
 }

@@ -25,6 +25,7 @@ import Search from "./components/Search.vue";
 import ActiveAdv from "./components/Cabinet/Tabs/ActiveAdv.vue";
 
 import {f} from "vue-slick-carousel/dist/vue-slick-carousel.common";
+import ProfileSettings from "./components/Cabinet/Tabs/ProfileSettings.vue";
 
 if (document.querySelector('.fade'))
 {
@@ -66,8 +67,11 @@ const router = new VueRouter({
         {
             path: '/history',
             component: HistoryAdv
+        },
+        {
+            path: '/edit-user',
+            component: ProfileSettings
         }
-
     ]
 })
 

@@ -3,18 +3,22 @@
 namespace App\Http\Controllers;
 
 
-use App\Http\Resources\AdvertisementCollection;
-use App\Http\Resources\AdvFileResourse;
-use App\Http\Resources\AdvPrevResourse;
-use App\Http\Resources\FavoriteResource;
-use App\Http\Resources\UserResourse;
-use App\Models\Advertisement;
-use App\Models\Category;
-use App\Models\Tag;
-use App\Models\User;
+use App\Http\Resources\
+    {AdvertisementCollection,
+    AdvFileResourse,
+    AdvPrevResourse,
+    FavoriteResource};
+
+use App\Models\
+    {Advertisement,
+    Tag,
+    User};
+
+use App\Services\Database\Advertisement\Pagination\Pages;
 use App\Services\Images\Adaptiving;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class AdvertisementController extends Controller
@@ -22,66 +26,76 @@ class AdvertisementController extends Controller
 
     public function addAdvert(Request $request)
     {
-        // 1. Get Request
-        $id = $request->get('id');
-        $title = $request->get('title');
-        $content = $request->get('content');
-        $location = $request->get('location');
-        $price = $request->get('price');
-        $imageIds = $request->get('images_ids');
-        $status = $request->get('status');
+        try {
+            DB::beginTransaction();
+
+            // 1. Get Request
+
+            $id = $request->get('id');
+            $title = $request->get('title');
+            $content = $request->get('content');
+            $location = $request->get('location');
+            $price = $request->get('price');
+            $imageIds = $request->get('images_ids');
+            $status = $request->get('status');
 
             // 1.2. Get for sync
-        $getCategory = (int)$request->get('category');
-        $getTags = $request->get('tags');
+            $getCategory = (int)$request->get('category');
+            $getTags = $request->get('tags');
 
-        // 2. Create advertisement
-        $advertisement = Advertisement::updateOrCreate(
-            [
-                'id' => $id
-            ],
+            // 2. Create advertisement
+            $advertisement = Advertisement::updateOrCreate(
+                [
+                    'id' => $id
+                ],
 
-            [
-                'author_id' => $request->user()->id,
-                'title' => $title,
-                'content' => $content,
-                'location' => $location,
-                'price' => $price,
-                'status' => $status,
-                'category_id' => $getCategory,
-            ]);
+                [
+                    'author_id' => $request->user()->id,
+                    'title' => $title,
+                    'content' => $content,
+                    'location' => $location,
+                    'price' => $price,
+                    'status' => $status,
+                    'category_id' => $getCategory,
+                ]);
 
-        // 3. Files
-        if ($imageIds !== null)
-        {
-            $advertisement->files()->sync($imageIds);
-        }
-
-        // 4. Tags
-        if ($getTags !== null)
-        {
-            $tagsId = [];
-
-            foreach ($getTags as $tagName)
+            // 3. Files
+            if ($imageIds !== null)
             {
-                $tag = Tag::firstOrCreate(
-                    ['name' => $tagName],
-                    ['created_by' => Auth::id()]
-                );
-
-                $tagsId[] = $tag->id;
+                $advertisement->files()->sync($imageIds);
             }
 
-            $advertisement->tags()->sync($tagsId);
+            // 4. Tags
+            if ($getTags !== null)
+            {
+                $tagsId = [];
+
+                foreach ($getTags as $tagName)
+                {
+                    $tag = Tag::firstOrCreate(
+                        ['name' => $tagName],
+                        ['created_by' => Auth::id()]
+                    );
+
+                    $tagsId[] = $tag->id;
+                }
+
+                $advertisement->tags()->sync($tagsId);
+            }
+
+            $advertisement->save();
+
+            DB::commit();
+
+            // 5. Response
+            return response()->json([
+                "success" => true,
+                "redirect" => "/cabinet"
+            ]);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return $exception;
         }
-
-        $advertisement->save();
-
-        // 5. Response
-        return response()->json([
-            "success" => true,
-            "redirect" => "/cabinet"
-        ]);
     }
 
     public function changeStatus(Request $request)
@@ -216,47 +230,7 @@ class AdvertisementController extends Controller
             }
         } else
         {
-            switch ($page) {
-                case "favorites":
-                    $advsGet = Auth::user()->favorites
-                        ->where('status', '=', 1)
-                        ->skip($start)
-                        ->take($perPage);
-
-                    break;
-
-                case "drafts":
-                    $advsGet = Auth::user()
-                        ->advertisements
-                        ->where('status', '=', 2)
-                        ->skip($start)
-                        ->take($perPage);
-                    break;
-
-                case "home":
-                    $advsGet = Advertisement
-                        ::where('status', '=', 1)
-                        ->skip($start)
-                        ->take($perPage)
-                        ->get();
-                    break;
-
-                case "activeAdv":
-                    $advsGet = Auth::user()
-                        ->advertisements
-                        ->where('status', '=', 1)
-                        ->skip($start)
-                        ->take($perPage);
-                    break;
-                case 'history':
-                    $advsGet = Auth::user()
-                        ->advertisements
-                        ->where('status', '=', 0)
-                        ->skip($start)
-                        ->take($perPage)
-                    ;
-                    break;
-            }
+            $advsGet = Pages::paginate($page, $perPage, $start);
         }
 
 

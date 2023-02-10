@@ -12,17 +12,10 @@ use App\Http\Controllers\TagController;
 use App\Http\Middleware\Authorization;
 use App\Http\Middleware\CreateMDW;
 use App\Http\Middleware\Redaction;
-use App\Http\Resources\AdvertisementResource;
-use App\Http\Resources\AdvFileResourse;
-use App\Models\Advertisement;
-use App\Services\Images\Adaptiving;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\FileController;
 use \App\Http\Controllers\AuthorizationController;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\AdController;
-use League\Glide\Server;
 
 /* 1. Pages */
 
@@ -69,8 +62,6 @@ Route::get('/cabinet/{catch?}', [CabinetController::class, 'cabinet'])
 
 Route::post('/file/upload-avatar', [CabinetController::class, 'changeAvatar'])
     ->name('avatar');
-    //3.2 Resources
-Route::get('/profile', [CabinetController::class, 'profile']);
 
 
 /* ------------------------------------------------------------------------ */
@@ -128,6 +119,9 @@ Route::post('/search/tags', [TagController::class]);
 
 Route::get('/image/', [ImageController::class, 'create']);
 
+Route::get('/profile', [CabinetController::class, 'profile']);
+
+Route::post('/change/user/profile', [AuthorizationController::class, 'changeInfo']);
 //Route::group()
 /* ------------------------------------------------------------------------ */
 

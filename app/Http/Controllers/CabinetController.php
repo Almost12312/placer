@@ -43,10 +43,9 @@ class CabinetController extends Controller
             $user = User::find(Auth::user()->id);
             return new UserResourse($user);
 
-        }   else
-        {
-            return false;
         }
+
+        return false;
 
     }
 }
